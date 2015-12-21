@@ -11,10 +11,10 @@ public class Ascenseur {
 	
 	//constructeur
 	public Ascenseur (){
-		etage = 0;
-		estEnMouvement = false;
-		estVide = true;
-		poidsMax = 300;
+		etage = 0;					//un nouvel ascenseur est assemblé au rez-de-chaussée (niveau 0)
+		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore reçu de requête
+		estVide = true;				//un nouvel ascenseur ne contient aucun usager
+		poidsMax = 300;				//paramètre par défaut - à changer ou rendre paramétrable par l'utilisateur
 	}
 
 	@Override

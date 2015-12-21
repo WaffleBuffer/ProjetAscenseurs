@@ -10,7 +10,7 @@ public class Requete {
  * -bouton "vers le bas" -> selectionAscenseur()
  */
 	private String libelle;
-	private int etage;
+	private int etageDemande;
 	
 	public String getLibelle() {
 		return libelle;
@@ -21,10 +21,10 @@ public class Requete {
 	}
 
 	public int getEtage() {
-		return etage;
+		return etageDemande;
 	}
 
 	public void setEtage(int etage) {
-		this.etage = etage;
+		this.etageDemande = etage;
 	}
 }
