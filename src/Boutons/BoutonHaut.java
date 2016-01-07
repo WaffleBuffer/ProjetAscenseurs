@@ -1,9 +1,8 @@
 package Boutons;
 
 public class BoutonHaut extends BoutonExterne{
-	private int etage;
 
-	public BoutonHaut(int etage) {
+	public BoutonHaut(int Libelle) {
 		super("Haut");
 		// TODO Auto-generated constructor stub
 	}
