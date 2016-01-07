@@ -26,18 +26,11 @@ public class Main {
 		ControleurInterne controleur1 = new ControleurInterne(asc1);
 		controleursInt.add(controleur1);
 		
-		BoutonExterne boutonExt0 = new BoutonHaut(0);
-		
-		boutonExt0.appuyer(controleurExterne);
-		
-		controleurExterne.choisirAsc(controleursInt);
-		
-		Requete test = new RequeteInterne (2);
+		asc1.getListeBoutons().get(3).appuyer(controleur1);;
 	
-		controleur1.addRequete(test);
-
-		boutonExt0.appuyer(controleurExterne);
+		controleur1.traiterRequetes();
 		
+		batim.getListeBoutons().get(0).appuyer(controleurExterne);
 		controleurExterne.choisirAsc(controleursInt);
 		
 		System.out.println(asc1.toString());
