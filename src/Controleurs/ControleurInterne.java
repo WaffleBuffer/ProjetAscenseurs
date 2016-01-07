@@ -8,7 +8,7 @@ import Requetes.RequeteExterne;
 import Requetes.RequeteInterne;
 
 
-public class ControleurInterne {
+public class ControleurInterne implements IControleur{
 	
 	private Ascenseur ascenseur;
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();

@@ -2,13 +2,14 @@ package Controleurs;
 
 import java.util.ArrayList;
 
+import Requetes.Requete;
 import Requetes.RequeteExterne;
 
-public class ControleurExterne{
+public class ControleurExterne implements IControleur{
 
 	final private static ControleurExterne singleton = new ControleurExterne ();
 	
-	private ArrayList<RequeteExterne> requetes = new ArrayList<RequeteExterne>();
+	private ArrayList<Requete> requetes = new ArrayList<Requete>();
 	
 	private ControleurExterne () {}
 	
@@ -16,7 +17,7 @@ public class ControleurExterne{
 		return singleton;
 	}
 	
-	public void addRequeteExt (int etage, String direction) {
+	public void addRequete (int etage, String direction) {
 		requetes.add(new RequeteExterne(etage, (direction == "Haut") ? true : false));
 	}
 	
@@ -27,7 +28,7 @@ public class ControleurExterne{
 		}
 	}
 
-	public void addRequeteExt(RequeteExterne requete) {
+	public void addRequete(Requete requete) {
 		// TODO Auto-generated method stub
 		requetes.add(requete);
 	}

@@ -1,6 +1,7 @@
 package Boutons;
 
 import Controleurs.ControleurExterne;
+import Controleurs.IControleur;
 import Requetes.RequeteExterne;
 
 
@@ -9,11 +10,5 @@ public class BoutonBas extends BoutonExterne{
 	public BoutonBas(int etage) {
 		super(etage, "Bas");
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void appuyer (ControleurExterne controleur) {
-		RequeteExterne requete = new RequeteExterne (this.getEtage(), false);
-		controleur.addRequeteExt(requete);
 	}
 }

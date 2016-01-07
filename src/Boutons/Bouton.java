@@ -1,5 +1,7 @@
 package Boutons;
 
+import Controleurs.IControleur;
+
 public class Bouton {
 	private String libelle;
 
@@ -16,4 +18,6 @@ public class Bouton {
 	public String toString() {
 		return "Bouton [libelle=" + libelle + "]";
 	}
+	
+	public void appuyer (IControleur controleur) {}
 }
