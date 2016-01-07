@@ -20,16 +20,19 @@ public class ControleurInterne {
 	public void traiterRequetes(){
 		for (int i = 0; i < requetes.size(); ++i) {
 			if (requetes.get(i).getLibelle() == "Allez � l'�tage") {
-				ascenseur.setEtage(requetes.get(i).getEtage());
 				System.out.println("Ascenceur va de l'étage : " + ascenseur.getEtage() + " à l'étage " + requetes.get(i).getEtage());
+				ascenseur.setEtage(requetes.get(i).getEtage());	
+				requetes.remove(requetes.get(i));
 			}
 			else if (requetes.get(i).getLibelle() == "Haut") {
-				ascenseur.setEtage(requetes.get(i).getEtage());
 				System.out.println("Ascenceur va de l'étage : " + ascenseur.getEtage() + " à l'étage " + requetes.get(i).getEtage());
+				ascenseur.setEtage(requetes.get(i).getEtage());
+				requetes.remove(requetes.get(i));
 			}
 			else if (requetes.get(i).getLibelle() == "Bas") {
-				ascenseur.setEtage(requetes.get(i).getEtage());
 				System.out.println("Ascenceur va de l'étage : " + ascenseur.getEtage() + " à l'étage " + requetes.get(i).getEtage());
+				ascenseur.setEtage(requetes.get(i).getEtage());
+				requetes.remove(requetes.get(i));
 			}
 		}
 	}

@@ -21,7 +21,10 @@ public class ControleurExterne{
 	}
 	
 	public void choisirAsc (ArrayList<ControleurInterne> controleurs) {
-		controleurs.get(0).addRequete(requetes.get(0));
+		for (int i = 0; i < requetes.size(); ++i) {
+			controleurs.get(0).addRequete(requetes.get(0));
+			requetes.remove(requetes.get(i));
+		}
 	}
 
 	public void addRequeteExt(RequeteExterne requete) {
