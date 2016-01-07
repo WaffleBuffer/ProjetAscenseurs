@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+
 
 
 //Salut, je suis un comm
 public class Ascenseur {
 	//� quel �tage se trouve  l'ascenseur
 	private int etage;
+	//liste des boutons présents sur le panneau interne de l'ascenseur
+	private ArrayList<Bouton> listeBoutons;
 	//l'ascenseur est-il en mouvement ou bien � l'arr�t
 	private boolean estEnMouvement;
 	//quel est le poids maximum en kg que l'ascenseur est cens� pouvoir supporter
@@ -27,5 +31,13 @@ public class Ascenseur {
 
 	public void setEtage(int etage) {
 		this.etage = etage;
+	}
+
+	public ArrayList<Bouton> getListeBoutons() {
+		return listeBoutons;
+	}
+
+	public void setListeBoutons(ArrayList<Bouton> listeBoutons) {
+		this.listeBoutons = listeBoutons;
 	}
 }
