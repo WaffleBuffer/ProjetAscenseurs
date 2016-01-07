@@ -11,7 +11,7 @@ public class ControleurExterne {
 	
 	private ControleurExterne () {}
 	
-	public ControleurExterne getControleurExterne() {
+	public static ControleurExterne getControleurExterne() {
 		return singleton;
 	}
 	
