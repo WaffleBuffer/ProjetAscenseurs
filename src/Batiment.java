@@ -8,4 +8,12 @@ public class Batiment {
 		this.nom = nom;
 		this.nbEtages = nbEtages;
 	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public int getNbEtages() {
+		return nbEtages;
+	}
 }
