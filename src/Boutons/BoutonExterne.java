@@ -5,10 +5,11 @@ import Controleurs.ControleurInterne;
 import Requetes.RequeteExterne;
 
 public class BoutonExterne extends Bouton {
-	int etage;
+	private int etage;
 
 	public BoutonExterne(int etage, String libelle) {
 		super(libelle);
+		this.etage = etage;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -18,6 +19,10 @@ public class BoutonExterne extends Bouton {
 
 	@Override
 	public String toString() {
-		return "BoutonExterne [libelle=" + this.getLibelle() + "; etage=" + etage + "]";
+		return "BoutonExterne [libelle=" + this.getLibelle() + "; etage=" + this.getEtage() + "]";
+	}
+	
+	public int getEtage() {
+		return etage;
 	}
 }

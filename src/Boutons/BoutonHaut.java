@@ -12,7 +12,7 @@ public class BoutonHaut extends BoutonExterne{
 
 	@Override
 	public void appuyer (ControleurExterne controleur) {
-		RequeteExterne requete = new RequeteExterne (etage, true);
+		RequeteExterne requete = new RequeteExterne (this.getEtage(), true);
 		controleur.addRequeteExt(requete);
 	}
 }

@@ -8,7 +8,7 @@ public class Bouton {
 	}
 
 	public Bouton(String libelle) {
-		super();
+		
 		this.libelle = libelle;
 	}
 
