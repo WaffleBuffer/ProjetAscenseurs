@@ -1,15 +1,11 @@
 package Client;
 import java.util.ArrayList;
 
-import Boutons.Bouton;
 import Boutons.BoutonExterne;
-import Boutons.BoutonHaut;
 import Boutons.BoutonInterne;
 import Controleurs.ControleurExterne;
 import Controleurs.ControleurInterne;
 import IHM.MainWindow;
-import Requetes.Requete;
-import Requetes.RequeteInterne;
 
 public class Main {
 
