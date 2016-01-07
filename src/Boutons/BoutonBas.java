@@ -1,5 +1,7 @@
+package Boutons;
 
-public class BoutonBas extends Bouton{
+
+public class BoutonBas extends BoutonExterne{
 
 	public BoutonBas(String libelle) {
 		super(libelle);

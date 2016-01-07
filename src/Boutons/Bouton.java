@@ -1,3 +1,4 @@
+package Boutons;
 
 public class Bouton {
 	private String libelle;

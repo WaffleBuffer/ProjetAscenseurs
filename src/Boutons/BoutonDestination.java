@@ -1,5 +1,6 @@
+package Boutons;
 
-public class BoutonDestination extends Bouton {
+public class BoutonDestination extends BoutonInterne {
 
 	public BoutonDestination(String libelle) {
 		super(libelle);

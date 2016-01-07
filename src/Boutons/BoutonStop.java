@@ -1,8 +1,9 @@
+package Boutons;
 
 public class BoutonStop extends Bouton{
 
-	public BoutonStop(String libelle) {
-		super(libelle);
+	public BoutonStop() {
+		super("Stop");
 		// TODO Auto-generated constructor stub
 	}
 
