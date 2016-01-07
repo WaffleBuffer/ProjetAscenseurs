@@ -1,6 +1,6 @@
 package Boutons;
 
-public class BoutonStop extends Bouton{
+public class BoutonStop extends BoutonInterne{
 
 	public BoutonStop() {
 		super("Stop");
