@@ -17,6 +17,7 @@ public class Ascenseur {
 	private ArrayList<BoutonInterne> listeBoutons = new ArrayList<BoutonInterne>();
 	//l'ascenseur est-il en mouvement ou bien � l'arr�t
 	private boolean estEnMouvement;
+	private boolean portesOuvertes;
 	//quel est le poids maximum en kg que l'ascenseur est cens� pouvoir supporter
 	private int poidsMax;
 	//l'ascenseur est-il vide
@@ -28,6 +29,7 @@ public class Ascenseur {
 		etage = 0;					//un nouvel ascenseur est assembl� au rez-de-chauss�e (niveau 0)
 		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore re�u de requ�te
 		estVide = true;				//un nouvel ascenseur ne contient aucun usager
+		portesOuvertes = false;
 		poidsMax = 300;				//param�tre par d�faut - � changer ou rendre param�trable par l'utilisateur
 		bat = bati;
 		listeBoutons.add(new BoutonDestination("Rez-de-chaussé", 0));
@@ -40,7 +42,8 @@ public class Ascenseur {
 
 	@Override
 	public String toString() {
-		return "Ascenseur [etage=" + etage + ", estArrete=" + estEnMouvement + ", poidsMax=" + poidsMax + ", estVide="
+		return "Ascenseur [etage=" + etage + ", estEnMouvement=" + estEnMouvement + ", portesOuvertes="
+				+ portesOuvertes + ", poidsMax=" + poidsMax + ", estVide="
 				+ estVide + "]";
 	}
 
@@ -58,5 +61,21 @@ public class Ascenseur {
 
 	public void setListeBoutons(ArrayList<BoutonInterne> listeBoutons) {
 		this.listeBoutons = listeBoutons;
+	}
+	
+	public void ouvrirPortes () {
+		portesOuvertes = true;
+	}
+	
+	public void fermerPortes () {
+		portesOuvertes = false;
+	}
+
+	public void setEstEnMouvement(boolean estEnMouvement) {
+		this.estEnMouvement = estEnMouvement;
+	}
+
+	public boolean isPortesOuvertes() {
+		return portesOuvertes;
 	}
 }

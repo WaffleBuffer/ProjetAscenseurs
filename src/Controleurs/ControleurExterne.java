@@ -21,7 +21,7 @@ public class ControleurExterne implements IControleur{
 		requetes.add(new RequeteExterne(etage, (direction == "Haut") ? true : false));
 	}
 	
-	public void choisirAsc (ArrayList<ControleurInterne> controleurs) {
+	public void traiterRequetes (ArrayList<ControleurInterne> controleurs) {
 		for (int i = 0; i < requetes.size(); ++i) {
 			controleurs.get(0).addRequete(requetes.get(0));
 			requetes.remove(requetes.get(i));

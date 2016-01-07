@@ -27,7 +27,7 @@ public class Main {
 		System.out.println(asc1.toString());
 		
 		batim.getListeBoutons().get(0).appuyer(controleurExterne);
-		controleurExterne.choisirAsc(controleursInt);
+		controleurExterne.traiterRequetes(controleursInt);
 		
 		for (ControleurInterne i : controleursInt) {
 			i.traiterRequetes();
