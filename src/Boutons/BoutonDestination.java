@@ -10,4 +10,11 @@ public class BoutonDestination extends BoutonInterne {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "BoutonDestination [libelle=" + this.getLibelle() + "; etage ciblé=" + etage + "]";
+	}
+	
+	
+
 }
