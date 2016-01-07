@@ -7,4 +7,9 @@ public class Bouton {
 		super();
 		this.libelle = libelle;
 	}
+
+	@Override
+	public String toString() {
+		return "Bouton [libelle=" + libelle + "]";
+	}
 }
