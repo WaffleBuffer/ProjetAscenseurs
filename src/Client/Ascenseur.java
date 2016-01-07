@@ -52,6 +52,10 @@ public class Ascenseur {
 		return listeBoutons;
 	}
 
+	public int getEtage() {
+		return etage;
+	}
+
 	public void setListeBoutons(ArrayList<BoutonInterne> listeBoutons) {
 		this.listeBoutons = listeBoutons;
 	}
