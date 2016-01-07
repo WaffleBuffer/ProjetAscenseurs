@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Client.Ascenseur;
 import Client.Batiment;
 
 public class MainWindow extends JFrame {
@@ -20,31 +21,38 @@ public class MainWindow extends JFrame {
 	/**
 	 * @param args
 	 */
-	public MainWindow () {
+	public MainWindow (Batiment bat, Ascenseur asc) {
 		
 		//layout de la fenêtre
 		BorderLayout mainLayout = new BorderLayout();
 		this.setLayout(mainLayout);
 		
-		//Panel qui contient batiment
-		JPanel mainPanel = new JPanel();
-		this.add(mainPanel, BorderLayout.CENTER);
+		//répartition des panels
+		JPanel batPanel = new JPanel();
+		JPanel ascPanel = new JPanel();
+		this.add(batPanel, BorderLayout.WEST);
+		this.add(ascPanel, BorderLayout.EAST);
 		
 		//layout partie batiment
-		LayoutManager batLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
-		mainPanel.setLayout(batLayout);
-		mainPanel.add(new JLabel("Bâtiment"));
+		LayoutManager batLayout = new BoxLayout(batPanel, BoxLayout.Y_AXIS);
+		batPanel.setLayout(batLayout);
+		batPanel.add(new JLabel("Bâtiment"));
 		
-		//batiment
-		Batiment bat = new Batiment("Immeuble", 6);
+		//layout partie ascenseur
+		LayoutManager ascLayout = new BoxLayout(ascPanel, BoxLayout.Y_AXIS);
+		ascPanel.setLayout(ascLayout);
+		ascPanel.add(new JLabel("Ascenseur"));
+		
+		//partie batiment
 		JLabel nomBat = new JLabel(bat.getNom());
-		JLabel nbEtagesBat = new JLabel();
-		nbEtagesBat.setText(Integer.toString(bat.getNbEtages()));
-		mainPanel.add(nomBat);
-		mainPanel.add(nbEtagesBat);
+		JLabel nbEtagesBat = new JLabel(Integer.toString(bat.getNbEtages()));
+		batPanel.add(nomBat);
+		batPanel.add(nbEtagesBat);
+		
+		//partie ascenseur
 		
 		//reglages de la fenêtre
-		this.setTitle("Bâtiment");						//Titre de la fenêtre 
+		this.setTitle("Projet Java Ascenseur");						//Titre de la fenêtre 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);	//le programme s'arrete quand la fenetre se ferme
 		this.setSize(400, 400);							//taille de la fenêtre fixe
 		this.setLocationRelativeTo(null);				//la fenêtre apparait au centre de l'écran
