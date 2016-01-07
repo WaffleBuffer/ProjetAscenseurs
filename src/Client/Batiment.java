@@ -17,4 +17,10 @@ public class Batiment {
 	public int getNbEtages() {
 		return nbEtages;
 	}
+
+	@Override
+	public String toString() {
+		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages + "]";
+	}
+
 }
