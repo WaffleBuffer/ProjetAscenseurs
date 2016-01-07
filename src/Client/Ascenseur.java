@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Boutons.Bouton;
 import Boutons.BoutonDestination;
 import Boutons.BoutonInterne;
+import Boutons.BoutonStop;
 
 
 
@@ -34,6 +35,7 @@ public class Ascenseur {
 		for (int i = 2; i <= bat.getNbEtages(); ++i){
 			listeBoutons.add(new BoutonDestination(i+"e étage", i)); //i est numero de l'etage correspondant au bouton
 		} //initialisation des boutons
+		listeBoutons.add(new BoutonStop());
 	}
 
 	@Override
