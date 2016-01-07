@@ -16,6 +16,15 @@ public class Main {
 		Ascenseur asc1 = new Ascenseur (batim);
 		System.out.println(asc1.toString());
 		Requete test = new RequeteInterne (2);
+		System.out.println("L'ascenseur va de l'étage" + asc1.getEtage() + " a l'étage" + test.getEtage());
+		
+		try {
+			Thread.sleep(4000);
+		} 
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		Controleur.traiterRequete(test, asc1);
 		System.out.println(asc1.toString());
 		System.out.println(batim.toString());
