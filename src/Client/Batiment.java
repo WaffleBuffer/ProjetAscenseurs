@@ -1,13 +1,26 @@
 package Client;
 
+import java.util.ArrayList;
+
+import Boutons.BoutonBas;
+import Boutons.BoutonExterne;
+import Boutons.BoutonHaut;
+
 public class Batiment {
 	private String nom;
 	private int nbEtages;
+	private ArrayList<BoutonExterne> listeBoutons = new ArrayList<BoutonExterne>();
 	
 	public Batiment(String nom, int nbEtages) {
 		super();
 		this.nom = nom;
 		this.nbEtages = nbEtages;
+		listeBoutons.add(new BoutonHaut(0));
+		for (int i = 0 ; i < nbEtages; ++i){
+			listeBoutons.add(new BoutonHaut(i));
+			listeBoutons.add(new BoutonBas(i));
+		}
+		listeBoutons.add(new BoutonBas(nbEtages));
 	}
 
 	public String getNom() {
@@ -16,6 +29,11 @@ public class Batiment {
 
 	public int getNbEtages() {
 		return nbEtages;
+	}
+	
+
+	public ArrayList<BoutonExterne> getListeBoutons() {
+		return listeBoutons;
 	}
 
 	@Override
