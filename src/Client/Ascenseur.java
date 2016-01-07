@@ -29,8 +29,10 @@ public class Ascenseur {
 		estVide = true;				//un nouvel ascenseur ne contient aucun usager
 		poidsMax = 300;				//param�tre par d�faut - � changer ou rendre param�trable par l'utilisateur
 		bat = bati;
-		for (int i = 0; i <= bat.getNbEtages(); ++i){
-			listeBoutons.add(new BoutonDestination("Etage"+i, i)); //i = numero de l'etage correspondant au bouton
+		listeBoutons.add(new BoutonDestination("Rez-de-chaussé", 0));
+		listeBoutons.add(new BoutonDestination("1er étage", 1));
+		for (int i = 2; i <= bat.getNbEtages(); ++i){
+			listeBoutons.add(new BoutonDestination(i+"e étage", i)); //i est numero de l'etage correspondant au bouton
 		} //initialisation des boutons
 	}
 

@@ -1,4 +1,8 @@
 package Client;
+import java.util.ArrayList;
+
+import Boutons.Bouton;
+import Boutons.BoutonInterne;
 import Controleurs.Controleur;
 import Requetes.Requete;
 import Requetes.RequeteInterne;
@@ -13,6 +17,11 @@ public class Main {
 		Controleur.traiterRequete(test, asc1);
 		System.out.println(asc1.toString());
 		System.out.println(batim.toString());
+		ArrayList<BoutonInterne> listeBoutonsAsc1 = new ArrayList<BoutonInterne>();
+		listeBoutonsAsc1 = asc1.getListeBoutons();
+		for (BoutonInterne i : listeBoutonsAsc1){
+			System.out.println(i.toString());
+		}
 	}
 
 }
