@@ -1,3 +1,8 @@
+package Client;
+import Controleurs.Controleur;
+import Requetes.Requete;
+import Requetes.RequeteInterne;
+
 
 public class Main {
 

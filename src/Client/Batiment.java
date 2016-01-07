@@ -1,3 +1,4 @@
+package Client;
 
 public class Batiment {
 	private String nom;

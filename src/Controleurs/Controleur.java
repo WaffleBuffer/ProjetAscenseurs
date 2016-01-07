@@ -1,19 +1,15 @@
-import java.util.ArrayList;
+package Controleurs;
+import Client.Ascenseur;
+import Requetes.Requete;
 
 
-public class ControleurInterne {
+public class Controleur {
 	
 	//on emp�che la classe d'�tre instanci�e car elle est statique
-	private ControleurInterne () {}
-	
-	private ArrayList<Requete> requetes = new ArrayList<Requete>();
+	private Controleur () {}
 	
 	public static void traiterRequete(Requete requete, Ascenseur ascenseur){
 		if (requete.getLibelle() == "Allez � l'�tage")
 			ascenseur.setEtage(requete.getEtage());
-	}
-	
-	public void addRequete (Requete requete) {
-		requetes.add(requete);
 	}
 }

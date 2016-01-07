@@ -1,6 +1,7 @@
+package Requetes;
 
 public class RequeteExterne extends Requete {
-	//constructeur si le bool est vrai le bouton haut est pressé sinon c'est le bouton bas
+	//constructeur si le bool est vrai le bouton haut est pressï¿½ sinon c'est le bouton bas
 	public RequeteExterne (boolean Haut){
 		if (Haut)
 			this.setLibelle("Appuie bouton haut");
