@@ -49,7 +49,7 @@ public class Main {
 		
 		listeBoutonsAsc1 = asc1.getListeBoutons();
 		for (BoutonInterne i : listeBoutonsAsc1){
-			System.out.println(i.toString());
+			System.out.println(i.getLibelle());
 		}
 		
 		System.out.println("Batiment :");

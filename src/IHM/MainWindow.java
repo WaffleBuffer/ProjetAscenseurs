@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Boutons.BoutonInterne;
 import Client.Ascenseur;
 import Client.Batiment;
 
@@ -50,6 +51,9 @@ public class MainWindow extends JFrame {
 		batPanel.add(nbEtagesBat);
 		
 		//partie ascenseur
+		for (BoutonInterne i : asc.getListeBoutons()){
+			ascPanel.add(new JLabel(i.getLibelle()));
+		}
 		
 		//reglages de la fenêtre
 		this.setTitle("Projet Java Ascenseur");						//Titre de la fenêtre 
