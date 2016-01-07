@@ -32,7 +32,7 @@ public class Ascenseur {
 		listeBoutons.add(new BoutonDestination("Rez-de-chaussé", 0));
 		listeBoutons.add(new BoutonDestination("1er étage", 1));
 		for (int i = 2; i <= bat.getNbEtages(); ++i){
-			listeBoutons.add(new BoutonDestination(i+"e étage", i)); //i = numero de l'etage correspondant au bouton
+			listeBoutons.add(new BoutonDestination(i+"e étage", i)); //i est numero de l'etage correspondant au bouton
 		} //initialisation des boutons
 	}
 
