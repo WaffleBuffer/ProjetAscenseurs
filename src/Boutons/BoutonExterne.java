@@ -15,4 +15,9 @@ public class BoutonExterne extends Bouton {
 	public void appuyer (ControleurExterne controleur) {
 
 	}
+
+	@Override
+	public String toString() {
+		return "BoutonExterne [libelle=" + this.getLibelle() + "; etage=" + etage + "]";
+	}
 }

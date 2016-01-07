@@ -12,14 +12,15 @@ public class Batiment {
 	private ArrayList<BoutonExterne> listeBoutons = new ArrayList<BoutonExterne>();
 	
 	public Batiment(String nom, int nbEtages) {
-		super();
 		this.nom = nom;
 		this.nbEtages = nbEtages;
 		listeBoutons.add(new BoutonHaut(0));
-		for (int i = 0 ; i < nbEtages; ++i){
+		
+		for (int i = 1 ; i < nbEtages; ++i){
 			listeBoutons.add(new BoutonHaut(i));
 			listeBoutons.add(new BoutonBas(i));
 		}
+		
 		listeBoutons.add(new BoutonBas(nbEtages));
 	}
 

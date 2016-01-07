@@ -33,26 +33,32 @@ public class Main {
 		controleurExterne.choisirAsc(controleursInt);
 		
 		Requete test = new RequeteInterne (2);
+	
 		controleur1.addRequete(test);
 
 		boutonExt0.appuyer(controleurExterne);
-		
-		try {
-			Thread.sleep(4000);
-		} 
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		
 		controleurExterne.choisirAsc(controleursInt);
 		
 		System.out.println(asc1.toString());
 		System.out.println(batim.toString());
 		ArrayList<BoutonInterne> listeBoutonsAsc1 = new ArrayList<BoutonInterne>();
+		ArrayList<BoutonExterne> listeBoutonsBatim = new ArrayList<BoutonExterne>();
+		
+		System.out.println("Ascenceur :");
+		
 		listeBoutonsAsc1 = asc1.getListeBoutons();
 		for (BoutonInterne i : listeBoutonsAsc1){
 			System.out.println(i.toString());
 		}
+		
+		System.out.println("Batiment :");
+		
+		listeBoutonsBatim = batim.getListeBoutons();
+		for (BoutonExterne i : listeBoutonsBatim){
+			System.out.println(i.toString());
+		}
+		
 	}
 
 }
