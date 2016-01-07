@@ -1,10 +1,18 @@
 package Boutons;
 
-public class BoutonExterne extends Bouton {
+import Controleurs.ControleurExterne;
+import Controleurs.ControleurInterne;
+import Requetes.RequeteExterne;
 
-	public BoutonExterne(String libelle) {
+public class BoutonExterne extends Bouton {
+	int etage;
+
+	public BoutonExterne(int etage, String libelle) {
 		super(libelle);
 		// TODO Auto-generated constructor stub
 	}
 
+	public void appuyer (ControleurExterne controleur) {
+
+	}
 }

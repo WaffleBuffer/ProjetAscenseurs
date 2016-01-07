@@ -1,9 +1,10 @@
 package Controleurs;
 
 import java.util.ArrayList;
+
 import Requetes.RequeteExterne;
 
-public class ControleurExterne {
+public class ControleurExterne{
 
 	final private static ControleurExterne singleton = new ControleurExterne ();
 	
@@ -21,5 +22,10 @@ public class ControleurExterne {
 	
 	public void choisirAsc (ArrayList<ControleurInterne> controleurs) {
 		controleurs.get(0).addRequete(requetes.get(0));
+	}
+
+	public void addRequeteExt(RequeteExterne requete) {
+		// TODO Auto-generated method stub
+		requetes.add(requete);
 	}
 }

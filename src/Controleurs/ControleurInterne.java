@@ -8,13 +8,18 @@ import Requetes.Requete;
 
 public class ControleurInterne {
 	
-	//on emp�che la classe d'�tre instanci�e car elle est statique
-	private ControleurInterne () {}
+	private Ascenseur ascenseur;
+	
+	public ControleurInterne (Ascenseur ascenseur) {
+		this.ascenseur = ascenseur;
+	}
 	
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();
 	
-	public static void traiterRequete(Requete requete, Ascenseur ascenseur){
+	public void traiterRequete(Requete requete, Ascenseur ascenseur){
 		if (requete.getLibelle() == "Allez � l'�tage")
+			ascenseur.setEtage(requete.getEtage());
+		else if (requete.getLibelle() == "Haut")
 			ascenseur.setEtage(requete.getEtage());
 	}
 	
