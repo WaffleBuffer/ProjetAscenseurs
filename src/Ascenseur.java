@@ -1,20 +1,22 @@
 
+
+//Salut, je suis un comm
 public class Ascenseur {
-	//à quel étage se trouve  l'ascenseur
+	//ï¿½ quel ï¿½tage se trouve  l'ascenseur
 	private int etage;
-	//l'ascenseur est-il en mouvement ou bien à l'arrêt
+	//l'ascenseur est-il en mouvement ou bien ï¿½ l'arrï¿½t
 	private boolean estEnMouvement;
-	//quel est le poids maximum en kg que l'ascenseur est censé pouvoir supporter
+	//quel est le poids maximum en kg que l'ascenseur est censï¿½ pouvoir supporter
 	private int poidsMax;
 	//l'ascenseur est-il vide
 	private boolean estVide;
 	
 	//constructeur
 	public Ascenseur (){
-		etage = 0;					//un nouvel ascenseur est assemblé au rez-de-chaussée (niveau 0)
-		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore reçu de requête
+		etage = 0;					//un nouvel ascenseur est assemblï¿½ au rez-de-chaussï¿½e (niveau 0)
+		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore reï¿½u de requï¿½te
 		estVide = true;				//un nouvel ascenseur ne contient aucun usager
-		poidsMax = 300;				//paramètre par défaut - à changer ou rendre paramétrable par l'utilisateur
+		poidsMax = 300;				//paramï¿½tre par dï¿½faut - ï¿½ changer ou rendre paramï¿½trable par l'utilisateur
 	}
 
 	@Override
