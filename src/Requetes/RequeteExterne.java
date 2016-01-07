@@ -2,10 +2,11 @@ package Requetes;
 
 public class RequeteExterne extends Requete {
 	//constructeur si le bool est vrai le bouton haut est press� sinon c'est le bouton bas
-	public RequeteExterne (boolean Haut){
+	public RequeteExterne (int etage, boolean Haut){
+		this.setEtage(etage);
 		if (Haut)
-			this.setLibelle("Appuie bouton haut");
+			this.setLibelle("Haut");
 		else
-			this.setLibelle("Appuie bouton bas");
+			this.setLibelle("Bas");
 	}
 }
