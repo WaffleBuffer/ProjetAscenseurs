@@ -14,13 +14,13 @@ import Requetes.RequeteInterne;
 public class Main {
 
 	public static void main(String[] args) {
-		MainWindow fenetre = new MainWindow();
 		Batiment batim = new Batiment("Hotel", 5);
 		ArrayList<ControleurInterne> controleursInt = new ArrayList<ControleurInterne>();
 		
 		ControleurExterne controleurExterne = ControleurExterne.getControleurExterne();
 		
 		Ascenseur asc1 = new Ascenseur (batim);
+		MainWindow fenetre = new MainWindow(batim, asc1);
 		System.out.println(asc1.toString());
 		
 		ControleurInterne controleur1 = new ControleurInterne(asc1);
@@ -42,7 +42,7 @@ public class Main {
 		
 		listeBoutonsAsc1 = asc1.getListeBoutons();
 		for (BoutonInterne i : listeBoutonsAsc1){
-			System.out.println(i.toString());
+			System.out.println(i.getLibelle());
 		}
 		
 		System.out.println("Batiment :");
