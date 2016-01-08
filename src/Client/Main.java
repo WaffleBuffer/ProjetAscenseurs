@@ -5,6 +5,7 @@ import Boutons.BoutonExterne;
 import Boutons.BoutonInterne;
 import Controleurs.ControleurExterne;
 import Controleurs.ControleurInterne;
+import IHM.ConfigWindow;
 import IHM.MainWindow;
 
 public class Main {
@@ -16,7 +17,7 @@ public class Main {
 		ControleurExterne controleurExterne = ControleurExterne.getControleurExterne();
 		
 		Ascenseur asc1 = new Ascenseur (batim);
-		MainWindow fenetre = new MainWindow(batim, asc1);
+		ConfigWindow fen = new ConfigWindow();
 		System.out.println(asc1.toString());
 		
 		ControleurInterne controleur1 = new ControleurInterne(asc1);
