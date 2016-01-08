@@ -68,7 +68,7 @@ public class Ascenseur {
 		return etage;
 	}
 	
-	public int numAsc() {
+	public int getNumAsc() {
 		return numAsc;
 	}
 
