@@ -4,9 +4,12 @@ import Controleurs.IControleur;
 
 public class Bouton {
 	/*Identifiant du bouton:
-	 * etage 0    -> "Rez-de-chaussé"
-	 * 1er étage  -> "1er étage"
-	 * ieme étage -> i + "e étage"
+	 * boutons etages :
+	 * 	-etage 0    -> "Rez-de-chaussé"
+	 * 	-1er étage  -> "1er étage"
+	 * 	-ieme étage -> i + "e étage"
+	 * 
+	 * bouton stop -> "Stop"
 	*/
 	private String libelle;
 
