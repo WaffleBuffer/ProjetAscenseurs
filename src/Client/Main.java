@@ -17,17 +17,23 @@ public class Main {
 		ControleurExterne controleurExterne = ControleurExterne.getControleurExterne();
 		
 		Ascenseur asc1 = new Ascenseur (batim);
+		Ascenseur asc2 = new Ascenseur (batim);
 		ConfigWindow fen = new ConfigWindow();
 		System.out.println(asc1.toString());
 		
 		ControleurInterne controleur1 = new ControleurInterne(asc1);
+		ControleurInterne controleur2 = new ControleurInterne(asc2);
 		controleursInt.add(controleur1);
+		controleursInt.add(controleur2);
 		
 		asc1.getListeBoutons().get(3).appuyer(controleur1);
+		asc2.getListeBoutons().get(5).appuyer(controleur2);
 		controleur1.traiterRequetes();
 		System.out.println(asc1.toString());
+		System.out.println(asc2.toString());
 		
 		batim.getListeBoutons().get(0).appuyer(controleurExterne);
+		batim.getListeBoutons().get(4).appuyer(controleurExterne);
 		controleurExterne.traiterRequetes(controleursInt);
 		
 		for (ControleurInterne i : controleursInt) {
@@ -35,6 +41,7 @@ public class Main {
 		}
 		
 		System.out.println(asc1.toString());
+		System.out.println(asc2.toString());
 		System.out.println(batim.toString());
 		ArrayList<BoutonInterne> listeBoutonsAsc1 = new ArrayList<BoutonInterne>();
 		ArrayList<BoutonExterne> listeBoutonsBatim = new ArrayList<BoutonExterne>();
