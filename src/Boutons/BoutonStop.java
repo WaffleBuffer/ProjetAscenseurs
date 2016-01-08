@@ -1,6 +1,6 @@
 package Boutons;
 
-import Controleurs.ControleurInterne;
+import Controleurs.IControleur;
 import Requetes.RequeteInterne;
 
 public class BoutonStop extends BoutonInterne{
@@ -17,7 +17,7 @@ public class BoutonStop extends BoutonInterne{
 
 	//Creation requete d'arret
 	@Override
-	public void appuyer (ControleurInterne controleur) {
+	public void appuyer (IControleur controleur) {
 		controleur.addRequete(new RequeteInterne());
 	}
 }

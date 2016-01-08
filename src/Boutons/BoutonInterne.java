@@ -1,7 +1,5 @@
 package Boutons;
 
-import Controleurs.ControleurInterne;
-
 public class BoutonInterne extends Bouton {
 
 
@@ -10,5 +8,4 @@ public class BoutonInterne extends Bouton {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void appuyer (ControleurInterne controleur) {}
 }
