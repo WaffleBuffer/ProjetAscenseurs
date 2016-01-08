@@ -24,9 +24,9 @@ public class Batiment {
 		this.nom = nom;
 		this.nbEtages = nbEtages;
 		this.nbAscenseur = nbAscenseur;
-		listeBoutons.add(new BoutonHaut(0)); //le rez de chaussé n'a qu'un bouton haut et as de boton bas
+		listeBoutons.add(new BoutonHaut(0)); //le rez de chaussé n'a qu'un bouton haut et pas de bouton bas
 		
-		//a chaque étage, le batiment possede deux boutons : haut et bas
+		//a chaque etage, le batiment possede deux boutons : haut et bas
 		for (int i = 1 ; i < nbEtages; ++i){
 			listeBoutons.add(new BoutonHaut(i));
 			listeBoutons.add(new BoutonBas(i));
@@ -85,10 +85,11 @@ public class Batiment {
 	public void appuyerBoutonAscenseur (int numAsc, int numBouton) {
 		this.getAscenseur(numAsc).getListeBoutons().get(numBouton).appuyer(this.getControleursInterne().get(numAsc - 1));
 	}
-
+	
+	//affichage de l'etat du batiment
 	@Override
 	public String toString() {
 		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages + "]";
-	} //affichage de l'etat du batiment
+	} 
 
 }
