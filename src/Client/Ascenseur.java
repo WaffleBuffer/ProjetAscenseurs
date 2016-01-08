@@ -17,6 +17,7 @@ public class Ascenseur {
 	private ArrayList<BoutonInterne> listeBoutons = new ArrayList<BoutonInterne>();
 	//l'ascenseur est-il en mouvement ou bien � l'arr�t
 	private boolean estEnMouvement;
+	//les portes de l'ascenseur sont-elles ouvertes ou fermées
 	private boolean portesOuvertes;
 	//quel est le poids maximum en kg que l'ascenseur est cens� pouvoir supporter
 	private int poidsMax;
@@ -35,7 +36,7 @@ public class Ascenseur {
 		etage = 0;					//un nouvel ascenseur est assembl� au rez-de-chauss�e (niveau 0)
 		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore re�u de requ�te
 		estVide = true;				//un nouvel ascenseur ne contient aucun usager
-		portesOuvertes = false;
+		portesOuvertes = false;		//un nouvel acsenseur à les portes fermées
 		poidsMax = 300;				//param�tre par d�faut - � changer ou rendre param�trable par l'utilisateur
 		bat = bati;
 		numAsc = num;
@@ -65,6 +66,10 @@ public class Ascenseur {
 
 	public int getEtage() {
 		return etage;
+	}
+	
+	public int numAsc() {
+		return numAsc;
 	}
 
 	public void setListeBoutons(ArrayList<BoutonInterne> listeBoutons) {
