@@ -23,7 +23,7 @@ public class ControleurExterne implements IControleur{
 	
 	public void traiterRequetes (ArrayList<ControleurInterne> controleurs) {
 		for (int i = 0; i < requetes.size(); ++i) {
-			controleurs.get(0).addRequete(requetes.get(0));
+			controleurs.get(0).addRequete(requetes.get(i));
 			requetes.remove(requetes.get(i));
 		}
 	}

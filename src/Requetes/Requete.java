@@ -28,4 +28,10 @@ public class Requete {
 	public void setEtage(int etage) {
 		this.etageDemande = etage;
 	}
+
+	@Override
+	public String toString() {
+		return "Requete [libelle=" + libelle + ", etageDemande=" + etageDemande
+				+ "]";
+	}
 }

@@ -9,7 +9,9 @@ import Requetes.RequeteInterne;
 
 public class ControleurInterne implements IControleur{
 	
+	//ascenseur gere par le controleur interne
 	private Ascenseur ascenseur;
+	//liste des requetes
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();
 	
 	public ControleurInterne (Ascenseur ascenseur) {
@@ -90,5 +92,11 @@ public class ControleurInterne implements IControleur{
 	
 	public void addRequete (int etage) {
 		requetes.add(new RequeteInterne(etage));
+	}
+
+	@Override
+	public String toString() {
+		return "ControleurInterne [ascenseur=" + ascenseur + ", requetes="
+				+ requetes + "]";
 	}
 }

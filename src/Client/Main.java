@@ -36,6 +36,8 @@ public class Main {
 		batim.getListeBoutons().get(4).appuyer(controleurExterne);
 		controleurExterne.traiterRequetes(controleursInt);
 		
+		System.out.println(controleur1.toString());
+		System.out.println(controleur1.toString());
 		for (ControleurInterne i : controleursInt) {
 			i.traiterRequetes();
 		}
