@@ -60,6 +60,7 @@ public class ControleurExterne implements IControleur{
 			}
 			aUtiliser.addRequete(requetes.get(i));
 			requetes.remove(requetes.get(i));
+			--i;
 		}
 		
 
