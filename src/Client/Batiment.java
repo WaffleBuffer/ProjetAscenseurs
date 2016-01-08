@@ -30,7 +30,7 @@ public class Batiment {
 		} //a chaque étage, le batiment possede deux boutons : haut et bas
 		
 		for (int i = 0; i < nbAscenseur; ++i) {
-			controleursInt.add(new ControleurInterne(new Ascenseur(nbEtages, i)));
+			controleursInt.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1)));
 		}
 		
 		//parametrage du controleur Externe
@@ -38,6 +38,10 @@ public class Batiment {
 		controleurExt.defineControleursInterne(controleursInt);
 		
 		listeBoutons.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
+	}
+	
+	public Ascenseur getAscenseur(int num) {
+		return controleursInt.get(num + 1).getAscenceur();
 	}
 
 	public String getNom() {
