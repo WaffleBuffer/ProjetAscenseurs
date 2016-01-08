@@ -29,6 +29,7 @@ public class Main {
 		asc1.getListeBoutons().get(3).appuyer(controleur1);
 		asc2.getListeBoutons().get(5).appuyer(controleur2);
 		controleur1.traiterRequetes();
+		controleur2.traiterRequetes();
 		System.out.println(asc1.toString());
 		System.out.println(asc2.toString());
 		

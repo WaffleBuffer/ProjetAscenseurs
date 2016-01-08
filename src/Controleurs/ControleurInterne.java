@@ -36,7 +36,7 @@ public class ControleurInterne implements IControleur{
 				}
 				
 				ascenseur.setEstEnMouvement(true);				
-				System.out.println("Ascenceur va de l'étage : " + ascenseur.getEtage() + " à l'étage " + requetes.get(i).getEtage());
+				System.out.println("Ascenceur " + ascenseur.getNumAsc() + " va de l'étage : " + ascenseur.getEtage() + " à l'étage " + requetes.get(i).getEtage());
 				try {
 					Thread.sleep((Math.abs(ascenseur.getEtage() - requetes.get(i).getEtage())) * 2000);
 				} catch (InterruptedException e) {
