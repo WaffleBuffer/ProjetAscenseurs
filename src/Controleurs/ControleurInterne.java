@@ -17,6 +17,9 @@ public class ControleurInterne implements IControleur{
 	}
 	
 	public void traiterRequetes(){
+		if (ascenseur.estBloquer()) {
+			return;
+		}
 		for (int i = 0; i < requetes.size(); ++i) {
 			if (requetes.get(i).getLibelle() == "Allez � l'�tage" || 
 					requetes.get(i).getLibelle() == "Haut" || 

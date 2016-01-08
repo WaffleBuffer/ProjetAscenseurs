@@ -23,6 +23,9 @@ public class Ascenseur {
 	//l'ascenseur est-il vide
 	private boolean estVide;
 	private Batiment bat;
+	//L'ascenseur est-il bloque
+	private boolean estBloque;
+	
 	
 	//constructeur
 	public Ascenseur (Batiment bati){
@@ -93,5 +96,17 @@ public class Ascenseur {
 
 	public boolean isPortesOuvertes() {
 		return portesOuvertes;
+	}
+	
+	public boolean estBloquer() {
+		return estBloque;
+	}
+	
+	public void bloquer () {
+		estBloque = true;
+	}
+	
+	public void debloque () {
+		estBloque = false;
 	}
 }
