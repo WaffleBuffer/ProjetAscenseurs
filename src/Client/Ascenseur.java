@@ -22,19 +22,23 @@ public class Ascenseur {
 	private int poidsMax;
 	//l'ascenseur est-il vide
 	private boolean estVide;
+	//le batiment dans lequel est l'ascenseur
 	private Batiment bat;
 	//L'ascenseur est-il bloque
 	private boolean estBloque;
+	//numero de l'ascenseur
+	private int numAsc;
 	
 	
 	//constructeur
-	public Ascenseur (Batiment bati){
+	public Ascenseur (Batiment bati, int num){
 		etage = 0;					//un nouvel ascenseur est assembl� au rez-de-chauss�e (niveau 0)
 		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore re�u de requ�te
 		estVide = true;				//un nouvel ascenseur ne contient aucun usager
 		portesOuvertes = false;
 		poidsMax = 300;				//param�tre par d�faut - � changer ou rendre param�trable par l'utilisateur
 		bat = bati;
+		numAsc = num;
 		listeBoutons.add(new BoutonDestination("Rez-de-chaussé", 0));
 		listeBoutons.add(new BoutonDestination("1er étage", 1));
 		for (int i = 2; i <= bat.getNbEtages(); ++i){
@@ -45,9 +49,11 @@ public class Ascenseur {
 
 	@Override
 	public String toString() {
-		return "Ascenseur [etage=" + etage + ", estEnMouvement=" + estEnMouvement + ", portesOuvertes="
+		return "Ascenseur [etage=" + etage + ", listeBoutons=" + listeBoutons
+				+ ", estEnMouvement=" + estEnMouvement + ", portesOuvertes="
 				+ portesOuvertes + ", poidsMax=" + poidsMax + ", estVide="
-				+ estVide + "]";
+				+ estVide + ", bat=" + bat + ", estBloque=" + estBloque
+				+ ", numAsc=" + numAsc + "]";
 	}
 
 	public void setEtage(int etage) {
