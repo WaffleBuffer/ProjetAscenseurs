@@ -38,7 +38,7 @@ public class Main {
 		controleurExterne.traiterRequetes(controleursInt);
 		
 		System.out.println(controleur1.toString());
-		System.out.println(controleur1.toString());
+		System.out.println(controleur2.toString());
 		for (ControleurInterne i : controleursInt) {
 			i.traiterRequetes();
 		}
