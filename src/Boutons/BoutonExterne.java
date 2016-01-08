@@ -12,6 +12,7 @@ public class BoutonExterne extends Bouton {
 		// TODO Auto-generated constructor stub
 	}
 
+	//Ajout d'une requete externe. Le fonctionnement est le meme pour les boutons Haut et Bas
 	@Override
 	public void appuyer (IControleur controleur) {
 		RequeteExterne requete = new RequeteExterne(etage, (this.getLibelle().equals("Haut")) ? true : false);

@@ -1,6 +1,7 @@
 package Boutons;
 
-import Controleurs.ControleurInterne;
+import Controleurs.IControleur;
+import Requetes.RequeteInterne;
 
 public class BoutonDestination extends BoutonInterne {
 
@@ -17,8 +18,9 @@ public class BoutonDestination extends BoutonInterne {
 		return "BoutonDestination [libelle=" + this.getLibelle() + "; etage ciblé=" + etage + "]";
 	}
 
+	//Ajout d'une requete interne
 	@Override
-	public void appuyer (ControleurInterne controleur) {
-		controleur.addRequete(etage);
+	public void appuyer (IControleur controleur) {
+		controleur.addRequete(new RequeteInterne (etage));
 	}
 }
