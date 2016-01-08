@@ -53,7 +53,7 @@ public class ControleurInterne implements IControleur{
 				//L'ascenseur arrive et on retire la requete
 				ascenseur.setEtage(requetes.get(i).getEtage());	
 				requetes.remove(requetes.get(i));
-				
+				--i;
 				//L'ascenseur s'arrrete
 				System.out.println("l'ascenseur s'arrête");
 				ascenseur.setEstEnMouvement(false);

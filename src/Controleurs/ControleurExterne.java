@@ -42,7 +42,7 @@ public class ControleurExterne implements IControleur{
 //			requetes.remove(requetes.get(i));
 //		}
 		
-		//Algo "avanc�"
+		//Algo "avance"
 		for (int i = 0; i < requetes.size();++i) {
 			
 			if (searchForInactive()) {}
@@ -68,7 +68,7 @@ public class ControleurExterne implements IControleur{
 	
 	private boolean searchForInactive () {
 		for (ControleurInterne controleur : controleurs) {
-			if (!controleur.getAscenceur().isEstEnMouvement()) {
+			if (0 == controleur.getNumberOfRequete()) {
 				this.aUtiliser = controleur;
 				return true;
 			}

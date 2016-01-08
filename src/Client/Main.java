@@ -23,10 +23,11 @@ public class Main {
 		batim.appuyerBoutonEtage(2); //etage 1 bas
 		batim.appuyerBoutonEtage(8); //etage 4 haut
 		batim.appuyerBoutonEtage(0); //etage 0 haut
-		System.out.println(batim.getControleursInterne().toString());
-		batim.getControleurExt().traiterRequetes();
 		
+		batim.getControleurExt().traiterRequetes();
+		System.out.println(batim.getControleursInterne().toString());		
 		batim.traiterControleurs();
+		System.out.println(batim.getControleursInterne().toString());		
 		
 		System.out.println(batim.getAscenseur(1).toString());
 		System.out.println(batim.getAscenseur(2).toString());
