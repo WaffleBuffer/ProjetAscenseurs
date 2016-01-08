@@ -1,16 +1,19 @@
 package Requetes;
 
 public class Requete {
-/*requetes possibles:
+/*libelle possibles:
  * Internes:
- * -bouton �tage X -> changerEtage()
- * -bouton d'arr�t d'urgence -> arreter()
+ * -bouton etage -> "Allez a l'etage"
+ * -bouton stop  -> "Arreter l'ascenseur"
  * 
  * Externes:
- * -bouton "vers le haut" -> selectionAscenseur()
- * -bouton "vers le bas" -> selectionAscenseur()
+ * -bouton haut -> "Haut"
+ * -bouton bas  -> "Bas"
  */
+	//Identifiant de requete
 	private String libelle;
+	//Numero de l'etage demande pour les requetes internes et le numero de l'etage du bouton pour
+	//les requetes externes
 	private int etageDemande;
 	
 	public String getLibelle() {
