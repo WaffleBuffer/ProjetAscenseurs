@@ -2,6 +2,7 @@ package IHM;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,19 +38,32 @@ public class FenetreBatiment extends JFrame {
 	public FenetreBatiment (Batiment bat, Ascenseur asc) {
 		
 		//layout de la fenêtre
-		BorderLayout mainLayout = new BorderLayout();	//création du layout principal
-		this.setLayout(mainLayout);						//il est associé à la fenetre principale
+		GridLayout layoutPrincipal = new GridLayout(bat.getNbEtages() + 1, 2);	//création du layout principal
+		this.setLayout(layoutPrincipal);									//il est associé à la fenetre principale
 		
-		//répartition des panels
-		JPanel batPanel = new JPanel();					//création d'un panel qui contiendra les infos sur le batiment
-		JPanel ascPanel = new JPanel();					//création d'un panel qui contiendra les infos sur l'ascenseur
-		this.add(batPanel, BorderLayout.WEST);			//la partie batiment sera a gauche de la fenetre
-		this.add(ascPanel, BorderLayout.EAST);			//la partie ascenseur sera à droite de la fenetre
-		
-		//layout partie batiment
-		LayoutManager batLayout = new BoxLayout(batPanel, BoxLayout.Y_AXIS);	//création layout qui align verticalement les éléments relatifs au batiment
-		batPanel.setLayout(batLayout);											//il est associé au panel du batiment
-		
+		for (int i = 0; i <= bat.getNbEtages(); ++i){
+			JLabel labelEtage = new JLabel("yolo", JLabel.CENTER);
+			labelEtage.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+			this.add(labelEtage);
+			
+			JPanel panelBoutons = new JPanel();
+			JButton boutonHaut = new JButton("Haut");
+			JButton boutonBas = new JButton("Bas");
+			panelBoutons.setLayout(new GridLayout(2, 1)); 
+			this.add(panelBoutons);
+			if (i == 0){
+				panelBoutons.add(new JLabel());
+				panelBoutons.add(boutonBas);
+			}
+			else if (i == bat.getNbEtages()){
+				panelBoutons.add(boutonHaut);
+			}
+			else {
+				panelBoutons.add(boutonHaut);
+				panelBoutons.add(boutonBas);
+			}
+		}
+		/*
 		//layout partie ascenseur
 		LayoutManager ascLayout = new BoxLayout(ascPanel, BoxLayout.Y_AXIS);	//layout identique au précédent mais avec l'ascenseur
 		ascPanel.setLayout(ascLayout);											//il est associé au panel de l'ascenseur
@@ -61,7 +75,7 @@ public class FenetreBatiment extends JFrame {
 		batPanel.add(nomBat);													
 		batPanel.add(nbEtagesBat);												//ajout des labels dans le panel batiment
 		batPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));		//ajout d'un padding à ce panel identique au précédent
-		*/
+		
 		//partie ascenseur
 		for (BoutonInterne i : asc.getListeBoutons()){							//ajout de chaque bouton de l'ascenseur au panel via des label
 			ascPanel.add(new JLabel(i.getLibelle()));
@@ -98,7 +112,7 @@ public class FenetreBatiment extends JFrame {
 					}});
 			}
 		}
-		
+		*/
 		//reglages de la fenêtre
 		this.setTitle(bat.getNom() + " " + bat.getNbEtages() + " étages");	//Titre de la fenêtre 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
