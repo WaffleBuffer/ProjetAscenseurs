@@ -34,7 +34,7 @@ public class ControleurExterne implements IControleur{
 		requetes.add(new RequeteExterne(etage, direction));
 	}
 	
-	public void traiterRequetes (ArrayList<ControleurInterne> controleurs) {
+	public void traiterRequetes () {
 
 		//Algo Naif
 //		for (int i = 0; i < requetes.size(); ++i) {
@@ -42,7 +42,7 @@ public class ControleurExterne implements IControleur{
 //			requetes.remove(requetes.get(i));
 //		}
 		
-		//Algo "avancé"
+		//Algo "avancï¿½"
 		for (int i = 0; i < requetes.size();++i) {
 			
 			if (searchForInactive()) {}

@@ -3,45 +3,30 @@ import java.util.ArrayList;
 
 import Boutons.BoutonExterne;
 import Boutons.BoutonInterne;
-import Controleurs.ControleurExterne;
-import Controleurs.ControleurInterne;
 import IHM.FenetreConfiguration;
-import IHM.FenetreBatiment;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Batiment batim = new Batiment("Hotel", 5, 2);
-		ArrayList<ControleurInterne> controleursInt = new ArrayList<ControleurInterne>();
-		
-		ControleurExterne controleurExterne = ControleurExterne.getControleurExterne();
 		
 		FenetreConfiguration fen = new FenetreConfiguration();
 		System.out.println(batim.getAscenseur(1).toString());
 		
-		ControleurInterne controleur1 = new ControleurInterne(batim.getAscenseur(1));
-		ControleurInterne controleur2 = new ControleurInterne(batim.getAscenseur(2));
-		controleursInt.add(controleur1);
-		controleursInt.add(controleur2);
-		
-		batim.getAscenseur(1).getListeBoutons().get(3).appuyer(controleur1);
-		batim.getAscenseur(2).getListeBoutons().get(5).appuyer(controleur2);
-		controleur1.traiterRequetes();
-		controleur2.traiterRequetes();
+		batim.appuyerBoutonAscenseur(1, 3);
+		batim.appuyerBoutonAscenseur(2, 5);
+		batim.traiterControleurs();
 		System.out.println(batim.getAscenseur(1).toString());
 		System.out.println(batim.getAscenseur(2).toString());
 		
-		batim.getListeBoutons().get(0).appuyer(controleurExterne); //etage 0 haut
-		batim.getListeBoutons().get(2).appuyer(controleurExterne); //etage 1 bas
-		batim.getListeBoutons().get(8).appuyer(controleurExterne); //etage 4 haut
-		batim.getListeBoutons().get(0).appuyer(controleurExterne); //etage 0 haut
-		controleurExterne.traiterRequetes(controleursInt);
+		batim.appuyerBoutonEtage(0); //etage 0 haut
+		batim.appuyerBoutonEtage(2); //etage 1 bas
+		batim.appuyerBoutonEtage(8); //etage 4 haut
+		batim.appuyerBoutonEtage(0); //etage 0 haut
+		System.out.println(batim.getControleursInterne().toString());
+		batim.getControleurExt().traiterRequetes();
 		
-		System.out.println(controleur1.toString());
-		System.out.println(controleur2.toString());
-		for (ControleurInterne i : controleursInt) {
-			i.traiterRequetes();
-		}
+		batim.traiterControleurs();
 		
 		System.out.println(batim.getAscenseur(1).toString());
 		System.out.println(batim.getAscenseur(2).toString());

@@ -11,6 +11,7 @@ import Controleurs.ControleurInterne;
 public class Batiment {
 	private String nom; // le batiment a un nom
 	private int nbEtages; //le batiment a un certain nombre d'etages
+	private int nbAscenseur; //le batiment a un certain nombre d'ascenseur
 	private ControleurExterne controleurExt = ControleurExterne.getControleurExterne();
 	
 	//liste des controleurs internes
@@ -22,6 +23,7 @@ public class Batiment {
 	public Batiment(String nom, int nbEtages, int nbAscenseur) {
 		this.nom = nom;
 		this.nbEtages = nbEtages;
+		this.nbAscenseur = nbAscenseur;
 		listeBoutons.add(new BoutonHaut(0)); //le rez de chaussé n'a qu'un bouton haut et as de boton bas
 		
 		for (int i = 1 ; i < nbEtages; ++i){
@@ -40,6 +42,16 @@ public class Batiment {
 		listeBoutons.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
 	}
 	
+	public void traiterControleurs () {
+		for (ControleurInterne i : controleursInt) {
+			i.traiterRequetes();
+		}
+	}
+	
+	public void appuyerBoutonEtage (int num) {
+		listeBoutons.get(num).appuyer(controleurExt);
+	}
+	
 	public Ascenseur getAscenseur(int num) {
 		return controleursInt.get(num - 1).getAscenceur();
 	}
@@ -52,6 +64,10 @@ public class Batiment {
 		return nbEtages;
 	}
 	
+	public int getNbAscenseur () {
+		return nbAscenseur;
+	}
+	
 	public ControleurExterne getControleurExt () {
 		return controleurExt;
 	}
@@ -62,6 +78,10 @@ public class Batiment {
 
 	public ArrayList<BoutonExterne> getListeBoutons() {
 		return listeBoutons;
+	}
+	
+	public void appuyerBoutonAscenseur (int numAsc, int numBouton) {
+		this.getAscenseur(numAsc).getListeBoutons().get(numBouton).appuyer(this.getControleursInterne().get(numAsc - 1));
 	}
 
 	@Override
