@@ -33,8 +33,10 @@ public class Main {
 		System.out.println(asc1.toString());
 		System.out.println(asc2.toString());
 		
-		batim.getListeBoutons().get(0).appuyer(controleurExterne);
-		batim.getListeBoutons().get(8).appuyer(controleurExterne);
+		batim.getListeBoutons().get(0).appuyer(controleurExterne); //etage 0 haut
+		batim.getListeBoutons().get(2).appuyer(controleurExterne); //etage 1 bas
+		batim.getListeBoutons().get(8).appuyer(controleurExterne); //etage 4 haut
+		batim.getListeBoutons().get(0).appuyer(controleurExterne); //etage 0 haut
 		controleurExterne.traiterRequetes(controleursInt);
 		
 		System.out.println(controleur1.toString());
