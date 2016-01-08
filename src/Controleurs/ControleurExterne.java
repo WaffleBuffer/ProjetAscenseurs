@@ -10,8 +10,13 @@ public class ControleurExterne implements IControleur{
 	final private static ControleurExterne singleton = new ControleurExterne ();
 	
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();
+	private ArrayList<ControleurInterne> controleurs;
 	
 	private ControleurExterne () {}
+	
+	public void defineControleursInterne (ArrayList<ControleurInterne> controleurs) {
+		this.controleurs = controleurs;
+	}
 	
 	public static ControleurExterne getControleurExterne() {
 		return singleton;
