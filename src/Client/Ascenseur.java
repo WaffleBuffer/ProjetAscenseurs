@@ -49,8 +49,7 @@ public class Ascenseur {
 
 	@Override
 	public String toString() {
-		return "Ascenseur [etage=" + etage + ", listeBoutons=" + listeBoutons
-				+ ", estEnMouvement=" + estEnMouvement + ", portesOuvertes="
+		return "Ascenseur [etage=" + etage + ", estEnMouvement=" + estEnMouvement + ", portesOuvertes="
 				+ portesOuvertes + ", poidsMax=" + poidsMax + ", estVide="
 				+ estVide + ", bat=" + bat + ", estBloque=" + estBloque
 				+ ", numAsc=" + numAsc + "]";
