@@ -13,7 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -31,111 +34,75 @@ public class MainWindow extends JFrame {
 	/**
 	 * @param args
 	 */
-	public MainWindow (Batiment bat, final Ascenseur asc) {
+	public MainWindow (Batiment bat, Ascenseur asc) {
 		
 		//layout de la fenêtre
-		BorderLayout mainLayout = new BorderLayout();
-		this.setLayout(mainLayout);
+		BorderLayout mainLayout = new BorderLayout();	//création du layout principal
+		this.setLayout(mainLayout);						//il est associé à la fenetre principale
 		
 		//répartition des panels
-		JPanel batPanel = new JPanel();
-		JPanel ascPanel = new JPanel();
-		this.add(batPanel, BorderLayout.WEST);
-		this.add(ascPanel, BorderLayout.EAST);
+		JPanel batPanel = new JPanel();					//création d'un panel qui contiendra les infos sur le batiment
+		JPanel ascPanel = new JPanel();					//création d'un panel qui contiendra les infos sur l'ascenseur
+		this.add(batPanel, BorderLayout.WEST);			//la partie batiment sera a gauche de la fenetre
+		this.add(ascPanel, BorderLayout.EAST);			//la partie ascenseur sera à droite de la fenetre
 		
 		//layout partie batiment
-		LayoutManager batLayout = new BoxLayout(batPanel, BoxLayout.Y_AXIS);
-		batPanel.setLayout(batLayout);
-		batPanel.add(new JLabel("Bâtiment"));
+		LayoutManager batLayout = new BoxLayout(batPanel, BoxLayout.Y_AXIS);	//création layout qui align verticalement les éléments relatifs au batiment
+		batPanel.setLayout(batLayout);											//il est associé au panel du batiment
 		
 		//layout partie ascenseur
-		LayoutManager ascLayout = new BoxLayout(ascPanel, BoxLayout.Y_AXIS);
-		ascPanel.setLayout(ascLayout);
-		ascPanel.add(new JLabel("Ascenseur"));
-		ascPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		LayoutManager ascLayout = new BoxLayout(ascPanel, BoxLayout.Y_AXIS);	//layout identique au précédent mais avec l'ascenseur
+		ascPanel.setLayout(ascLayout);											//il est associé au panel de l'ascenseur
+		ascPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));		//ajout d'un padding à ce panel 
 		
 		//partie batiment
-		JLabel nomBat = new JLabel(bat.getNom());
-		JLabel nbEtagesBat = new JLabel(Integer.toString(bat.getNbEtages()));
-		batPanel.add(nomBat);
-		batPanel.add(nbEtagesBat);
-		batPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		
+		/*JLabel nomBat = new JLabel(bat.getNom());								//création label contenant le nom du batiment
+		JLabel nbEtagesBat = new JLabel(Integer.toString(bat.getNbEtages()));	//création label contenant le nombre d'étages du batiment
+		batPanel.add(nomBat);													
+		batPanel.add(nbEtagesBat);												//ajout des labels dans le panel batiment
+		batPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));		//ajout d'un padding à ce panel identique au précédent
+		*/
 		//partie ascenseur
-		for (BoutonInterne i : asc.getListeBoutons()){
+		for (BoutonInterne i : asc.getListeBoutons()){							//ajout de chaque bouton de l'ascenseur au panel via des label
 			ascPanel.add(new JLabel(i.getLibelle()));
 		}
 		
-		final JProgressBar barre_progression = new JProgressBar(JProgressBar.VERTICAL, 0, bat.getNbEtages());
-		barre_progression.setValue(asc.getEtage());
-		barre_progression.setForeground(Color.ORANGE);
-		barre_progression.setStringPainted(true);
-		this.add(barre_progression, BorderLayout.CENTER);
+		final JProgressBar barre_progression = new JProgressBar(JProgressBar.VERTICAL, 0, bat.getNbEtages());//création barre de progression verticale pour représenter l'emplacement de l'ascenseur
+		barre_progression.setValue(asc.getEtage());			//elle prend pour valeur l'emplacement de l'ascenseur
+		barre_progression.setForeground(Color.BLUE);		//changement de la couleur de la barre pour une meilleure visibilité
+		this.add(barre_progression, BorderLayout.CENTER);	//on l'ajoute au centre de la fenetre
 		
-		//boutons
-		JButton un = new JButton("1er");
-		JButton deux = new JButton("2e");
-		JButton trois = new JButton("3e");
-		JButton quatre = new JButton("4e");
+		//boutons		
+		JPanel boutonPanel = new JPanel();					//création panel qui contiendra les boutons cliquables
+		BoxLayout boutonLayout = new BoxLayout(boutonPanel, BoxLayout.Y_AXIS);	//création  boxlayout vertical
+		this.add(boutonPanel, BorderLayout.SOUTH);								//ajout du panel en bas de la fenetre
 		
-		JPanel boutonPanel = new JPanel();
-		BoxLayout boutonLayout = new BoxLayout(boutonPanel, BoxLayout.Y_AXIS);
-		this.add(boutonPanel, BorderLayout.SOUTH);
-		boutonPanel.add(un, BorderLayout.SOUTH);
-		boutonPanel.add(deux, BorderLayout.SOUTH);
-		boutonPanel.add(trois, BorderLayout.SOUTH);
-		boutonPanel.add(quatre, BorderLayout.SOUTH);
-		
-		un.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				barre_progression.setValue(1);
-			}});
-		
-		deux.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				barre_progression.setValue(2);
-			}});
-		
-		trois.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				barre_progression.setValue(3);
-			}});
-		
-		quatre.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				barre_progression.setValue(4);
-			}});
-		
-		 /*barre_progression.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				barre_progression.setValue(1);
-			}});
-		*/
-		barre_progression.addChangeListener(new ChangeListener() {
-	
-			@Override
-			public void stateChanged(ChangeEvent arg0) {
-				if (barre_progression.isIndeterminate())
-					barre_progression.setIndeterminate(false);
-				else if (!barre_progression.isIndeterminate())
-					barre_progression.setIndeterminate(true);	
+		//création en boucle des boutons qui ont pour effet de changer la valeur de la barre au clic
+		for (int i = 0; i < asc.getListeBoutons().size(); ++i){
+			if (i == asc.getListeBoutons().size() - 1)
+			{
+				JButton boutonStop = new JButton("STOP");
+				boutonPanel.add(boutonStop, BorderLayout.SOUTH);
 			}
-		    });
+			else
+			{
+				final int j = i;
+				JButton boutonDestination = new JButton(Integer.toString(i));
+				boutonPanel.add(boutonDestination, BorderLayout.SOUTH);
+				boutonDestination.addActionListener(new ActionListener() {
+	
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						
+							barre_progression.setValue(j);
+					}});
+			}
+		}
 		
 		//reglages de la fenêtre
-		this.setTitle("Projet Java Ascenseur");					//Titre de la fenêtre 
+		this.setTitle(bat.getNom() + " " + bat.getNbEtages() + " étages");					//Titre de la fenêtre 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
-		this.setSize(300, bat.getNbEtages()*30);				//taille de la fenêtre fixe
+		this.setSize(400, 500);									//taille de la fenêtre fixe
 		this.setLocationRelativeTo(null);						//la fenêtre apparait au centre de l'écran
 		this.setVisible(true);									//la fenêtre apparaît
 		
