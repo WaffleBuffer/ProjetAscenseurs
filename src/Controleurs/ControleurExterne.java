@@ -2,6 +2,7 @@ package Controleurs;
 
 import java.util.ArrayList;
 
+import Client.Batiment;
 import Requetes.Requete;
 import Requetes.RequeteExterne;
 
@@ -13,6 +14,7 @@ public class ControleurExterne implements IControleur{
 	
 	private ArrayList<ControleurInterne> controleurs;
 	private ControleurInterne aUtiliser;
+	private Batiment batiment;
 	
 	private ControleurExterne () {}
 	
@@ -20,12 +22,16 @@ public class ControleurExterne implements IControleur{
 		this.controleurs = controleurs;
 	}
 	
+	public void defineBatiment (Batiment batiment) {
+		this.batiment = batiment;
+	}
+	
 	public static ControleurExterne getControleurExterne() {
 		return singleton;
 	}
 	
 	public void addRequete (int etage, String direction) {
-		requetes.add(new RequeteExterne(etage, direction);
+		requetes.add(new RequeteExterne(etage, direction));
 	}
 	
 	public void traiterRequetes (ArrayList<ControleurInterne> controleurs) {
@@ -92,11 +98,27 @@ public class ControleurExterne implements IControleur{
 	}
 	
 	private void searchLessActive () {
-		
+		int min = batiment.getNbEtages() + 1;
+		for (ControleurInterne controleur : controleurs) {
+			if (controleur.getNumberOfRequete() == 0) {
+				this.aUtiliser = controleur;
+				return;
+			}
+			else {
+				if (controleur.getNumberOfRequete() < min) {
+					min = controleur.getNumberOfRequete();
+				}
+			}
+		}
+		for (ControleurInterne controleur : controleurs) {
+			if (controleur.getNumberOfRequete() == min) {
+				this.aUtiliser = controleur;
+				return;
+			}
+		}
 	}
 
 	public void addRequete(Requete requete) {
-		// TODO Auto-generated method stub
 		requetes.add(requete);
 	}
 }
