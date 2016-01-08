@@ -38,14 +38,14 @@ public class Ascenseur {
 		estVide = true;				//un nouvel ascenseur ne contient aucun usager
 		portesOuvertes = false;		//un nouvel acsenseur à les portes fermées
 		poidsMax = 300;				//param�tre par d�faut - � changer ou rendre param�trable par l'utilisateur
-		bat = bati;
+		bat = bati;					
 		numAsc = num;
-		listeBoutons.add(new BoutonDestination("Rez-de-chaussé", 0));
-		listeBoutons.add(new BoutonDestination("1er étage", 1));
+		listeBoutons.add(new BoutonDestination("Rez-de-chaussé", 0)); //tout ascenseur à un bouton rez-de chaussé
+		listeBoutons.add(new BoutonDestination("1er étage", 1)); //tout ascenseur à un bouton 1er etage
 		for (int i = 2; i <= bat.getNbEtages(); ++i){
 			listeBoutons.add(new BoutonDestination(i+"e étage", i)); //i est numero de l'etage correspondant au bouton
-		} //initialisation des boutons
-		listeBoutons.add(new BoutonStop());
+		} //initialisation des boutons : autant de boutons qu'il y a d'étages
+		listeBoutons.add(new BoutonStop()); // tout ascenseur à un bouton stop
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class Ascenseur {
 				+ portesOuvertes + ", poidsMax=" + poidsMax + ", estVide="
 				+ estVide + ", bat=" + bat + ", estBloque=" + estBloque
 				+ ", numAsc=" + numAsc + "]";
-	}
+	} // affichage de l'etat de l'ascenseur
 
 	public void setEtage(int etage) {
 		this.etage = etage;
@@ -76,10 +76,11 @@ public class Ascenseur {
 		this.listeBoutons = listeBoutons;
 	}
 	
+	
 	public void ouvrirPortes () {
 		System.out.println("les portes s'ouvrent");
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(1000); //temps d'ouverture des portes
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,7 +92,7 @@ public class Ascenseur {
 	public void fermerPortes () {
 		System.out.println("les portes se ferment");
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(1000); //temps de fermeture des portes
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,6 +112,11 @@ public class Ascenseur {
 	public boolean estBloquer() {
 		return estBloque;
 	}
+	
+	public boolean isEstEnMouvement() {
+		return estEnMouvement;
+	}
+	
 	
 	public void bloquer () {
 		estBloque = true;
