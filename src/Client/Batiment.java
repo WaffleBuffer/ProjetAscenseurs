@@ -41,7 +41,7 @@ public class Batiment {
 	}
 	
 	public Ascenseur getAscenseur(int num) {
-		return controleursInt.get(num + 1).getAscenceur();
+		return controleursInt.get(num).getAscenceur();
 	}
 
 	public String getNom() {
