@@ -54,7 +54,7 @@ public class ConfigWindow extends JFrame {
 		add(labelNbEtages);
 		
 		SpinnerModel modele = new SpinnerNumberModel(0, 0, 100, 1);
-		JSpinner nbEtages = new JSpinner(modele);
+		final JSpinner nbEtages = new JSpinner(modele);
 		gb.setConstraints(nbEtages, gbc); // mise en forme des objets
 		add(nbEtages);
 		
@@ -76,14 +76,14 @@ public class ConfigWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Batiment bat = new Batiment(textNomBat.getText(), nbAsc.getComponentCount());
+				Batiment bat = new Batiment(textNomBat.getText(), (Integer) nbEtages.getValue());
 				Ascenseur asc = new Ascenseur(bat);
 				MainWindow mainWindow = new MainWindow(bat, asc);
 			}});
 		
 		this.setTitle("Projet Java Ascenseur");					//Titre de la fenêtre 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
-		this.setResizable(false);
+		this.setResizable(false);								//la fenetre de configuration n'a pas besoin d'être redimensionner
 		this.setSize(new Dimension(300, 300));					//taille de la fenêtre fixe
 		this.setLocationRelativeTo(null);						//la fenêtre apparait au centre de l'écran
 		this.setVisible(true);									//la fenêtre apparaît
