@@ -68,7 +68,7 @@ public class FenetreConfiguration extends JFrame {
 		gb.setConstraints(nbAsc, gbc); // mise en forme des objets
 		add(nbAsc);
 		
-		JButton submit = new JButton ("Submit");
+		JButton submit = new JButton ("Enregistrer");
 		gb.setConstraints(submit, gbc); // mise en forme des objets
 		add(submit);
 		
@@ -76,9 +76,11 @@ public class FenetreConfiguration extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
 				Batiment bat = new Batiment(textNomBat.getText(), (Integer) nbEtages.getValue(), (Integer) nbAsc.getValue());
 				Ascenseur asc = new Ascenseur(bat.getNbEtages(), 1);
 				FenetreBatiment mainWindow = new FenetreBatiment(bat, asc);
+				//FenetrePanneau panneau = new FenetrePanneau(bat.get);
 			}});
 		
 		this.setTitle("Projet Java Ascenseur");					//Titre de la fenêtre 
