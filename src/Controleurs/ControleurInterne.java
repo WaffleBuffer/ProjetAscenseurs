@@ -18,6 +18,10 @@ public class ControleurInterne implements IControleur{
 		this.ascenseur = ascenseur;
 	}
 	
+	public Ascenseur getAscenceur() {
+		return this.ascenseur;
+	}
+	
 	public void traiterRequetes(){
 		if (ascenseur.estBloquer()) {
 			return;
