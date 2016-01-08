@@ -3,13 +3,14 @@ package Requetes;
 public class Requete {
 /*requetes possibles:
  * Internes:
- * -bouton �tage X -> changerEtage()
+ * -bouton etage -> Allez a l'etage
  * -bouton d'arr�t d'urgence -> arreter()
  * 
  * Externes:
  * -bouton "vers le haut" -> selectionAscenseur()
  * -bouton "vers le bas" -> selectionAscenseur()
  */
+	//Identifiant de requete
 	private String libelle;
 	private int etageDemande;
 	

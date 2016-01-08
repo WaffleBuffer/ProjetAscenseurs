@@ -27,7 +27,7 @@ public class ControleurInterne implements IControleur{
 			return;
 		}
 		for (int i = 0; i < requetes.size(); ++i) {
-			if (requetes.get(i).getLibelle() == "Allez � l'�tage" || 
+			if (requetes.get(i).getLibelle() == "Allez a l'etage" || 
 					requetes.get(i).getLibelle() == "Haut" || 
 					requetes.get(i).getLibelle() == "Bas") {
 				

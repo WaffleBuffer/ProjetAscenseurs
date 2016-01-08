@@ -4,7 +4,7 @@ public class RequeteInterne extends Requete {
 	
 	//constructeur pour changer d'�tage
 	public RequeteInterne (int nouvelEtage){
-		this.setLibelle("Allez � l'�tage");
+		this.setLibelle("Allez a l'etage");
 		this.setEtage(nouvelEtage);
 	}
 	
