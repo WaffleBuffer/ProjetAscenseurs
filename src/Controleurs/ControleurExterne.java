@@ -10,7 +10,9 @@ public class ControleurExterne implements IControleur{
 	final private static ControleurExterne singleton = new ControleurExterne ();
 	
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();
+	
 	private ArrayList<ControleurInterne> controleurs;
+	private ControleurInterne aUtiliser;
 	
 	private ControleurExterne () {}
 	
@@ -23,14 +25,74 @@ public class ControleurExterne implements IControleur{
 	}
 	
 	public void addRequete (int etage, String direction) {
-		requetes.add(new RequeteExterne(etage, (direction == "Haut") ? true : false));
+		requetes.add(new RequeteExterne(etage, direction);
 	}
 	
 	public void traiterRequetes (ArrayList<ControleurInterne> controleurs) {
-		for (int i = 0; i < requetes.size(); ++i) {
-			controleurs.get(0).addRequete(requetes.get(i));
+
+		//Algo Naif
+//		for (int i = 0; i < requetes.size(); ++i) {
+//			controleurs.get(0).addRequete(requetes.get(i));
+//			requetes.remove(requetes.get(i));
+//		}
+		
+		//Algo "avancé"
+		for (int i = 0; i < requetes.size();++i) {
+			
+			if (searchForInactive()) {}
+			else if (requetes.get(i).getLibelle().equals("Haut")) {
+				if (searchToUp(requetes.get(i).getEtage())) {}
+				else {
+					searchLessActive ();
+				}
+			}
+			else {
+				if(searchToDown(requetes.get(i).getEtage())) {}
+				else {
+					searchLessActive ();
+				}				
+			}
+			aUtiliser.addRequete(requetes.get(i));
 			requetes.remove(requetes.get(i));
 		}
+		
+
+	}
+	
+	private boolean searchForInactive () {
+		for (ControleurInterne controleur : controleurs) {
+			if (!controleur.getAscenceur().isEstEnMouvement()) {
+				this.aUtiliser = controleur;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean searchToUp (int etage) {
+		for (ControleurInterne controleur : controleurs) {
+			if (controleur.prochaineDest() != -1 && 
+					(controleur.getAscenceur().getEtage() < etage && controleur.prochaineDest() >= etage)) {
+				this.aUtiliser = controleur;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean searchToDown (int etage) {
+		for (ControleurInterne controleur : controleurs) {
+			if (controleur.prochaineDest() != -1 && 
+					(controleur.getAscenceur().getEtage() > etage && controleur.prochaineDest() <= etage)) {
+				this.aUtiliser = controleur;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void searchLessActive () {
+		
 	}
 
 	public void addRequete(Requete requete) {
