@@ -26,11 +26,13 @@ public class Batiment {
 		this.nbAscenseur = nbAscenseur;
 		listeBoutons.add(new BoutonHaut(0)); //le rez de chaussé n'a qu'un bouton haut et as de boton bas
 		
+		//a chaque étage, le batiment possede deux boutons : haut et bas
 		for (int i = 1 ; i < nbEtages; ++i){
 			listeBoutons.add(new BoutonHaut(i));
 			listeBoutons.add(new BoutonBas(i));
-		} //a chaque étage, le batiment possede deux boutons : haut et bas
+		} 
 		
+		//Creation de tous les ascenseurs
 		for (int i = 0; i < nbAscenseur; ++i) {
 			controleursInt.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1)));
 		}
