@@ -63,7 +63,8 @@ public class ConfigWindow extends JFrame {
 		gb.setConstraints(labelNbAsc, gbc); // mise en forme des objets
 		add(labelNbAsc);
 		
-		final JSpinner nbAsc = new JSpinner(modele);
+		SpinnerModel modeleNbAsc = new SpinnerNumberModel(0, 0, 100, 1);
+		final JSpinner nbAsc = new JSpinner(modeleNbAsc);
 		gb.setConstraints(nbAsc, gbc); // mise en forme des objets
 		add(nbAsc);
 		
