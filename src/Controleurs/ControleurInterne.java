@@ -94,6 +94,10 @@ public class ControleurInterne implements IControleur{
 		else
 			return -1;
 	}
+	
+	public int getNumberOfRequete () {
+		return requetes.size();
+	}
 
 	@Override
 	public String toString() {
