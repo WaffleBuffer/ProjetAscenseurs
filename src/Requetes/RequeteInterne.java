@@ -2,7 +2,7 @@ package Requetes;
 
 public class RequeteInterne extends Requete {
 	
-	//constructeur pour changer d'�tage
+	//constructeur pour changer d'etage
 	public RequeteInterne (int nouvelEtage){
 		this.setLibelle("Allez a l'etage");
 		this.setEtage(nouvelEtage);
@@ -10,7 +10,7 @@ public class RequeteInterne extends Requete {
 	
 	//constructeur pour l'arr�t d'urgence
 	public RequeteInterne (){
-		this.setLibelle("Arr�ter l'ascenseur");
+		this.setLibelle("Arreter l'ascenseur");
 	}
 
 }
