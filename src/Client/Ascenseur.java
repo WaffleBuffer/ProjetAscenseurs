@@ -64,11 +64,27 @@ public class Ascenseur {
 	}
 	
 	public void ouvrirPortes () {
+		System.out.println("les portes s'ouvrent");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		portesOuvertes = true;
+		System.out.println("les portes sont ouvertes");
 	}
 	
 	public void fermerPortes () {
+		System.out.println("les portes se ferment");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		portesOuvertes = false;
+		System.out.println("les portes sont fermés");
 	}
 
 	public void setEstEnMouvement(boolean estEnMouvement) {

@@ -23,15 +23,7 @@ public class ControleurInterne implements IControleur{
 					requetes.get(i).getLibelle() == "Bas") {
 				
 				if (ascenseur.isPortesOuvertes()) {
-					System.out.println("les portes se ferment");
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					ascenseur.fermerPortes();
-					System.out.println("les portes sont fermés");
 				}
 				
 				ascenseur.setEstEnMouvement(true);				
@@ -48,30 +40,15 @@ public class ControleurInterne implements IControleur{
 				System.out.println("l'ascenseur s'arrête");
 				ascenseur.setEstEnMouvement(false);
 				
-				System.out.println("les portes s'ouvrent");
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				ascenseur.ouvrirPortes();
-				System.out.println("les portes sont ouvertes");
-				
+				//temps d'attente avant fermeture automatique des portes
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("les portes se ferment");
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("les portes sont fermées");
+				
 				ascenseur.fermerPortes();
 
 			}
