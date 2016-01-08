@@ -34,7 +34,7 @@ public class Main {
 		System.out.println(asc2.toString());
 		
 		batim.getListeBoutons().get(0).appuyer(controleurExterne);
-		batim.getListeBoutons().get(4).appuyer(controleurExterne);
+		batim.getListeBoutons().get(8).appuyer(controleurExterne);
 		controleurExterne.traiterRequetes(controleursInt);
 		
 		System.out.println(controleur1.toString());
