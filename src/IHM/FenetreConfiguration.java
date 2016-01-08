@@ -77,7 +77,7 @@ public class FenetreConfiguration extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Batiment bat = new Batiment(textNomBat.getText(), (Integer) nbEtages.getValue());
-				Ascenseur asc = new Ascenseur(bat);
+				Ascenseur asc = new Ascenseur(bat, 1);
 				FenetreBatiment mainWindow = new FenetreBatiment(bat, asc);
 			}});
 		
