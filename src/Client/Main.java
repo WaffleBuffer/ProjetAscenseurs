@@ -16,8 +16,8 @@ public class Main {
 		
 		ControleurExterne controleurExterne = ControleurExterne.getControleurExterne();
 		
-		Ascenseur asc1 = new Ascenseur (batim);
-		Ascenseur asc2 = new Ascenseur (batim);
+		Ascenseur asc1 = new Ascenseur (batim, 1);
+		Ascenseur asc2 = new Ascenseur (batim, 2);
 		FenetreConfiguration fen = new FenetreConfiguration();
 		System.out.println(asc1.toString());
 		
