@@ -22,14 +22,14 @@ import javax.swing.SwingConstants;
 import Client.Ascenseur;
 import Client.Batiment;
 
-public class ConfigWindow extends JFrame {
+public class FenetreConfiguration extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public ConfigWindow(){
+	public FenetreConfiguration(){
 		
 		GridBagLayout gb = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -78,7 +78,7 @@ public class ConfigWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Batiment bat = new Batiment(textNomBat.getText(), (Integer) nbEtages.getValue());
 				Ascenseur asc = new Ascenseur(bat);
-				MainWindow mainWindow = new MainWindow(bat, asc);
+				FenetreBatiment mainWindow = new FenetreBatiment(bat, asc);
 			}});
 		
 		this.setTitle("Projet Java Ascenseur");					//Titre de la fenêtre 

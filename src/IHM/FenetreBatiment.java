@@ -24,7 +24,7 @@ import Boutons.BoutonInterne;
 import Client.Ascenseur;
 import Client.Batiment;
 
-public class MainWindow extends JFrame {
+public class FenetreBatiment extends JFrame {
 
 	/**
 	 * 
@@ -34,7 +34,7 @@ public class MainWindow extends JFrame {
 	/**
 	 * @param args
 	 */
-	public MainWindow (Batiment bat, Ascenseur asc) {
+	public FenetreBatiment (Batiment bat, Ascenseur asc) {
 		
 		//layout de la fenêtre
 		BorderLayout mainLayout = new BorderLayout();	//création du layout principal
@@ -100,7 +100,7 @@ public class MainWindow extends JFrame {
 		}
 		
 		//reglages de la fenêtre
-		this.setTitle(bat.getNom() + " " + bat.getNbEtages() + " étages");					//Titre de la fenêtre 
+		this.setTitle(bat.getNom() + " " + bat.getNbEtages() + " étages");	//Titre de la fenêtre 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
 		this.setSize(400, 500);									//taille de la fenêtre fixe
 		this.setLocationRelativeTo(null);						//la fenêtre apparait au centre de l'écran
