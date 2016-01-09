@@ -1,15 +1,12 @@
 package IHM;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -79,8 +76,10 @@ public class FenetreConfiguration extends JFrame {
 				setVisible(false);
 				Batiment bat = new Batiment(textNomBat.getText(), (Integer) nbEtages.getValue(), (Integer) nbAsc.getValue());
 				Ascenseur asc = new Ascenseur(bat.getNbEtages(), 1);
+				@SuppressWarnings("unused")
 				FenetreBatiment mainWindow = new FenetreBatiment(bat, asc);
-				//FenetrePanneau panneau = new FenetrePanneau(bat.get);
+				@SuppressWarnings("unused")
+				FenetrePanneau panneau = new FenetrePanneau(bat, bat.getNbAscenseur());
 			}});
 		
 		this.setTitle("Projet Java Ascenseur");					//Titre de la fenêtre 

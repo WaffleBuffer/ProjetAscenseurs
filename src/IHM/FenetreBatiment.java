@@ -1,27 +1,12 @@
 package IHM;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import Boutons.BoutonInterne;
 import Client.Ascenseur;
 import Client.Batiment;
 
@@ -43,7 +28,7 @@ public class FenetreBatiment extends JFrame {
 		
 		for (int i = 0; i <= bat.getNbEtages(); ++i){
 			JLabel labelEtage = new JLabel("yolo", JLabel.CENTER);
-			labelEtage.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+			labelEtage.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 			this.add(labelEtage);
 			
 			JPanel panelBoutons = new JPanel();
@@ -64,10 +49,6 @@ public class FenetreBatiment extends JFrame {
 			}
 		}
 		/*
-		//layout partie ascenseur
-		LayoutManager ascLayout = new BoxLayout(ascPanel, BoxLayout.Y_AXIS);	//layout identique au précédent mais avec l'ascenseur
-		ascPanel.setLayout(ascLayout);											//il est associé au panel de l'ascenseur
-		ascPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));		//ajout d'un padding à ce panel 
 		
 		//partie batiment
 		/*JLabel nomBat = new JLabel(bat.getNom());								//création label contenant le nom du batiment
