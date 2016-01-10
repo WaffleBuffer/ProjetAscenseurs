@@ -38,7 +38,7 @@ public class Batiment {
 		}
 		
 		//parametrage du controleur Externe
-		controleurExt.defineBatiment (this);
+		controleurExt.defineBatiment (this.getNbEtages());
 		controleurExt.defineControleursInterne(controleursInt);
 		
 		listeBoutons.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut

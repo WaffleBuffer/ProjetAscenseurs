@@ -6,15 +6,40 @@ import Client.Batiment;
 import Requetes.Requete;
 import Requetes.RequeteExterne;
 
+/**Controleur correspondant a celui du sujet. Il en existe un par {@link Batiment} et permet de traiter les {@link RequeteExterne}
+ * en choisissant quel est le meilleur {@link ControleurInterne} pour traiter la demande.
+ * @author Thomas
+ *
+ */
 public class ControleurExterne implements IControleur{
 
+	/**Il n'existe qu'un seul ControleurExterne par {@link Batiment} donc c'est un singleton.
+	 * 
+	 */
 	final private static ControleurExterne singleton = new ControleurExterne ();
 	
+	/**Liste des {@link Requete} a traiter. Chaque {@link Requete} devrait etre une {@link RequeteExterne} pour fonctionner correctement.
+	 * Sinon elle seront interpretee comme telle et n'auront pas le resultat attendu.
+	 * 
+	 */
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();
 	
+	/**Liste des {@link ControleurInterne} (et donc des {@link Ascenseur}) disponnibles.
+	 * 
+	 */
 	private ArrayList<ControleurInterne> controleurs;
+	
+	
+	/**Variable utiliser durant {@link ControleurExterne#traiterRequetes()}.
+	 * @see ControleurExterne#traiterRequetes()
+	 */
 	private ControleurInterne aUtiliser;
-	private Batiment batiment;
+	
+	
+	/**Utiliser pour connaitre le nombre d'etage.
+	 * 
+	 */
+	private int nbEtage;
 	
 	private ControleurExterne () {}
 	
@@ -22,8 +47,8 @@ public class ControleurExterne implements IControleur{
 		this.controleurs = controleurs;
 	}
 	
-	public void defineBatiment (Batiment batiment) {
-		this.batiment = batiment;
+	public void defineBatiment (int batiment) {
+		this.nbEtage = batiment;
 	}
 	
 	public static ControleurExterne getControleurExterne() {
@@ -99,7 +124,7 @@ public class ControleurExterne implements IControleur{
 	}
 	
 	private void searchLessActive () {
-		int min = batiment.getNbEtages() + 1;
+		int min = nbEtage + 1;
 		for (ControleurInterne controleur : controleurs) {
 			if (controleur.getNumberOfRequete() == 0) {
 				this.aUtiliser = controleur;
