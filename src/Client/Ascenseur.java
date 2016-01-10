@@ -2,7 +2,6 @@ package Client;
 
 import java.util.ArrayList;
 
-import Boutons.Bouton;
 import Boutons.BoutonDestination;
 import Boutons.BoutonInterne;
 import Boutons.BoutonStop;
@@ -37,10 +36,10 @@ public class Ascenseur {
 		portesOuvertes = false;		//un nouvel acsenseur à les portes fermées
 		poidsMax = 300;				//param�tre par d�faut - � changer ou rendre param�trable par l'utilisateur				
 		numAsc = num;
-		listeBoutons.add(new BoutonDestination("Rez-de-chaussé", 0)); //tout ascenseur à un bouton rez-de chaussé
-		listeBoutons.add(new BoutonDestination("1er étage", 1)); //tout ascenseur à un bouton 1er etage
+		listeBoutons.add(new BoutonDestination("Rez-de-chausse", 0)); //tout ascenseur à un bouton rez-de chaussé
+		listeBoutons.add(new BoutonDestination("1er etage", 1)); //tout ascenseur à un bouton 1er etage
 		for (int i = 2; i <= nbEtage; ++i){
-			listeBoutons.add(new BoutonDestination(i+"e étage", i)); //i est numero de l'etage correspondant au bouton
+			listeBoutons.add(new BoutonDestination(i+"e etage", i)); //i est numero de l'etage correspondant au bouton
 		} //initialisation des boutons : autant de boutons qu'il y a d'étages
 		listeBoutons.add(new BoutonStop()); // tout ascenseur à un bouton stop
 	}
