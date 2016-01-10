@@ -1,16 +1,25 @@
 package Requetes;
 
+/**Description des requetes internes. Sous-classe de {@link Requete}.<br>
+ * Correspond aux {@link BoutonInterne} se trouvant a l'interieur de l'ascenseur.
+ * @author Thomas
+ */
 public class RequeteInterne extends Requete {
 	
-	//constructeur pour changer d'etage
+	/** Construit une RequeteInterne pour demander a l'ascenseur d'aller a un etage.<br>
+	 * {@link Requete#libelle} = "Allez a l'etage"
+	 * @param nouvelEtage Le numero de l'etage correspondant au {@link BoutonDestination}.
+	 */
 	public RequeteInterne (int nouvelEtage){
-		this.setLibelle("Allez a l'etage");
-		this.setEtage(nouvelEtage);
+		super(nouvelEtage, "Allez a l'etage");
 	}
 	
 	//constructeur pour l'arr�t d'urgence
+	/**Construit une RequeteInterne pour demander l'arret de l'ascenseur en appuyant sur un {@link BoutonStop}<br>
+	 * {@link Requete#libelle} = "Arreter l'ascenseur"
+	 */
 	public RequeteInterne (){
-		this.setLibelle("Arreter l'ascenseur");
+		super (0, "Arreter l'ascenseur");
 	}
 
 }

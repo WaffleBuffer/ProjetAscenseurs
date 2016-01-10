@@ -42,16 +42,16 @@ public class ControleurInterne implements IControleur{
 				
 				//On met l'ascenseur en mouvement
 				ascenseur.setEstEnMouvement(true);				
-				System.out.println("Ascenceur " + ascenseur.getNumAsc() + " va de l'étage : " + ascenseur.getEtage() + " à l'étage " + requetes.get(i).getEtage());
+				System.out.println("Ascenceur " + ascenseur.getNumAsc() + " va de l'étage : " + ascenseur.getEtage() + " à l'étage " + requetes.get(i).getEtageDemande());
 				try {
 					//Le temps d'attente correspond a 2 secondes par etage
-					Thread.sleep((Math.abs(ascenseur.getEtage() - requetes.get(i).getEtage())) * 2000);
+					Thread.sleep((Math.abs(ascenseur.getEtage() - requetes.get(i).getEtageDemande())) * 2000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				//L'ascenseur arrive et on retire la requete
-				ascenseur.setEtage(requetes.get(i).getEtage());	
+				ascenseur.setEtage(requetes.get(i).getEtageDemande());	
 				requetes.remove(requetes.get(i));
 				--i;
 				//L'ascenseur s'arrrete
@@ -88,7 +88,7 @@ public class ControleurInterne implements IControleur{
 	//Renvoie le numero d'etage de la prochaine Requete
 	public int prochaineDest () {
 		if (requetes.size() > 0) {
-			return requetes.get(0).getEtage();
+			return requetes.get(0).getEtageDemande();
 		}
 		//S'il n'y a pas de requete retourne -1
 		else

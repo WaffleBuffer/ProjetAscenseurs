@@ -47,13 +47,13 @@ public class ControleurExterne implements IControleur{
 			
 			if (searchForInactive()) {}
 			else if (requetes.get(i).getLibelle().equals("Haut")) {
-				if (searchToUp(requetes.get(i).getEtage())) {}
+				if (searchToUp(requetes.get(i).getEtageDemande())) {}
 				else {
 					searchLessActive ();
 				}
 			}
 			else {
-				if(searchToDown(requetes.get(i).getEtage())) {}
+				if(searchToDown(requetes.get(i).getEtageDemande())) {}
 				else {
 					searchLessActive ();
 				}				
