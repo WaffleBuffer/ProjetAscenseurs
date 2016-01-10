@@ -6,18 +6,18 @@ package Requetes;
  */
 public class Requete {
 	
-	/**Numero de l'etage demande pour les {@link RequeteInterne} et le numero de l'etage du {@link BoutonExterne} pour les {@link RequeteExterne}
+	/**Numero de l'etage demande pour les {@link RequeteInterne} et le numero de l'etage du {@link Boutons.BoutonExterne} pour les {@link RequeteExterne}
 	 */
 	private int etageDemande;
 	
 	/**Identifiant de requete. Possibilites selon le type de requete:<br>
 	 * {@link RequeteInterne}:<br>
-	 * -{@link BoutonDestination} = "Allez a l'etage"<br>
-	 * -{@link BoutonStop}        = "Arreter l'ascenseur"<br>
+	 * -{@link Boutons.BoutonDestination} = "Allez a l'etage"<br>
+	 * -{@link Boutons.BoutonStop}        = "Arreter l'ascenseur"<br>
 	 * 
 	 * {@link RequeteExterne}<br>
-	 * -{@link BoutonHaut} = "Haut"<br>
-	 * -{@link BoutonBas}  = "Bas"<br>
+	 * -{@link Boutons.BoutonHaut} = "Haut"<br>
+	 * -{@link Boutons.BoutonBas}  = "Bas"<br>
 	 */
 	private String libelle;
 	

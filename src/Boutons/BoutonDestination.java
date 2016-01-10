@@ -1,5 +1,6 @@
 package Boutons;
 
+import Controleurs.ControleurInterne;
 import Controleurs.IControleur;
 import Requetes.Requete;
 import Requetes.RequeteInterne;
@@ -31,7 +32,7 @@ public class BoutonDestination extends BoutonInterne {
 	
 	/** Definition de la fonction d'action. Creer une {@link RequeteInterne} pour un etage et l'ajoute
 	 * au {@link IControleur}. Le {@link IControleur} devrait etre un {@link ControleurInterne} pour un fonctionnement normal. L'affectation manuelle 
-	 * a un {@link ControleurExterne} resultera en une interpretation de la {@link Requete} comme venant d'un {@link BoutonExterne}.
+	 * a un {@link ControleurInterne} resultera en une interpretation de la {@link Requete} comme venant d'un {@link BoutonExterne}.
 	 * @param controleur {@link IControleur} auquel le bouton va ajouter une {@link Requete}.
 	 */
 	@Override

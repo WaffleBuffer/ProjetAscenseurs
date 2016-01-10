@@ -36,7 +36,7 @@ public class Bouton {
 		this.libelle = libelle;
 	}
 	
-	/**Fonction d'action du Bouton. Les Boutons creent des {@link Requete} et l'ajouter au {@link IControleur}. Defini dans les sous-classes.
+	/**Fonction d'action du Bouton. Ce Bouton cree une {@link Requete} l'ajoute au {@link IControleur}. Defini dans les sous-classes.
 	 * @param controleur {@link IControleur} auquel le bouton va ajouter une {@link Requete}.
 	 */
 	public void appuyer (IControleur controleur) {}

@@ -1,5 +1,7 @@
 package Boutons;
 
+import Controleurs.ControleurExterne;
+import Controleurs.ControleurInterne;
 import Controleurs.IControleur;
 import Requetes.Requete;
 import Requetes.RequeteInterne;

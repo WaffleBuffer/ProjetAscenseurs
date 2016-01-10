@@ -28,8 +28,8 @@ public class BoutonExterne extends Bouton {
 
 	
 	/** Definition de la fonction d'action. Creer une {@link RequeteExterne} pour un etage et une direction donnee par les sous-classes et l'ajoute
-	 * au {@link IControleur}. Le {@link IControleur} devrait etre un {@link ControleurExterne} pour un fonctionnement normal (bien que l'affecter
-	 * manuellement a un {@link ControleurInterne} fonctionne aussi).
+	 * au {@link IControleur}. Le {@link IControleur} devrait etre un {@link Controleurs.ControleurExterne} pour un fonctionnement normal (bien que l'affecter
+	 * manuellement a un {@link Controleurs.ControleurInterne} fonctionne aussi).
 	 * @param controleur {@link IControleur} auquel le bouton va ajouter une {@link Requete}.
 	 */
 	@Override
