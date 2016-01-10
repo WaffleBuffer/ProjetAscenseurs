@@ -1,7 +1,7 @@
 package Requetes;
 
 /**Description des requetes internes. Sous-classe de {@link Requete}.<br>
- * Correspond aux {@link BoutonInterne} se trouvant a l'interieur de l'ascenseur.
+ * Correspond aux {@link BoutonInterne} se trouvant a l'interieur de l'{@link Ascenseur}.
  * @author Thomas
  */
 public class RequeteInterne extends Requete {
