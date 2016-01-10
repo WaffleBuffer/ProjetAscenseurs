@@ -8,13 +8,36 @@ import Boutons.BoutonHaut;
 import Controleurs.ControleurExterne;
 import Controleurs.ControleurInterne;
 
+/**Contient les principales informations: les {@link ControleurInterne} (et donc les {@link Ascenseur})
+ * et le {@link ControleurExterne} correspondant a ce Batiment.
+ * @author Thomas
+ * @see ControleurInterne
+ */
 public class Batiment {
-	private String nom; // le batiment a un nom
-	private int nbEtages; //le batiment a un certain nombre d'etages
-	private int nbAscenseur; //le batiment a un certain nombre d'ascenseur
+	
+	/**Le nom de ce Batiment.
+	 * 
+	 */
+	private String nom;
+	
+	/**Le nombre d'etage de ce Batiment.
+	 * 
+	 */
+	private int nbEtages;
+	
+	/**Le nombre d'{@link Ascenseur} ce Batiment.
+	 * 
+	 */
+	private int nbAscenseur;
+	
+	/**le {@link ControleurExterne} de ce Batiment.
+	 * 
+	 */
 	private ControleurExterne controleurExt = ControleurExterne.getControleurExterne();
 	
-	//liste des controleurs internes
+	/**La liste des {@link ControleurInterne} de ce Batiment.
+	 * @see ControleurInterne
+	 */
 	private ArrayList<ControleurInterne> controleursInt = new ArrayList<ControleurInterne>();
 	
 	//le batiment possede une liste de bouton

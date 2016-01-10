@@ -5,45 +5,77 @@ import java.util.ArrayList;
 import Boutons.BoutonDestination;
 import Boutons.BoutonInterne;
 import Boutons.BoutonStop;
+import Controleurs.ControleurInterne;
+import Requetes.RequeteInterne;
 
-
-
-//Salut, je suis un comm
+/**Description de l'etat de l'Ascenseur. Le traitement des {@link Requete} se fait dans le {@link ControleurInterne} correspondant.
+ * @author Thomas
+ */
 public class Ascenseur {
-	//� quel �tage se trouve  l'ascenseur
+	
+	/**Etage auquel se situe acutellement cet Ascenseur.
+	 * 
+	 */
 	private int etage;
-	//liste des boutons présents sur le panneau interne de l'ascenseur
+	
+	/**Liste des {@link BoutonInterne} situes dans cet Ascenseur.
+	 * 
+	 */
 	private ArrayList<BoutonInterne> listeBoutons = new ArrayList<BoutonInterne>();
-	//l'ascenseur est-il en mouvement ou bien � l'arr�t
+
+	/**Permet de savoir si cet Ascenseur est en mouvement (true) ou non (false).
+	 * 
+	 */
 	private boolean estEnMouvement;
-	//les portes de l'ascenseur sont-elles ouvertes ou fermées
+
+	/**Permet de savoir si les portes de cet Ascenseur sont fermees (true) ou non (false).
+	 * 
+	 */
 	private boolean portesOuvertes;
-	//quel est le poids maximum en kg que l'ascenseur est cens� pouvoir supporter
+
+	/**Permet de connaitre le poid maximume que peut supporter cet Ascenseur.
+	 * 
+	 */
 	private int poidsMax;
-	//l'ascenseur est-il vide
+
+	/**Permet de savoir cet Ascenseur est vide (true) ou non (false).
+	 * 
+	 */
 	private boolean estVide;
-	//L'ascenseur est-il bloque
+
+	/**Permet de savoir si cet Ascenseur est bloque (true) ou non (false).
+	 * @see BoutonStop
+	 * @see RequeteInterne#RequeteInterne()
+	 */
 	private boolean estBloque;
-	//numero de l'ascenseur
+
+	/**Permet d'indentifier les differents Ascenseur.
+	 * 
+	 */
 	private int numAsc;
 	
-	
-	//constructeur
+	/**Construit un Ascenseur et initialise tous ses attributs.
+	 * @param nbEtage permet de connaitre le nombre de {@link BoutonDestination} que devrair posseder cet Ascenseur.
+	 * @param num le numero que l'on attribut a cet Ascenseur.
+	 */
 	public Ascenseur (int nbEtage, int num){
-		etage = 0;					//un nouvel ascenseur est assembl� au rez-de-chauss�e (niveau 0)
-		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore re�u de requ�te
+		etage = 0;					//un nouvel ascenseur est assemble au rez-de-chaussee (niveau 0)
+		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore recu de requete
 		estVide = true;				//un nouvel ascenseur ne contient aucun usager
-		portesOuvertes = false;		//un nouvel acsenseur à les portes fermées
-		poidsMax = 300;				//param�tre par d�faut - � changer ou rendre param�trable par l'utilisateur				
+		portesOuvertes = false;		//un nouvel acsenseur a les portes fermees
+		poidsMax = 300;				//parametre par defaut - a changer ou rendre parametrable par l'utilisateur				
 		numAsc = num;
-		listeBoutons.add(new BoutonDestination("Rez-de-chausse", 0)); //tout ascenseur à un bouton rez-de chaussé
-		listeBoutons.add(new BoutonDestination("1er etage", 1)); //tout ascenseur à un bouton 1er etage
+		listeBoutons.add(new BoutonDestination("Rez-de-chausse", 0)); //tout ascenseur a un bouton rez-de chausse
+		listeBoutons.add(new BoutonDestination("1er etage", 1)); //tout ascenseur a un bouton 1er etage
 		for (int i = 2; i <= nbEtage; ++i){
 			listeBoutons.add(new BoutonDestination(i+"e etage", i)); //i est numero de l'etage correspondant au bouton
-		} //initialisation des boutons : autant de boutons qu'il y a d'étages
-		listeBoutons.add(new BoutonStop()); // tout ascenseur à un bouton stop
+		} //initialisation des boutons : autant de boutons qu'il y a d'etages
+		listeBoutons.add(new BoutonStop()); // tout ascenseur a un bouton stop
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Ascenseur [etage=" + etage + ", estEnMouvement=" + estEnMouvement + ", portesOuvertes="
@@ -52,27 +84,37 @@ public class Ascenseur {
 				+ ", numAsc=" + numAsc + "]";
 	} // affichage de l'etat de l'ascenseur
 
+	/**Permet de faire bouger concretement l'Ascenseur en modifiant {@link Ascenseur#etage}.
+	 * @param etage l'etage ou doit etre l'Ascenseur.
+	 */
 	public void setEtage(int etage) {
 		this.etage = etage;
 	}
 
+	/**Permet d'obtenir {@link Ascenseur#listeBoutons}
+	 * @return {@link Ascenseur#listeBoutons}
+	 */
 	public ArrayList<BoutonInterne> getListeBoutons() {
 		return listeBoutons;
 	}
 
+	/**Permet d'obtenir {@link Ascenseur#etage}.
+	 * @return {@link Ascenseur#etage}
+	 */
 	public int getEtage() {
 		return etage;
 	}
 	
+	/**Permet d'obtenir {@link Ascenseur#numAsc}.
+	 * @return {@link Ascenseur#numAsc}
+	 */
 	public int getNumAsc() {
 		return numAsc;
 	}
 
-	public void setListeBoutons(ArrayList<BoutonInterne> listeBoutons) {
-		this.listeBoutons = listeBoutons;
-	}
-	
-	
+	/**Ouvre les portes en modifiant {@link Ascenseur#portesOuvertes} en prenant du temps.
+	 * 
+	 */
 	public void ouvrirPortes () {
 		System.out.println("les portes s'ouvrent");
 		try {
@@ -85,6 +127,9 @@ public class Ascenseur {
 		System.out.println("les portes sont ouvertes");
 	}
 	
+	/**Ferme les portes en modifiant {@link Ascenseur#portesOuvertes} en prenant du temps.
+	 * 
+	 */
 	public void fermerPortes () {
 		System.out.println("les portes se ferment");
 		try {
@@ -97,27 +142,44 @@ public class Ascenseur {
 		System.out.println("les portes sont fermés");
 	}
 
+	/**Met l'Ascenseur en mouvement en modifiant {@link Ascenseur#estEnMouvement}
+	 * @param estEnMouvement true si doit etre en mouvement false sinon.
+	 */
 	public void setEstEnMouvement(boolean estEnMouvement) {
 		this.estEnMouvement = estEnMouvement;
 	}
 
+	/**Permet d'obtenir {@link Ascenseur#portesOuvertes}.
+	 * @return {@link Ascenseur#portesOuvertes}
+	 */
 	public boolean isPortesOuvertes() {
 		return portesOuvertes;
 	}
 	
+	/**Permet d'obtenir {@link Ascenseur#estBloque}.
+	 * @return {@link Ascenseur#estBloque}
+	 */
 	public boolean estBloquer() {
 		return estBloque;
 	}
 	
+	/**Permet d'obtenir {@link Ascenseur#estEnMouvement}.
+	 * @return {@link Ascenseur#estEnMouvement}
+	 */
 	public boolean isEstEnMouvement() {
 		return estEnMouvement;
 	}
 	
-	
+	/**Bloque l'Ascenseur en modifiant {@link Ascenseur#estBloque}.
+	 * 
+	 */
 	public void bloquer () {
 		estBloque = true;
 	}
 	
+	/**Debloque l'Ascenseur en modifiant {@link Ascenseur#estBloque}.
+	 * 
+	 */
 	public void debloque () {
 		estBloque = false;
 	}
