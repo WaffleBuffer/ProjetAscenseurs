@@ -6,7 +6,7 @@ package Requetes;
  */
 public class Requete {
 	
-	/**Numero de l'etage demande pour les @link RequeteInterne} et le numero de l'etage du bouton pour les {@link RequeteExterne}
+	/**Numero de l'etage demande pour les {@link RequeteInterne} et le numero de l'etage du bouton pour les {@link RequeteExterne}
 	 */
 	private int etageDemande;
 	
