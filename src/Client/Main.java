@@ -15,15 +15,14 @@ public class Main {
 		new FenetreConfiguration();
 		System.out.println(batim.getAscenseur(1).toString());
 		
-		GestionnaireOption gestionnaireOpt = new GestionnaireOption();
-		gestionnaireOpt.addOption(new OptionMusique("Coucou"));
-		gestionnaireOpt.activerOption(0);
-		
 		batim.appuyerBoutonAscenseur(1, 3);
 		batim.appuyerBoutonAscenseur(2, 5);
 		batim.traiterControleurs();
 		System.out.println(batim.getAscenseur(1).toString());
 		System.out.println(batim.getAscenseur(2).toString());
+		
+		batim.getAscenseur(1).ajouterOption(new OptionMusique("Guns'n Roses FTW"));
+		batim.getAscenseur(1).activerOption(0);
 		
 		batim.appuyerBoutonEtage(0); //etage 0 haut
 		batim.appuyerBoutonEtage(2); //etage 1 bas

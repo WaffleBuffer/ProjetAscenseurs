@@ -18,8 +18,8 @@ public class GestionnaireOption {
 		return options.get(i);
 	}
 
-	public void activerOption (int iemeOption) {
+	public void activerOption (int numOption) {
 		//traitement par defaut
-		options.get(iemeOption).activer();
+		options.get(numOption).activer();
 	}
 }
