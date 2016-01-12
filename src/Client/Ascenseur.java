@@ -6,12 +6,19 @@ import Boutons.BoutonDestination;
 import Boutons.BoutonInterne;
 import Boutons.BoutonStop;
 import Controleurs.ControleurInterne;
+import Options.GestionnaireOption;
+import Options.IOption;
 import Requetes.RequeteInterne;
 
 /**Description de l'etat de l'Ascenseur. Le traitement des {@link Requete} se fait dans le {@link ControleurInterne} correspondant.
  * @author Thomas
  */
 public class Ascenseur {
+	
+	/**{@link GestionnaireOption} de cet Ascenseur
+	 * @see GestionnaireOption
+	 */
+	private GestionnaireOption gestionnaireOption;
 	
 	/**Etage auquel se situe actuellement cet Ascenseur.
 	 * 
@@ -59,11 +66,32 @@ public class Ascenseur {
 	 * @param num le numero que l'on attribut a cet Ascenseur.
 	 */
 	public Ascenseur (int nbEtage, int num){
+		gestionnaireOption = new GestionnaireOption ();
 		etage = 0;					//un nouvel ascenseur est assemble au rez-de-chaussee (niveau 0)
 		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore recu de requete
 		estVide = true;				//un nouvel ascenseur ne contient aucun usager
 		portesOuvertes = false;		//un nouvel acsenseur a les portes fermees
-		poidsMax = 300;				//parametre par defaut - a changer ou rendre parametrable par l'utilisateur				
+		poidsMax = 300;				//parametre par defaut		
+		numAsc = num;
+		listeBoutons.add(new BoutonDestination("Rez-de-chausse", 0)); //tout ascenseur a un bouton rez-de chausse
+		listeBoutons.add(new BoutonDestination("1er etage", 1)); //tout ascenseur a un bouton 1er etage
+		for (int i = 2; i <= nbEtage; ++i){
+			listeBoutons.add(new BoutonDestination(i+"e etage", i)); //i est numero de l'etage correspondant au bouton
+		} //initialisation des boutons : autant de boutons qu'il y a d'etages
+		listeBoutons.add(new BoutonStop()); // tout ascenseur a un bouton stop
+	}
+	
+	/**Construit un Ascenseur et initialise tous ses attributs avec en plus le {@link Ascenseur#poidsMax} en parametre.
+	 * @param nbEtage permet de connaitre le nombre de {@link BoutonDestination} que devrait posseder cet Ascenseur.
+	 * @param num le numero que l'on attribut a cet Ascenseur.
+	 */
+	public Ascenseur (int nbEtage, int num, int poidsMax){
+		gestionnaireOption = new GestionnaireOption ();
+		etage = 0;					//un nouvel ascenseur est assemble au rez-de-chaussee (niveau 0)
+		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore recu de requete
+		estVide = true;				//un nouvel ascenseur ne contient aucun usager
+		portesOuvertes = false;		//un nouvel acsenseur a les portes fermees
+		this.poidsMax = poidsMax;	//poids max donne par l'utilisateur			
 		numAsc = num;
 		listeBoutons.add(new BoutonDestination("Rez-de-chausse", 0)); //tout ascenseur a un bouton rez-de chausse
 		listeBoutons.add(new BoutonDestination("1er etage", 1)); //tout ascenseur a un bouton 1er etage
@@ -98,6 +126,13 @@ public class Ascenseur {
 		return listeBoutons;
 	}
 
+	/**Retourne le {@link Ascenseur#gestionnaireOption} de cet Ascenseur
+	 * @return {@link Ascenseur#gestionnaireOption}
+	 */
+	public GestionnaireOption getGestionnaireOption() {
+		return gestionnaireOption;
+	}
+
 	/**Permet d'obtenir {@link Ascenseur#etage}.
 	 * @return {@link Ascenseur#etage}
 	 */
@@ -105,6 +140,13 @@ public class Ascenseur {
 		return etage;
 	}
 	
+	/**Retourne le {@link Ascenseur#poidsMax} de l'ascenseur
+	 * @return {@link Ascenseur#poidsMax}
+	 */
+	public int getPoidsMax() {
+		return poidsMax;
+	}
+
 	/**Permet d'obtenir {@link Ascenseur#numAsc}.
 	 * @return {@link Ascenseur#numAsc}
 	 */
@@ -182,5 +224,27 @@ public class Ascenseur {
 	 */
 	public void debloque () {
 		estBloque = false;
+	}
+	
+	/**Permet d'appuyer sur un {@link BoutonInterne} de cet Ascenseur
+	 * @param numBouton {@link BoutonInterne} de cet Ascenseur sur lequel on veut appuyer
+	 * @param controleur {@link ControleurInterne} de cet Ascenseur
+	 */
+	public void appuyerBouton (int numBouton, ControleurInterne controleur) {
+		listeBoutons.get(numBouton).appuyer(controleur);
+	}
+	
+	/**Active l'{@link IOption} de numero numOption
+	 * @param numOption le numero de l'{@link IOption} a activer
+	 */
+	public void activerOption (int numOption) {
+		gestionnaireOption.activerOption(numOption);
+	}
+	
+	/**Ajoute une {@link IOption} au {@link Ascenseur#gestionnaireOption} de ce Ascenseur
+	 * @param option {@link IOption} a ajouter
+	 */
+	public void ajouterOption (IOption option) {
+		gestionnaireOption.addOption(option);
 	}
 }

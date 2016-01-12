@@ -106,7 +106,7 @@ public class Batiment {
 	}
 	
 	public void appuyerBoutonAscenseur (int numAsc, int numBouton) {
-		this.getAscenseur(numAsc).getListeBoutons().get(numBouton).appuyer(this.getControleursInterne().get(numAsc - 1));
+		this.getAscenseur(numAsc).appuyerBouton(numBouton, this.getControleursInterne().get(numAsc - 1));
 	}
 	
 	//affichage de l'etat du batiment
