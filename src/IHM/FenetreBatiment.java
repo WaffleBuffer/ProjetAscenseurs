@@ -95,8 +95,7 @@ public class FenetreBatiment extends JFrame {
 		}
 		*/
 		//reglages de la fenêtre
-		this.setTitle(bat.getNom() + " " + bat.getNbEtages() + " étages");	//Titre de la fenêtre 
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
+		this.setTitle(bat.getNom() + " (" + bat.getNbEtages() + " étages)");	//Titre de la fenêtre 
 		this.setSize(400, 500);									//taille de la fenêtre fixe
 		this.setLocationRelativeTo(null);						//la fenêtre apparait au centre de l'écran
 		this.setVisible(true);									//la fenêtre apparaît

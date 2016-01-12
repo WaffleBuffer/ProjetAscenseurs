@@ -36,8 +36,8 @@ public class FenetreConfiguration extends JFrame {
 		gbc.weighty = 1;
 		gbc.gridx = 1;
 		
-		JLabel labelNomBat = new JLabel("Nom du bâtiment :", SwingConstants.CENTER);
-		labelNomBat.setFont(new Font("Arial",Font.BOLD,20));
+		JLabel labelNomBat = new JLabel("Nom", SwingConstants.CENTER);
+		labelNomBat.setFont(new Font("Arial",Font.BOLD,18));
 		gb.setConstraints(labelNomBat, gbc); // mise en forme des objets
 		add(labelNomBat);
 		
@@ -45,27 +45,27 @@ public class FenetreConfiguration extends JFrame {
 		gb.setConstraints(textNomBat, gbc); // mise en forme des objets
 		add(textNomBat);
 		
-		JLabel labelNbEtages = new JLabel("Nombre d'étages :", SwingConstants.CENTER);
+		JLabel labelNbEtages = new JLabel("Nombre d'étages", SwingConstants.CENTER);
 		labelNbEtages.setFont(new Font("Arial",Font.BOLD,16));
 		gb.setConstraints(labelNbEtages, gbc); // mise en forme des objets
 		add(labelNbEtages);
 		
-		SpinnerModel modele = new SpinnerNumberModel(0, 0, 100, 1);
+		SpinnerModel modele = new SpinnerNumberModel(1, 0, 50, 1);
 		final JSpinner nbEtages = new JSpinner(modele);
 		gb.setConstraints(nbEtages, gbc); // mise en forme des objets
 		add(nbEtages);
 		
-		JLabel labelNbAsc = new JLabel("Nombre d'ascenseurs :",SwingConstants.CENTER);
+		JLabel labelNbAsc = new JLabel("Nombre d'ascenseurs",SwingConstants.CENTER);
 		labelNbAsc.setFont(new Font("Arial",Font.BOLD,16));
 		gb.setConstraints(labelNbAsc, gbc); // mise en forme des objets
 		add(labelNbAsc);
 		
-		SpinnerModel modeleNbAsc = new SpinnerNumberModel(0, 0, 100, 1);
+		SpinnerModel modeleNbAsc = new SpinnerNumberModel(1, 0, 50, 1);
 		final JSpinner nbAsc = new JSpinner(modeleNbAsc);
 		gb.setConstraints(nbAsc, gbc); // mise en forme des objets
 		add(nbAsc);
 		
-		JButton submit = new JButton ("Enregistrer");
+		JButton submit = new JButton ("Ajouter");
 		gb.setConstraints(submit, gbc); // mise en forme des objets
 		add(submit);
 		
@@ -73,16 +73,18 @@ public class FenetreConfiguration extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
 				Batiment bat = new Batiment(textNomBat.getText(), (Integer) nbEtages.getValue(), (Integer) nbAsc.getValue());
 				Ascenseur asc = new Ascenseur(bat.getNbEtages(), 1);
 				@SuppressWarnings("unused")
 				FenetreBatiment mainWindow = new FenetreBatiment(bat, asc);
 				@SuppressWarnings("unused")
 				FenetrePanneau panneau = new FenetrePanneau(bat, bat.getNbAscenseur());
+				textNomBat.setText(null);
+				nbEtages.setValue(1);
+				nbAsc.setValue(1);
 			}});
 		
-		this.setTitle("Projet Java Ascenseur");					//Titre de la fenêtre 
+		this.setTitle("Ajout d'un bâtiment");					//Titre de la fenêtre 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
 		this.setResizable(false);								//la fenetre de configuration n'a pas besoin d'être redimensionner
 		this.setSize(new Dimension(300, 300));					//taille de la fenêtre fixe

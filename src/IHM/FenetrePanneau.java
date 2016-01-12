@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 import Client.Ascenseur;
 import Client.Batiment;
@@ -31,8 +33,11 @@ public class FenetrePanneau extends JFrame{
 		
 		JPanel panelAscenseurs =  new JPanel();					//création panel pour afficher la liste des ascenseurs
 		panelAscenseurs.setLayout(new GridLayout(nbAsc, 1));	//ajout d'un layout à ce panel
-		this.add(panelAscenseurs);								//ajout du panel dans la fenetre
+		//20this.add(panelAscenseurs);								//ajout du panel dans la fenetre
 		ascenseurActuel = bat.getAscenseur(1);				//l'ascenseur affiché lors de la creation de la fenetre est celui d'id 1
+		
+		JScrollPane scrollAsc = new JScrollPane(panelAscenseurs);
+		this.add(scrollAsc);
 		
 		//creation de la liste des ascenseur sous forme de boutons alignés verticalement
 		for(int i = 1; i <= nbAsc; ++i){		
@@ -47,7 +52,7 @@ public class FenetrePanneau extends JFrame{
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-						ascenseurSelectionne.setBackground(Color.BLACK);
+						ascenseurSelectionne.setBackground(null);
 						ascenseurSelectionne = ascenseur;
 						ascenseurSelectionne.setBackground(Color.WHITE);		//lorsqu'on clique sur un ascenseur, il se colore en blanc 
 						ascenseurActuel = bat.getAscenseur(j);		//et l'ascenseur selectionne devient celui cliqué
@@ -81,10 +86,8 @@ public class FenetrePanneau extends JFrame{
 			}
 		}
 		
-		this.setTitle("Gestion des ascenseurs");				//Titre de la fenêtre 
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
-		this.setMinimumSize(new Dimension(400, 500));			//taille de la fenêtre fixe
-		//this.setLocationRelativeTo(null);						//la fenêtre apparait au centre de l'écran
-		this.setVisible(true);									//la fenêtre apparaît
+		this.setTitle("Ascenseurs du bâtiment \"" + bat.getNom() + "\"");	//Titre de la fenêtre 
+		this.setMinimumSize(new Dimension(400, 500));						//taille de la fenêtre fixe
+		this.setVisible(true);												//la fenêtre apparaît
 	}
 }
