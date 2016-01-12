@@ -181,7 +181,7 @@ public class Ascenseur {
 			e.printStackTrace();
 		}
 		portesOuvertes = false;
-		System.out.println("les portes sont fermés");
+		System.out.println("les portes sont fermes");
 	}
 
 	/**Met l'Ascenseur en mouvement en modifiant {@link Ascenseur#estEnMouvement}
