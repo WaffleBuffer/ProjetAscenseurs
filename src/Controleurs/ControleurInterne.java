@@ -72,7 +72,7 @@ public class ControleurInterne implements IControleur{
 			//Si l'ascenseur n'est pas arrive, on le met l'ascenseur en mouvement
 			else if (!ascenseur.isEstEnMouvement() && !(requetes.get(0).getEtageDemande() == ascenseur.getEtage())) {
 				ascenseur.setEstEnMouvement(true);				
-				return "Ascenceur " + ascenseur.getNumAsc() + " va de l'étage : " + ascenseur.getEtage() + " a l'etage " 
+				return "Ascenceur " + ascenseur.getNumAsc() + " va de l'etage : " + ascenseur.getEtage() + " a l'etage " 
 				+ requetes.get(0).getEtageDemande();
 			}
 			//Si l'ascenseur est arrete, a ce stade, c'est qu'il est arrive donc on ouvre les portes et on supprime la requete
