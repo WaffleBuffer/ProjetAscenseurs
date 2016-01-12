@@ -41,7 +41,11 @@ public class ControleurInterne implements IControleur{
 	 * 
 	 */
 	public String traiterRequetes(){
-		//Si le bouton stop a ete appuyer, alors on ignore le traitement
+		//Si le controleur n'a pas de requete a traiter alors on ignore le traitement
+		if (0 == requetes.size()) {
+			return "ascenseur " + ascenseur.getNumAsc() + " n'a pas de requete a traiter";
+		}
+		//Si le bouton stop a ete appuyer, et que l'ascenseur est debloque, alors on le bloque. Sinon on le debloque
 		if (requetes.get(0).getLibelle() == Constantes.STOP) {
 			if (ascenseur.estBloquer()) {
 				ascenseur.debloque();
@@ -52,6 +56,7 @@ public class ControleurInterne implements IControleur{
 				return "ascenseur " + ascenseur.getNumAsc() + " se bloque.";
 			}
 		}
+		//Si l'ascenseur est bloque alors on ignore le traitement.
 		if (ascenseur.estBloquer()) {
 			return "ascenseur " + ascenseur.getNumAsc() + " est bloque.";
 		}
@@ -68,7 +73,7 @@ public class ControleurInterne implements IControleur{
 			//Si l'ascenseur n'est pas arrive, on le met l'ascenseur en mouvement
 			else if (!ascenseur.isEstEnMouvement() && !(requetes.get(0).getEtageDemande() == ascenseur.getEtage())) {
 				ascenseur.setEstEnMouvement(true);				
-				return "Ascenceur " + ascenseur.getNumAsc() + " va de l'étage : " + ascenseur.getEtage() + " à l'étage " 
+				return "Ascenceur " + ascenseur.getNumAsc() + " va de l'étage : " + ascenseur.getEtage() + " a l'etage " 
 				+ requetes.get(0).getEtageDemande();
 			}
 			//Si l'ascenseur est arrete, a ce stade, c'est qu'il est arrive donc on ouvre les portes et on supprime la requete
@@ -77,9 +82,14 @@ public class ControleurInterne implements IControleur{
 				requetes.remove(requetes.get(0));
 				return "ascenseur " + ascenseur.getNumAsc() + " ouvre les portes";
 			}
+			//Si l'ascenseur est a l'etage demande, on l'arrete.
+			else if (requetes.get(0).getEtageDemande() == ascenseur.getEtage()) {
+				ascenseur.setEstEnMouvement(false);
+				return "ascenseur " + ascenseur.getNumAsc() + " s'arrete a l'etage " + ascenseur.getEtage();
+			}
 			//A ce stade, l'ascenseur se deplace et n'est pas arrive, donc on le fait changer d'etage
 			else {
-				if (requetes.get(0).getLibelle() == Constantes.HAUT) {
+				if (requetes.get(0).getEtageDemande() > ascenseur.getEtage()) {
 					ascenseur.setEtage(ascenseur.getEtage() + 1);
 				}
 				else {
@@ -88,6 +98,7 @@ public class ControleurInterne implements IControleur{
 				return "ascenseur " + ascenseur.getNumAsc() + " passe par l'etage " + ascenseur.getEtage();
 			}
 		}
+		//Si on arrive ici, alors c'est une requete non prise en charge.
 		return "Requete non reconnue";
 	}
 	

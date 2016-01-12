@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import Boutons.BoutonExterne;
 import Boutons.BoutonInterne;
 import IHM.FenetreConfiguration;
-import Options.GestionnaireOption;
 import Options.OptionMusique;
 
 public class Main {
@@ -17,12 +16,11 @@ public class Main {
 		
 		batim.appuyerBoutonAscenseur(1, 3);
 		batim.appuyerBoutonAscenseur(2, 5);
-		batim.traiterControleurs();
-		System.out.println(batim.getAscenseur(1).toString());
-		System.out.println(batim.getAscenseur(2).toString());
-		
 		batim.getAscenseur(1).ajouterOption(new OptionMusique("Guns'n Roses FTW"));
 		batim.getAscenseur(1).activerOption(0);
+		batim.traiterControleurs();
+		System.out.println(batim.getAscenseur(1).toString());
+		System.out.println(batim.getAscenseur(2).toString());	
 		
 		batim.appuyerBoutonEtage(0); //etage 0 haut
 		batim.appuyerBoutonEtage(2); //etage 1 bas
@@ -52,6 +50,9 @@ public class Main {
 		listeBoutonsBatim = batim.getListeBoutons();
 		for (BoutonExterne i : listeBoutonsBatim){
 			System.out.println(i.toString());
+		}
+		for (int i = 0; i < 20; ++i) {
+			batim.traiterControleurs();
 		}
 		
 	}
