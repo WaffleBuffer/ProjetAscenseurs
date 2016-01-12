@@ -216,6 +216,7 @@ public class Ascenseur {
 	 * 
 	 */
 	public void bloquer () {
+		estEnMouvement = false;
 		estBloque = true;
 	}
 	

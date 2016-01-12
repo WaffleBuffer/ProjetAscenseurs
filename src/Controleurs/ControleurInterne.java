@@ -36,59 +36,58 @@ public class ControleurInterne implements IControleur{
 		return this.ascenseur;
 	}
 	
-	/**Fonction permettant de traiter les {@link Requete} de l'{@link Ascenseur} gere par ce ControleurInterne
+	/**Fonction permettant de traiter les {@link Requete} de l'{@link Ascenseur} gere par ce ControleurInterne pour chaque iteration
 	 * 
 	 */
-	public void traiterRequetes(){
+	public String traiterRequetes(){
 		//Si le bouton stop a ete appuyer, alors on ignore le traitement
-		if (ascenseur.estBloquer()) {
-			return;
-		}
-		//Parcour de la liste des requetes
-		for (int i = 0; i < requetes.size(); ++i) {
-			//Si c'est une requete de mouvement
-			if (requetes.get(i).getLibelle() == "Allez a l'etage" || 
-					requetes.get(i).getLibelle() == "Haut" || 
-					requetes.get(i).getLibelle() == "Bas") {
-				
-				//Si les portes sont ouvertes alors on les fermes
-				if (ascenseur.isPortesOuvertes()) {
-					ascenseur.fermerPortes();
-				}
-				
-				//On met l'ascenseur en mouvement
-				ascenseur.setEstEnMouvement(true);				
-				System.out.println("Ascenceur " + ascenseur.getNumAsc() + " va de l'étage : " + ascenseur.getEtage() + " à l'étage " + requetes.get(i).getEtageDemande());
-				try {
-					//Le temps d'attente correspond a 2 secondes par etage
-					Thread.sleep((Math.abs(ascenseur.getEtage() - requetes.get(i).getEtageDemande())) * 2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				//L'ascenseur arrive et on retire la requete
-				ascenseur.setEtage(requetes.get(i).getEtageDemande());	
-				requetes.remove(requetes.get(i));
-				--i;
-				//L'ascenseur s'arrrete
-				System.out.println("l'ascenseur s'arrête");
-				ascenseur.setEstEnMouvement(false);
-				
-				//On ouvre les portes
-				ascenseur.ouvrirPortes();
-				//temps d'attente avant fermeture automatique des portes
-				try {
-					//2 secondes
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				//On referme les portes
-				ascenseur.fermerPortes();
+		if (requetes.get(0).getLibelle() == "Stop") {
+			if (ascenseur.estBloquer()) {
+				ascenseur.debloque();
+				return "ascenseur " + ascenseur.getNumAsc() + " se debloque.";
+			}
+			else {
+				ascenseur.bloquer();
+				return "ascenseur " + ascenseur.getNumAsc() + " se bloque.";
 			}
 		}
+		if (ascenseur.estBloquer()) {
+			return "ascenseur " + ascenseur.getNumAsc() + " est bloque.";
+		}
+		//Si c'est une requete de mouvement
+		if (requetes.get(0).getLibelle() == "Allez a l'etage" || 
+				requetes.get(0).getLibelle() == "Haut" || 
+				requetes.get(0).getLibelle() == "Bas") {
+			
+			//Si les portes sont ouvertes alors on les fermes
+			if (ascenseur.isPortesOuvertes()) {
+				ascenseur.fermerPortes();
+				return "ascenseur " + ascenseur.getNumAsc() + " ferme les portes";
+			}
+			//Si l'ascenseur n'est pas arrive, on le met l'ascenseur en mouvement
+			else if (!ascenseur.isEstEnMouvement() && !(requetes.get(0).getEtageDemande() == ascenseur.getEtage())) {
+				ascenseur.setEstEnMouvement(true);				
+				return "Ascenceur " + ascenseur.getNumAsc() + " va de l'étage : " + ascenseur.getEtage() + " à l'étage " 
+				+ requetes.get(0).getEtageDemande();
+			}
+			//Si l'ascenseur est arrete, a ce stade, c'est qu'il est arrive donc on ouvre les portes et on supprime la requete
+			else if (!ascenseur.isEstEnMouvement()) {	
+				ascenseur.ouvrirPortes();
+				requetes.remove(requetes.get(0));
+				return "ascenseur " + ascenseur.getNumAsc() + " ouvre les portes";
+			}
+			//A ce stade, l'ascenseur se deplace et n'est pas arrive, donc on le fait changer d'etage
+			else {
+				if (requetes.get(0).getLibelle().equals("Haut")) {
+					ascenseur.setEtage(ascenseur.getEtage() + 1);
+				}
+				else {
+					ascenseur.setEtage(ascenseur.getEtage() - 1);
+				}
+				return "ascenseur " + ascenseur.getNumAsc() + " passe par l'etage " + ascenseur.getEtage();
+			}
+		}
+		return "Requete non reconnue";
 	}
 	
 	/**Ajout d'une {@link Requete} specifique a {@link ControleurInterne#requetes}
