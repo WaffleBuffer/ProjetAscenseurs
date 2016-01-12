@@ -84,7 +84,6 @@ public class FenetrePanneau extends JFrame{
 			final int j = i;
 			if (i == bat.getNbEtages() + 1)
 			{
-				System.out.println(ascenseurActuel.getListeBoutons().size());
 				JButton boutonStop = new JButton("STOP");
 				panelPanneau.add(boutonStop);
 			}
