@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import Boutons.BoutonExterne;
 import Boutons.BoutonInterne;
 import IHM.FenetreConfiguration;
+import Options.GestionnaireOption;
+import Options.OptionMusique;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Batiment batim = new Batiment("Hotel", 5, 2);
 		
-		FenetreConfiguration fen = new FenetreConfiguration();
+		new FenetreConfiguration();
 		System.out.println(batim.getAscenseur(1).toString());
+		
+		GestionnaireOption gestionnaireOpt = new GestionnaireOption();
+		gestionnaireOpt.addOption(new OptionMusique("Coucou"));
+		gestionnaireOpt.activerOption(0);
 		
 		batim.appuyerBoutonAscenseur(1, 3);
 		batim.appuyerBoutonAscenseur(2, 5);
