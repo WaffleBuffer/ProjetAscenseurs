@@ -99,6 +99,13 @@ public class ControleurInterne implements IControleur{
 		requetes.add(requete);
 	}
 	
+	/**Ajout d'une {@link Requete} prioritaire sur les requetes en cours de traitement
+	 * @param requete
+	 */
+	public void addRequetePrioritaire (Requete requete) {
+		this.requetes.add(0, requete);
+	}
+	
 	/**Ajout d'une {@link RequeteInterne} specifique a {@link ControleurInterne#requetes}
 	 * @param etage l'etage de la {@link RequeteInterne}.
 	 * @see Controleurs.IControleur#addRequete(Requetes.Requete)
