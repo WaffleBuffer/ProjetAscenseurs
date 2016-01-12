@@ -29,7 +29,7 @@ public class ControleurInterne implements IControleur{
 		this.ascenseur = ascenseur;
 	}
 	
-	/**Renvoie {@link Ascenseur} gere par ce ControleurInterne
+	/**Renvoi {@link Ascenseur} gere par ce ControleurInterne
 	 * @return {@link Ascenseur} gere par ce ControleurInterne
 	 */
 	public Ascenseur getAscenceur() {
@@ -108,7 +108,7 @@ public class ControleurInterne implements IControleur{
 		requetes.add(new RequeteInterne(etage));
 	}
 	
-	/**Renvoie le numero d'etage de la prochaine {@link Requete}. Si {@link ControleurInterne#requetes} est vide alors renvoie -1.
+	/**Renvoi le numero d'etage de la prochaine {@link Requete}. Si {@link ControleurInterne#requetes} est vide alors renvoie -1.
 	 * @return le numero d'etage de la prochaine {@link Requete}. Si {@link ControleurInterne#requetes} est vide alors renvoie -1.
 	 */
 	public int prochaineDest () {
@@ -120,7 +120,7 @@ public class ControleurInterne implements IControleur{
 			return -1;
 	}
 	
-	/**Renvoie le nombre de {@link Requete} dans {@link ControleurInterne#requetes}.
+	/**Renvoi le nombre de {@link Requete} dans {@link ControleurInterne#requetes}.
 	 * @return le nombre de {@link Requete} dans {@link ControleurInterne#requetes}.
 	 */
 	public int getNumberOfRequete () {

@@ -1,6 +1,6 @@
 package Boutons;
 
-/**Definie un {@link BoutonExterne} pour aller vers le haut.
+/**Definit un {@link BoutonExterne} pour aller vers le haut.
  * @author Thomas
  * @see BoutonExterne
  */

@@ -13,7 +13,7 @@ import Requetes.RequeteInterne;
  */
 public class Ascenseur {
 	
-	/**Etage auquel se situe acutellement cet Ascenseur.
+	/**Etage auquel se situe actuellement cet Ascenseur.
 	 * 
 	 */
 	private int etage;
@@ -33,12 +33,12 @@ public class Ascenseur {
 	 */
 	private boolean portesOuvertes;
 
-	/**Permet de connaitre le poid maximume que peut supporter cet Ascenseur.
+	/**Permet de connaitre le poid maximum que peut supporter cet Ascenseur.
 	 * 
 	 */
 	private int poidsMax;
 
-	/**Permet de savoir cet Ascenseur est vide (true) ou non (false).
+	/**Permet de savoir si cet Ascenseur est vide (true) ou non (false).
 	 * 
 	 */
 	private boolean estVide;
@@ -55,7 +55,7 @@ public class Ascenseur {
 	private int numAsc;
 	
 	/**Construit un Ascenseur et initialise tous ses attributs.
-	 * @param nbEtage permet de connaitre le nombre de {@link BoutonDestination} que devrair posseder cet Ascenseur.
+	 * @param nbEtage permet de connaitre le nombre de {@link BoutonDestination} que devrait posseder cet Ascenseur.
 	 * @param num le numero que l'on attribut a cet Ascenseur.
 	 */
 	public Ascenseur (int nbEtage, int num){

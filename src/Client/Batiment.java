@@ -25,7 +25,7 @@ public class Batiment {
 	 */
 	private int nbEtages;
 	
-	/**Le nombre d'{@link Ascenseur} ce Batiment.
+	/**Le nombre d'{@link Ascenseur} de ce Batiment.
 	 * 
 	 */
 	private int nbAscenseur;

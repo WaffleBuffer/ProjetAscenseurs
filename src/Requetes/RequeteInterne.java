@@ -7,11 +7,11 @@ package Requetes;
 public class RequeteInterne extends Requete {
 	
 	/** Construit une RequeteInterne pour demander a l'ascenseur d'aller a un etage.<br>
-	 * {@link Requete#libelle} = "Allez a l'etage"
+	 * {@link Requete#libelle} = "Aller a l'etage"
 	 * @param nouvelEtage Le numero de l'etage correspondant au {@link Boutons.BoutonDestination}.
 	 */
 	public RequeteInterne (int nouvelEtage){
-		super(nouvelEtage, "Allez a l'etage");
+		super(nouvelEtage, "Aller a l'etage");
 	}
 	
 	//constructeur pour l'arr�t d'urgence

@@ -23,19 +23,19 @@ public class ControleurExterne implements IControleur{
 	 */
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();
 	
-	/**Liste des {@link ControleurInterne} (et donc des {@link Ascenseur}) disponnibles.
+	/**Liste des {@link ControleurInterne} (et donc des {@link Ascenseur}) disponibles.
 	 * 
 	 */
 	private ArrayList<ControleurInterne> controleurs;
 	
 	
-	/**Variable utiliser durant {@link ControleurExterne#traiterRequetes()}.
+	/**Variable utilisee durant {@link ControleurExterne#traiterRequetes()}.
 	 * @see ControleurExterne#traiterRequetes()
 	 */
 	private ControleurInterne aUtiliser;
 	
 	
-	/**Utiliser pour connaitre le nombre d'etage. Utiliser dans {@link ControleurExterne#searchLessActive()}
+	/**Utilise pour connaitre le nombre d'etages. Utilise dans {@link ControleurExterne#searchLessActive()}
 	 * @see ControleurExterne#searchLessActive()
 	 */
 	private int nbEtage;

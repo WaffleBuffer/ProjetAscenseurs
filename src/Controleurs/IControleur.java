@@ -2,7 +2,7 @@ package Controleurs;
 
 import Requetes.Requete;
 
-/**Interface montrant que les deux type de controleurs ({@link ControleurInterne} et {@link ControleurExterne}) ont une chose en commun:
+/**Interface montrant que les deux types de controleurs ({@link ControleurInterne} et {@link ControleurExterne}) ont une chose en commun:
  * le traitement des {@link Requete}. Mais cela s'arrete la.
  * @author Thomas
  *

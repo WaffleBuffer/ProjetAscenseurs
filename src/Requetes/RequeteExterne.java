@@ -1,8 +1,8 @@
 package Requetes;
 
 /**Description des requetes externes. Sous-classe de {@link Requete}.<br>
- * Ces requete correspondent aux {@link Boutons.BoutonExterne}.<br>
- * le {@link Requete#libelle} ne doit valoir que "Haut" ou "Bas" sinon la requete sera ignorer par le {@link Controleurs.IControleur}.
+ * Ces requetes correspondent aux {@link Boutons.BoutonExterne}.<br>
+ * le {@link Requete#libelle} ne doit valoir que "Haut" ou "Bas" sinon la requete sera ignoree par le {@link Controleurs.IControleur}.
  * @author Thomas
  */
 public class RequeteExterne extends Requete {

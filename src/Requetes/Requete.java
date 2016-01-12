@@ -1,6 +1,6 @@
 package Requetes;
 
-/** Description générale d'une requete. Le libelle est donne par les sous-classe {@link RequeteInterne} et {@link RequeteExterne}
+/** Description generale d'une requete. Le libelle est donne par les sous-classes {@link RequeteInterne} et {@link RequeteExterne}
  * @author Thomas
  *
  */
@@ -12,7 +12,7 @@ public class Requete {
 	
 	/**Identifiant de requete. Possibilites selon le type de requete:<br>
 	 * {@link RequeteInterne}:<br>
-	 * -{@link Boutons.BoutonDestination} = "Allez a l'etage"<br>
+	 * -{@link Boutons.BoutonDestination} = "Aller a l'etage"<br>
 	 * -{@link Boutons.BoutonStop}        = "Arreter l'ascenseur"<br>
 	 * 
 	 * {@link RequeteExterne}<br>
@@ -22,7 +22,7 @@ public class Requete {
 	private String libelle;
 	
 	/** Constructeur appele par les sous-classes
-	 * @param libelle {@link Requete#libelle} identifiant de la requete, fournis par la sous-classe
+	 * @param libelle {@link Requete#libelle} identifiant de la requete, fourni par la sous-classe
 	 * @param etageDemande {@link Requete#etageDemande} Numero de l'etage demande
 	 * @see #libelle
 	 * @see #etageDemande
@@ -34,7 +34,7 @@ public class Requete {
 	
 	
 	/** Obtient le {@link Requete#libelle} d'une requete
-	 * @return le {@link Requete#libelle} de la requete. Voire l'attribut pour les valeurs possibles
+	 * @return le {@link Requete#libelle} de la requete. Voir l'attribut pour les valeurs possibles
 	 * @see #libelle
 	 */
 	public String getLibelle() {
