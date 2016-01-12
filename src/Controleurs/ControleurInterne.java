@@ -16,7 +16,6 @@ public class ControleurInterne implements IControleur{
 	 * 
 	 */
 	private Ascenseur ascenseur;
-	//liste des requetes
 	
 	/**Liste des {@link Requete} affectees a ce ControleurInterne.
 	 * 
