@@ -17,22 +17,18 @@ import Controleurs.ControleurInterne;
 public class Batiment {
 	
 	/**Le nom de ce Batiment.
-	 * 
 	 */
 	private String nom;
 	
 	/**Le nombre d'etage de ce Batiment.
-	 * 
 	 */
 	private int nbEtages;
 	
 	/**Le nombre d'{@link Ascenseur} de ce Batiment.
-	 * 
 	 */
 	private int nbAscenseur;
 	
 	/**le {@link ControleurExterne} de ce Batiment.
-	 * 
 	 */
 	private ControleurExterne controleurExt = ControleurExterne.getControleurExterne();
 	
@@ -41,8 +37,7 @@ public class Batiment {
 	 */
 	private ArrayList<ControleurInterne> controleursInt = new ArrayList<ControleurInterne>();
 	
-	/**le batiment possede une liste de boutons
-	 * 
+	/**le batiment possede une liste de bouton
 	 */
 	private ArrayList<BoutonExterne> listeBoutons = new ArrayList<BoutonExterne>();
 	
@@ -70,8 +65,7 @@ public class Batiment {
 		listeBoutons.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
 	}
 	
-	/**
-	 * 
+	/**permet de traiter les requetes du {@link ControleurInterne}
 	 */
 	public void traiterControleurs () {
 		for (ControleurInterne i : controleursInt) {
@@ -79,16 +73,14 @@ public class Batiment {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param num
+	/**permet d'appuyer sur le {@link Bouton}
+	 * @param numBouton numero du {@link Bouton}
 	 */
-	public void appuyerBoutonEtage (int num) {
-		listeBoutons.get(num).appuyer(controleurExt);
+	public void appuyerBoutonEtage (int numBouton) {
+		listeBoutons.get(numBouton).appuyer(controleurExt);
 	}
 	
-	/**
-	 * 
+	/**permet d'obtenir les {@link Ascenseur} de ce Batiment
 	 * @param num numero de l'{@link Ascenseur}
 	 * @return {@link ControleurInterne#controleursInt}
 	 */
@@ -96,48 +88,42 @@ public class Batiment {
 		return controleursInt.get(num - 1).getAscenceur();
 	}
 
-	/**
-	 * Permet d'obtenir le nom du Batiment
+	/** Permet d'obtenir le {@link Batiment#nom} de ce Batiment
 	 * @return {@link Batiment#nom}
 	 */
 	public String getNom() {
 		return nom;
 	}
 
-	/**
-	 * Permet d'obtenir le nombre d'etage du batiment
+	/**Permet d'obtenir le {@link Batiment#nbEtage} de ce Batiment
 	 * @return {@link Batiment#nbEtage}
 	 */
 	public int getNbEtages() {
 		return nbEtages;
 	}
 	
-	/**
-	 * Permet d'obtenir le nombre d'ascenseurs contenus dans le batiment
-	 * @return {@link Batiment#nbAscenceur}
+	/** Permet d'obtenir le {@link Batiment#nbAscenseur} contenus dans ce Batiment
+	 * @return le {@link Batiment#nbAscenceur} contenus dans ce Batiment
 	 */
 	public int getNbAscenseur () {
 		return nbAscenseur;
 	}
 	
-	/**
-	 * 
+	/**permet d'obtenir le {@link CountroleurExterne#controleurExt}
 	 * @return {@link ControleurExterne#controleurExt}
 	 */
 	public ControleurExterne getControleurExt () {
 		return controleurExt;
 	}
 	
-	/**
-	 * 
+	/**permet d'obtenir la liste des {@link ControleurInterne#controleurInt} de ce Batiment
 	 * @return {@link ControleurInterne#controleursInt}
 	 */
 	public ArrayList<ControleurInterne> getControleursInterne () {
 		return controleursInt;
 	}
 
-	/**
-	 * 
+	/**permet d'obtenir la {@link Batiment#listeBoutons} de ce Batiment
 	 * @return la {@link Batiment#listeBoutons} de ce Batiment
 	 */
 	public ArrayList<BoutonExterne> getListeBoutons() {
@@ -153,7 +139,6 @@ public class Batiment {
 	}
 	
 	/**affichage de l'etat de ce Batiment
-	 * 
 	 */
 	@Override
 	public String toString() {
