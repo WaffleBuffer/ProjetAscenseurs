@@ -12,7 +12,7 @@ public class RequeteExterne extends Requete {
 	 * @param direction La direction que l'on souhaite prendre. Le {@link Requete#getLibelle()} 
 	 * ne peut que etre "Haut" ou "Bas" sinon ignore par le {@link Controleurs.IControleur}.
 	 */
-	public RequeteExterne (int etage, String direction){
+	public RequeteExterne (int etage, int direction){
 		super (etage, direction);
 	}
 }

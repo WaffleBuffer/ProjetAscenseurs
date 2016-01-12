@@ -14,15 +14,17 @@ public class BoutonExterne extends Bouton {
 	 * 
 	 */
 	private int etage;
+	private int direction;
 
 	/**Constructeur de BoutonExterne. Appele par les sous-classes
 	 * @param etage etage auquel se trouve le BoutonExterne
 	 * @param libelle Indentifiant du BoutonExterne. Donner par les sous-classes
 	 * @see Bouton#libelle
 	 */
-	protected BoutonExterne(int etage, String libelle) {
+	protected BoutonExterne(int etage, String libelle, int direction) {
 		super(libelle);
 		this.etage = etage;
+		this.direction = direction;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,7 +36,7 @@ public class BoutonExterne extends Bouton {
 	 */
 	@Override
 	public void appuyer (IControleur controleur) {
-		RequeteExterne requete = new RequeteExterne(etage, this.getLibelle());
+		RequeteExterne requete = new RequeteExterne(etage, this.direction);
 		controleur.addRequete(requete);
 	}
 

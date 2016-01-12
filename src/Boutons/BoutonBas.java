@@ -1,5 +1,7 @@
 package Boutons;
 
+import Client.Constantes;
+
 /**Definie un {@link BoutonExterne} pour aller vers le bas.
  * @author Thomas
  * @see BoutonExterne
@@ -12,7 +14,7 @@ public class BoutonBas extends BoutonExterne{
 	 * @see BoutonExterne
 	 */
 	public BoutonBas(int etage) {
-		super(etage, "Bas");
+		super(etage, "Bas", Constantes.BAS);
 		// TODO Auto-generated constructor stub
 	}
 }

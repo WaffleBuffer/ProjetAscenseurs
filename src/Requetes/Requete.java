@@ -19,7 +19,7 @@ public class Requete {
 	 * -{@link Boutons.BoutonHaut} = "Haut"<br>
 	 * -{@link Boutons.BoutonBas}  = "Bas"<br>
 	 */
-	private String libelle;
+	private int libelle;
 	
 	/** Constructeur appele par les sous-classes
 	 * @param libelle {@link Requete#libelle} identifiant de la requete, fourni par la sous-classe
@@ -27,7 +27,7 @@ public class Requete {
 	 * @see #libelle
 	 * @see #etageDemande
 	 */
-	protected Requete (int etageDemande, String libelle) {
+	protected Requete (int etageDemande, int libelle) {
 		this.etageDemande = etageDemande;
 		this.libelle = libelle;
 	}
@@ -37,7 +37,7 @@ public class Requete {
 	 * @return le {@link Requete#libelle} de la requete. Voir l'attribut pour les valeurs possibles
 	 * @see #libelle
 	 */
-	public String getLibelle() {
+	public int getLibelle() {
 		return libelle;
 	}
 

@@ -3,6 +3,7 @@ package Controleurs;
 import java.util.ArrayList;
 
 import Client.Batiment;
+import Client.Constantes;
 import Requetes.Requete;
 import Requetes.RequeteExterne;
 
@@ -73,7 +74,7 @@ public class ControleurExterne implements IControleur{
 	 * @param direction {@link Requete#libelle} que prend la {@link RequeteExterne} : "Haut" ou "Bas".
 	 * @see RequeteExterne
 	 */
-	public void addRequete (int etage, String direction) {
+	public void addRequete (int etage, int direction) {
 		requetes.add(new RequeteExterne(etage, direction));
 	}
 	
@@ -89,7 +90,7 @@ public class ControleurExterne implements IControleur{
 				requetes.remove(requetes.get(i));
 				--i;//repositionne i sur la requete suivante, puisque la requete courante viens d'etre supprimee
 			}
-			else if (requetes.get(i).getLibelle().equals("Haut")) {//si on veut aller vers le haut
+			else if (requetes.get(i).getLibelle() == Constantes.HAUT) {//si on veut aller vers le haut
 				if (searchToUp(requetes.get(i).getEtageDemande())) {
 					/*Cherche un ascenseur qui est en-dessous de l'etage de la requete 
 					et qui se dirige vers un etage superieur ou egal a celui de la requete*/

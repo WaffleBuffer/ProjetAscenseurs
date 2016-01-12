@@ -1,5 +1,7 @@
 package Requetes;
 
+import Client.Constantes;
+
 /**Description des requetes internes. Sous-classe de {@link Requete}.<br>
  * Correspond aux {@link Boutons.BoutonInterne} se trouvant a l'interieur de l'{@link Ascenseur}.
  * @author Thomas
@@ -11,7 +13,7 @@ public class RequeteInterne extends Requete {
 	 * @param nouvelEtage Le numero de l'etage correspondant au {@link Boutons.BoutonDestination}.
 	 */
 	public RequeteInterne (int nouvelEtage){
-		super(nouvelEtage, "Aller a l'etage");
+		super(nouvelEtage, Constantes.DEPLACEMENT);
 	}
 	
 	//constructeur pour l'arr�t d'urgence
@@ -19,7 +21,7 @@ public class RequeteInterne extends Requete {
 	 * {@link Requete#libelle} = "Arreter l'ascenseur"
 	 */
 	public RequeteInterne (){
-		super (0, "Arreter l'ascenseur");
+		super (0, Constantes.STOP);
 	}
 
 }

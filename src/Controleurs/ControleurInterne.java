@@ -3,6 +3,7 @@ package Controleurs;
 import java.util.ArrayList;
 
 import Client.Ascenseur;
+import Client.Constantes;
 import Requetes.Requete;
 import Requetes.RequeteInterne;
 
@@ -41,7 +42,7 @@ public class ControleurInterne implements IControleur{
 	 */
 	public String traiterRequetes(){
 		//Si le bouton stop a ete appuyer, alors on ignore le traitement
-		if (requetes.get(0).getLibelle() == "Stop") {
+		if (requetes.get(0).getLibelle() == Constantes.STOP) {
 			if (ascenseur.estBloquer()) {
 				ascenseur.debloque();
 				return "ascenseur " + ascenseur.getNumAsc() + " se debloque.";
@@ -55,9 +56,9 @@ public class ControleurInterne implements IControleur{
 			return "ascenseur " + ascenseur.getNumAsc() + " est bloque.";
 		}
 		//Si c'est une requete de mouvement
-		if (requetes.get(0).getLibelle() == "Allez a l'etage" || 
-				requetes.get(0).getLibelle() == "Haut" || 
-				requetes.get(0).getLibelle() == "Bas") {
+		if (requetes.get(0).getLibelle() == Constantes.DEPLACEMENT || 
+				requetes.get(0).getLibelle() == Constantes.HAUT || 
+				requetes.get(0).getLibelle() == Constantes.BAS) {
 			
 			//Si les portes sont ouvertes alors on les fermes
 			if (ascenseur.isPortesOuvertes()) {
@@ -78,7 +79,7 @@ public class ControleurInterne implements IControleur{
 			}
 			//A ce stade, l'ascenseur se deplace et n'est pas arrive, donc on le fait changer d'etage
 			else {
-				if (requetes.get(0).getLibelle().equals("Haut")) {
+				if (requetes.get(0).getLibelle() == Constantes.HAUT) {
 					ascenseur.setEtage(ascenseur.getEtage() + 1);
 				}
 				else {
