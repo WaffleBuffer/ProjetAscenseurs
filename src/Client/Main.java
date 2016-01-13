@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		Batiment batim = new Batiment("Hotel", 5, 2);
 		
-		new FenetreConfiguration();
+		FenetreConfiguration fenetre = new FenetreConfiguration();
 		System.out.println(batim.getAscenseur(1).toString());
 		
 		batim.appuyerBoutonAscenseur(1, 3);

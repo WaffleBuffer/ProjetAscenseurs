@@ -1,6 +1,5 @@
 package IHM;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
+
 import Client.Ascenseur;
 import Client.Batiment;
 
@@ -25,7 +26,7 @@ public class FenetrePanneau extends JFrame{
 		return ascenseurActuel;
 	}
 
-	private JButton ascenseurSelectionne;
+	private JToggleButton ascenseurSelectionne;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -49,19 +50,18 @@ public class FenetrePanneau extends JFrame{
 		//creation de la liste des ascenseur sous forme de boutons alignés verticalement
 		for(int i = 1; i <= nbAsc; ++i){		
 			final int j = i;
-			final JButton ascenseur = new JButton("Ascenseur n°" + i);
+			final JToggleButton ascenseur = new JToggleButton("Ascenseur n°" + i);
 			panelAscenseurs.add(ascenseur);
 			if (i == 1){
 				ascenseurSelectionne = ascenseur;
-				ascenseurSelectionne.setBackground(Color.WHITE);
+				ascenseurSelectionne.setSelected(true);
 			}
 			ascenseur.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-						ascenseurSelectionne.setBackground(null);
+						ascenseurSelectionne.setSelected(false);
 						ascenseurSelectionne = ascenseur;
-						ascenseurSelectionne.setBackground(Color.WHITE);		//lorsqu'on clique sur un ascenseur, il se colore en blanc 
 						ascenseurActuel = bat.getAscenseur(j);		//et l'ascenseur selectionne devient celui cliqué
 				}});
 		}
