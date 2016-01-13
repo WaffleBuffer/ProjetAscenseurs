@@ -10,7 +10,7 @@ import Controleurs.ControleurExterne;
 import Controleurs.ControleurInterne;
 import Requetes.Requete;
 
-/**Contient les principales informations: les {@link ControleurInterne} (et donc les {@link Ascenseur})
+/**Contient les principales informations: les {@link Controleurs.ControleurInterne} (et donc les {@link Ascenseur})
  * et le {@link ControleurExterne} correspondant a ce Batiment.
  * @author Thomas
  * @see ControleurInterne
@@ -63,12 +63,22 @@ public class Batiment {
 		controleurExt = new ControleurExterne(controleursInt, this.getNbEtages());
 	}
 	
-	/**permet de traiter les {@link Requete} du {@link ControleurInterne}
+	/**permet de traiter les {@link Requete} des {@link ControleurInterne} contenus dans {@link #controleursInt}
+	 * @see Controleurs.ControleurInterne#traiterRequetes()
 	 */
-	public void traiterControleurs () {
+	public String traiterControleurs () {
+		String strToReturn = "";
 		for (ControleurInterne i : controleursInt) {
-			System.out.println(i.traiterRequetes());
+			String strResult = i.traiterRequetes();
+			String frame = "";
+			for (int j = 0; j < strResult.length() + 4; ++j) {
+				frame += "=";
+			}
+			strToReturn += frame + "\n";
+			strToReturn += "| " + strResult + " |\n";
+			strToReturn += frame + "\n";
 		}
+		return strToReturn;
 	}
 	
 	/**permet d'appuyer sur le {@link Bouton}
@@ -80,42 +90,42 @@ public class Batiment {
 	
 	/**permet d'obtenir les {@link Ascenseur} de ce Batiment
 	 * @param num numero de l'{@link Ascenseur}
-	 * @return {@link ControleurInterne#controleursInt}
+	 * @return {@link #controleursInt}
 	 */
 	public Ascenseur getAscenseur(int num) {
 		return controleursInt.get(num - 1).getAscenceur();
 	}
 
 	/** Permet d'obtenir le {@link Batiment#nom} de ce Batiment
-	 * @return {@link Batiment#nom}
+	 * @return {@link #nom}
 	 */
 	public String getNom() {
 		return nom;
 	}
 
-	/**Permet d'obtenir le {@link Batiment#nbEtage} de ce Batiment
-	 * @return {@link Batiment#nbEtage}
+	/**Permet d'obtenir le {@link Batiment#nbEtages} de ce Batiment
+	 * @return {@link #nbEtages}
 	 */
 	public int getNbEtages() {
 		return nbEtages;
 	}
 	
 	/** Permet d'obtenir le {@link Batiment#nbAscenseur} contenus dans ce Batiment
-	 * @return le {@link Batiment#nbAscenseur} contenus dans ce Batiment
+	 * @return le {@link #nbAscenseur} contenus dans ce Batiment
 	 */
 	public int getNbAscenseur () {
 		return nbAscenseur;
 	}
 	
-	/**permet d'obtenir le {@link ControleurExterne#controleurExt}
-	 * @return {@link Batiment#controleurExt}
+	/**permet d'obtenir le {@link #controleurExt}
+	 * @return {@link #controleurExt}
 	 */
 	public ControleurExterne getControleurExt () {
 		return controleurExt;
 	}
 	
-	/**permet d'obtenir la liste des {@link ControleurInterne#controleurInt} de ce Batiment
-	 * @return {@link Batiment#controleursInt}
+	/**permet d'obtenir la liste des {@link #controleursInt} de ce Batiment
+	 * @return {@link #controleursInt}
 	 */
 	public ArrayList<ControleurInterne> getControleursInterne () {
 		return controleursInt;
@@ -136,12 +146,15 @@ public class Batiment {
 		this.getAscenseur(numAsc).appuyerBouton(numBouton, this.getControleursInterne().get(numAsc - 1));
 	}
 	
-	/**affichage de l'etat de ce Batiment
-	 * @return etat de ce Batiment
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages + "]";
+		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages
+				+ ", nbAscenseur=" + nbAscenseur + ", controleursInt="
+				+ controleursInt + ", controleurExt=" + controleurExt
+				+ ", listeBoutons=" + listeBoutons + "]";
 	} 
 
 }

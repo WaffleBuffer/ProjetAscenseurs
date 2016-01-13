@@ -10,7 +10,7 @@ import Options.GestionnaireOption;
 import Options.IOption;
 import Requetes.RequeteInterne;
 
-/**Description de l'etat de l'Ascenseur. Le traitement des {@link Requete} se fait dans le {@link ControleurInterne} correspondant.
+/**Description de l'etat de l'Ascenseur. Le traitement des {@link Requetes.Requete} se fait dans le {@link ControleurInterne} correspondant.
  * @author Thomas
  */
 public class Ascenseur {
@@ -103,6 +103,7 @@ public class Ascenseur {
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
+	 * affichage de l'etat de l'ascenseur
 	 */
 	@Override
 	public String toString() {
@@ -110,7 +111,7 @@ public class Ascenseur {
 				+ portesOuvertes + ", poidsMax=" + poidsMax + ", estVide="
 				+ estVide + ", estBloque=" + estBloque
 				+ ", numAsc=" + numAsc + "]";
-	} // affichage de l'etat de l'ascenseur
+	}
 
 	/**Permet de faire bouger concretement l'Ascenseur en modifiant {@link Ascenseur#etage}.
 	 * @param etage l'etage ou doit etre l'Ascenseur.

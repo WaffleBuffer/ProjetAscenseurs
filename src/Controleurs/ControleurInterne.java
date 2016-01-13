@@ -78,7 +78,11 @@ public class ControleurInterne implements IControleur{
 			//Si l'ascenseur est arrete, a ce stade, c'est qu'il est arrive donc on ouvre les portes et on supprime la requete
 			else if (!ascenseur.isEstEnMouvement()) {	
 				ascenseur.ouvrirPortes();
-				requetes.remove(requetes.get(0));
+				for (int i = 0; i < requetes.size(); ++i) {
+					if (requetes.get(i).getEtageDemande() == ascenseur.getEtage()) {
+						requetes.remove(i);
+					}
+				}
 				return "ascenseur " + ascenseur.getNumAsc() + " ouvre ses portes";
 			}
 			//Si l'ascenseur est a l'etage demande, on l'arrete.
