@@ -63,19 +63,23 @@ public class ControleurExterne implements IControleur{
 		for (int i = 0; i < requetes.size();++i) {//parcours de toutes les requetes externe non affectees
 			
 			if (searchForInactive()) {//cherche d'abord si des ascenseurs sont inactifs
+				
 				aUtiliser.addRequete(requetes.get(i));
 				requetes.remove(requetes.get(i));
 				--i;//repositionne i sur la requete suivante, puisque la requete courante viens d'etre supprimee
 			}
 			else if (requetes.get(i).getLibelle() == Constantes.HAUT) {//si on veut aller vers le haut
+				
 				if (searchToUp(requetes.get(i).getEtageDemande())) {
 					/*Cherche un ascenseur qui est en-dessous de l'etage de la requete 
 					et qui se dirige vers un etage superieur ou egal a celui de la requete*/
+					
 					aUtiliser.addRequetePrioritaire(requetes.get(i));// ajout de la requete de maniere prioritaire
 					requetes.remove(requetes.get(i));
 					--i;
 				}
 				else {//Sinon on cherche l'ascenseur ayant le moins de requete en attente
+					
 					searchLessActive ();
 					aUtiliser.addRequete(requetes.get(i));
 					requetes.remove(requetes.get(i));
@@ -83,14 +87,17 @@ public class ControleurExterne implements IControleur{
 				}
 			}
 			else {//si on veut aller vers le bas
+				
 				if(searchToDown(requetes.get(i).getEtageDemande())) {
 					/*Cherche un ascenseur qui est au-dessus de l'etage de la requete 
 					et qui se dirige vers un etage inferieur ou egal a celui de la requete*/
+					
 					aUtiliser.addRequetePrioritaire(requetes.get(i));
 					requetes.remove(requetes.get(i));
 					--i;
 				}
 				else {//Sinon on cherche l'ascenseur ayant le moins de requete en attente
+					
 					searchLessActive ();
 					aUtiliser.addRequete(requetes.get(i));
 					requetes.remove(requetes.get(i));

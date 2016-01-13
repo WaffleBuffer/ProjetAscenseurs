@@ -20,7 +20,7 @@ public class Main {
 		batim.getAscenseur(1).activerOption(0);
 		batim.traiterControleurs();
 		System.out.println(batim.getAscenseur(1).toString());
-		System.out.println(batim.getAscenseur(2).toString());	
+		System.out.println(batim.getAscenseur(2).toString());
 		
 		batim.appuyerBoutonEtage(0); //etage 0 haut
 		batim.appuyerBoutonEtage(2); //etage 1 bas
