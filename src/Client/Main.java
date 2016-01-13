@@ -51,14 +51,16 @@ public class Main {
 		for (BoutonExterne i : listeBoutonsBatim){
 			System.out.println(i.toString());
 		}
-		for (int i = 0; i < 20; ++i) {
+		for (int i = 0;0 < batim.getControleursInterne().get(0).getNumberOfRequete(); ++i) {
 			try {
 				Thread.sleep(1000); //temps d'iteration
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			batim.traiterControleurs();
+			System.out.println("-------------------Iteration-------------------");
+			System.out.println(batim.traiterControleurs());
+			System.out.println("----------------fin d'Iteration----------------\n");
 		}
 		
 	}

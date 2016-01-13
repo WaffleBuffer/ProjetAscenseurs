@@ -66,18 +66,19 @@ public class Batiment {
 	/**permet de traiter les {@link Requete} des {@link ControleurInterne} contenus dans {@link #controleursInt}
 	 * @see Controleurs.ControleurInterne#traiterRequetes()
 	 */
-	public void traiterControleurs () {
+	public String traiterControleurs () {
+		String strToReturn = "";
 		for (ControleurInterne i : controleursInt) {
 			String strResult = i.traiterRequetes();
 			String frame = "";
 			for (int j = 0; j < strResult.length() + 4; ++j) {
 				frame += "=";
 			}
-			System.out.println(frame);
-			System.out.println("| " + strResult + " |");
-			System.out.println(frame);
-			System.out.println("");
+			strToReturn += frame + "\n";
+			strToReturn += "| " + strResult + " |\n";
+			strToReturn += frame + "\n";
 		}
+		return strToReturn;
 	}
 	
 	/**permet d'appuyer sur le {@link Bouton}
