@@ -2,6 +2,9 @@ package Options;
 
 import java.util.ArrayList;
 
+/** gestion des options de {@link IOption}
+ * @author p14005728
+ */
 public class GestionnaireOption {
 
 	/** création d'une liste de {@link IOption}
