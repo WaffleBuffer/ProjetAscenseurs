@@ -40,10 +40,12 @@ public class FenetreRequetes extends JFrame{
 		panel.add(scrollHistorique);
 		this.add(panel);
 		
-		this.setTitle(batiment.getNom());			        	//Titre de la fenetre 
-		//this.setResizable(false);								//la fenetre n'a pas besoin d'etre redimensionner
-		this.setSize(new Dimension(300, 300));					//taille de la fenetre fixe
-		this.setLocationRelativeTo(null);						//la fenetre apparait au centre de l'ecran
+		this.setTitle(batiment.getNom() + " (queries)");			        	//Titre de la fenetre 
+		this.setSize(new Dimension(400, 500));					//taille de la fenetre fixe
+		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		int height = (int)dimension.getHeight();
+		int width  = (int)dimension.getWidth();
+		this.setLocation(width - this.getWidth(), height/2 - this.getHeight()/2);
 		this.setVisible(true);									//la fenetre apparaît
 	}
 	

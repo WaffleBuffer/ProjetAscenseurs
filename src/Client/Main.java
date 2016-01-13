@@ -63,10 +63,7 @@ public class Main {
 //			System.out.println(batim.traiterControleurs());
 //			System.out.println("----------------fin d'Iteration----------------\n");
 //		}
-		Batiment testJawa = new Batiment("Jawa", 5, 1);
-		testJawa.appuyerBoutonAscenseur(1, 3);
-		FenetreRequetes vueRequetes = new FenetreRequetes(testJawa);
-		vueRequetes.actualiserText();
+		
 	}
 
 }

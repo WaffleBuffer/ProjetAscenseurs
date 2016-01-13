@@ -36,16 +36,16 @@ public class FenetreConfiguration extends JFrame {
 		gbc.weighty = 1;
 		gbc.gridx = 1;
 		
-		JLabel labelNomBat = new JLabel("Nom", SwingConstants.CENTER);
+		JLabel labelNomBat = new JLabel("Name", SwingConstants.CENTER);
 		labelNomBat.setFont(new Font("Arial",Font.BOLD,18));
 		gb.setConstraints(labelNomBat, gbc); // mise en forme des objets
 		add(labelNomBat);
 		
-		final JTextField textNomBat = new JTextField();
-		gb.setConstraints(textNomBat, gbc); // mise en forme des objets
-		add(textNomBat);
+		final JTextField texteNomBatiment = new JTextField();
+		gb.setConstraints(texteNomBatiment, gbc); // mise en forme des objets
+		add(texteNomBatiment);
 		
-		JLabel labelNbEtages = new JLabel("Nombre d'étages", SwingConstants.CENTER);
+		JLabel labelNbEtages = new JLabel("Number of floors", SwingConstants.CENTER);
 		labelNbEtages.setFont(new Font("Arial",Font.BOLD,16));
 		gb.setConstraints(labelNbEtages, gbc); // mise en forme des objets
 		add(labelNbEtages);
@@ -55,17 +55,17 @@ public class FenetreConfiguration extends JFrame {
 		gb.setConstraints(nbEtages, gbc); // mise en forme des objets
 		add(nbEtages);
 		
-		JLabel labelNbAsc = new JLabel("Nombre d'ascenseurs",SwingConstants.CENTER);
+		JLabel labelNbAsc = new JLabel("Number of elevators",SwingConstants.CENTER);
 		labelNbAsc.setFont(new Font("Arial",Font.BOLD,16));
 		gb.setConstraints(labelNbAsc, gbc); // mise en forme des objets
 		add(labelNbAsc);
 		
 		SpinnerModel modeleNbAsc = new SpinnerNumberModel(1, 0, 50, 1);
-		final JSpinner nbAsc = new JSpinner(modeleNbAsc);
-		gb.setConstraints(nbAsc, gbc); // mise en forme des objets
-		add(nbAsc);
+		final JSpinner nbAscenseurs = new JSpinner(modeleNbAsc);
+		gb.setConstraints(nbAscenseurs, gbc); // mise en forme des objets
+		add(nbAscenseurs);
 		
-		JButton submit = new JButton ("Ajouter");
+		JButton submit = new JButton ("Add");
 		gb.setConstraints(submit, gbc); // mise en forme des objets
 		add(submit);
 		
@@ -73,22 +73,24 @@ public class FenetreConfiguration extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Batiment bat = new Batiment(textNomBat.getText(), (Integer) nbEtages.getValue(), (Integer) nbAsc.getValue());
-				Ascenseur asc = new Ascenseur(bat.getNbEtages(), 1);
+				Batiment batiment = new Batiment(texteNomBatiment.getText(), (Integer) nbEtages.getValue(), (Integer) nbAscenseurs.getValue());
+				FenetreBatiment fenetreBatiment = new FenetreBatiment(batiment);
 				@SuppressWarnings("unused")
-				FenetreBatiment batiment = new FenetreBatiment(bat);
-				@SuppressWarnings("unused")
-				FenetrePanneau panneau = new FenetrePanneau(bat, bat.getNbAscenseur(), batiment);	
-				textNomBat.setText(null);
+				FenetrePanneau fenetrePanneau = new FenetrePanneau(batiment, batiment.getNbAscenseur(), fenetreBatiment);	
+				FenetreRequetes fenetreRequetes = new FenetreRequetes(batiment);
+				texteNomBatiment.setText(null);
 				nbEtages.setValue(1);
-				nbAsc.setValue(1);
+				nbAscenseurs.setValue(1);
 			}});
 		
-		this.setTitle("Ajout d'un bâtiment");					//Titre de la fenêtre 
+		this.setTitle("Add a building");					//Titre de la fenêtre 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
 		this.setResizable(false);								//la fenetre de configuration n'a pas besoin d'être redimensionner
-		this.setSize(new Dimension(250, 300));					//taille de la fenêtre fixe
-		this.setLocationRelativeTo(null);						//la fenêtre apparait au centre de l'écran
+		this.setSize(new Dimension(250, 200));					//taille de la fenêtre fixe
+		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		int height = (int)dimension.getHeight();
+		int width  = (int)dimension.getWidth();
+		this.setLocation(width/2 - this.getWidth()/2, 0);
 		this.setVisible(true);									//la fenêtre apparaît
 	}
 }
