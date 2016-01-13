@@ -52,6 +52,12 @@ public class Main {
 			System.out.println(i.toString());
 		}
 		for (int i = 0; i < 20; ++i) {
+			try {
+				Thread.sleep(1000); //temps d'iteration
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			batim.traiterControleurs();
 		}
 		

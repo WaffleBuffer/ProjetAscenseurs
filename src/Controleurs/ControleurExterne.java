@@ -13,11 +13,6 @@ import Requetes.RequeteExterne;
  */
 public class ControleurExterne implements IControleur{
 
-	/**Il n'existe qu'un seul ControleurExterne par {@link Batiment} donc c'est un singleton.
-	 * 
-	 */
-	final private static ControleurExterne singleton = new ControleurExterne ();
-	
 	/**Liste des {@link Requete} a traiter. Chaque {@link Requete} devrait etre une {@link RequeteExterne} pour fonctionner correctement.
 	 * Sinon elle seront interpretee comme telle et n'auront pas le resultat attendu.
 	 * 
@@ -41,32 +36,14 @@ public class ControleurExterne implements IControleur{
 	 */
 	private int nbEtage;
 	
-	/**ControleurExterne est un singleton donc le constructeur est private.
-	 * 
-	 */
-	private ControleurExterne () {}
-	
-	/**Comme c'est un singleton, on doit definir par la suite les attributs. Cela est effectue dans le constructeur de {@link Batiment}
-	 * @param controleurs liste des {@link ControleurInterne} disponnibles
-	 * @see Batiment#Batiment(String, int, int)
-	 */
-	public void defineControleursInterne (ArrayList<ControleurInterne> controleurs) {
-		this.controleurs = controleurs;
-	}
-	
-	/**Comme c'est un singleton, on doit definir par la suite les attributs. Cela est effectue dans le constructeur de {@link Batiment}
+	/**Construit un ControleurExterne
+	 * @param controleurs iste des {@link ControleurInterne} disponnibles
 	 * @param nbEtage nombre d'etage du {@link Batiment} correspondant.
 	 * @see Batiment#Batiment(String, int, int)
 	 */
-	public void defineBatiment (int nbEtage) {
+	public ControleurExterne (ArrayList<ControleurInterne> controleurs, int nbEtage) {
+		this.controleurs = controleurs;
 		this.nbEtage = nbEtage;
-	}
-	
-	/**Obtient le singleton
-	 * @return le singleton
-	 */
-	public static ControleurExterne getControleurExterne() {
-		return singleton;
 	}
 	
 	/**Permet d'ajouter une {@link RequeteExterne} a {@link ControleurExterne#requetes}.

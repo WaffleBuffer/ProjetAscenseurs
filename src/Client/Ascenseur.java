@@ -158,30 +158,14 @@ public class Ascenseur {
 	 * 
 	 */
 	public void ouvrirPortes () {
-		System.out.println("les portes s'ouvrent");
-		try {
-			Thread.sleep(1000); //temps d'ouverture des portes
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		portesOuvertes = true;
-		System.out.println("les portes sont ouvertes");
 	}
 	
 	/**Ferme les portes en modifiant {@link Ascenseur#portesOuvertes} en prenant du temps.
 	 * 
 	 */
 	public void fermerPortes () {
-		System.out.println("les portes se ferment");
-		try {
-			Thread.sleep(1000); //temps de fermeture des portes
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		portesOuvertes = false;
-		System.out.println("les portes sont fermes");
 	}
 
 	/**Met l'Ascenseur en mouvement en modifiant {@link Ascenseur#estEnMouvement}

@@ -67,7 +67,7 @@ public class ControleurInterne implements IControleur{
 			//Si les portes sont ouvertes alors on les fermes
 			if (ascenseur.isPortesOuvertes()) {
 				ascenseur.fermerPortes();
-				return "ascenseur " + ascenseur.getNumAsc() + " ferme les portes";
+				return "ascenseur " + ascenseur.getNumAsc() + " ferme ses portes";
 			}
 			//Si l'ascenseur n'est pas arrive, on le met l'ascenseur en mouvement
 			else if (!ascenseur.isEstEnMouvement() && !(requetes.get(0).getEtageDemande() == ascenseur.getEtage())) {
@@ -79,7 +79,7 @@ public class ControleurInterne implements IControleur{
 			else if (!ascenseur.isEstEnMouvement()) {	
 				ascenseur.ouvrirPortes();
 				requetes.remove(requetes.get(0));
-				return "ascenseur " + ascenseur.getNumAsc() + " ouvre les portes";
+				return "ascenseur " + ascenseur.getNumAsc() + " ouvre ses portes";
 			}
 			//Si l'ascenseur est a l'etage demande, on l'arrete.
 			else if (requetes.get(0).getEtageDemande() == ascenseur.getEtage()) {
