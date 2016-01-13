@@ -36,7 +36,7 @@ public class Batiment {
 	
 	/**le {@link ControleurExterne} de ce Batiment.
 	 */
-	private ControleurExterne controleurExt = new ControleurExterne(controleursInt, this.getNbEtages());
+	private ControleurExterne controleurExt;
 	
 	/**le batiment possede une liste de {@link Bouton}
 	 */
@@ -60,6 +60,7 @@ public class Batiment {
 		}
 		
 		listeBoutons.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
+		controleurExt = new ControleurExterne(controleursInt, this.getNbEtages());
 	}
 	
 	/**permet de traiter les {@link Requete} du {@link ControleurInterne}
@@ -100,21 +101,21 @@ public class Batiment {
 	}
 	
 	/** Permet d'obtenir le {@link Batiment#nbAscenseur} contenus dans ce Batiment
-	 * @return le {@link Batiment#nbAscenceur} contenus dans ce Batiment
+	 * @return le {@link Batiment#nbAscenseur} contenus dans ce Batiment
 	 */
 	public int getNbAscenseur () {
 		return nbAscenseur;
 	}
 	
 	/**permet d'obtenir le {@link ControleurExterne#controleurExt}
-	 * @return {@link ControleurExterne#controleurExt}
+	 * @return {@link Batiment#controleurExt}
 	 */
 	public ControleurExterne getControleurExt () {
 		return controleurExt;
 	}
 	
 	/**permet d'obtenir la liste des {@link ControleurInterne#controleurInt} de ce Batiment
-	 * @return {@link ControleurInterne#controleursInt}
+	 * @return {@link Batiment#controleursInt}
 	 */
 	public ArrayList<ControleurInterne> getControleursInterne () {
 		return controleursInt;
