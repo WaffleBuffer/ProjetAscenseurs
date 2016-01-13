@@ -1,6 +1,6 @@
 package Boutons;
 
-/**Definit les BoutonsInterne a l'interieur des {@link Ascenseur}.
+/**Definit les BoutonsInterne a l'interieur des {@link Client.Ascenseur}.
  * @author Thomas
  *
  */

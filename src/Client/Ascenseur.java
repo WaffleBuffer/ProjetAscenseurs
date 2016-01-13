@@ -10,7 +10,7 @@ import Options.GestionnaireOption;
 import Options.IOption;
 import Requetes.RequeteInterne;
 
-/**Description de l'etat de l'Ascenseur. Le traitement des {@link Requete} se fait dans le {@link ControleurInterne} correspondant.
+/**Description de l'etat de l'Ascenseur. Le traitement des {@link Requetes.Requete} se fait dans le {@link ControleurInterne} correspondant.
  * @author Thomas
  */
 public class Ascenseur {

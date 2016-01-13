@@ -8,7 +8,7 @@ import Requetes.Requete;
 import Requetes.RequeteExterne;
 
 /**Controleur correspondant a celui du sujet. Il en existe un par {@link Batiment} et permet de traiter les {@link RequeteExterne}
- * en choisissant quel est le meilleur {@link ControleurInterne} (donc {@link Ascenseur}) pour traiter la demande.
+ * en choisissant quel est le meilleur {@link ControleurInterne} (donc {@link Client.Ascenseur}) pour traiter la demande.
  * @author Thomas
  */
 public class ControleurExterne implements IControleur{
@@ -19,7 +19,7 @@ public class ControleurExterne implements IControleur{
 	 */
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();
 	
-	/**Liste des {@link ControleurInterne} (et donc des {@link Ascenseur}) disponibles.
+	/**Liste des {@link ControleurInterne} (et donc des {@link Client.Ascenseur}) disponibles.
 	 * 
 	 */
 	private ArrayList<ControleurInterne> controleurs;
