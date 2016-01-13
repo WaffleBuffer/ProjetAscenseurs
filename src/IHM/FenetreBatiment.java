@@ -25,6 +25,7 @@ public class FenetreBatiment extends JFrame {
 		//layout de la fenêtre
 		this.setLayout(new GridLayout(1, 2));									//il est associé à la fenetre principale
 		JPanel panelBatiment = new JPanel();
+		panelBatiment.setBorder(BorderFactory.createTitledBorder("Bâtiment"));
 		GridLayout layoutBatiment = new GridLayout(bat.getNbEtages() + 1, 2);
 		panelBatiment.setLayout(layoutBatiment);
 		this.add(panelBatiment);
@@ -53,6 +54,7 @@ public class FenetreBatiment extends JFrame {
 		}
 		
 		JPanel panelInfos = new JPanel();
+		panelInfos.setBorder(BorderFactory.createTitledBorder("Détails ascenseur actuel"));
 		this.add(panelInfos);
 		
 		JLabel labelNumAsc = new JLabel(String.valueOf(panneau.getAscenseurActuel().getNumAsc()), JLabel.CENTER);
