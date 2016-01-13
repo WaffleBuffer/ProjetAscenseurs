@@ -1,7 +1,7 @@
 package Options;
 
 
-/**description de l'option musique une option de {@link IOption}
+/**description de l'OptionMusique une implementation de {@link IOption}
  * @author p14005728
  */
 public class OptionMusique implements IOption {

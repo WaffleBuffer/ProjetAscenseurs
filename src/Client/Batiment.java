@@ -137,12 +137,15 @@ public class Batiment {
 		this.getAscenseur(numAsc).appuyerBouton(numBouton, this.getControleursInterne().get(numAsc - 1));
 	}
 	
-	/**affichage de l'etat de ce Batiment
-	 * @return etat de ce Batiment
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages + "]";
+		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages
+				+ ", nbAscenseur=" + nbAscenseur + ", controleursInt="
+				+ controleursInt + ", controleurExt=" + controleurExt
+				+ ", listeBoutons=" + listeBoutons + "]";
 	} 
 
 }
