@@ -68,7 +68,15 @@ public class Batiment {
 	 */
 	public void traiterControleurs () {
 		for (ControleurInterne i : controleursInt) {
-			System.out.println(i.traiterRequetes());
+			String strResult = i.traiterRequetes();
+			String frame = "";
+			for (int j = 0; j < strResult.length() + 4; ++j) {
+				frame += "=";
+			}
+			System.out.println(frame);
+			System.out.println("| " + strResult + " |");
+			System.out.println(frame);
+			System.out.println("");
 		}
 	}
 	
