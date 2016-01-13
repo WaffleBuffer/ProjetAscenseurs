@@ -8,7 +8,7 @@ import Requetes.Requete;
 import Requetes.RequeteExterne;
 
 /**Controleur correspondant a celui du sujet. Il en existe un par {@link Batiment} et permet de traiter les {@link RequeteExterne}
- * en choisissant quel est le meilleur {@link ControleurInterne} (donc {@link Ascenseur}) pour traiter la demande.
+ * en choisissant quel est le meilleur {@link ControleurInterne} (donc {@link Client.Ascenseur}) pour traiter la demande.
  * @author Thomas
  */
 public class ControleurExterne implements IControleur{
