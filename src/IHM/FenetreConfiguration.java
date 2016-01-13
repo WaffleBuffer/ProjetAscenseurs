@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -77,9 +76,9 @@ public class FenetreConfiguration extends JFrame {
 				Batiment bat = new Batiment(textNomBat.getText(), (Integer) nbEtages.getValue(), (Integer) nbAsc.getValue());
 				Ascenseur asc = new Ascenseur(bat.getNbEtages(), 1);
 				@SuppressWarnings("unused")
-				FenetrePanneau panneau = new FenetrePanneau(bat, bat.getNbAscenseur());
+				FenetreBatiment batiment = new FenetreBatiment(bat, asc);
 				@SuppressWarnings("unused")
-				FenetreBatiment batiment = new FenetreBatiment(bat, asc, panneau);
+				FenetrePanneau panneau = new FenetrePanneau(bat, bat.getNbAscenseur(), batiment);	
 				textNomBat.setText(null);
 				nbEtages.setValue(1);
 				nbAsc.setValue(1);
@@ -88,7 +87,7 @@ public class FenetreConfiguration extends JFrame {
 		this.setTitle("Ajout d'un bâtiment");					//Titre de la fenêtre 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);			//le programme s'arrete quand la fenetre se ferme
 		this.setResizable(false);								//la fenetre de configuration n'a pas besoin d'être redimensionner
-		this.setSize(new Dimension(300, 300));					//taille de la fenêtre fixe
+		this.setSize(new Dimension(250, 300));					//taille de la fenêtre fixe
 		this.setLocationRelativeTo(null);						//la fenêtre apparait au centre de l'écran
 		this.setVisible(true);									//la fenêtre apparaît
 	}
