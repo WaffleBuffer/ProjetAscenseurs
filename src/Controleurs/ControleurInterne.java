@@ -157,4 +157,11 @@ public class ControleurInterne implements IControleur{
 		return "ControleurInterne [ascenseur=" + ascenseur + ", requetes="
 				+ requetes + "]";
 	}
+	
+	/**Obtient {@link #requetes} de ce ControleurInterne
+	 * @return {@link #requetes}
+	 */
+	public ArrayList<Requete> getRequetes() {
+		return requetes;
+	}
 }

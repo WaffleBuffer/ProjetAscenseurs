@@ -197,4 +197,11 @@ public class ControleurExterne implements IControleur{
 	public void addRequete(Requete requete) {
 		requetes.add(requete);
 	}
+	
+	/**Obtient {@link #requetes} de ce ControleurExterne
+	 * @return {@link #requetes}
+	 */
+	public ArrayList<Requete> getRequetes() {
+		return requetes;
+	}
 }
