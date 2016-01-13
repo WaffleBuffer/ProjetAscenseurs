@@ -65,6 +65,9 @@ public class FenetrePanneau extends JFrame{
 						boutonAscenseur.setSelected(false);
 						boutonAscenseur = ascenseur;
 						ascenseurSelectionne = bat.getAscenseur(j);		//et l'ascenseur selectionne devient celui cliqué
+						fenetreBatiment.setAscenseur(ascenseurSelectionne);
+						fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));
+						
 				}});
 		}
 		

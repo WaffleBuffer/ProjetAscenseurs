@@ -30,14 +30,14 @@ public class FenetreBatiment extends JFrame {
 	 *String.valueOf(panneau.getAscenseurActuel().getNumAsc()), JLabel.CENTER
 	 *String.valueOf(panneau.getAscenseurActuel().getEtage()), JLabel.CENTER
 	 */
-	private JLabel labelNumAsc = new JLabel("numéro de l'ascenseur", JLabel.CENTER);
+	private JLabel labelNumAsc = new JLabel("1", JLabel.CENTER);
 	private Ascenseur ascenseur;
-	private JLabel labelEtage = new JLabel("étage de l'ascenseur", JLabel.CENTER);
+	private JLabel labelEtage = new JLabel("0", JLabel.CENTER);
 	private ArrayList<JLabel> listeLabelNbAscenseursParEtage = new ArrayList<JLabel>();
 	
-	public FenetreBatiment (final Batiment bat, final Ascenseur asc) {
+	public FenetreBatiment (final Batiment bat) {
 		
-		ascenseur = asc;
+		ascenseur = bat.getAscenseur(1);
 		
 		//layout de la fenêtre
 		this.setLayout(new GridLayout(1, 2));
@@ -87,14 +87,18 @@ public class FenetreBatiment extends JFrame {
 		 * 					-VERT = arrêté portes ouvertes
 		 * 					-BLEU = en mouvement				
 		 */
-		listeLabelNbAscenseursParEtage.get(bat.getNbEtages() - asc.getEtage()).setBackground(Color.orange);
+		listeLabelNbAscenseursParEtage.get(bat.getNbEtages() - ascenseur.getEtage()).setBackground(Color.orange);
 		
 		JPanel panelInfos = new JPanel();
-		panelInfos.setLayout(new BoxLayout(panelInfos, BoxLayout.PAGE_AXIS));
+		panelInfos.setLayout(new GridLayout(5,1));
 		panelInfos.setBorder(BorderFactory.createTitledBorder("Détails ascenseur actuel"));
 		this.add(panelInfos);
-				
+		
+		JLabel labelTexteNumAsc = new JLabel("Numéro de l'ascenseur :", JLabel.CENTER);
+		JLabel labelTexteEtageAsc = new JLabel("Etage de l'ascenseur :", JLabel.CENTER);
+		panelInfos.add(labelTexteNumAsc);
 		panelInfos.add(labelNumAsc);
+		panelInfos.add(labelTexteEtageAsc);
 		panelInfos.add(labelEtage);
 		JButton boutonSimulation = new JButton("Simuler par étape");
 		panelInfos.add(boutonSimulation);
@@ -103,8 +107,11 @@ public class FenetreBatiment extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				getListeNbAscenseursParEtage().get(asc.getEtage()).setText("test");
-				bat.traiterControleurs();				
+				bat.traiterControleurs();
+				getLabelEtage().setText(String.valueOf(ascenseur.getEtage()));
+				if (ascenseur.getEtage() >= 1)
+					getListeNbAscenseursParEtage().get(bat.getNbEtages() - ascenseur.getEtage() + 1).setBackground(null);
+				getListeNbAscenseursParEtage().get(bat.getNbEtages() - ascenseur.getEtage()).setBackground(Color.blue);
 			}});
 		
 		//reglages de la fenêtre
@@ -136,5 +143,13 @@ public class FenetreBatiment extends JFrame {
 
 	public ArrayList<JLabel> getListeNbAscenseursParEtage() {
 		return listeLabelNbAscenseursParEtage;
+	}
+
+	public JLabel getLabelNumAsc() {
+		return labelNumAsc;
+	}
+
+	public JLabel getLabelEtage() {
+		return labelEtage;
 	}
 }
