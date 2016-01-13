@@ -1,5 +1,7 @@
 package Requetes;
 
+import Client.Constantes;
+
 /** Description generale d'une requete. Le libelle est donne par les sous-classes {@link RequeteInterne} et {@link RequeteExterne}
  * @author Thomas
  *
@@ -54,7 +56,6 @@ public class Requete {
 	 */
 	@Override
 	public String toString() {
-		return "Requete [libelle=" + libelle + ", etageDemande=" + etageDemande
-				+ "]";
+		return "libelle = " + Constantes.toString(libelle) + ", etage Demande = " + etageDemande;
 	}
 }

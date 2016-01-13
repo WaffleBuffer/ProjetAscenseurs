@@ -26,4 +26,18 @@ public abstract class Constantes {
 	 * 
 	 */
 	public static final int DEPLACEMENT = 3;
+	
+	public static String toString (int i) {
+		switch (i) {
+		case 0 :
+			return "Haut";
+		case 1 :
+			return "Bas";
+		case 2 :
+			return "Stop";
+		case 3 :
+			return "Deplacement";
+		}
+		return "Inconnue";
+	}
 }

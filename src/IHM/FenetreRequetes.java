@@ -29,6 +29,7 @@ public class FenetreRequetes extends JFrame{
 	public FenetreRequetes (Batiment batiment) {
 		this.batiment = batiment;
 		requetes.setText("");
+		requetes.setEditable(false);
 		this.setLayout(new GridLayout(1, 2));	//il est associe a la fenetre principale
 		JPanel panelRequete = new JPanel();
 		panelRequete.add(requetes);
@@ -40,24 +41,35 @@ public class FenetreRequetes extends JFrame{
 		this.add(panel);
 		
 		this.setTitle(batiment.getNom());			        	//Titre de la fenetre 
-		this.setResizable(false);								//la fenetre de configuration n'a pas besoin d'etre redimensionner
+		//this.setResizable(false);								//la fenetre n'a pas besoin d'etre redimensionner
 		this.setSize(new Dimension(300, 300));					//taille de la fenetre fixe
 		this.setLocationRelativeTo(null);						//la fenetre apparait au centre de l'ecran
 		this.setVisible(true);									//la fenetre apparaît
 	}
 	
 	public void actualiserText () {
-		requetes.setText(requetes.getText() + "\n");
-		requetes.setText(requetes.getText() + "\n------Requete Externes------\n");
+		String tiretsAffichage = "";
+		String egalesAffichage = "";
+		for (int i = 0; i < this.getSize().width / 11; ++i) {
+			tiretsAffichage += "-";
+			if (0 == i % 3) {
+				egalesAffichage += "=";
+			}
+		}
+		requetes.setText("\n" + tiretsAffichage + "Requetes Externes" + tiretsAffichage + "\n");
 		for (Requete i : batiment.getControleurExt().getRequetes()) {
 			requetes.setText(requetes.getText() + i.toString() + "\n");
 		}
 		
-		requetes.setText(requetes.getText() + "\n------Requete Interne------\n");
+		requetes.setText("\n" + tiretsAffichage + "Requetes Internes" + tiretsAffichage + "\n");
 		for (ControleurInterne i : batiment.getControleursInterne()) {
-			for (Requete j : i.getRequetes()) {
-				requetes.setText(requetes.getText() + j.toString() + "\n");
+			requetes.setText(requetes.getText() + "\n" + egalesAffichage + 
+					"[Ascenseur " + i.getAscenceur().getNumAsc() + "]" + egalesAffichage +"\n");
+			for (Requete j : i.getRequetes()) {		
+				requetes.setText(requetes.getText() + j.toString());
 			}
+			requetes.setText(requetes.getText() + "\n" + egalesAffichage  + egalesAffichage + "=========\n");
 		}
+		
 	}
 }
