@@ -81,6 +81,7 @@ public class ControleurInterne implements IControleur{
 				for (int i = 0; i < requetes.size(); ++i) {
 					if (requetes.get(i).getEtageDemande() == ascenseur.getEtage()) {
 						requetes.remove(i);
+						--i;
 					}
 				}
 				return "ascenseur " + ascenseur.getNumAsc() + " ouvre ses portes";
