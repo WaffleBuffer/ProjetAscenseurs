@@ -19,7 +19,7 @@ public class ControleurExterne implements IControleur{
 	 */
 	private ArrayList<Requete> requetes = new ArrayList<Requete>();
 	
-	/**Liste des {@link ControleurInterne} (et donc des {@link Ascenseur}) disponibles.
+	/**Liste des {@link ControleurInterne} (et donc des {@link Client.Ascenseur}) disponibles.
 	 * 
 	 */
 	private ArrayList<ControleurInterne> controleurs;

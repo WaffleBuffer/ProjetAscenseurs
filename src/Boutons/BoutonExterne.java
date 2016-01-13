@@ -4,7 +4,7 @@ import Controleurs.IControleur;
 import Requetes.Requete;
 import Requetes.RequeteExterne;
 
-/**Definit les BoutonExterne qui sont a chaque etage des {@link Batiment}
+/**Definit les BoutonExterne qui sont a chaque etage des {@link Client.Batiment}
  * @author Thomas
  *
  */

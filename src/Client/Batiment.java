@@ -8,6 +8,7 @@ import Boutons.BoutonExterne;
 import Boutons.BoutonHaut;
 import Controleurs.ControleurExterne;
 import Controleurs.ControleurInterne;
+import Requetes.Requete;
 
 /**Contient les principales informations: les {@link ControleurInterne} (et donc les {@link Ascenseur})
  * et le {@link ControleurExterne} correspondant a ce Batiment.
@@ -37,7 +38,7 @@ public class Batiment {
 	 */
 	private ControleurExterne controleurExt = new ControleurExterne(controleursInt, this.getNbEtages());
 	
-	/**le batiment possede une liste de bouton
+	/**le batiment possede une liste de {@link Bouton}
 	 */
 	private ArrayList<BoutonExterne> listeBoutons = new ArrayList<BoutonExterne>();
 	
@@ -61,7 +62,7 @@ public class Batiment {
 		listeBoutons.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
 	}
 	
-	/**permet de traiter les requetes du {@link ControleurInterne}
+	/**permet de traiter les {@link Requete} du {@link ControleurInterne}
 	 */
 	public void traiterControleurs () {
 		for (ControleurInterne i : controleursInt) {
@@ -105,7 +106,7 @@ public class Batiment {
 		return nbAscenseur;
 	}
 	
-	/**permet d'obtenir le {@link CountroleurExterne#controleurExt}
+	/**permet d'obtenir le {@link ControleurExterne#controleurExt}
 	 * @return {@link ControleurExterne#controleurExt}
 	 */
 	public ControleurExterne getControleurExt () {
@@ -127,14 +128,15 @@ public class Batiment {
 	}
 	
 	/**Appuie sur le {@link Bouton} d'un {@link Ascenseur} de ce Batiment
-	 * @param numAsc numero de l'{@link Ascenseur) concerne
-	 * @param numBouton numero du {@link Bouton} de {@link Ascenseur) 
+	 * @param numAsc numero de l'{@link Ascenseur} concerne
+	 * @param numBouton numero du {@link Bouton} de {@link Ascenseur} 
 	 */
 	public void appuyerBoutonAscenseur (int numAsc, int numBouton) {
 		this.getAscenseur(numAsc).appuyerBouton(numBouton, this.getControleursInterne().get(numAsc - 1));
 	}
 	
 	/**affichage de l'etat de ce Batiment
+	 * @return etat de ce Batiment
 	 */
 	@Override
 	public String toString() {

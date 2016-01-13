@@ -6,7 +6,7 @@ import Controleurs.IControleur;
 import Requetes.Requete;
 import Requetes.RequeteInterne;
 
-/**Bouton permettant de stopper l'{@link Ascenseur}
+/**Bouton permettant de stopper l'{@link Client.Ascenseur}
  * @author Thomas
  */
 public class BoutonStop extends BoutonInterne{
