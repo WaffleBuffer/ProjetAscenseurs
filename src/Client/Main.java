@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import Boutons.BoutonExterne;
 import Boutons.BoutonInterne;
 import IHM.FenetreConfiguration;
+import IHM.FenetreRequetes;
 import Options.OptionMusique;
 
 public class Main {
@@ -62,6 +63,7 @@ public class Main {
 //			System.out.println(batim.traiterControleurs());
 //			System.out.println("----------------fin d'Iteration----------------\n");
 //		}
+		FenetreRequetes vueRequetes = new FenetreRequetes();
 		
 	}
 
