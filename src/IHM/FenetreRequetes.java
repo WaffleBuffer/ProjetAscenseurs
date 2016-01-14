@@ -76,22 +76,22 @@ public class FenetreRequetes extends JFrame{
 			}
 		}
 		//if (0 != batiment.getControleurExt().getRequetes().size()) {
-			requetes.setText("\n" + tiretsAffichage + "External queries" + tiretsAffichage + "\n");
+			requetes.append("\n" + tiretsAffichage + "External queries" + tiretsAffichage + "\n");
 			for (Requete i : batiment.getControleurExt().getRequetes()) {
-				requetes.setText(requetes.getText() + i.toString() + "\n");
+				requetes.append(i.toString() + "\n");
 			}
 		//}
 		
-		requetes.setText(requetes.getText() + "\n" + tiretsAffichage + "Internal queries" + tiretsAffichage + "\n");
+		requetes.append("\n" + tiretsAffichage + "Internal queries" + tiretsAffichage + "\n");
 		for (ControleurInterne i : batiment.getControleursInterne()) {
 				if (0 != i.getNumberOfRequete()) {
-					requetes.setText(requetes.getText() + "\n====" + egalesAffichage + 
+					requetes.append("\n====" + egalesAffichage + 
 							"[Lift " + i.getAscenceur().getNumAsc() + "]" + egalesAffichage +"====\n");
 					for (Requete j : i.getRequetes()) {		
-						requetes.setText(requetes.getText() + j.toString());
+						requetes.append(j.toString());
 					}
 	
-					requetes.setText(requetes.getText() + "\n====" + egalesAffichage  + egalesAffichage + "========\n");
+					requetes.append("\n====" + egalesAffichage  + egalesAffichage + "========\n");
 				}
 		}
 		
