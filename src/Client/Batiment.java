@@ -89,7 +89,7 @@ public class Batiment {
 		if (hautOuBas == Constantes.HAUT)
 			listeBoutonsHaut.get(numEtage).appuyer(controleurExt);
 		else if (hautOuBas == Constantes.BAS)
-			listeBoutonsBas.get(numEtage).appuyer(controleurExt);
+			listeBoutonsBas.get(numEtage-1).appuyer(controleurExt);
 	}
 	
 	/**permet d'obtenir les {@link Ascenseur} de ce Batiment
