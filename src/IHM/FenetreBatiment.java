@@ -107,7 +107,9 @@ public class FenetreBatiment extends JFrame {
 				getLabelEtage().setText(String.valueOf(ascenseurSelectionne.getEtage()));	//actualise l'étage actuel de l'ascenseur
 				getLabelCourant().setBackground(null);
 				setLabelCourant(getListeNbAscenseursParEtage().get(bat.getNbEtages() - ascenseurSelectionne.getEtage()));
-				if (ascenseurSelectionne.isEstEnMouvement())
+				if (ascenseurSelectionne.estBloquer())
+					getLabelCourant().setBackground(Color.red);
+				else if (ascenseurSelectionne.isEstEnMouvement())
 					getLabelCourant().setBackground(Color.blue);
 				else if (!ascenseurSelectionne.isPortesOuvertes())
 					getLabelCourant().setBackground(Color.orange);

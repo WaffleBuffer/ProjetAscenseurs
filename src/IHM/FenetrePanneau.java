@@ -5,10 +5,12 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TreeMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
@@ -28,6 +30,7 @@ public class FenetrePanneau extends JFrame{
 	}
 
 	private JToggleButton boutonAscenseurSelectionne;
+	private TreeMap<Ascenseur, JLabel> AscenseurAvecSonLabelActuel = new TreeMap<Ascenseur, JLabel>(); 
 	
 	private static final long serialVersionUID = 1L;
 
@@ -62,13 +65,14 @@ public class FenetrePanneau extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if (ascenseurSelectionne != bat.getAscenseur(j)) {
-						boutonAscenseurSelectionne.setSelected(false);						//le dernier sélectionné ne l'est plus
-						boutonAscenseurSelectionne = ascenseur;							//le bouton sélectionné devient le nouveau cliqué
+						boutonAscenseurSelectionne.setSelected(false);			//le dernier sélectionné ne l'est plus
+						boutonAscenseurSelectionne = ascenseur;					//le bouton sélectionné devient le nouveau cliqué
 						ascenseurSelectionne = bat.getAscenseur(j);				//et l'ascenseur selectionne devient celui cliqué
 						fenetreBatiment.setAscenseur(ascenseurSelectionne);		//idem pour la fenetreBatiment
 						fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));	//actualisation du numéro du nouvel ascenseur
-						fenetreBatiment.getListeLabelNbAscenseursParEtage().get(bat.getNbEtages() - 
-						ascenseurSelectionne.getEtage()).setBackground(Color.orange);
+						//fenetreBatiment.getListeLabelNbAscenseursParEtage().get(bat.getNbEtages() - 
+						//ascenseurSelectionne.getEtage()).setBackground(Color.orange);
+						AscenseurAvecSonLabelActuel.get(ascenseurSelectionne).setBackground(Color.orange);
 						fenetreBatiment.getLabelCourant().setBackground(null);
 					}
 					else
@@ -95,11 +99,25 @@ public class FenetrePanneau extends JFrame{
 			if (i == bat.getNbEtages() + 1)
 			{
 				JButton boutonStop = new JButton("STOP");
+				boutonStop.setBackground(Color.red);
+				boutonStop.setForeground(Color.white);
 				panelPanneau.add(boutonStop);
+				boutonStop.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						if (!ascenseurSelectionne.estBloquer())
+							ascenseurSelectionne.bloquer();
+						else
+							ascenseurSelectionne.debloque();
+						
+					}});
 			}
 			else
 			{
 				JButton boutonDestination = new JButton(DenominationEtages.nommerEtage(i));
+				boutonDestination.setBackground(Color.white);
+				boutonDestination.setForeground(Color.black);
 				panelPanneau.add(boutonDestination);
 				boutonDestination.addActionListener(new ActionListener() {
 	
