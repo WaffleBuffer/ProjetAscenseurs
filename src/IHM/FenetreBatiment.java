@@ -47,7 +47,7 @@ public class FenetreBatiment extends JFrame {
 		panelPrincipalBatiment.add(scrollBatiment);		//ajout du jscollpane au panelprincipal de la partie batiment
 		
 		for (int i = 0; i <= bat.getNbEtages(); ++i){
-			JLabel labelEtage = new JLabel(DenominationEtages.nommerEtage(bat.getNbEtages() - i), JLabel.CENTER);
+			JLabel labelEtage = new JLabel(FonctionsUtiles.nommerEtage(bat.getNbEtages() - i), JLabel.CENTER);
 			//un label par étage pour le nommer à l'aide de la fonction static prévue pour (le texte est centré)
 			
 			panelBatiment.add(labelEtage);				//ajout du label dans le panel representant le batiment
@@ -107,14 +107,7 @@ public class FenetreBatiment extends JFrame {
 				getLabelEtage().setText(String.valueOf(ascenseurSelectionne.getEtage()));	//actualise l'étage actuel de l'ascenseur
 				getLabelCourant().setBackground(null);
 				setLabelCourant(getListeNbAscenseursParEtage().get(bat.getNbEtages() - ascenseurSelectionne.getEtage()));
-				if (ascenseurSelectionne.estBloquer())
-					getLabelCourant().setBackground(Color.red);
-				else if (ascenseurSelectionne.isEstEnMouvement())
-					getLabelCourant().setBackground(Color.blue);
-				else if (!ascenseurSelectionne.isPortesOuvertes())
-					getLabelCourant().setBackground(Color.orange);
-				else 
-					getLabelCourant().setBackground(Color.green);
+				FonctionsUtiles.afficherEtatAscenseur(ascenseurSelectionne, getLabelCourant());
 				fenetreRequetes.actualiserText();
 			}});
 		

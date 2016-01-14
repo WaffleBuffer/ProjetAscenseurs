@@ -115,7 +115,7 @@ public class FenetrePanneau extends JFrame{
 			}
 			else
 			{
-				JButton boutonDestination = new JButton(DenominationEtages.nommerEtage(i));
+				JButton boutonDestination = new JButton(FonctionsUtiles.nommerEtage(i));
 				boutonDestination.setBackground(Color.white);
 				boutonDestination.setForeground(Color.black);
 				panelPanneau.add(boutonDestination);
