@@ -30,13 +30,13 @@ public abstract class Constantes {
 	public static String toString (int i) {
 		switch (i) {
 		case 0 :
-			return "Haut";
+			return "Up";
 		case 1 :
-			return "Bas";
+			return "Down";
 		case 2 :
 			return "Stop";
 		case 3 :
-			return "Deplacement";
+			return "Movement";
 		}
 		return "Inconnue";
 	}
