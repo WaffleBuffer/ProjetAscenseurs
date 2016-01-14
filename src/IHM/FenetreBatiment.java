@@ -33,7 +33,7 @@ public class FenetreBatiment extends JFrame {
 	private Ascenseur ascenseurSelectionne;
 	private	JLabel labelCourant;
 	
-	public FenetreBatiment (final Batiment bat) {
+	public FenetreBatiment (final Batiment bat, final FenetreRequetes fenetreRequetes) {
 		
 		ascenseurSelectionne = bat.getAscenseur(1);
 		
@@ -111,6 +111,7 @@ public class FenetreBatiment extends JFrame {
 				if (ascenseurSelectionne.getEtage() >= 1)
 					getListeNbAscenseursParEtage().get(bat.getNbEtages() - ascenseurSelectionne.getEtage() + 1).setBackground(null);
 				getListeNbAscenseursParEtage().get(bat.getNbEtages() - ascenseurSelectionne.getEtage()).setBackground(Color.blue);
+				fenetreRequetes.actualiserText();
 			}});
 		
 		//reglages de la fenêtre

@@ -74,10 +74,10 @@ public class FenetreConfiguration extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Batiment batiment = new Batiment(texteNomBatiment.getText(), (Integer) nbEtages.getValue(), (Integer) nbAscenseurs.getValue());
-				FenetreBatiment fenetreBatiment = new FenetreBatiment(batiment);
+				FenetreRequetes fenetreRequetes = new FenetreRequetes(batiment);
+				FenetreBatiment fenetreBatiment = new FenetreBatiment(batiment, fenetreRequetes);
 				@SuppressWarnings("unused")
 				FenetrePanneau fenetrePanneau = new FenetrePanneau(batiment, batiment.getNbAscenseur(), fenetreBatiment);	
-				FenetreRequetes fenetreRequetes = new FenetreRequetes(batiment);
 				texteNomBatiment.setText(null);
 				nbEtages.setValue(1);
 				nbAscenseurs.setValue(1);
