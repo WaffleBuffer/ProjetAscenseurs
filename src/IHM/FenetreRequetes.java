@@ -18,17 +18,28 @@ import Client.Batiment;
 import Controleurs.ControleurInterne;
 import Requetes.Requete;
 
+/**Vue de la liste des {@link Requete} a traiter par le systeme concernant le {{@link #batiment} de cette FenetreRequetes
+ * @author dark1wador
+ *
+ */
 public class FenetreRequetes extends JFrame{
 
+	/**{@link JTextArea} dans laquelle s'ecrie la liste des {@link Requete}
+	 */
 	private JTextArea requetes = new JTextArea("Liste des requetes:");
 	
+	/**{@link Batiment} correspondant a cette vue
+	 */
 	private Batiment batiment;
 	
-	/**
-	 * 
+	/**Vient de {@link JFrame}
+	 * @see JFrame
 	 */
 	private static final long serialVersionUID = 4236819230726511089L;
 
+	/**Construit une FenetreRequetes correspondant a un {@link Batiment}
+	 * @param batiment le {@link Batiment} correspondant a cette FenetreRequetes
+	 */
 	public FenetreRequetes (Batiment batiment) {
 		this.batiment = batiment;				// le Batiment associe a cette fenetre
 		requetes.setText("");					// initialisation du JTextArea
@@ -65,30 +76,35 @@ public class FenetreRequetes extends JFrame{
 		this.setVisible(true);									//la fenetre apparaît
 	}
 	
+	/**Actualise le text dans le {@link #requetes} de cette FenetreRequetes
+	 */
 	public void actualiserText () {
+		// Reinitialisation du JTextArea
 		requetes.setText("");
-		String tiretsAffichage = "";
-		String egalesAffichage = "";
+		String tiretsAffichage = "";	// variable d'affichage
+		String egalesAffichage = "";	// variable d'affichage
+		// configuration des variables d'affichage sela la taille de la JFrame
 		for (int i = 0; i < this.getSize().width / 11; ++i) {
 			tiretsAffichage += "-";
 			if (0 == i % 2) {
 				egalesAffichage += "=";
 			}
 		}
-		//if (0 != batiment.getControleurExt().getRequetes().size()) {
-			requetes.append("\n" + tiretsAffichage + "External queries" + tiretsAffichage + "\n");
-			for (Requete i : batiment.getControleurExt().getRequetes()) {
-				requetes.append(i.toString() + "\n");
-			}
-		//}
+		// Affichage des RequeteExterne du Batiment
+		requetes.append("\n" + tiretsAffichage + "External queries" + tiretsAffichage + "\n");
+		for (Requete i : batiment.getControleurExt().getRequetes()) {
+			requetes.append(i.toString() + "\n");
+		}
 		
+		// Affichage des RequeteInterne
 		requetes.append("\n" + tiretsAffichage + "Internal queries" + tiretsAffichage + "\n");
+		//Parcour des ControleurInterne du Batiment
 		for (ControleurInterne i : batiment.getControleursInterne()) {
 				if (0 != i.getNumberOfRequete()) {
 					requetes.append("\n====" + egalesAffichage + 
 							"[Lift " + i.getAscenceur().getNumAsc() + "]" + egalesAffichage +"====\n");
 					for (Requete j : i.getRequetes()) {		
-						requetes.append(j.toString());
+						requetes.append("\n" + j.toString());
 					}
 	
 					requetes.append("\n====" + egalesAffichage  + egalesAffichage + "========\n");
