@@ -69,8 +69,8 @@ public class ControleurInterne implements IControleur{
 				ascenseur.fermerPortes();
 				return "ascenseur " + ascenseur.getNumAsc() + " ferme ses portes";
 			}
-			//Si l'ascenseur n'est pas arrive, on le met l'ascenseur en mouvement
-			else if (!ascenseur.isEstEnMouvement() && !(requetes.get(0).getEtageDemande() == ascenseur.getEtage())) {
+			//Si l'ascenseur n'est pas arrive, on le met l'ascenseur en mouvement.
+			else if (!ascenseur.isEstEnMouvement() && !isEtageDemande()) {
 				ascenseur.setEstEnMouvement(true);				
 				return "Ascenceur " + ascenseur.getNumAsc() + " se met en mouvement de l'etage : " + ascenseur.getEtage() + " a l'etage " 
 				+ requetes.get(0).getEtageDemande();
@@ -86,8 +86,8 @@ public class ControleurInterne implements IControleur{
 				}
 				return "ascenseur " + ascenseur.getNumAsc() + " ouvre ses portes";
 			}
-			//Si l'ascenseur est a l'etage demande, on l'arrete.
-			else if (requetes.get(0).getEtageDemande() == ascenseur.getEtage()) {
+			//Si l'ascenseur est a un etage demande, on l'arrete.
+			else if (isEtageDemande()) {
 				ascenseur.setEstEnMouvement(false);
 				return "ascenseur " + ascenseur.getNumAsc() + " s'arrete a l'etage " + ascenseur.getEtage();
 			}
@@ -104,6 +104,15 @@ public class ControleurInterne implements IControleur{
 		}
 		//Si on arrive ici, alors c'est une requete non prise en charge.
 		return "Requete non reconnue";
+	}
+	
+	private Boolean isEtageDemande () {
+		for (Requete i : requetes) {
+			if (i.getEtageDemande() == this.ascenseur.getEtage()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**Ajout d'une {@link Requete} specifique a {@link ControleurInterne#requetes}
