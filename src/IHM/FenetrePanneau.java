@@ -27,7 +27,7 @@ public class FenetrePanneau extends JFrame{
 		return ascenseurSelectionne;
 	}
 
-	private JToggleButton boutonAscenseur;
+	private JToggleButton boutonAscenseurSelectionne;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -54,24 +54,25 @@ public class FenetrePanneau extends JFrame{
 			final JToggleButton ascenseur = new JToggleButton("Elevator n°" + i);
 			panelAscenseurs.add(ascenseur);
 			if (i == 1){
-				boutonAscenseur = ascenseur;
-				boutonAscenseur.setSelected(true);
+				boutonAscenseurSelectionne = ascenseur;
+				boutonAscenseurSelectionne.setSelected(true);
 			}
 			ascenseur.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if (ascenseurSelectionne != bat.getAscenseur(j)) {
-						boutonAscenseur.setSelected(false);
-						boutonAscenseur = ascenseur;
-						ascenseurSelectionne = bat.getAscenseur(j);		//et l'ascenseur selectionne devient celui cliqué
-						fenetreBatiment.setAscenseur(ascenseurSelectionne);
-						fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));
+						boutonAscenseurSelectionne.setSelected(false);						//le dernier sélectionné ne l'est plus
+						boutonAscenseurSelectionne = ascenseur;							//le bouton sélectionné devient le nouveau cliqué
+						ascenseurSelectionne = bat.getAscenseur(j);				//et l'ascenseur selectionne devient celui cliqué
+						fenetreBatiment.setAscenseur(ascenseurSelectionne);		//idem pour la fenetreBatiment
+						fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));	//actualisation du numéro du nouvel ascenseur
 						fenetreBatiment.getListeLabelNbAscenseursParEtage().get(bat.getNbEtages() - 
-								ascenseurSelectionne.getEtage()).setBackground(Color.blue);
+						ascenseurSelectionne.getEtage()).setBackground(Color.orange);
+						fenetreBatiment.getLabelCourant().setBackground(null);
 					}
 					else
-						boutonAscenseur.setSelected(true);
+						boutonAscenseurSelectionne.setSelected(true);
 				}});
 		}
 		

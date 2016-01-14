@@ -83,7 +83,7 @@ public class FenetreBatiment extends JFrame {
 		 */
 		labelCourant = listeLabelNbAscenseursParEtage.get(bat.getNbEtages() - ascenseurSelectionne.getEtage());
 		//on sauvegarde le dernier label qui à été modifié en commençant par le rez-de-chaussée car les ascenseurs apparaissent là lors de leur création
-		labelCourant.setBackground(Color.GREEN);	//lors de la création l'ascenseur est à l'arrêt portes ouvertes.
+		labelCourant.setBackground(Color.orange);	//lors de la création l'ascenseur est à l'arrêt portes ouvertes.
 		
 		JPanel panelInfos = new JPanel();			//panel qui contiendra les détails sur l'asenseur selectionné
 		panelInfos.setLayout(new GridLayout(5,1));	//son layout est composé de 5 lignes et une colonne (alignés vertcalement)
@@ -107,13 +107,18 @@ public class FenetreBatiment extends JFrame {
 				getLabelEtage().setText(String.valueOf(ascenseurSelectionne.getEtage()));	//actualise l'étage actuel de l'ascenseur
 				getLabelCourant().setBackground(null);
 				setLabelCourant(getListeNbAscenseursParEtage().get(bat.getNbEtages() - ascenseurSelectionne.getEtage()));
-				getLabelCourant().setBackground(Color.blue);
+				if (ascenseurSelectionne.isEstEnMouvement())
+					getLabelCourant().setBackground(Color.blue);
+				else if (!ascenseurSelectionne.isPortesOuvertes())
+					getLabelCourant().setBackground(Color.orange);
+				else 
+					getLabelCourant().setBackground(Color.green);
 				fenetreRequetes.actualiserText();
 			}});
 		
 		//reglages de la fenêtre
 		this.setTitle(bat.getNom() + " (sectionnal view [" + bat.getNbEtages() + " floors])");	//Titre de la fenêtre 
-		this.setMinimumSize(new Dimension(560, 500));									//taille de la fenêtre fixe
+		this.setMinimumSize(new Dimension(590, 500));									//taille de la fenêtre fixe
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int)dimension.getHeight();
 		int width  = (int)dimension.getWidth();
