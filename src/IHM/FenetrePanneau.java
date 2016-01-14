@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
@@ -115,7 +114,6 @@ public class FenetrePanneau extends JFrame{
 		this.setMinimumSize(new Dimension(300, 500));
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int)dimension.getHeight();
-		int width  = (int)dimension.getWidth();
 		this.setLocation(0, height/2 - this.getHeight()/2);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setVisible(true);												//la fenêtre apparaît
