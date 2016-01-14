@@ -42,6 +42,8 @@ public class ControleurInterne implements IControleur{
 	public String traiterRequetes(){
 		//Si le controleur n'a pas de requete a traiter alors on ignore le traitement
 		if (0 == requetes.size()) {
+			if (ascenseur.isPortesOuvertes())
+				ascenseur.fermerPortes();
 			return "ascenseur " + ascenseur.getNumAsc() + " n'a pas de requete a traiter";
 		}
 		//Si le bouton stop a ete appuyer, et que l'ascenseur est debloque, alors on le bloque. Sinon on le debloque
