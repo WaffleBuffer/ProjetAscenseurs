@@ -156,6 +156,9 @@ public class FenetreBatiment extends JFrame {
 				setLabelCourant(getListeNbAscenseursParEtage().get(bat.getNbEtages() - ascenseurSelectionne.getEtage()));
 				FonctionsUtiles.afficherEtatAscenseur(ascenseurSelectionne, getLabelCourant());
 				fenetreRequetes.actualiserText();
+				for (int i = 0; i <= bat.getNbEtages(); ++i){
+					getListeLabelNbAscenseursParEtage().get(bat.getNbEtages() - i).setText(String.valueOf(FonctionsUtiles.NbAscenseursParEtage(bat, i)));
+				}
 			}});
 		
 		//reglages de la fenêtre

@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 
 import Client.Ascenseur;
+import Client.Batiment;
 
 public class FonctionsUtiles {
 
@@ -30,5 +31,20 @@ public class FonctionsUtiles {
 			label.setBackground(Color.orange);
 		else 
 			label.setBackground(Color.green);
+	}
+	
+	public static int NbAscenseursParEtage(Batiment bat, int etage){
+		int CptAscenseurs = 0;
+		for (int i = 1; i <= bat.getNbAscenseur(); ++i){
+			if (bat.getAscenseur(i).getEtage() == etage){
+				for (int j = 1; j <= bat.getNbEtages(); ++j){
+					if (bat.getAscenseur(j).getEtage() == etage)
+						++CptAscenseurs;
+				}
+				return CptAscenseurs;
+			}
+		}
+		return CptAscenseurs;
+		
 	}
 }
