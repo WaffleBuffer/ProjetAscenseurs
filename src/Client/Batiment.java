@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Boutons.Bouton;
 import Boutons.BoutonBas;
-import Boutons.BoutonExterne;
 import Boutons.BoutonHaut;
 import Controleurs.ControleurExterne;
 import Controleurs.ControleurInterne;
