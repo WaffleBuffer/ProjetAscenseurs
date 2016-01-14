@@ -54,7 +54,10 @@ public class FenetreBatiment extends JFrame {
 			
 			panelBatiment.add(labelEtage);				//ajout du label dans le panel representant le batiment
 			
-			JLabel labelNbAscenseursParEtage = new JLabel("yolo", JLabel.CENTER);	//ce label représente le nombre d'ascenseur présent à cet étage
+			JLabel labelNbAscenseursParEtage = new JLabel("0", JLabel.CENTER);
+			if (i == bat.getNbEtages())
+				labelNbAscenseursParEtage.setText(String.valueOf(bat.getNbAscenseur()));	//ce label représente le nombre d'ascenseur présent à cet étage
+
 			labelNbAscenseursParEtage.setOpaque(true);	//nécessaire pour colorer le fond du label
 			labelNbAscenseursParEtage.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));	//créer l'illusion du batiment vue en coupe avec des bordures noires 
 			listeLabelNbAscenseursParEtage.add(labelNbAscenseursParEtage);	//ajout de ce label bien paramétré à une liste dans l'ordre pour pouvoir le retrouver
@@ -111,22 +114,26 @@ public class FenetreBatiment extends JFrame {
 		panelInfos.add(labelTexteLegende);
 		
 		JPanel panelLegende = new JPanel();
-		panelLegende.setLayout(new GridLayout(1, 4));
+		panelLegende.setLayout(new GridLayout(1, 4, 2, 0));
 		
 		JLabel labelRouge = new JLabel("Blocked", JLabel.CENTER);
 		labelRouge.setOpaque(true);
+		labelRouge.setBorder(BorderFactory.createLineBorder(Color.black));
 		labelRouge.setForeground(Color.white);
 		labelRouge.setBackground(Color.red);
 		JLabel labelOrange = new JLabel("Stopped", JLabel.CENTER);
 		labelOrange.setOpaque(true);
+		labelOrange.setBorder(BorderFactory.createLineBorder(Color.black));
 		labelOrange.setForeground(Color.white);
 		labelOrange.setBackground(Color.orange);
 		JLabel labelBleu = new JLabel("Move", JLabel.CENTER);
 		labelBleu.setOpaque(true);
+		labelBleu.setBorder(BorderFactory.createLineBorder(Color.black));
 		labelBleu.setForeground(Color.white);
 		labelBleu.setBackground(Color.blue);
 		JLabel labelVert = new JLabel("Open doors", JLabel.CENTER);
 		labelVert.setOpaque(true);
+		labelVert.setBorder(BorderFactory.createLineBorder(Color.black));
 		labelVert.setForeground(Color.white);
 		labelVert.setBackground(Color.green);
 		
@@ -163,7 +170,7 @@ public class FenetreBatiment extends JFrame {
 		
 		//reglages de la fenêtre
 		this.setTitle(bat.getNom() + " (sectionnal view [" + bat.getNbEtages() + " floors])");	
-		this.setMinimumSize(new Dimension(700, 550));										
+		this.setMinimumSize(new Dimension(720, 550));										
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int)dimension.getHeight();
 		int width  = (int)dimension.getWidth();
