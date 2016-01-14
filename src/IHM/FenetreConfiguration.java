@@ -76,7 +76,7 @@ public class FenetreConfiguration extends JFrame {
 				FenetreRequetes fenetreRequetes = new FenetreRequetes(batiment);
 				FenetreBatiment fenetreBatiment = new FenetreBatiment(batiment, fenetreRequetes);
 				@SuppressWarnings("unused")
-				FenetrePanneau fenetrePanneau = new FenetrePanneau(batiment, batiment.getNbAscenseur(), fenetreBatiment);	
+				FenetrePanneau fenetrePanneau = new FenetrePanneau(batiment, batiment.getNbAscenseur(), fenetreBatiment, fenetreRequetes);	
 				texteNomBatiment.setText(null);
 				nbEtages.setValue(1);
 				nbAscenseurs.setValue(1);

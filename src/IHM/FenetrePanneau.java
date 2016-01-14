@@ -34,7 +34,8 @@ public class FenetrePanneau extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
-	public FenetrePanneau (final Batiment bat, int nbAsc, final FenetreBatiment fenetreBatiment){
+	public FenetrePanneau (final Batiment bat, int nbAsc, final FenetreBatiment fenetreBatiment, 
+			final FenetreRequetes fenetreRequetes){
 		GridLayout layoutPrincipal = new GridLayout(2, 1);		//création layout principal de la fenetre
 		layoutPrincipal.setVgap(20);							//ajout margin vertical entre éléments du layout
 		this.setLayout(layoutPrincipal);						//associationd du layout à la fenetre
@@ -124,7 +125,7 @@ public class FenetrePanneau extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						bat.appuyerBoutonAscenseur(ascenseurSelectionne.getNumAsc(), j);
-						
+						fenetreRequetes.actualiserText();
 					}});
 			}
 		}
