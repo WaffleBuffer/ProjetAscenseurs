@@ -56,6 +56,6 @@ public class Requete {
 	 */
 	@Override
 	public String toString() {
-		return "libelle = " + Constantes.toString(libelle) + ", etage Demande = " + etageDemande;
+		return "type = " + Constantes.toString(libelle) + ", floor asked = " + etageDemande;
 	}
 }
