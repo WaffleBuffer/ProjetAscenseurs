@@ -106,6 +106,10 @@ public class ControleurInterne implements IControleur{
 		return "Requete non reconnue";
 	}
 	
+	/**Verifie si l'une des {@link Requete} correspond a l'etage courrant de l'{@link Ascenseur} de ce ControleurInterne.
+	 * Utilise dans {@link #traiterRequetes()}.
+	 * @return true si l'une des {@link Requete} correspond a l'etage courrant de l'{@link Ascenseur}, false sinon
+	 */
 	private Boolean isEtageDemande () {
 		for (Requete i : requetes) {
 			if (i.getEtageDemande() == this.ascenseur.getEtage()) {
