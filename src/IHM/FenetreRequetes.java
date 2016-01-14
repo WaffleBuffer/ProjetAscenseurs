@@ -58,19 +58,24 @@ public class FenetreRequetes extends JFrame{
 				egalesAffichage += "=";
 			}
 		}
-		requetes.setText("\n" + tiretsAffichage + "Requetes Externes" + tiretsAffichage + "\n");
-		for (Requete i : batiment.getControleurExt().getRequetes()) {
-			requetes.setText(requetes.getText() + i.toString() + "\n");
+		if (0 != batiment.getControleurExt().getRequetes().size()) {
+			requetes.setText("\n" + tiretsAffichage + "External queries" + tiretsAffichage + "\n");
+			for (Requete i : batiment.getControleurExt().getRequetes()) {
+				requetes.setText(requetes.getText() + i.toString() + "\n");
+			}
 		}
 		
-		requetes.setText("\n" + tiretsAffichage + "Requetes Internes" + tiretsAffichage + "\n");
+		requetes.setText(requetes.getText() + "\n" + tiretsAffichage + "Internal queries" + tiretsAffichage + "\n");
 		for (ControleurInterne i : batiment.getControleursInterne()) {
-			requetes.setText(requetes.getText() + "\n" + egalesAffichage + 
-					"[Ascenseur " + i.getAscenceur().getNumAsc() + "]" + egalesAffichage +"\n");
-			for (Requete j : i.getRequetes()) {		
-				requetes.setText(requetes.getText() + j.toString());
-			}
-			requetes.setText(requetes.getText() + "\n" + egalesAffichage  + egalesAffichage + "=========\n");
+				if (0 != i.getNumberOfRequete()) {
+				requetes.setText(requetes.getText() + "\n" + egalesAffichage + 
+						"[Lift " + i.getAscenceur().getNumAsc() + "]" + egalesAffichage +"\n");
+				for (Requete j : i.getRequetes()) {		
+					requetes.setText(requetes.getText() + j.toString());
+				}
+
+				requetes.setText(requetes.getText() + "\n" + egalesAffichage  + egalesAffichage + "=======\n");
+				}
 		}
 		
 	}
