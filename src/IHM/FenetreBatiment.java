@@ -13,8 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import Boutons.BoutonBas;
+import Boutons.BoutonHaut;
 import Client.Ascenseur;
 import Client.Batiment;
+import Client.Constantes;
 
 public class FenetreBatiment extends JFrame {
 
@@ -47,6 +50,7 @@ public class FenetreBatiment extends JFrame {
 		panelPrincipalBatiment.add(scrollBatiment);		//ajout du jscollpane au panelprincipal de la partie batiment
 		
 		for (int i = 0; i <= bat.getNbEtages(); ++i){
+			final int j = i;
 			JLabel labelEtage = new JLabel(FonctionsUtiles.nommerEtage(bat.getNbEtages() - i), JLabel.CENTER);
 			//un label par étage pour le nommer à l'aide de la fonction static prévue pour (le texte est centré)
 			
@@ -60,7 +64,22 @@ public class FenetreBatiment extends JFrame {
 			
 			JPanel panelBoutons = new JPanel();			//création du panel pour les boutons haut et bas
 			JButton boutonHaut = new JButton("Up");		//création du bouton haut
+			
+			boutonHaut.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					bat.appuyerBoutonEtage(bat.getNbEtages() - j, Constantes.HAUT);
+					fenetreRequetes.actualiserText();
+				}});
 			JButton boutonBas = new JButton("Down");	//création du bouton bas
+			boutonBas.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					bat.appuyerBoutonEtage(bat.getNbEtages() - j - 1, Constantes.BAS);
+					fenetreRequetes.actualiserText();
+				}});
 			panelBoutons.setLayout(new GridLayout(2, 1)); 	//ce panel utilise un layout à deux lignes et une colonne
 			panelBatiment.add(panelBoutons);	//ajout du panel des boutons à celui du batiment 
 			if (i == 0){						//il n'y a pas de bouton haut au dernier étage
@@ -103,6 +122,7 @@ public class FenetreBatiment extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				bat.getControleurExt().traiterRequetes();
 				bat.traiterControleurs();	//les requetes en attente sont traiter dans l'ordre de priorité
 				getLabelEtage().setText(String.valueOf(ascenseurSelectionne.getEtage()));	//actualise l'étage actuel de l'ascenseur
 				getLabelCourant().setBackground(null);
@@ -112,14 +132,14 @@ public class FenetreBatiment extends JFrame {
 			}});
 		
 		//reglages de la fenêtre
-		this.setTitle(bat.getNom() + " (sectionnal view [" + bat.getNbEtages() + " floors])");	//Titre de la fenêtre 
-		this.setMinimumSize(new Dimension(590, 500));									//taille de la fenêtre fixe
+		this.setTitle(bat.getNom() + " (sectionnal view [" + bat.getNbEtages() + " floors])");	
+		this.setMinimumSize(new Dimension(590, 500));										
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int)dimension.getHeight();
 		int width  = (int)dimension.getWidth();
-		this.setLocation(width/2 - this.getWidth()/2, height - this.getHeight() - 10);
+		this.setLocation(width/2 - this.getWidth()/2, height - this.getHeight() - 10);	//positionnement de la fenetre en bas centrée
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.setVisible(true);									//la fenêtre apparaît
+		this.setVisible(true);									
 		
 		//permet d'initialiser la scrollbar du batiment en bas pour que le rez-de-chaussée soit visible à l'apparition
 		scrollBatiment.getVerticalScrollBar().setValue(scrollBatiment.getVerticalScrollBar().getMaximum()); 		

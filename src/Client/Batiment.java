@@ -40,18 +40,19 @@ public class Batiment {
 	
 	/**le batiment possede une liste de {@link Bouton}
 	 */
-	private ArrayList<BoutonExterne> listeBoutons = new ArrayList<BoutonExterne>();
+	private ArrayList<BoutonHaut> listeBoutonsHaut = new ArrayList<BoutonHaut>();
+	private ArrayList<BoutonBas> listeBoutonsBas = new ArrayList<BoutonBas>();
 	
 	public Batiment(String nom, int nbEtages, int nbAscenseur) {
 		this.nom = nom;
 		this.nbEtages = nbEtages;
 		this.nbAscenseur = nbAscenseur;
-		listeBoutons.add(new BoutonHaut(0)); //le rez de chaussé n'a qu'un bouton haut et pas de bouton bas
+		listeBoutonsHaut.add(new BoutonHaut(0)); //le rez de chaussé n'a qu'un bouton haut et pas de bouton bas
 		
 		//a chaque etage, le batiment possede deux boutons : haut et bas
 		for (int i = 1 ; i < nbEtages; ++i){
-			listeBoutons.add(new BoutonHaut(i));
-			listeBoutons.add(new BoutonBas(i));
+			listeBoutonsHaut.add(new BoutonHaut(i));
+			listeBoutonsBas.add(new BoutonBas(i));
 		} 
 		
 		//Creation de tous les ascenseurs
@@ -59,7 +60,7 @@ public class Batiment {
 			controleursInt.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1)));
 		}
 		
-		listeBoutons.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
+		listeBoutonsBas.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
 		controleurExt = new ControleurExterne(controleursInt, this.getNbEtages());
 	}
 	
@@ -82,10 +83,13 @@ public class Batiment {
 	}
 	
 	/**permet d'appuyer sur le {@link Bouton}
-	 * @param numBouton numero du {@link Bouton}
+	 * @param numEtage numero du {@link Bouton}
 	 */
-	public void appuyerBoutonEtage (int numBouton) {
-		listeBoutons.get(numBouton).appuyer(controleurExt);
+	public void appuyerBoutonEtage (int numEtage, int hautOuBas) {
+		if (hautOuBas == Constantes.HAUT)
+			listeBoutonsHaut.get(numEtage).appuyer(controleurExt);
+		else if (hautOuBas == Constantes.BAS)
+			listeBoutonsBas.get(numEtage).appuyer(controleurExt);
 	}
 	
 	/**permet d'obtenir les {@link Ascenseur} de ce Batiment
@@ -130,13 +134,7 @@ public class Batiment {
 	public ArrayList<ControleurInterne> getControleursInterne () {
 		return controleursInt;
 	}
-
-	/**permet d'obtenir la {@link Batiment#listeBoutons} de ce Batiment
-	 * @return la {@link Batiment#listeBoutons} de ce Batiment
-	 */
-	public ArrayList<BoutonExterne> getListeBoutons() {
-		return listeBoutons;
-	}
+	
 	
 	/**Appuie sur le {@link Bouton} d'un {@link Ascenseur} de ce Batiment
 	 * @param numAsc numero de l'{@link Ascenseur} concerne
@@ -146,15 +144,21 @@ public class Batiment {
 		this.getAscenseur(numAsc).appuyerBouton(numBouton, this.getControleursInterne().get(numAsc - 1));
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages
 				+ ", nbAscenseur=" + nbAscenseur + ", controleursInt="
 				+ controleursInt + ", controleurExt=" + controleurExt
-				+ ", listeBoutons=" + listeBoutons + "]";
+				+ ", listeBoutonsHaut=" + listeBoutonsHaut
+				+ ", listeBoutonsBas=" + listeBoutonsBas + "]";
+	}
+
+	public ArrayList<BoutonHaut> getListeBoutonsHaut() {
+		return listeBoutonsHaut;
+	}
+
+	public ArrayList<BoutonBas> getListeBoutonsBas() {
+		return listeBoutonsBas;
 	} 
 
 }

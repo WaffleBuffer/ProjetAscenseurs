@@ -72,7 +72,7 @@ public class FenetrePanneau extends JFrame{
 						fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));	//actualisation du numéro du nouvel ascenseur
 						//fenetreBatiment.getListeLabelNbAscenseursParEtage().get(bat.getNbEtages() - 
 						//ascenseurSelectionne.getEtage()).setBackground(Color.orange);
-						AscenseurAvecSonLabelActuel.get(ascenseurSelectionne).setBackground(Color.orange);
+						//AscenseurAvecSonLabelActuel.get(ascenseurSelectionne).setBackground(Color.orange);
 						fenetreBatiment.getLabelCourant().setBackground(null);
 					}
 					else
