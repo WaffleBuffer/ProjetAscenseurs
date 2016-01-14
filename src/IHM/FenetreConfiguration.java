@@ -16,7 +16,6 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
-import Client.Ascenseur;
 import Client.Batiment;
 
 public class FenetreConfiguration extends JFrame {
@@ -50,7 +49,7 @@ public class FenetreConfiguration extends JFrame {
 		gb.setConstraints(labelNbEtages, gbc); // mise en forme des objets
 		add(labelNbEtages);
 		
-		SpinnerModel modele = new SpinnerNumberModel(1, 0, 50, 1);
+		SpinnerModel modele = new SpinnerNumberModel(1, 1, 50, 1);
 		final JSpinner nbEtages = new JSpinner(modele);
 		gb.setConstraints(nbEtages, gbc); // mise en forme des objets
 		add(nbEtages);
@@ -60,7 +59,7 @@ public class FenetreConfiguration extends JFrame {
 		gb.setConstraints(labelNbAsc, gbc); // mise en forme des objets
 		add(labelNbAsc);
 		
-		SpinnerModel modeleNbAsc = new SpinnerNumberModel(1, 0, 50, 1);
+		SpinnerModel modeleNbAsc = new SpinnerNumberModel(1, 1, 50, 1);
 		final JSpinner nbAscenseurs = new JSpinner(modeleNbAsc);
 		gb.setConstraints(nbAscenseurs, gbc); // mise en forme des objets
 		add(nbAscenseurs);
@@ -88,7 +87,6 @@ public class FenetreConfiguration extends JFrame {
 		this.setResizable(false);								//la fenetre de configuration n'a pas besoin d'être redimensionner
 		this.setSize(new Dimension(250, 200));					//taille de la fenêtre fixe
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		int height = (int)dimension.getHeight();
 		int width  = (int)dimension.getWidth();
 		this.setLocation(width/2 - this.getWidth()/2, 0);
 		this.setVisible(true);									//la fenêtre apparaît

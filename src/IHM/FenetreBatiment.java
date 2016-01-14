@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import Boutons.BoutonBas;
-import Boutons.BoutonHaut;
 import Client.Ascenseur;
 import Client.Batiment;
 import Client.Constantes;
@@ -77,7 +75,7 @@ public class FenetreBatiment extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					bat.appuyerBoutonEtage(bat.getNbEtages() - j - 1, Constantes.BAS);
+					bat.appuyerBoutonEtage(bat.getNbEtages() - j, Constantes.BAS);
 					fenetreRequetes.actualiserText();
 				}});
 			panelBoutons.setLayout(new GridLayout(2, 1)); 	//ce panel utilise un layout à deux lignes et une colonne
@@ -105,9 +103,38 @@ public class FenetreBatiment extends JFrame {
 		labelCourant.setBackground(Color.orange);	//lors de la création l'ascenseur est à l'arrêt portes ouvertes.
 		
 		JPanel panelInfos = new JPanel();			//panel qui contiendra les détails sur l'asenseur selectionné
-		panelInfos.setLayout(new GridLayout(5,1));	//son layout est composé de 5 lignes et une colonne (alignés vertcalement)
+		panelInfos.setLayout(new GridLayout(7,1));	//son layout est composé de 5 lignes et une colonne (alignés vertcalement)
 		panelInfos.setBorder(BorderFactory.createTitledBorder("Details current elevator"));	//on encadre encore une fois cette partie pour plus de visibilité
 		this.add(panelInfos);						//ajout de ce panel à la fenetre
+		
+		JLabel labelTexteLegende = new JLabel("Legend :", JLabel.CENTER);
+		panelInfos.add(labelTexteLegende);
+		
+		JPanel panelLegende = new JPanel();
+		panelLegende.setLayout(new GridLayout(1, 4));
+		
+		JLabel labelRouge = new JLabel("Blocked", JLabel.CENTER);
+		labelRouge.setOpaque(true);
+		labelRouge.setForeground(Color.white);
+		labelRouge.setBackground(Color.red);
+		JLabel labelOrange = new JLabel("Stopped", JLabel.CENTER);
+		labelOrange.setOpaque(true);
+		labelOrange.setForeground(Color.white);
+		labelOrange.setBackground(Color.orange);
+		JLabel labelBleu = new JLabel("Move", JLabel.CENTER);
+		labelBleu.setOpaque(true);
+		labelBleu.setForeground(Color.white);
+		labelBleu.setBackground(Color.blue);
+		JLabel labelVert = new JLabel("Open doors", JLabel.CENTER);
+		labelVert.setOpaque(true);
+		labelVert.setForeground(Color.white);
+		labelVert.setBackground(Color.green);
+		
+		panelLegende.add(labelRouge);
+		panelLegende.add(labelOrange);
+		panelLegende.add(labelBleu);
+		panelLegende.add(labelVert);
+		panelInfos.add(panelLegende);
 		
 		JLabel labelTexteNumAsc = new JLabel("Elevator's number :", JLabel.CENTER);	
 		JLabel labelTexteEtageAsc = new JLabel("Elevator's floor :", JLabel.CENTER);
@@ -133,7 +160,7 @@ public class FenetreBatiment extends JFrame {
 		
 		//reglages de la fenêtre
 		this.setTitle(bat.getNom() + " (sectionnal view [" + bat.getNbEtages() + " floors])");	
-		this.setMinimumSize(new Dimension(590, 500));										
+		this.setMinimumSize(new Dimension(700, 550));										
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int)dimension.getHeight();
 		int width  = (int)dimension.getWidth();
