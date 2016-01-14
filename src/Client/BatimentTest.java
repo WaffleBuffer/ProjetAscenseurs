@@ -57,13 +57,13 @@ public class BatimentTest {
 		System.out.println("==============================================");
 		System.out.println("");
 		
-		this.batiment.appuyerBoutonEtage(0); //etage 0 haut
-		this.batiment.appuyerBoutonEtage(2); //etage 1 bas
-		this.batiment.appuyerBoutonEtage(8); //etage 4 haut
-		this.batiment.appuyerBoutonEtage(0); //etage 0 haut
+		this.batiment.appuyerBoutonEtage(0, Constantes.HAUT); //etage 0 haut
+		this.batiment.appuyerBoutonEtage(1, Constantes.BAS); //etage 1 bas
+		this.batiment.appuyerBoutonEtage(4, Constantes.HAUT); //etage 4 haut
+		this.batiment.appuyerBoutonEtage(0, Constantes.HAUT); //etage 0 haut
 		
 		this.batiment.getControleurExt().traiterRequetes();
-		//System.out.println(this.batiment.getControleursInterne().toString());
+		System.out.println(this.batiment.getControleursInterne().toString());
 		
 		for (int i = 1; i <= 10; ++i) {
 			System.out.println("Iteration " + i);
@@ -71,7 +71,7 @@ public class BatimentTest {
 		}
 		
 		assertTrue(this.batiment.getAscenseur(1).getEtage() == 4);
-		assertTrue(this.batiment.getAscenseur(2).getEtage() == 0);
+		assertTrue(this.batiment.getAscenseur(2).getEtage() == 1);
 	}
 
 }
