@@ -32,7 +32,7 @@ public class ControleurInterne implements IControleur{
 	/**Renvoi {@link Ascenseur} gere par ce ControleurInterne
 	 * @return {@link Ascenseur} gere par ce ControleurInterne
 	 */
-	public Ascenseur getAscenceur() {
+	public Ascenseur getAscenseur() {
 		return this.ascenseur;
 	}
 	

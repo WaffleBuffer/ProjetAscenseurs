@@ -39,8 +39,8 @@ public class BatimentTest {
 		System.out.println("==============================================");
 		System.out.println("");
 		
-		this.batiment.appuyerBoutonAscenseur(1, 3);
-		this.batiment.appuyerBoutonAscenseur(2, 5);
+		/*this.batiment.appuyerBoutonAscenseur(1, 3);
+		this.batiment.appuyerBoutonAscenseur(2, 5);*/
 		for (int i = 1; i <= 9; ++i) {
 			System.out.println("Iteration " + i);
 			System.out.println(this.batiment.traiterControleurs());
@@ -63,7 +63,7 @@ public class BatimentTest {
 		this.batiment.appuyerBoutonEtage(0, Constantes.HAUT); //etage 0 haut
 		
 		this.batiment.getControleurExt().traiterRequetes();
-		System.out.println(this.batiment.getControleursInterne().toString());
+		System.out.println(this.batiment.getControleursInternes().toString());
 		
 		for (int i = 1; i <= 10; ++i) {
 			System.out.println("Iteration " + i);

@@ -1,11 +1,5 @@
 package Client;
-import java.util.ArrayList;
-
-import Boutons.BoutonExterne;
-import Boutons.BoutonInterne;
 import IHM.FenetreConfiguration;
-import IHM.FenetreRequetes;
-import Options.OptionMusique;
 
 public class Main {
 

@@ -35,9 +35,9 @@ public class FonctionsUtiles {
 	
 	public static int NbAscenseursParEtage(Batiment bat, int etage){
 		int CptAscenseurs = 0;
-		for (int i = 1; i <= bat.getNbAscenseur(); ++i){
+		for (int i = 0; i < bat.getNbAscenseurs(); ++i){
 			if (bat.getAscenseur(i).getEtage() == etage){
-				for (int j = 1; j <= bat.getNbEtages(); ++j){
+				for (int j = 0; j < bat.getNbEtages(); ++j){
 					if (bat.getAscenseur(j).getEtage() == etage)
 						++CptAscenseurs;
 				}

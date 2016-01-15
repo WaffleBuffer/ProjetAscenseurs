@@ -5,55 +5,38 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.TreeMap;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 
-import Client.Ascenseur;
 import Client.Batiment;
 
-public class FenetrePanneau extends JFrame{
-	
-	/**
-	 * 
-	 */
-	private Ascenseur ascenseurSelectionne;
-	
-	public Ascenseur getAscenseurActuel() {
-		return ascenseurSelectionne;
-	}
+public class FenetrePanneau extends JFrame {
+
 
 	private JToggleButton boutonAscenseurSelectionne;
-	private TreeMap<Ascenseur, JLabel> AscenseurAvecSonLabelActuel = new TreeMap<Ascenseur, JLabel>(); 
-	
 	private static final long serialVersionUID = 1L;
 
-	public FenetrePanneau (final Batiment bat, int nbAsc, final FenetreBatiment fenetreBatiment, 
-			final FenetreRequetes fenetreRequetes){
+	public FenetrePanneau (final Batiment bat){
 		GridLayout layoutPrincipal = new GridLayout(2, 1);		//création layout principal de la fenetre
 		layoutPrincipal.setVgap(20);							//ajout margin vertical entre éléments du layout
 		this.setLayout(layoutPrincipal);						//associationd du layout à la fenetre
-		
 		JPanel panelPrincipalAscenseurs = new JPanel();
 		panelPrincipalAscenseurs.setLayout(new GridLayout());
 		this.add(panelPrincipalAscenseurs);
 		panelPrincipalAscenseurs.setBorder(BorderFactory.createTitledBorder("Lifts"));
-		ascenseurSelectionne = bat.getAscenseur(1);					//l'ascenseur affiché lors de la creation de la fenetre est celui d'id 1
 		
 		JPanel panelAscenseurs = new JPanel();
-		panelAscenseurs.setLayout(new GridLayout(nbAsc, 1));	
+		panelAscenseurs.setLayout(new GridLayout(bat.getNbAscenseurs(), 1));	
 		
 		JScrollPane scrollAscenseurs = new JScrollPane(panelAscenseurs);
 		panelPrincipalAscenseurs.add(scrollAscenseurs);
 		
 		//creation de la liste des ascenseur sous forme de boutons alignés verticalement
-		for(int i = 1; i <= nbAsc; ++i){		
+		for(int i = 1; i <= bat.getNbAscenseurs(); ++i){		
 			final int j = i;
 			final JToggleButton ascenseur = new JToggleButton("Elevator n°" + i);
 			panelAscenseurs.add(ascenseur);
@@ -65,16 +48,17 @@ public class FenetrePanneau extends JFrame{
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					if (ascenseurSelectionne != bat.getAscenseur(j)) {
+					if (bat.getAscenseurSelectionne() != bat.getAscenseur(j)) {
 						boutonAscenseurSelectionne.setSelected(false);			//le dernier sélectionné ne l'est plus
 						boutonAscenseurSelectionne = ascenseur;					//le bouton sélectionné devient le nouveau cliqué
-						ascenseurSelectionne = bat.getAscenseur(j);				//et l'ascenseur selectionne devient celui cliqué
-						fenetreBatiment.setAscenseur(ascenseurSelectionne);		//idem pour la fenetreBatiment
-						fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));	//actualisation du numéro du nouvel ascenseur
+						bat.setAscenseurSelectionne(bat.getAscenseur(j));		//et l'ascenseur selectionne devient celui cliqué
+						
+						//fenetreBatiment.setAscenseur(ascenseurSelectionne);	//idem pour la fenetreBatiment
+						//fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));	//actualisation du numéro du nouvel ascenseur
 						//fenetreBatiment.getListeLabelNbAscenseursParEtage().get(bat.getNbEtages() - 
 						//ascenseurSelectionne.getEtage()).setBackground(Color.orange);
 						//AscenseurAvecSonLabelActuel.get(ascenseurSelectionne).setBackground(Color.orange);
-						fenetreBatiment.getLabelCourant().setBackground(null);
+						//fenetreBatiment.getLabelCourant().setBackground(null);
 					}
 					else
 						boutonAscenseurSelectionne.setSelected(true);
@@ -95,7 +79,7 @@ public class FenetrePanneau extends JFrame{
 		panelPrincipalPanneau.add(scrollBoutons);
 		
 		//création en boucle des boutons
-		for (int i = 0; i < bat.getNbEtages() + 2; ++i){
+		for (int i = 0; i <= bat.getNbEtages() + 1; ++i){
 			final int j = i;
 			if (i == bat.getNbEtages() + 1)
 			{
@@ -107,10 +91,10 @@ public class FenetrePanneau extends JFrame{
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						if (!ascenseurSelectionne.estBloquer())
-							ascenseurSelectionne.bloquer();
+						if (!bat.getAscenseurSelectionne().estBloquer())
+							bat.getAscenseurSelectionne().bloquer();
 						else
-							ascenseurSelectionne.debloque();
+							bat.getAscenseurSelectionne().debloque();
 						
 					}});
 			}
@@ -124,8 +108,7 @@ public class FenetrePanneau extends JFrame{
 	
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						bat.appuyerBoutonAscenseur(ascenseurSelectionne.getNumAsc(), j);
-						fenetreRequetes.actualiserText();
+						bat.appuyerBoutonAscenseur(bat.getAscenseurSelectionne(), j);
 					}});
 			}
 		}

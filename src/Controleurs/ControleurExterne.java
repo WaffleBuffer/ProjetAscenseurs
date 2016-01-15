@@ -136,7 +136,7 @@ public class ControleurExterne implements IControleur{
 	private boolean searchToUp (int etage) {
 		for (ControleurInterne controleur : controleurs) {
 			if (controleur.prochaineDest() != -1 && 
-					(controleur.getAscenceur().getEtage() < etage && controleur.prochaineDest() >= etage)) {
+					(controleur.getAscenseur().getEtage() < etage && controleur.prochaineDest() >= etage)) {
 				this.aUtiliser = controleur;
 				return true;
 			}
@@ -155,7 +155,7 @@ public class ControleurExterne implements IControleur{
 	private boolean searchToDown (int etage) {
 		for (ControleurInterne controleur : controleurs) {
 			if (controleur.prochaineDest() != -1 && 
-					(controleur.getAscenceur().getEtage() > etage && controleur.prochaineDest() <= etage)) {
+					(controleur.getAscenseur().getEtage() > etage && controleur.prochaineDest() <= etage)) {
 				this.aUtiliser = controleur;
 				return true;
 			}

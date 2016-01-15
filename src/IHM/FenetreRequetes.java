@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -21,7 +23,7 @@ import Requetes.Requete;
  * @author dark1wador
  *
  */
-public class FenetreRequetes extends JFrame{
+public class FenetreRequetes extends JFrame implements Observer{
 
 	/**{@link JTextArea} dans laquelle s'ecrie la liste des {@link Requete}
 	 */
@@ -34,7 +36,7 @@ public class FenetreRequetes extends JFrame{
 	/**Vient de {@link JFrame}
 	 * @see JFrame
 	 */
-	private static final long serialVersionUID = 4236819230726511089L;
+	private static final long serialVersionUID = 0L;
 
 	/**Construit une FenetreRequetes correspondant a un {@link Batiment}
 	 * @param batiment le {@link Batiment} correspondant a cette FenetreRequetes
@@ -65,7 +67,7 @@ public class FenetreRequetes extends JFrame{
 		{
 			public void componentResized (ComponentEvent event) {
 				FenetreRequetes c = (FenetreRequetes)event.getSource();
-				c.actualiserText();
+				c.update(null, null);
 			}
 		});
 		int height = (int)dimension.getHeight();
@@ -74,10 +76,11 @@ public class FenetreRequetes extends JFrame{
 		this.setLocation(width - this.getWidth(), height/2 - this.getHeight()/2);
 		this.setVisible(true);									//la fenetre apparaît
 	}
-	
+
 	/**Actualise le text dans le {@link #requetes} de cette FenetreRequetes
 	 */
-	public void actualiserText () {
+	@Override
+	public void update(Observable o, Object arg) {
 		// Reinitialisation du JTextArea
 		requetes.setText("");
 		String tiretsAffichage = "";	// variable d'affichage
@@ -98,10 +101,10 @@ public class FenetreRequetes extends JFrame{
 		// Affichage des RequeteInterne
 		requetes.append("\n" + tiretsAffichage + "Internal queries" + tiretsAffichage + "\n");
 		//Parcour des ControleurInterne du Batiment
-		for (ControleurInterne i : batiment.getControleursInterne()) {
+		for (ControleurInterne i : batiment.getControleursInternes()) {
 				if (0 != i.getNumberOfRequete()) {
 					requetes.append("\n====" + egalesAffichage + 
-							"[Lift " + i.getAscenceur().getNumAsc() + "]" + egalesAffichage +"====\n");
+							"[Lift " + i.getAscenseur().getNumAsc() + "]" + egalesAffichage +"====\n");
 					for (Requete j : i.getRequetes()) {		
 						requetes.append("\n" + j.toString());
 					}
@@ -109,6 +112,5 @@ public class FenetreRequetes extends JFrame{
 					requetes.append("\n====" + egalesAffichage  + egalesAffichage + "========\n");
 				}
 		}
-		
 	}
 }
