@@ -93,7 +93,6 @@ public class Batiment extends java.util.Observable implements Observer {
 			strToReturn += frame + "\n";
 			strToReturn += "| " + strResult + " |\n";
 			strToReturn += frame + "\n";
-			System.out.println(strResult);
 			//Si l'ascenseur s'est bloque, alors traitement exceptionnel : on reaffecte toutes les RequeteExterne de celui-ci au ControleurExterne.
 			//Cela evite que si un ascenseur se bloque de facon infini, alors la requete externe n'est jamais satisfaite.
 			if (strResult.equals("ascenseur " + i.getAscenseur().getNumAsc() + " est bloque.")) {
