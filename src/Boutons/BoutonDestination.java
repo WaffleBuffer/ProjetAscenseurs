@@ -1,6 +1,6 @@
 package Boutons;
 
-import Controleurs.IControleur;
+import Controleurs.Controleur;
 import Requetes.RequeteInterne;
 
 /**{@link BoutonInterne} representant les etages auquels peut acceder l'{@link Client.Ascenseur} qui les contient.
@@ -28,13 +28,13 @@ public class BoutonDestination extends BoutonInterne {
 	}
 	
 	/** Definition de la fonction d'action. Creer une {@link Requetes.RequeteInterne} pour l'{@link #etage} et l'ajoute
-	 * au {@link Controleurs.IControleur}. Le {@link Controleurs.IControleur} devrait etre un {@link Controleurs.ControleurInterne} 
+	 * au {@link Controleurs.Controleur}. Le {@link Controleurs.Controleur} devrait etre un {@link Controleurs.ControleurInterne} 
 	 * pour un fonctionnement normal. L'affectation manuelle 
 	 * a un {@link Controleurs.ControleurExterne} resultera en une interpretation de la {@link Requetes.Requete} comme venant d'un {@link BoutonExterne}.
-	 * @param controleur {@link Controleurs.IControleur} auquel le bouton va ajouter une {@link Requetes.RequeteInterne}.
+	 * @param controleur {@link Controleurs.Controleur} auquel le bouton va ajouter une {@link Requetes.RequeteInterne}.
 	 */
 	@Override
-	public void appuyer (IControleur controleur) {
+	public void appuyer (Controleur controleur) {
 		controleur.addRequete(new RequeteInterne (etage));
 	}
 

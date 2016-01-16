@@ -1,6 +1,6 @@
 package Boutons;
 
-import Controleurs.IControleur;
+import Controleurs.Controleur;
 import Requetes.Requete;
 
 /**Description des Boutons en generale.
@@ -35,8 +35,8 @@ public abstract class Bouton {
 		this.libelle = libelle;
 	}
 	
-	/**Fonction d'action du Bouton. Ce Bouton cree une {@link Requete} l'ajoute au {@link IControleur}. Defini dans les sous-classes.
-	 * @param controleur {@link IControleur} auquel le bouton va ajouter une {@link Requete}.
+	/**Fonction d'action du Bouton. Ce Bouton cree une {@link Requete} l'ajoute au {@link Controleur}. Defini dans les sous-classes.
+	 * @param controleur {@link Controleur} auquel le bouton va ajouter une {@link Requete}.
 	 */
-	public abstract void appuyer (IControleur controleur);
+	public abstract void appuyer (Controleur controleur);
 }

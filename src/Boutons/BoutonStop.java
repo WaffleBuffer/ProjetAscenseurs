@@ -1,8 +1,8 @@
 package Boutons;
 
+import Controleurs.Controleur;
 import Controleurs.ControleurExterne;
 import Controleurs.ControleurInterne;
-import Controleurs.IControleur;
 import Requetes.Requete;
 import Requetes.RequeteInterne;
 
@@ -20,13 +20,13 @@ public class BoutonStop extends BoutonInterne{
 	}
 
 	/** Definition de la fonction d'action. Creer une {@link RequeteInterne} et l'ajoute
-	 * au {@link IControleur}. Le {@link IControleur} devrait etre un {@link ControleurInterne} pour un fonctionnement normal. L'affectation manuelle 
+	 * au {@link Controleur}. Le {@link Controleur} devrait etre un {@link ControleurInterne} pour un fonctionnement normal. L'affectation manuelle 
 	 * a un {@link ControleurExterne} resultera en une interpretation de la {@link Requete} comme venant d'un {@link BoutonExterne} de l'etage 0.
-	 * @param controleur {@link IControleur} auquel le bouton va ajouter une {@link Requete}.
+	 * @param controleur {@link Controleur} auquel le bouton va ajouter une {@link Requete}.
 	 * @see RequeteInterne#RequeteInterne()
 	 */
 	@Override
-	public void appuyer (IControleur controleur) {
+	public void appuyer (Controleur controleur) {
 		controleur.addRequete(new RequeteInterne());
 	}
 	

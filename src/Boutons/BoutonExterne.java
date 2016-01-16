@@ -1,7 +1,6 @@
 package Boutons;
 
-import Controleurs.IControleur;
-import Requetes.Requete;
+import Controleurs.Controleur;
 import Requetes.RequeteExterne;
 
 /**Definit les BoutonExterne qui sont a chaque etage d'un {@link Client.Batiment}
@@ -39,13 +38,13 @@ public abstract class BoutonExterne extends Bouton {
 	
 	/** Definition de la fonction d'action. Creer une {@link RequeteExterne} pour l'{@link #etage} et
 	 *  la {@link #direction} (donnee par les sous-classes) et l'ajoute
-	 * au {@link IControleur}. Le {@link IControleur} devrait etre un {@link Controleurs.ControleurExterne}
+	 * au {@link Controleur}. Le {@link Controleur} devrait etre un {@link Controleurs.ControleurExterne}
 	 *  pour un fonctionnement normal (bien que l'affecter
 	 * manuellement a un {@link Controleurs.ControleurInterne} fonctionne aussi).
-	 * @param controleur {@link IControleur} auquel le bouton va ajouter une {@link RequeteExterne}.
+	 * @param controleur {@link Controleur} auquel le bouton va ajouter une {@link RequeteExterne}.
 	 */
 	@Override
-	public void appuyer (IControleur controleur) {
+	public void appuyer (Controleur controleur) {
 		RequeteExterne requete = new RequeteExterne(etage, this.direction);
 		controleur.addRequete(requete);
 	}
