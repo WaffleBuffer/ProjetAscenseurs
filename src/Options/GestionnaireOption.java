@@ -34,11 +34,11 @@ public class GestionnaireOption {
 		return options.get(i);
 	}
 
-	/**permet d'activer une {@link IOption} de {@link #options} grace a son numero
-	 * @param numOption numero de l'{@link IOption} a activer
+	/**permet d'activer une {@link IOption} de {@link #options} grace a son index
+	 * @param index numero de l'{@link IOption} a activer
 	 */
-	public void activerOption (int numOption) {
+	public void activerOption (int index) {
 		//traitement par defaut
-		options.get(numOption).activer();
+		options.get(index).activer();
 	}
 }

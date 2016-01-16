@@ -7,6 +7,8 @@ import java.util.Observer;
 import Boutons.Bouton;
 import Boutons.BoutonBas;
 import Boutons.BoutonHaut;
+import AlgosTraitement.AlgoTraitementExterneStandard;
+import AlgosTraitement.AlgoTraitementInterneStandard;
 import Controleurs.ControleurExterne;
 import Controleurs.ControleurInterne;
 import Requetes.Requete;
@@ -63,14 +65,14 @@ public class Batiment extends java.util.Observable implements Observer {
 		
 		//Creation de tous les ascenseurs
 		for (int i = 0; i < nbAscenseur; ++i) {
-			controleursInt.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1)));
+			controleursInt.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1), new AlgoTraitementInterneStandard()));
 			//controleursInt.get(i).getAscenseur().addObserver(this);
 		}
 		
 		//this.ascenseurSelectionne = getAscenseur(0);
 		
 		listeBoutonsBas.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
-		controleurExt = new ControleurExterne(controleursInt, this.getNbEtages());
+		controleurExt = new ControleurExterne(controleursInt, this.getNbEtages(), new AlgoTraitementExterneStandard());
 	}
 	
 	/**permet de traiter les {@link Requete} des {@link ControleurInterne} contenus dans {@link #controleursInt}
