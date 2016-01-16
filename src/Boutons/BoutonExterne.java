@@ -4,35 +4,45 @@ import Controleurs.IControleur;
 import Requetes.Requete;
 import Requetes.RequeteExterne;
 
-/**Definit les BoutonExterne qui sont a chaque etage des {@link Client.Batiment}
+/**Definit les BoutonExterne qui sont a chaque etage d'un {@link Client.Batiment}
  * @author Thomas
- *
  */
-public class BoutonExterne extends Bouton {
+public abstract class BoutonExterne extends Bouton {
 	
-	/**Etage auquel se trouve le BoutonExterne
+	/**Etage auquel se trouve ce BoutonExterne
 	 * 
 	 */
 	private int etage;
+	
+	/**Direction de ce BoutonExterne : <br>
+	 * {@link Client.Constantes#HAUT}
+	 * {@link Client.Constantes#BAS}
+	 * @see Client.Constantes
+	 * @see BoutonHaut
+	 * @see BoutonBas
+	 */
 	private int direction;
 
-	/**Constructeur de BoutonExterne. Appele par les sous-classes
+	/**Constructeur de BoutonExterne. Appelle par les sous-classes
 	 * @param etage etage auquel se trouve le BoutonExterne
-	 * @param libelle Indentifiant du BoutonExterne. Donner par les sous-classes
+	 * @param libelle Indentifiant du BoutonExterne. Donne par les sous-classes:<br>
+	 * - {@link BoutonHaut} : "Haut"<br>
+	 * - {@link BoutonBas}  : "Bas"
+	 * @param direction {@link #direction} de ce BoutonExterne
 	 * @see Bouton#libelle
 	 */
 	protected BoutonExterne(int etage, String libelle, int direction) {
 		super(libelle);
 		this.etage = etage;
 		this.direction = direction;
-		// TODO Auto-generated constructor stub
 	}
-
 	
-	/** Definition de la fonction d'action. Creer une {@link RequeteExterne} pour un etage et une direction donnee par les sous-classes et l'ajoute
-	 * au {@link IControleur}. Le {@link IControleur} devrait etre un {@link Controleurs.ControleurExterne} pour un fonctionnement normal (bien que l'affecter
+	/** Definition de la fonction d'action. Creer une {@link RequeteExterne} pour l'{@link #etage} et
+	 *  la {@link #direction} (donnee par les sous-classes) et l'ajoute
+	 * au {@link IControleur}. Le {@link IControleur} devrait etre un {@link Controleurs.ControleurExterne}
+	 *  pour un fonctionnement normal (bien que l'affecter
 	 * manuellement a un {@link Controleurs.ControleurInterne} fonctionne aussi).
-	 * @param controleur {@link IControleur} auquel le bouton va ajouter une {@link Requete}.
+	 * @param controleur {@link IControleur} auquel le bouton va ajouter une {@link RequeteExterne}.
 	 */
 	@Override
 	public void appuyer (IControleur controleur) {
@@ -40,14 +50,14 @@ public class BoutonExterne extends Bouton {
 		controleur.addRequete(requete);
 	}
 
-	/**Permet de connaitre l'etage ou se trouve le BoutonExterne 
+	/**Permet de connaitre l'{@link #etage} ou se trouve ce BoutonExterne 
 	 * @return l'etage ou se trouve le BoutonExterne
 	 */
 	public int getEtage() {
 		return etage;
 	}
 	
-	/* (non-Javadoc)
+	/** Renvoie l'etat de ce BoutonExterne
 	 * @see Boutons.Bouton#toString()
 	 */
 	@Override

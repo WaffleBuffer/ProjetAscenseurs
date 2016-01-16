@@ -15,6 +15,5 @@ public class BoutonBas extends BoutonExterne{
 	 */
 	public BoutonBas(int etage) {
 		super(etage, "Bas", Constantes.BAS);
-		// TODO Auto-generated constructor stub
 	}
 }

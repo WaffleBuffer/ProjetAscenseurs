@@ -10,11 +10,10 @@ public class BoutonHaut extends BoutonExterne{
 
 	/** Construit un BoutonHaut. {@link Bouton#libelle} = "Haut"
 	 * @param etage numero de l'etage auquel se trouve ce BoutonHaut.
-	 * @see Bouton
+	 * @see Bouton#libelle
 	 * @see BoutonExterne
 	 */
 	public BoutonHaut(int etage) {
 		super(etage, "Haut", Constantes.HAUT);
-		// TODO Auto-generated constructor stub
 	}
 }
