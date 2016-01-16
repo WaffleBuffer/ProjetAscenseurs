@@ -47,7 +47,7 @@ public class Batiment extends java.util.Observable implements Observer {
 	 */
 	private ArrayList<BoutonBas> listeBoutonsBas = new ArrayList<BoutonBas>();
 	
-	//private Ascenseur ascenseurSelectionne;
+	private Ascenseur ascenseurSelectionne;
 	
 	public Batiment(String nom, int nbEtages, int nbAscenseur) {
 		this.nom = nom;
@@ -178,15 +178,15 @@ public class Batiment extends java.util.Observable implements Observer {
 		return listeBoutonsBas;
 	}
 
-	/*public Ascenseur getAscenseurSelectionne() {
+	public Ascenseur getAscenseurSelectionne() {
 		return ascenseurSelectionne;
-	}*/
+	}
 
-	/*public void setAscenseurSelectionne(Ascenseur ascenseurSelectionne) {
+	public void setAscenseurSelectionne(Ascenseur ascenseurSelectionne) {
 		this.ascenseurSelectionne = ascenseurSelectionne;
 		setChanged();
 		notifyObservers();
-	}*/
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {

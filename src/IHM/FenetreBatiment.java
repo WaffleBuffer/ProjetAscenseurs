@@ -31,7 +31,6 @@ public class FenetreBatiment extends JFrame implements Observer{
 	private ArrayList<JLabel> listeLabelNbAscenseursParEtage = new ArrayList<JLabel>();
 	private	JLabel labelCourant;
 	private Batiment batiment;
-	private Ascenseur ascenseurSelectionne;
 	
 	public FenetreBatiment (final Batiment batiment) {
 		
@@ -106,7 +105,7 @@ public class FenetreBatiment extends JFrame implements Observer{
 		//on sauvegarde le dernier label qui à été modifié en commençant par le rez-de-chaussée car les ascenseurs apparaissent là lors de leur création
 		labelCourant.setBackground(Color.orange);	//lors de la création l'ascenseur est à l'arrêt portes ouvertes.
 		
-		this.setAscenseurSelectionne(this.batiment.getAscenseur(0));
+		batiment.setAscenseurSelectionne(this.batiment.getAscenseur(0));
 		JPanel panelInfos = new JPanel();			//panel qui contiendra les détails sur l'asenseur selectionné
 		panelInfos.setLayout(new GridLayout(7,1));	//son layout est composé de 5 lignes et une colonne (alignés vertcalement)
 		panelInfos.setBorder(BorderFactory.createTitledBorder("Details current elevator"));	//on encadre encore une fois cette partie pour plus de visibilité
@@ -214,22 +213,13 @@ public class FenetreBatiment extends JFrame implements Observer{
 
 	@Override
 	public void update(Observable observe, Object arg1) {
-		labelEtageAscenseurSelectionne.setText(Integer.toString(getAscenseurSelectionne().getEtage()));	//actualise l'étage actuel de l'ascenseur
+		labelEtageAscenseurSelectionne.setText(Integer.toString(batiment.getAscenseurSelectionne().getEtage()));	//actualise l'étage actuel de l'ascenseur
 		labelCourant.setOpaque(false);
-		setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - getAscenseurSelectionne().getEtage()));
+		setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - batiment.getAscenseurSelectionne().getEtage()));
 		labelCourant.setOpaque(true);
-		FonctionsUtiles.afficherEtatAscenseur(getAscenseurSelectionne(), labelCourant);
+		FonctionsUtiles.afficherEtatAscenseur(batiment.getAscenseurSelectionne(), labelCourant);
 		for (int i = 0; i < listeLabelNbAscenseursParEtage.size(); ++i){
 			listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - i).setText(Integer.toString((FonctionsUtiles.NbAscenseursParEtage(batiment, i))));
 		}
-	}
-
-	public Ascenseur getAscenseurSelectionne() {
-		return ascenseurSelectionne;	
-	}
-
-	public void setAscenseurSelectionne(Ascenseur ascenseurASelectionne) {
-		this.ascenseurSelectionne = ascenseurASelectionne;
-		update(this.ascenseurSelectionne, null);
 	}
 }

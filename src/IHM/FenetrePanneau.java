@@ -19,7 +19,6 @@ public class FenetrePanneau extends JFrame {
 
 
 	private JToggleButton boutonAscenseurSelectionne;
-	private Ascenseur ascenseurSelectionne;
 	private static final long serialVersionUID = 1L;
 
 	public FenetrePanneau (final Batiment batiment){
@@ -50,10 +49,10 @@ public class FenetrePanneau extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					if (getAscenseurSelectionne() != batiment.getAscenseur(j - 1)) {
+					if (batiment.getAscenseurSelectionne() != batiment.getAscenseur(j - 1)) {
 						boutonAscenseurSelectionne.setSelected(false);			//le dernier sélectionné ne l'est plus
 						boutonAscenseurSelectionne = ascenseur;					//le bouton sélectionné devient le nouveau cliqué
-						setAscenseurSelectionne(batiment.getAscenseur(j - 1));		//et l'ascenseur selectionne devient celui cliqué
+						batiment.setAscenseurSelectionne(batiment.getAscenseur(j - 1));		//et l'ascenseur selectionne devient celui cliqué
 						
 						//fenetreBatiment.setAscenseur(ascenseurSelectionne);	//idem pour la fenetreBatiment
 						//fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));	//actualisation du numéro du nouvel ascenseur
@@ -93,10 +92,10 @@ public class FenetrePanneau extends JFrame {
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						if (!getAscenseurSelectionne().estBloquer())
-							getAscenseurSelectionne().bloquer();
+						if (!batiment.getAscenseurSelectionne().estBloquer())
+							batiment.getAscenseurSelectionne().bloquer();
 						else
-							getAscenseurSelectionne().debloque();
+							batiment.getAscenseurSelectionne().debloque();
 						
 					}});
 			}
@@ -110,11 +109,11 @@ public class FenetrePanneau extends JFrame {
 	
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						batiment.appuyerBoutonAscenseur(getAscenseurSelectionne(), j);
+						batiment.appuyerBoutonAscenseur(batiment.getAscenseurSelectionne(), j);
 					}});
 			}
 		}
-		setAscenseurSelectionne(batiment.getAscenseur(0));
+		batiment.setAscenseurSelectionne(batiment.getAscenseur(0));
 		
 		this.setTitle(batiment.getNom() + " (lifts)");	//Titre de la fenêtre 
 		this.setMinimumSize(new Dimension(300, 500));
@@ -122,15 +121,6 @@ public class FenetrePanneau extends JFrame {
 		int height = (int)dimension.getHeight();
 		this.setLocation(0, height/2 - this.getHeight()/2);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.setVisible(true);												//la fenêtre apparaît
-	}
-
-	public Ascenseur getAscenseurSelectionne() {
-		return ascenseurSelectionne;
-	}
-
-	public void setAscenseurSelectionne(Ascenseur ascenseurSelectionne) {
-		this.ascenseurSelectionne = ascenseurSelectionne;
-		this.ascenseurSelectionne.notifyObservers();
+		this.setVisible(true);												//la fenetre apparait
 	}
 }
