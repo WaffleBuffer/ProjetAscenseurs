@@ -3,7 +3,6 @@ package Controleurs;
 import java.util.ArrayList;
 
 import Client.Batiment;
-import Client.Constantes;
 import Requetes.Requete;
 import Requetes.RequeteExterne;
 import AlgosTraitement.IAlgoTraitementExterne;
