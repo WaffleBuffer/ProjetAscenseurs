@@ -78,7 +78,7 @@ public class FenetreBatiment extends JFrame implements Observer{
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					bat.appuyerBoutonEtage(bat.getNbEtages() - j, Constantes.BAS);
+					bat.appuyerBoutonEtage(bat.getNbEtages() - j - 1, Constantes.BAS);
 				}});
 			panelBoutons.setLayout(new GridLayout(2, 1)); 	//ce panel utilise un layout à deux lignes et une colonne
 			panelBatiment.add(panelBoutons);	//ajout du panel des boutons à celui du batiment 
@@ -213,14 +213,11 @@ public class FenetreBatiment extends JFrame implements Observer{
 	public void update(Observable observe, Object arg1) {
 		labelEtageAscenseurSelectionne.setText(Integer.toString(batiment.getAscenseurSelectionne().getEtage()));	//actualise l'étage actuel de l'ascenseur
 		labelCourant.setOpaque(false);
-		setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - batiment.getAscenseurSelectionne().getEtage() - 1));
+		setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - batiment.getAscenseurSelectionne().getEtage()));
 		labelCourant.setOpaque(true);
-		FonctionsUtiles.afficherEtatAscenseur(batiment.getAscenseurSelectionne(), getLabelCourant());
-		for (int i = 0; i < batiment.getNbEtages(); ++i){
-			System.out.println("********");
-			System.out.println(batiment.getNbEtages() - i - 1);
-			System.out.println(String.valueOf(FonctionsUtiles.NbAscenseursParEtage(batiment, i)));
-			listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - i - 1).setText(String.valueOf(FonctionsUtiles.NbAscenseursParEtage(batiment, i)));
+		FonctionsUtiles.afficherEtatAscenseur(batiment.getAscenseurSelectionne(), labelCourant);
+		for (int i = 0; i < listeLabelNbAscenseursParEtage.size(); ++i){
+			listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - i).setText(Integer.toString((FonctionsUtiles.NbAscenseursParEtage(batiment, i))));
 		}
 	}
 }

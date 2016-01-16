@@ -95,10 +95,13 @@ public class Batiment extends java.util.Observable{
 	 * @param numEtage numero du {@link Bouton}
 	 */
 	public void appuyerBoutonEtage (int numEtage, int hautOuBas) {
-		if (hautOuBas == Constantes.HAUT)
+		if (hautOuBas == Constantes.HAUT) {
 			listeBoutonsHaut.get(numEtage).appuyer(controleurExt);
-		else if (hautOuBas == Constantes.BAS)
-			listeBoutonsBas.get(numEtage-1).appuyer(controleurExt);
+		}
+		else if (hautOuBas == Constantes.BAS) {
+			listeBoutonsBas.get(numEtage).appuyer(controleurExt);
+		}
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -152,7 +155,7 @@ public class Batiment extends java.util.Observable{
 	 * @param numBouton numero du {@link Bouton} de {@link Ascenseur} 
 	 */
 	public void appuyerBoutonAscenseur (Ascenseur ascenseur, int numBouton) {
-		ascenseur.appuyerBouton(numBouton, this.getControleursInternes().get(ascenseur.getNumAsc()));
+		ascenseur.appuyerBouton(numBouton, this.getControleursInternes().get(ascenseur.getNumAsc() - 1));
 		setChanged();
 		notifyObservers();
 	}

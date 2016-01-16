@@ -48,10 +48,10 @@ public class FenetrePanneau extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					if (bat.getAscenseurSelectionne() != bat.getAscenseur(j)) {
+					if (bat.getAscenseurSelectionne() != bat.getAscenseur(j - 1)) {
 						boutonAscenseurSelectionne.setSelected(false);			//le dernier sélectionné ne l'est plus
 						boutonAscenseurSelectionne = ascenseur;					//le bouton sélectionné devient le nouveau cliqué
-						bat.setAscenseurSelectionne(bat.getAscenseur(j));		//et l'ascenseur selectionne devient celui cliqué
+						bat.setAscenseurSelectionne(bat.getAscenseur(j - 1));		//et l'ascenseur selectionne devient celui cliqué
 						
 						//fenetreBatiment.setAscenseur(ascenseurSelectionne);	//idem pour la fenetreBatiment
 						//fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));	//actualisation du numéro du nouvel ascenseur
