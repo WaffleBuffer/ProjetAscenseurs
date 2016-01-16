@@ -1,6 +1,7 @@
 package Client;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import Boutons.BoutonDestination;
 import Boutons.BoutonInterne;
@@ -13,7 +14,7 @@ import Requetes.RequeteInterne;
 /**Description de l'etat de l'Ascenseur. Le traitement des {@link Requetes.Requete} se fait dans le {@link ControleurInterne} correspondant.
  * @author Thomas
  */
-public class Ascenseur {
+public class Ascenseur extends Observable{
 	
 	/**{@link GestionnaireOption} de cet Ascenseur
 	 * @see GestionnaireOption
@@ -84,6 +85,7 @@ public class Ascenseur {
 	/**Construit un Ascenseur et initialise tous ses attributs avec en plus le {@link Ascenseur#poidsMax} en parametre.
 	 * @param nbEtage permet de connaitre le nombre de {@link BoutonDestination} que devrait posseder cet Ascenseur.
 	 * @param num le numero que l'on attribut a cet Ascenseur.
+	 * @param poidsMax le {@link #poidsMax} de cet Ascenseur.
 	 */
 	public Ascenseur (int nbEtage, int num, int poidsMax){
 		gestionnaireOption = new GestionnaireOption ();
@@ -101,9 +103,8 @@ public class Ascenseur {
 		listeBoutons.add(new BoutonStop()); // tout ascenseur a un bouton stop
 	}
 
-	/* (non-Javadoc)
+	/** Renvoie l'etat de cet Ascenseur.
 	 * @see java.lang.Object#toString()
-	 * affichage de l'etat de l'ascenseur
 	 */
 	@Override
 	public String toString() {
@@ -118,6 +119,8 @@ public class Ascenseur {
 	 */
 	public void setEtage(int etage) {
 		this.etage = etage;
+		setChanged();
+		notifyObservers();
 	}
 
 	/**Permet d'obtenir {@link Ascenseur#listeBoutons}
@@ -160,6 +163,8 @@ public class Ascenseur {
 	 */
 	public void ouvrirPortes () {
 		portesOuvertes = true;
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**Ferme les portes en modifiant {@link Ascenseur#portesOuvertes} en prenant du temps.
@@ -167,6 +172,8 @@ public class Ascenseur {
 	 */
 	public void fermerPortes () {
 		portesOuvertes = false;
+		setChanged();
+		notifyObservers();
 	}
 
 	/**Met l'Ascenseur en mouvement en modifiant {@link Ascenseur#estEnMouvement}
@@ -174,6 +181,8 @@ public class Ascenseur {
 	 */
 	public void setEstEnMouvement(boolean estEnMouvement) {
 		this.estEnMouvement = estEnMouvement;
+		setChanged();
+		notifyObservers();
 	}
 
 	/**Permet d'obtenir {@link Ascenseur#portesOuvertes}.
@@ -203,6 +212,8 @@ public class Ascenseur {
 	public void bloquer () {
 		estEnMouvement = false;
 		estBloque = true;
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**Debloque l'Ascenseur en modifiant {@link Ascenseur#estBloque}.
@@ -210,6 +221,8 @@ public class Ascenseur {
 	 */
 	public void debloque () {
 		estBloque = false;
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**Permet d'appuyer sur un {@link BoutonInterne} de cet Ascenseur
@@ -218,6 +231,8 @@ public class Ascenseur {
 	 */
 	public void appuyerBouton (int numBouton, ControleurInterne controleur) {
 		listeBoutons.get(numBouton).appuyer(controleur);
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**Active l'{@link IOption} de numero numOption
@@ -225,6 +240,8 @@ public class Ascenseur {
 	 */
 	public void activerOption (int numOption) {
 		gestionnaireOption.activerOption(numOption);
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**Ajoute une {@link IOption} au {@link Ascenseur#gestionnaireOption} de ce Ascenseur
@@ -232,5 +249,7 @@ public class Ascenseur {
 	 */
 	public void ajouterOption (IOption option) {
 		gestionnaireOption.addOption(option);
+		setChanged();
+		notifyObservers();
 	}
 }

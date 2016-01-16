@@ -1,6 +1,8 @@
 package Client;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import Boutons.Bouton;
 import Boutons.BoutonBas;
@@ -14,7 +16,7 @@ import Requetes.Requete;
  * @author Thomas
  * @see ControleurInterne
  */
-public class Batiment extends java.util.Observable{
+public class Batiment extends java.util.Observable implements Observer {
 	
 	/**Le nom de ce Batiment.
 	 */
@@ -37,15 +39,15 @@ public class Batiment extends java.util.Observable{
 	 */
 	private ControleurExterne controleurExt;
 	
-	/**le batiment possede une liste de {@link BoutonExterne} vers le haut
+	/**le batiment possede une liste de {@link Boutons.BoutonExterne} vers le haut
 	 */
 	private ArrayList<BoutonHaut> listeBoutonsHaut = new ArrayList<BoutonHaut>();
 	
-	/**le batiment possede une liste de {@link BoutonExterne} vers le bas
+	/**le batiment possede une liste de {@link Boutons.BoutonExterne} vers le bas
 	 */
 	private ArrayList<BoutonBas> listeBoutonsBas = new ArrayList<BoutonBas>();
 	
-	private Ascenseur ascenseurSelectionne;
+	//private Ascenseur ascenseurSelectionne;
 	
 	public Batiment(String nom, int nbEtages, int nbAscenseur) {
 		this.nom = nom;
@@ -62,9 +64,10 @@ public class Batiment extends java.util.Observable{
 		//Creation de tous les ascenseurs
 		for (int i = 0; i < nbAscenseur; ++i) {
 			controleursInt.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1)));
+			//controleursInt.get(i).getAscenseur().addObserver(this);
 		}
 		
-		this.ascenseurSelectionne = getAscenseur(0);
+		//this.ascenseurSelectionne = getAscenseur(0);
 		
 		listeBoutonsBas.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
 		controleurExt = new ControleurExterne(controleursInt, this.getNbEtages());
@@ -86,8 +89,6 @@ public class Batiment extends java.util.Observable{
 			strToReturn += "| " + strResult + " |\n";
 			strToReturn += frame + "\n";
 		}
-		setChanged();
-		notifyObservers();
 		return strToReturn;
 	}
 	
@@ -107,7 +108,7 @@ public class Batiment extends java.util.Observable{
 	
 	/**permet d'obtenir un {@link Ascenseur} de ce Batiment
 	 * @param index l'index de l'{@link Ascenseur}
-	 * @return {@link #controleursInt}
+	 * @return l'{@link Ascenseur} a l'index index.
 	 */
 	public Ascenseur getAscenseur(int index) {
 		return controleursInt.get(index).getAscenseur();
@@ -156,8 +157,8 @@ public class Batiment extends java.util.Observable{
 	 */
 	public void appuyerBoutonAscenseur (Ascenseur ascenseur, int numBouton) {
 		ascenseur.appuyerBouton(numBouton, this.getControleursInternes().get(ascenseur.getNumAsc() - 1));
-		setChanged();
-		notifyObservers();
+		//setChanged();
+		//notifyObservers();
 	}
 	
 	@Override
@@ -177,12 +178,18 @@ public class Batiment extends java.util.Observable{
 		return listeBoutonsBas;
 	}
 
-	public Ascenseur getAscenseurSelectionne() {
+	/*public Ascenseur getAscenseurSelectionne() {
 		return ascenseurSelectionne;
-	}
+	}*/
 
-	public void setAscenseurSelectionne(Ascenseur ascenseurSelectionne) {
+	/*public void setAscenseurSelectionne(Ascenseur ascenseurSelectionne) {
 		this.ascenseurSelectionne = ascenseurSelectionne;
+		setChanged();
+		notifyObservers();
+	}*/
+
+	@Override
+	public void update(Observable o, Object arg) {
 		setChanged();
 		notifyObservers();
 	} 

@@ -17,6 +17,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import Client.Batiment;
+import Controleurs.ControleurInterne;
 
 public class FenetreConfiguration extends JFrame {
 
@@ -73,8 +74,14 @@ public class FenetreConfiguration extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Batiment batiment = new Batiment(texteNomBatiment.getText(), (Integer) nbEtages.getValue(), (Integer) nbAscenseurs.getValue());
-				batiment.addObserver(new FenetreRequetes(batiment));
-				batiment.addObserver(new FenetreBatiment(batiment));
+				FenetreRequetes fenetreRequetes = new FenetreRequetes(batiment);
+				FenetreBatiment fenetreBatiment = new FenetreBatiment(batiment);
+				batiment.addObserver(fenetreRequetes);
+				batiment.addObserver(fenetreBatiment);
+				for (ControleurInterne i : batiment.getControleursInternes()) {
+					i.getAscenseur().addObserver(fenetreRequetes);
+					i.getAscenseur().addObserver(fenetreBatiment);
+				}
 				new FenetrePanneau(batiment);
 				texteNomBatiment.setText(null);
 				nbEtages.setValue(1);
