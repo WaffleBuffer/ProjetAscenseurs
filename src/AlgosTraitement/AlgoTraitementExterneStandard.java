@@ -41,13 +41,14 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 				}
 				else {//Sinon on cherche l'ascenseur ayant le moins de requete en attente
 					
-					rechercheMoinsActif (controleurExt);
-					aUtiliser.addRequete(controleurExt.getRequetes().get(i));
-					controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
-					--i;
+					if (rechercheMoinsActif (controleurExt)) {
+						aUtiliser.addRequete(controleurExt.getRequetes().get(i));
+						controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
+						--i;
+					}
 				}
 			}
-			else {//si on veut aller vers le bas
+			else if (controleurExt.getRequetes().get(i).getLibelle() == Constantes.BAS){//si on veut aller vers le bas
 				
 				if(rechercheVersBas(controleurExt.getRequetes().get(i).getEtageDemande(), controleurExt)) {
 					/*Cherche un ascenseur qui est au-dessus de l'etage de la requete 
@@ -59,10 +60,11 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 				}
 				else {//Sinon on cherche l'ascenseur ayant le moins de requete en attente
 					
-					rechercheMoinsActif (controleurExt);
-					aUtiliser.addRequete(controleurExt.getRequetes().get(i));
-					controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
-					--i;
+					if (rechercheMoinsActif (controleurExt)) {
+						aUtiliser.addRequete(controleurExt.getRequetes().get(i));
+						controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
+						--i;
+					}
 				}				
 			}
 		}
@@ -77,7 +79,7 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 	 */
 	private boolean rechercheInactif (ControleurExterne controleurExt) {
 		for (ControleurInterne controleur : controleurExt.getControleurs()) {
-			if (0 == controleur.getNumberOfRequete()) {
+			if (0 == controleur.getNumberOfRequete() && !controleur.getAscenseur().estBloquer()) {
 				this.aUtiliser = controleur;
 				return true;
 			}
@@ -97,7 +99,8 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 	private boolean rechercheVersHaut (int etage, ControleurExterne controleurExt) {
 		for (ControleurInterne controleur : controleurExt.getControleurs()) {
 			if (controleur.prochaineDest() != -1 && 
-					(controleur.getAscenseur().getEtage() < etage && controleur.prochaineDest() >= etage)) {
+					(controleur.getAscenseur().getEtage() < etage && controleur.prochaineDest() >= etage &&
+					!controleur.getAscenseur().estBloquer())) {
 				this.aUtiliser = controleur;
 				return true;
 			}
@@ -117,7 +120,8 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 	private boolean rechercheVersBas (int etage, ControleurExterne controleurExt) {
 		for (ControleurInterne controleur : controleurExt.getControleurs()) {
 			if (controleur.prochaineDest() != -1 && 
-					(controleur.getAscenseur().getEtage() > etage && controleur.prochaineDest() <= etage)) {
+					(controleur.getAscenseur().getEtage() > etage && controleur.prochaineDest() <= etage) && 
+					!controleur.getAscenseur().estBloquer()) {
 				this.aUtiliser = controleur;
 				return true;
 			}
@@ -126,29 +130,31 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 	}
 	
 	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet d'attribuer a {@link #aUtiliser} le {@link ControleurInterne}
-	 * possedant le moins de {@link Requete} parmis {@link ControleurExterne#controleurs}.
+	 * possedant le moins de {@link Requete} parmis {@link ControleurExterne#controleurs} s'il y en a un.
 	 * @param controleurExt controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
+	 * @return true si un {@link ControleurInterne} disponnible a ete trouve, false sinon (ils sont tous bloque).
 	 * @see ControleurExterne#traiterRequetes()
 	 * @see ControleurInterne
 	 */
-	private void rechercheMoinsActif (ControleurExterne controleurExt) {
+	private boolean rechercheMoinsActif (ControleurExterne controleurExt) {
 		int min = controleurExt.getNbEtage() + 1;
 		for (ControleurInterne controleur : controleurExt.getControleurs()) {
-			if (controleur.getNumberOfRequete() == 0) {
+			if (controleur.getNumberOfRequete() == 0 && !controleur.getAscenseur().estBloquer()) {
 				this.aUtiliser = controleur;
-				return;
+				return true;
 			}
 			else {
-				if (controleur.getNumberOfRequete() < min) {
+				if (controleur.getNumberOfRequete() < min && !controleur.getAscenseur().estBloquer()) {
 					min = controleur.getNumberOfRequete();
 				}
 			}
 		}
 		for (ControleurInterne controleur : controleurExt.getControleurs()) {
-			if (controleur.getNumberOfRequete() == min) {
+			if (controleur.getNumberOfRequete() == min && !controleur.getAscenseur().estBloquer()) {
 				this.aUtiliser = controleur;
-				return;
+				return true;
 			}
 		}
+		return false;
 	}
 }
