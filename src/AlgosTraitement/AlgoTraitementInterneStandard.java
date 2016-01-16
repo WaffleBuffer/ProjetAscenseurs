@@ -10,7 +10,8 @@ import Requetes.Requete;
  */
 public class AlgoTraitementInterneStandard implements IAlgoTraitementInterne{
 
-	/**Fonction permettant de traiter les {@link Controleur#requetes} de l'{@link Ascenseur} gere par ontroleurInt pour une iteration de maniere standard.
+	/**Fonction permettant de traiter les {@link Controleurs.Controleur#requetes} de l'{@link Ascenseur}
+	 *  gere par controleurInt pour une iteration de maniere standard.
 	 * @param controleurInt le {@link ControleurInterne} sur lequel appliquer l'algorithme.
 	 * @return String representant le resultat de l'iteration. Inutilise a ce jour. Etait utilisee pour des tests dans un terminal.
 	 */
@@ -84,7 +85,7 @@ public class AlgoTraitementInterneStandard implements IAlgoTraitementInterne{
 		return "Requete non reconnue";
 	}
 	
-	/**Verifie si l'une des {@link Requete} stockee par correspond a l'etage courrant de l'{@link Ascenseur} de ControleurInt.
+	/**Verifie si l'une des {@link Requete} stockee par controleurInt correspond a l'etage courrant de l'{@link Ascenseur} de ControleurInt.
 	 * Utilise dans {@link #traiterRequetes(ControleurInterne)}.
 	 * @param controleurInt le {@link ControleurInterne} sur lequel s'applique le traitement.
 	 * @return true si l'une des {@link Requetes.Requete} de ControleurInt

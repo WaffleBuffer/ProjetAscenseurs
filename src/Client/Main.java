@@ -4,9 +4,10 @@ import IHM.FenetreConfiguration;
 public class Main {
 
 	public static void main(String[] args) {
-		//Batiment batim = new Batiment("Hotel", 5, 2);
-		
 		FenetreConfiguration fenetre = new FenetreConfiguration();
+		
+		//Permet de tester une partie du programme sur terminal.
+		//Batiment batim = new Batiment("Hotel", 5, 2);
 //		System.out.println(batim.getAscenseur(1).toString());
 //		
 //		batim.appuyerBoutonAscenseur(1, 3);

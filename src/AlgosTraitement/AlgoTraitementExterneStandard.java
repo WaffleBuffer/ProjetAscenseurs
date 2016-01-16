@@ -11,19 +11,19 @@ import Requetes.RequeteExterne;
  */
 public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 
-	/**Variable utilisee durant {@link ControleurExterne#traiterRequetes()}.
-	 * @see ControleurExterne#traiterRequetes()
+	/**Variable utilisee durant {@link #traiterRequetes (ControleurExterne controleurExt)}.
+	 * @see #traiterRequetes (ControleurExterne controleurExt)
 	 */
 	private ControleurInterne aUtiliser;
 	
-	/** (non-Javadoc)
-	 * @see Controleurs.IAlgoTraitementExterne#traiterRequetes(Controleurs.ControleurExterne)
+	/** traitement standard des {@link RequeteExterne}.
+	 * @see IAlgoTraitementExterne#traiterRequetes(Controleurs.ControleurExterne)
 	 */
 	@Override
 	public void traiterRequetes (ControleurExterne controleurExt) {
 		for (int i = 0; i < controleurExt.getRequetes().size();++i) {//parcours de toutes les requetes externe non affectees
 			
-			if (rechercheDInactif(controleurExt)) {//cherche d'abord si des ascenseurs sont inactifs
+			if (rechercheInactif(controleurExt)) {//cherche d'abord si des ascenseurs sont inactifs
 				
 				aUtiliser.addRequete(controleurExt.getRequetes().get(i));
 				controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
@@ -68,13 +68,14 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 		}
 	}
 	
-	/**Utilise dans {@link ControleurExterne#traiterRequetes()}. Permet de connaitre s'il y a un {@link ControleurInterne}
+	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet de connaitre s'il y a un {@link ControleurInterne}
 	 *  innactif parmis {@link ControleurExterne#controleurs}.
-	 * Si c'est le cas, alors {@link ControleurExterne#aUtiliser} le designera et la fonction renvera true.
+	 * Si c'est le cas, alors {@link #aUtiliser} le designera et la fonction renvera true.
+	 * @param controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
 	 * @return true si un {@link ControleurInterne} innactif a ete trouve false sinon.
-	 * @see ControleurExterne#traiterRequetes()
+	 * @see #traiterRequetes (ControleurExterne controleurExt)
 	 */
-	private boolean rechercheDInactif (ControleurExterne controleurExt) {
+	private boolean rechercheInactif (ControleurExterne controleurExt) {
 		for (ControleurInterne controleur : controleurExt.getControleurs()) {
 			if (0 == controleur.getNumberOfRequete()) {
 				this.aUtiliser = controleur;
@@ -84,13 +85,14 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 		return false;
 	}
 	
-	/**Utilise dans {@link ControleurExterne#traiterRequetes()}. Permet de verifier si l'etage d'ou provient la {@link Requete}
+	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet de verifier si l'etage d'ou provient la {@link Requete}
 	 * courante est sur le chemin d'un {@link ControleurInterne} qui monte parmis {@link ControleurExterne#controleurs}. 
-	 * Si c'est le cas, alors {@link ControleurExterne#aUtiliser} le designera et la fonction renvera true.
+	 * Si c'est le cas, alors {@link #aUtiliser} le designera et la fonction renvera true.
 	 * @param etage l'etage de la {@link Requete} consideree comme une {@link RequeteExterne}
+	 * @param controleurExt controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
 	 * @return true si un {@link ControleurInterne} passe par etage, false sinon.
 	 * @see RequeteExterne
-	 * @see ControleurExterne#traiterRequetes()
+	 * @see #traiterRequetes (ControleurExterne controleurExt)
 	 */
 	private boolean rechercheVersHaut (int etage, ControleurExterne controleurExt) {
 		for (ControleurInterne controleur : controleurExt.getControleurs()) {
@@ -103,13 +105,14 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 		return false;
 	}
 	
-	/**Utilise dans {@link ControleurExterne#traiterRequetes()}. Permet de verifier si l'etage d'ou provient la {@link Requete}
+	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet de verifier si l'etage d'ou provient la {@link Requete}
 	 * courante est sur le chemin d'un {@link ControleurInterne} qui descent parmis {@link ControleurExterne#controleurs}.
-	 * Si c'est le cas, alors {@link ControleurExterne#aUtiliser} le designera et la fonction renvera true.
+	 * Si c'est le cas, alors {@link #aUtiliser} le designera et la fonction renvera true.
 	 * @param etage l'etage de la {@link Requete}. Consideree comme une {@link RequeteExterne}
+	 * @param controleurExt controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
 	 * @return true si un {@link ControleurInterne} passe par etage, false sinon.
 	 * @see RequeteExterne
-	 * @see ControleurExterne#traiterRequetes()
+	 * @see #traiterRequetes (ControleurExterne controleurExt)
 	 */
 	private boolean rechercheVersBas (int etage, ControleurExterne controleurExt) {
 		for (ControleurInterne controleur : controleurExt.getControleurs()) {
@@ -122,9 +125,9 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 		return false;
 	}
 	
-	/**Utilise dans {@link ControleurExterne#traiterRequetes()}. Permet d'attribuer a {@link ControleurExterne#aUtiliser} le {@link ControleurInterne}
+	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet d'attribuer a {@link #aUtiliser} le {@link ControleurInterne}
 	 * possedant le moins de {@link Requete} parmis {@link ControleurExterne#controleurs}.
-	 * 
+	 * @param controleurExt controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
 	 * @see ControleurExterne#traiterRequetes()
 	 * @see ControleurInterne
 	 */

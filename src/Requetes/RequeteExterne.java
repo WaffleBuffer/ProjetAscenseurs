@@ -18,7 +18,7 @@ public class RequeteExterne extends Requete {
 	 * @param etage le numero de l'{@link BoutonExterne#etage}} auquel se trouve le {@link BoutonExterne} lorsque l'on appuie dessu.
 	 * @param direction La direction que l'on souhaite prendre. Le {@link Requete#libelle} 
 	 * ne peut que etre {@link Constantes#HAUT} ou {@link Constantes#BAS} sinon elle sera ignore par le {@link Controleurs.ControleurInterne}.
-	 * @see BoutonExterne#appuyer(Controleurs.IControleur)
+	 * @see BoutonExterne#appuyer(Controleurs.Controleur)
 	 * @see Client.Constantes
 	 */
 	public RequeteExterne (int etage, int direction){

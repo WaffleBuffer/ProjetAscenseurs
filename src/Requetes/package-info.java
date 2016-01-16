@@ -1,4 +1,4 @@
-/**Contient la classe {@link Requetes.Requete} et ses sous-classes.
+/**Contient les requetes.
  * @author julien
  */
 package Requetes;

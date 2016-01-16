@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import Boutons.Bouton;
 import Boutons.BoutonBas;
+import Boutons.BoutonExterne;
 import Boutons.BoutonHaut;
 import AlgosTraitement.AlgoTraitementExterneStandard;
 import AlgosTraitement.AlgoTraitementInterneStandard;
@@ -76,6 +77,7 @@ public class Batiment extends java.util.Observable implements Observer {
 	}
 	
 	/**permet de traiter les {@link Requete} des {@link ControleurInterne} contenus dans {@link #controleursInt}
+	 * @return String representant le resultat de l'iteration. Inutilise a ce jour. Etait utilisee pour des tests dans un terminal.
 	 * @see Controleurs.ControleurInterne#traiterRequetes()
 	 */
 	public String traiterControleurs () {
@@ -94,8 +96,10 @@ public class Batiment extends java.util.Observable implements Observer {
 		return strToReturn;
 	}
 	
-	/**permet d'appuyer sur le {@link Bouton}
-	 * @param numEtage numero du {@link Bouton}
+	/**permet d'appuyer sur le {@link BoutonExterne}
+	 * @param numEtage numero du {@link BoutonExterne}
+	 * @param hautOuBas la direction demandee par le {@link BoutonExterne} : {@link Constantes#HAUT} ou {@link Constantes#BAS}
+	 * @see Constantes
 	 */
 	public void appuyerBoutonEtage (int numEtage, int hautOuBas) {
 		if (hautOuBas == Constantes.HAUT) {

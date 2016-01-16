@@ -15,11 +15,13 @@ public class ControleurInterne extends Controleur{
 	 */
 	private Ascenseur ascenseur;
 	
+	/**la strategie a appliquer pour traiter les {@link RequeteInterne} de ce ControleurInterne.
+	 */
 	private IAlgoTraitementInterne strategieTraitement;
 	
 	/**Construit un ControleurInterne.
 	 * @param ascenseur {@link Ascenseur} lie a ce ControleurInterne.
-	 * @param strategie l'{@link IAlgoTraitementInterne} a appliquer sur ce ControleurInterne pour le traitement des Requetes.
+	 * @param strategie l'{@link IAlgoTraitementInterne} a appliquer sur ce ControleurInterne pour le traitement des {@link Requete}.
 	 */
 	public ControleurInterne (Ascenseur ascenseur, IAlgoTraitementInterne strategie) {
 		this.ascenseur = ascenseur;
@@ -33,7 +35,7 @@ public class ControleurInterne extends Controleur{
 		return this.ascenseur;
 	}
 	
-	/**Fonction permettant de traiter les {@link Controleur#requetes} de l'{@link Ascenseur} gere par ce ControleurInterne pour une iteration
+	/**Fonction permettant de traiter les {@link Controleur#requetes} pour l'{@link Ascenseur} gere par ce ControleurInterne pour une iteration
 	 * grace a la {@link #strategieTraitement} de ce ControleurInterne.
 	 * @return String representant le resultat de l'iteration. Inutilise a ce jour. Etait utilisee pour des tests dans un terminal.
 	 */

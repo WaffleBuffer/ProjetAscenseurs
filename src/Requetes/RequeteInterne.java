@@ -11,7 +11,7 @@ public class RequeteInterne extends Requete {
 	/** Construit une RequeteInterne correspondant a la demande d'un {@link Client.Ascenseur} d'aller a un {@link Boutons.BoutonDestination#etage}.<br>
 	 * {@link Requete#libelle} = {@link Constantes#DEPLACEMENT}.
 	 * @param nouvelEtage Le numero de l'etage correspondant au {@link Boutons.BoutonDestination#etage}.
-	 * @see Boutons.BoutonDestination#appuyer(Controleurs.IControleur)
+	 * @see Boutons.BoutonDestination#appuyer(Controleurs.Controleur)
 	 */
 	public RequeteInterne (int nouvelEtage){
 		super(nouvelEtage, Constantes.DEPLACEMENT);
@@ -19,7 +19,7 @@ public class RequeteInterne extends Requete {
 	
 	/**Construit une RequeteInterne correspondant a la demande d'arret d'un {@link Client.Ascenseur} en appuyant sur un {@link Boutons.BoutonStop}<br>
 	 * {@link Requete#libelle} = {@link Constantes#STOP}.
-	 * @see Boutons.BoutonStop#appuyer(Controleurs.IControleur)
+	 * @see Boutons.BoutonStop#appuyer(Controleurs.Controleur)
 	 */
 	public RequeteInterne (){
 		super (0, Constantes.STOP);

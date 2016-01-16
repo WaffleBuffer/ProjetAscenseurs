@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Client.Batiment;
 import Requetes.Requete;
 import Requetes.RequeteExterne;
+import AlgosTraitement.AlgoTraitementExterneStandard;
 import AlgosTraitement.IAlgoTraitementExterne;
 
 /**Controleur correspondant a celui du sujet. Il en existe un par {@link Batiment} et permet de traiter les {@link RequeteExterne}
@@ -16,22 +17,20 @@ public class ControleurExterne extends Controleur{
 	/**Liste des {@link ControleurInterne} (et donc des {@link Client.Ascenseur}) disponibles.
 	 */
 	private ArrayList<ControleurInterne> controleurs;
-
-	/**Variable utilisee durant {@link ControleurExterne#traiterRequetes()}.
-	 * @see ControleurExterne#traiterRequetes()
-	 */
-	private ControleurInterne aUtiliser;
 	
-	/**Utilise pour connaitre le nombre d'etages. Utilise dans {@link ControleurExterne#rechercheMoinsActif()}
-	 * @see ControleurExterne#rechercheMoinsActif()
+	/**Utilise pour connaitre le nombre d'etages. Utilise dans {@link AlgoTraitementExterneStandard#rechercheMoinsActif (ControleurExterne controleurExt)}
+	 * @see AlgoTraitementExterneStandard#rechercheMoinsActif (ControleurExterne controleurExt)
 	 */
 	private int nbEtage;
 	
+	/**la strategie a appliquer pour traiter les {@link RequeteExterne} de ce ControleurExterne
+	 */
 	private IAlgoTraitementExterne strategieTraitement;
 	
 	/**Construit un ControleurExterne
 	 * @param controleurs liste des {@link ControleurInterne} disponnibles
 	 * @param nbEtage nombre d'etage du {@link Batiment} correspondant.
+	 * @param strategie l'{@link IAlgoTraitementExterne} a appliquer pour traiter les {@link RequeteExterne} de ce ControleurExterne
 	 * @see Batiment#Batiment(String, int, int)
 	 */
 	public ControleurExterne (ArrayList<ControleurInterne> controleurs, int nbEtage, IAlgoTraitementExterne strategie) {
@@ -49,17 +48,24 @@ public class ControleurExterne extends Controleur{
 		getRequetes().add(new RequeteExterne(etage, direction));
 	}
 	
-	/**Permet de traiter toutes les requetes de {@link Controleur#requetes}
+	/**Permet de traiter toutes les requetes de {@link Controleur#requetes} 
+	 * en appliquant la {@link #strategieTraitement} de ce ControleurExterne.
 	 * 
 	 */
 	public void traiterRequetes () {
 		strategieTraitement.traiterRequetes(this);
 	}
 	
+	/**Permet d'obtenir le {@link #nbEtage} de ce ControleurExterne
+	 * @return {@link #nbEtage} de ce ControleurExterne
+	 */
 	public int getNbEtage() {
 		return nbEtage;
 	}
 
+	/**Permet d'obtenir les {@link #controleurs} de ce ControleurExterne.
+	 * @return {@link #controleurs} de ce ControleurExterne.
+	 */
 	public ArrayList<ControleurInterne> getControleurs() {
 		return controleurs;
 	}
