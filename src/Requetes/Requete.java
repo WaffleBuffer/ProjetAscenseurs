@@ -2,30 +2,32 @@ package Requetes;
 
 import Client.Constantes;
 
-/** Description generale d'une requete. Le libelle est donne par les sous-classes {@link RequeteInterne} et {@link RequeteExterne}
+/** Description generale d'une requete. Le libelle est donne par les sous-classes.
  * @author Thomas
- *
+ * @see RequeteInterne
+ * @see RequeteExterne
  */
-public class Requete {
+public abstract class Requete {
 	
-	/**Numero de l'etage demande pour les {@link RequeteInterne} et le numero de l'etage du {@link Boutons.BoutonExterne} pour les {@link RequeteExterne}
+	/**Numero de l'etage demande par les {@link RequeteInterne} et le numero de l'etage du {@link Boutons.BoutonExterne} pour les {@link RequeteExterne}
 	 */
 	private int etageDemande;
 	
-	/**Identifiant de requete. Possibilites selon le type de requete:<br>
+	/**Identifiant de requete. Possibilitees selon le type de cette Requete:<br>
 	 * {@link RequeteInterne}:<br>
-	 * -{@link Boutons.BoutonDestination} = "Aller a l'etage"<br>
-	 * -{@link Boutons.BoutonStop}        = "Arreter l'ascenseur"<br>
+	 * -{@link Boutons.BoutonDestination} = {@link Constantes#DEPLACEMENT}<br>
+	 * -{@link Boutons.BoutonStop}        = {@link Constantes#STOP}<br>
 	 * 
 	 * {@link RequeteExterne}<br>
-	 * -{@link Boutons.BoutonHaut} = "Haut"<br>
-	 * -{@link Boutons.BoutonBas}  = "Bas"<br>
+	 * -{@link Boutons.BoutonHaut} = {@link Constantes#HAUT}<br>
+	 * -{@link Boutons.BoutonBas}  = {@link Constantes#BAS}<br>
+	 * @see Constantes
 	 */
 	private int libelle;
 	
-	/** Constructeur appele par les sous-classes
-	 * @param libelle {@link Requete#libelle} identifiant de la requete, fourni par la sous-classe
-	 * @param etageDemande {@link Requete#etageDemande} Numero de l'etage demande
+	/** Constructeur appelle par les sous-classes
+	 * @param libelle {@link #libelle} de cette requete, fourni par la sous-classe
+	 * @param etageDemande {@link #etageDemande} par cette Requete
 	 * @see #libelle
 	 * @see #etageDemande
 	 */
@@ -35,24 +37,25 @@ public class Requete {
 	}
 	
 	
-	/** Obtient le {@link Requete#libelle} d'une requete
-	 * @return le {@link Requete#libelle} de la requete. Voir l'attribut pour les valeurs possibles
+	/** Obtient le {@link #libelle} de cette requete
+	 * @return le {@link #libelle} de la requete.
 	 * @see #libelle
 	 */
 	public int getLibelle() {
 		return libelle;
 	}
 
-	/**Obtient {@link Requete#etageDemande} demande par cette requete
-	 * @return {@link Requete#etageDemande} par cette requete.
+	/**Obtient l'{@link #etageDemande} demande par cette requete
+	 * @return l'{@link #etageDemande} par cette requete.
 	 * @see #etageDemande
 	 */
 	public int getEtageDemande() {
 		return etageDemande;
 	}
 
-	/* (non-Javadoc)
+	/** Renvoie l'etat de cette Requete
 	 * @see java.lang.Object#toString()
+	 * @see Constantes#toString(int)
 	 */
 	@Override
 	public String toString() {
