@@ -1,5 +1,6 @@
 package IHM;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -64,6 +66,9 @@ public class FenetreOption extends JFrame implements Observer{
 		}
 		
 		this.listeAscenseur = new JList<Ascenseur>(ascenseurs);
+		
+		//Permet un affichage customise des cellules de la JList
+		listeAscenseur.setCellRenderer(new LabelAscenseurCellRenderer());
 		listeAscenseur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listeAscenseur.setLayoutOrientation(JList.VERTICAL);
 		listeAscenseur.setVisibleRowCount(-1);

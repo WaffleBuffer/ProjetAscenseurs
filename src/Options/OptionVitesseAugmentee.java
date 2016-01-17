@@ -1,39 +1,31 @@
 package Options;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import AlgosTraitement.AlgoTraitementInterneStandard;
 import AlgosTraitement.AlgoTraitementInterneVitesseAugmentee;
-import Client.Ascenseur;
+import AlgosTraitement.IAlgoTraitementInterne;
 import Controleurs.ControleurInterne;
 
-/**description de l'OptionMusique une implementation de {@link Option}
- * @author p14005728
+/**description de l'OptionVitesseAugmentee, une implementation de {@link Option}
+ * @author Thomas
  */
 public class OptionVitesseAugmentee extends Option {
 	
-	/**constructeur de OptionMusique
-	 * @param nomMusique le nom de la musique de cette OptionMusique
+	/**Construit une OptionVitesseAugmentee et initialise {@link Option#controleurInt}.
+	 * @param controleurInt le {@link ControleurInterne} a affecter a cette OptionVitesseAugmentee.
 	 */
 	public OptionVitesseAugmentee (ControleurInterne controleurInt) {
 		setControleurInterne(controleurInt);
 	}
 	
+	/**Constructeur par defaut d'une OptionVitesseAugmentee.
+	 */
 	public OptionVitesseAugmentee () {
 	}
 
-	/** permet d'activer OptionMusique en utilisant {@link OptionVitesseAugmentee#lancerMusique}
+	/** permet d'activer cette OptionVitesseAugmentee.
+	 * Cela a pour effet de changer l'{@link IAlgoTraitementInterne} du {@link Option#controleurInt}
+	 * de cette OptionVitesseAugmentee.
 	 */
 	@Override
 	public void activer() {
@@ -53,11 +45,17 @@ public class OptionVitesseAugmentee extends Option {
 		}
 	}
 
+	/** Permet de connaitre l'etat de cette OptionVitesseAugmentee.
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "speed upgrade " + (isEstActivee() ? " activated" : "");
 	}
 	
+	/** Permet d'obtenir une copie de cette OptionVitesseAugmentee.
+	 * @see Options.Option#clone()
+	 */
 	@Override
 	public OptionVitesseAugmentee clone() {
 		OptionVitesseAugmentee optionARetournee = new OptionVitesseAugmentee();
