@@ -1,6 +1,5 @@
 package IHM;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -24,11 +22,14 @@ import javax.swing.event.ListSelectionListener;
 import Client.Ascenseur;
 import Client.Batiment;
 import Options.Option;
-import Options.OptionMusique;
 import Options.OptionsDisponnibles;
 
 public class FenetreOption extends JFrame implements Observer{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Batiment batiment;
 	private JList<Ascenseur> listeAscenseur;
 	private JList<Option> listeOptionsAscenseur;

@@ -1,12 +1,9 @@
 package IHM;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,8 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.TitledBorder;
-
 import Client.Batiment;
 import Controleurs.ControleurInterne;
 import Requetes.Requete;
@@ -71,12 +66,6 @@ public class FenetreRequetes extends JFrame implements Observer{
 		// on met une JScrollBar en cas de besoin
 		//JScrollPane scrollHistorique = new JScrollPane(panelRequeteInterne);	
 		
-		// On met un cadre avec le titre en haut, au milieu
-		/*panel.setBorder(BorderFactory.createTitledBorder(null, "Queries list", TitledBorder.CENTER, 
-				TitledBorder.DEFAULT_POSITION));
-		panel.add(scrollHistorique);	// on ajoute la JScrollBar au panel principale
-		this.add(panel);				// et on ajoute le panel principale a la fenetre*/
-		
 		// Lors d'un changement de taille de la fenetre, on reactualise l'affichage
 		this.addComponentListener(new ComponentAdapter ()
 		{
@@ -102,8 +91,15 @@ public class FenetreRequetes extends JFrame implements Observer{
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// Reinitialisation du JTextArea
-		/*AffichageRequetesInternes.setText("");
+		// Reinitialisation des JTextArea
+		AffichageRequetesInternes.setText("");
+		AffichageRequetesExternes.setText("");
+		
+		// Affichage des RequeteExterne du Batiment
+		for (Requete i : batiment.getControleurExt().getRequetes()) {
+			AffichageRequetesExternes.append(i.toString() + "\n");
+		}
+	
 		String tiretsAffichage = "";	// variable d'affichage
 		String egalesAffichage = "";	// variable d'affichage
 		// configuration des variables d'affichage sela la taille de la JFrame
@@ -113,14 +109,8 @@ public class FenetreRequetes extends JFrame implements Observer{
 				egalesAffichage += "=";
 			}
 		}
-		// Affichage des RequeteExterne du Batiment
-		AffichageRequetesInternes.append("\n" + tiretsAffichage + "External queries" + tiretsAffichage + "\n");
-		for (Requete i : batiment.getControleurExt().getRequetes()) {
-			AffichageRequetesInternes.append(i.toString() + "\n");
-		}
 		
-		// Affichage des RequeteInterne
-		//AffichageRequetesInternes.append("\n" + tiretsAffichage + "Internal queries" + tiretsAffichage + "\n");
+		// Affichage des RequeteInterne du Batiment
 		//Parcour des ControleurInterne du Batiment
 		for (ControleurInterne i : batiment.getControleursInternes()) {
 				if (0 != i.getNumberOfRequete()) {
@@ -132,6 +122,6 @@ public class FenetreRequetes extends JFrame implements Observer{
 	
 					AffichageRequetesInternes.append("\n====" + egalesAffichage  + egalesAffichage + "========\n");
 				}
-		}*/
+		}
 	}
 }
