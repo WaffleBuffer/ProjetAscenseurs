@@ -6,7 +6,7 @@ import Controleurs.ControleurInterne;
 import Requetes.Requete;
 import Requetes.RequeteExterne;
 
-/**Description de le strategies de traitement interne standard.
+/**Description de la strategie de traitement interne standard.
  * @author Thomas
  */
 public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
@@ -14,103 +14,103 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 	/**Variable utilisee durant {@link #traiterRequetes (ControleurExterne controleurExt)}.
 	 * @see #traiterRequetes (ControleurExterne controleurExt)
 	 */
-	private ControleurInterne aUtiliser;
+	private ControleurInterne controleurInterneUtilise;
 	
 	/** traitement standard des {@link RequeteExterne}.
 	 * @see IAlgoTraitementExterne#traiterRequetes(Controleurs.ControleurExterne)
 	 */
 	@Override
-	public void traiterRequetes (ControleurExterne controleurExt) {
-		for (int i = 0; i < controleurExt.getRequetes().size();++i) {//parcours de toutes les requetes externe non affectees
+	public void traiterRequetes (ControleurExterne controleurExterne) {
+		for (int i = 0; i < controleurExterne.getRequetes().size();++i) {//parcours de toutes les requetes externe non affectees
 			
-			if (rechercheInactif(controleurExt)) {//cherche d'abord si des ascenseurs sont inactifs
+			if (rechercheInactif(controleurExterne)) {//cherche d'abord si des ascenseurs sont inactifs
 				
-				aUtiliser.addRequete(controleurExt.getRequetes().get(i));
-				controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
+				controleurInterneUtilise.addRequete(controleurExterne.getRequetes().get(i));
+				controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 				--i;//repositionne i sur la requete suivante, puisque la requete courante viens d'etre supprimee
 			}
-			else if (controleurExt.getRequetes().get(i).getLibelle() == Constantes.HAUT) {//si on veut aller vers le haut
+			else if (controleurExterne.getRequetes().get(i).getLibelle() == Constantes.HAUT) {//si on veut aller vers le haut
 				
-				if (rechercheVersHaut(controleurExt.getRequetes().get(i).getEtageDemande(), controleurExt)) {
+				if (rechercheVersHaut(controleurExterne.getRequetes().get(i).getEtageDemande(), controleurExterne)) {
 					/*Cherche un ascenseur qui est en-dessous de l'etage de la requete 
 					et qui se dirige vers un etage superieur ou egal a celui de la requete*/
 					
-					aUtiliser.addRequetePrioritaire(controleurExt.getRequetes().get(i));// ajout de la requete de maniere prioritaire
-					controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
+					controleurInterneUtilise.addRequetePrioritaire(controleurExterne.getRequetes().get(i));// ajout de la requete de maniere prioritaire
+					controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 					--i;
 				}
 				else {//Sinon on cherche l'ascenseur ayant le moins de requete en attente
 					
-					if (rechercheMoinsActif (controleurExt)) {
-						aUtiliser.addRequete(controleurExt.getRequetes().get(i));
-						controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
+					if (rechercheMoinsActif (controleurExterne)) {
+						controleurInterneUtilise.addRequete(controleurExterne.getRequetes().get(i));
+						controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 						--i;
 					}
 				}
 			}
-			else if (controleurExt.getRequetes().get(i).getLibelle() == Constantes.BAS){//si on veut aller vers le bas
+			else if (controleurExterne.getRequetes().get(i).getLibelle() == Constantes.BAS){//si on veut aller vers le bas
 				
-				if(rechercheVersBas(controleurExt.getRequetes().get(i).getEtageDemande(), controleurExt)) {
+				if(rechercheVersBas(controleurExterne.getRequetes().get(i).getEtageDemande(), controleurExterne)) {
 					/*Cherche un ascenseur qui est au-dessus de l'etage de la requete 
 					et qui se dirige vers un etage inferieur ou egal a celui de la requete*/
 					
-					aUtiliser.addRequetePrioritaire(controleurExt.getRequetes().get(i));
-					controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
+					controleurInterneUtilise.addRequetePrioritaire(controleurExterne.getRequetes().get(i));
+					controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 					--i;
 				}
 				else {//Sinon on cherche l'ascenseur ayant le moins de requete en attente
 					
-					if (rechercheMoinsActif (controleurExt)) {
-						aUtiliser.addRequete(controleurExt.getRequetes().get(i));
-						controleurExt.getRequetes().remove(controleurExt.getRequetes().get(i));
+					if (rechercheMoinsActif (controleurExterne)) {
+						controleurInterneUtilise.addRequete(controleurExterne.getRequetes().get(i));
+						controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 						--i;
 					}
 				}				
 			}
-		}
-	}
+		}// boucle for
+	}// traiterRequete()
 	
 	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet de connaitre s'il y a un {@link ControleurInterne}
-	 *  innactif parmis {@link ControleurExterne#controleurs}.
-	 * Si c'est le cas, alors {@link #aUtiliser} le designera et la fonction renvera true.
-	 * @param controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
-	 * @return true si un {@link ControleurInterne} innactif a ete trouve false sinon.
+	 *  innactif parmi {@link ControleurExterne#controleurs}.
+	 * Si c'est le cas, alors {@link #controleurInterneUtilise} le designera et la fonction renverra true.
+	 * @param controleurExterne le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
+	 * @return true si un {@link ControleurInterne} inactif a ete trouve false sinon.
 	 * @see #traiterRequetes (ControleurExterne controleurExt)
 	 */
-	private boolean rechercheInactif (ControleurExterne controleurExt) {
-		for (ControleurInterne controleur : controleurExt.getControleurs()) {
+	private boolean rechercheInactif (ControleurExterne controleurExterne) {
+		for (ControleurInterne controleur : controleurExterne.getControleurs()) {
 			if (0 == controleur.getNumberOfRequete() && !controleur.getAscenseur().estBloquer()) {
-				this.aUtiliser = controleur;
+				this.controleurInterneUtilise = controleur;
 				return true;
 			}
 		}
 		return false;
-	}
+	}//rechercheInactif()
 	
 	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet de verifier si l'etage d'ou provient la {@link Requete}
-	 * courante est sur le chemin d'un {@link ControleurInterne} qui monte parmis {@link ControleurExterne#controleurs}. 
-	 * Si c'est le cas, alors {@link #aUtiliser} le designera et la fonction renvera true.
+	 * courante est sur le chemin d'un {@link ControleurInterne} qui monte parmi {@link ControleurExterne#controleurs}. 
+	 * Si c'est le cas, alors {@link #controleurInterneUtilise} le designera et la fonction renverra true.
 	 * @param etage l'etage de la {@link Requete} consideree comme une {@link RequeteExterne}
-	 * @param controleurExt controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
+	 * @param controleurExterne controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
 	 * @return true si un {@link ControleurInterne} passe par etage, false sinon.
 	 * @see RequeteExterne
 	 * @see #traiterRequetes (ControleurExterne controleurExt)
 	 */
-	private boolean rechercheVersHaut (int etage, ControleurExterne controleurExt) {
-		for (ControleurInterne controleur : controleurExt.getControleurs()) {
-			if (controleur.prochaineDest() != -1 && 
-					(controleur.getAscenseur().getEtage() < etage && controleur.prochaineDest() >= etage &&
-					!controleur.getAscenseur().estBloquer())) {
-				this.aUtiliser = controleur;
+	private boolean rechercheVersHaut (int etage, ControleurExterne controleurExterne) {
+		for (ControleurInterne controleurInterne : controleurExterne.getControleurs()) {
+			if (controleurInterne.prochaineDest() != -1 && 
+					(controleurInterne.getAscenseur().getEtage() < etage && controleurInterne.prochaineDest() >= etage &&
+					!controleurInterne.getAscenseur().estBloquer())) {
+				this.controleurInterneUtilise = controleurInterne;
 				return true;
 			}
 		}
 		return false;
-	}
+	}//rechercheVersHaut()
 	
 	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet de verifier si l'etage d'ou provient la {@link Requete}
 	 * courante est sur le chemin d'un {@link ControleurInterne} qui descent parmis {@link ControleurExterne#controleurs}.
-	 * Si c'est le cas, alors {@link #aUtiliser} le designera et la fonction renvera true.
+	 * Si c'est le cas, alors {@link #controleurInterneUtilise} le designera et la fonction renvera true.
 	 * @param etage l'etage de la {@link Requete}. Consideree comme une {@link RequeteExterne}
 	 * @param controleurExt controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
 	 * @return true si un {@link ControleurInterne} passe par etage, false sinon.
@@ -122,39 +122,40 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 			if (controleur.prochaineDest() != -1 && 
 					(controleur.getAscenseur().getEtage() > etage && controleur.prochaineDest() <= etage) && 
 					!controleur.getAscenseur().estBloquer()) {
-				this.aUtiliser = controleur;
+				this.controleurInterneUtilise = controleur;
 				return true;
 			}
 		}
 		return false;
-	}
+	}//rechercheVersBas()
 	
-	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet d'attribuer a {@link #aUtiliser} le {@link ControleurInterne}
-	 * possedant le moins de {@link Requete} parmis {@link ControleurExterne#controleurs} s'il y en a un.
-	 * @param controleurExt controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
-	 * @return true si un {@link ControleurInterne} disponnible a ete trouve, false sinon (ils sont tous bloque).
+	/**Utilise dans {@link #traiterRequetes (ControleurExterne controleurExt)}. Permet d'attribuer a {@link #controleurInterneUtilise} le {@link ControleurInterne}
+	 * possedant le moins de {@link Requete} parmi {@link ControleurExterne#controleurs} s'il y en a un.
+	 * @param controleurExterne controleurExt le {@link ControleurExterne} sur lequel appliquer l'{@link AlgoTraitementExterneStandard}.
+	 * @return true si un {@link ControleurInterne} disponible a ete trouve, false sinon (ils sont tous bloque).
 	 * @see ControleurExterne#traiterRequetes()
 	 * @see ControleurInterne
 	 */
-	private boolean rechercheMoinsActif (ControleurExterne controleurExt) {
-		int min = controleurExt.getNbEtage() + 1;
-		for (ControleurInterne controleur : controleurExt.getControleurs()) {
-			if (controleur.getNumberOfRequete() == 0 && !controleur.getAscenseur().estBloquer()) {
-				this.aUtiliser = controleur;
+	private boolean rechercheMoinsActif (ControleurExterne controleurExterne) {
+		//expliquer ce qu'est min?
+		int min = controleurExterne.getNbEtage() + 1;
+		for (ControleurInterne controleurInterne : controleurExterne.getControleurs()) {
+			if (controleurInterne.getNumberOfRequete() == 0 && !controleurInterne.getAscenseur().estBloquer()) {
+				this.controleurInterneUtilise = controleurInterne;
 				return true;
 			}
 			else {
-				if (controleur.getNumberOfRequete() < min && !controleur.getAscenseur().estBloquer()) {
-					min = controleur.getNumberOfRequete();
+				if (controleurInterne.getNumberOfRequete() < min && !controleurInterne.getAscenseur().estBloquer()) {
+					min = controleurInterne.getNumberOfRequete();
 				}
 			}
 		}
-		for (ControleurInterne controleur : controleurExt.getControleurs()) {
-			if (controleur.getNumberOfRequete() == min && !controleur.getAscenseur().estBloquer()) {
-				this.aUtiliser = controleur;
+		for (ControleurInterne controleurInterne : controleurExterne.getControleurs()) {
+			if (controleurInterne.getNumberOfRequete() == min && !controleurInterne.getAscenseur().estBloquer()) {
+				this.controleurInterneUtilise = controleurInterne;
 				return true;
 			}
 		}
 		return false;
-	}
+	}//rechercheMoinsActif()
 }
