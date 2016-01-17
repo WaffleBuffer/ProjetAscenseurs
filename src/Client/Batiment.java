@@ -98,7 +98,7 @@ public class Batiment extends java.util.Observable implements Observer {
 			if (resultat.equals("Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is blocked")) {
 				for (int j = 0; j < controleurInterne.getRequetes().size(); ++j) {
 					if (controleurInterne.getRequetes().get(j) instanceof RequeteExterne) {
-						controleurExterne.addRequete(controleurInterne.getRequetes().get(j));
+						controleurExterne.ajouterRequete(controleurInterne.getRequetes().get(j));
 						controleurInterne.getRequetes().remove(controleurInterne.getRequetes().get(j));
 						--j;
 						setChanged();

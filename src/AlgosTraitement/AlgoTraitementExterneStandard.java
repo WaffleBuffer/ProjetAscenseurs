@@ -25,7 +25,7 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 			
 			if (rechercheInactif(controleurExterne)) {//cherche d'abord si des ascenseurs sont inactifs
 				
-				controleurInterneUtilise.addRequete(controleurExterne.getRequetes().get(i));
+				controleurInterneUtilise.ajouterRequete(controleurExterne.getRequetes().get(i));
 				controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 				--i;//repositionne i sur la requete suivante, puisque la requete courante viens d'etre supprimee
 			}
@@ -35,14 +35,14 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 					/*Cherche un ascenseur qui est en-dessous de l'etage de la requete 
 					et qui se dirige vers un etage superieur ou egal a celui de la requete*/
 					
-					controleurInterneUtilise.addRequetePrioritaire(controleurExterne.getRequetes().get(i));// ajout de la requete de maniere prioritaire
+					controleurInterneUtilise.ajouterRequetePrioritaire(controleurExterne.getRequetes().get(i));// ajout de la requete de maniere prioritaire
 					controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 					--i;
 				}
 				else {//Sinon on cherche l'ascenseur ayant le moins de requete en attente
 					
 					if (rechercheMoinsActif (controleurExterne)) {
-						controleurInterneUtilise.addRequete(controleurExterne.getRequetes().get(i));
+						controleurInterneUtilise.ajouterRequete(controleurExterne.getRequetes().get(i));
 						controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 						--i;
 					}
@@ -54,14 +54,14 @@ public class AlgoTraitementExterneStandard implements IAlgoTraitementExterne{
 					/*Cherche un ascenseur qui est au-dessus de l'etage de la requete 
 					et qui se dirige vers un etage inferieur ou egal a celui de la requete*/
 					
-					controleurInterneUtilise.addRequetePrioritaire(controleurExterne.getRequetes().get(i));
+					controleurInterneUtilise.ajouterRequetePrioritaire(controleurExterne.getRequetes().get(i));
 					controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 					--i;
 				}
 				else {//Sinon on cherche l'ascenseur ayant le moins de requete en attente
 					
 					if (rechercheMoinsActif (controleurExterne)) {
-						controleurInterneUtilise.addRequete(controleurExterne.getRequetes().get(i));
+						controleurInterneUtilise.ajouterRequete(controleurExterne.getRequetes().get(i));
 						controleurExterne.getRequetes().remove(controleurExterne.getRequetes().get(i));
 						--i;
 					}

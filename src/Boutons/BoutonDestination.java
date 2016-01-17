@@ -35,7 +35,7 @@ public class BoutonDestination extends BoutonInterne {
 	 */
 	@Override
 	public void appuyer (Controleur controleur) {
-		controleur.addRequete(new RequeteInterne (etage));
+		controleur.ajouterRequete(new RequeteInterne (etage));
 	}
 
 	/** Renvoie l'etat de ce BoutonDestination

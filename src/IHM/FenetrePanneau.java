@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 
-import Client.Ascenseur;
 import Client.Batiment;
 
 public class FenetrePanneau extends JFrame {
@@ -36,6 +35,7 @@ public class FenetrePanneau extends JFrame {
 		JScrollPane scrollAscenseurs = new JScrollPane(panelAscenseurs);
 		panelPrincipalAscenseurs.add(scrollAscenseurs);
 		
+		//==========ASCENSEURS==========
 		//creation de la liste des ascenseur sous forme de boutons alignés verticalement
 		for(int i = 1; i <= batiment.getNbAscenseurs(); ++i){		
 			final int j = i;

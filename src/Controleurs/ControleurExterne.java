@@ -16,12 +16,12 @@ public class ControleurExterne extends Controleur{
 	
 	/**Liste des {@link ControleurInterne} (et donc des {@link Client.Ascenseur}) disponibles.
 	 */
-	private ArrayList<ControleurInterne> controleurs;
+	private ArrayList<ControleurInterne> listeControleursInternes;
 	
 	/**Utilise pour connaitre le nombre d'etages. Utilise dans {@link AlgoTraitementExterneStandard#rechercheMoinsActif (ControleurExterne controleurExt)}
 	 * @see AlgoTraitementExterneStandard#rechercheMoinsActif (ControleurExterne controleurExt)
 	 */
-	private int nbEtage;
+	private int nbEtages;
 	
 	/**la strategie a appliquer pour traiter les {@link RequeteExterne} de ce ControleurExterne
 	 */
@@ -29,14 +29,14 @@ public class ControleurExterne extends Controleur{
 	
 	/**Construit un ControleurExterne
 	 * @param controleurs liste des {@link ControleurInterne} disponnibles
-	 * @param nbEtage nombre d'etage du {@link Batiment} correspondant.
+	 * @param nbEtages nombre d'etage du {@link Batiment} correspondant.
 	 * @param strategie l'{@link IAlgoTraitementExterne} a appliquer pour traiter les {@link RequeteExterne} de ce ControleurExterne
 	 * @see Batiment#Batiment(String, int, int)
 	 */
-	public ControleurExterne (ArrayList<ControleurInterne> controleurs, int nbEtage, IAlgoTraitementExterne strategie) {
+	public ControleurExterne (ArrayList<ControleurInterne> controleurs, int nbEtages, IAlgoTraitementExterne strategie) {
 		this.strategieTraitement = strategie;
-		this.controleurs = controleurs;
-		this.nbEtage = nbEtage;
+		this.listeControleursInternes = controleurs;
+		this.nbEtages = nbEtages;
 	}
 	
 	/**Permet d'ajouter une {@link RequeteExterne} a {@link Controleur#requetes}.
@@ -56,17 +56,17 @@ public class ControleurExterne extends Controleur{
 		strategieTraitement.traiterRequetes(this);
 	}
 	
-	/**Permet d'obtenir le {@link #nbEtage} de ce ControleurExterne
-	 * @return {@link #nbEtage} de ce ControleurExterne
+	/**Permet d'obtenir le {@link #nbEtages} de ce ControleurExterne
+	 * @return {@link #nbEtages} de ce ControleurExterne
 	 */
 	public int getNbEtage() {
-		return nbEtage;
+		return nbEtages;
 	}
 
-	/**Permet d'obtenir les {@link #controleurs} de ce ControleurExterne.
-	 * @return {@link #controleurs} de ce ControleurExterne.
+	/**Permet d'obtenir les {@link #listeControleursInternes} de ce ControleurExterne.
+	 * @return {@link #listeControleursInternes} de ce ControleurExterne.
 	 */
 	public ArrayList<ControleurInterne> getControleurs() {
-		return controleurs;
+		return listeControleursInternes;
 	}
 }

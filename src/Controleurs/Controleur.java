@@ -15,7 +15,7 @@ public abstract class Controleur {
 	/**Liste des {@link Requete} affectees a ce Controleur.
 	 * 
 	 */
-	private ArrayList<Requete> requetes = new ArrayList<Requete>();
+	private ArrayList<Requete> listeRequetes = new ArrayList<Requete>();
 	
 	/**Permet d'ajouter une {@link Requete} a ce Controleur
 	 * @param requete la {@link Requete} a ajouter a ce Controleur
@@ -23,14 +23,14 @@ public abstract class Controleur {
 	 * @see ControleurInterne
 	 * @see ControleurExterne
 	 */
-	public void addRequete (Requete requete) {
-		requetes.add(requete);
+	public void ajouterRequete (Requete requete) {
+		listeRequetes.add(requete);
 	}
 
-	/**Retourne {@link #requetes} de ce Controleur.
-	 * @return {@link #requetes} de ce Controleur.
+	/**Retourne {@link #listeRequetes} de ce Controleur.
+	 * @return {@link #listeRequetes} de ce Controleur.
 	 */
 	public ArrayList<Requete> getRequetes() {
-		return requetes;
+		return listeRequetes;
 	}
 }

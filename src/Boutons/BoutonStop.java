@@ -27,7 +27,7 @@ public class BoutonStop extends BoutonInterne{
 	 */
 	@Override
 	public void appuyer (Controleur controleur) {
-		controleur.addRequete(new RequeteInterne());
+		controleur.ajouterRequete(new RequeteInterne());
 	}
 	
 	/** Renvoie l'etat de ce BoutonStop

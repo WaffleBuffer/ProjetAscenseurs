@@ -46,7 +46,7 @@ public abstract class BoutonExterne extends Bouton {
 	@Override
 	public void appuyer (Controleur controleur) {
 		RequeteExterne requete = new RequeteExterne(etage, this.direction);
-		controleur.addRequete(requete);
+		controleur.ajouterRequete(requete);
 	}
 
 	/**Permet de connaitre l'{@link #etage} ou se trouve ce BoutonExterne 

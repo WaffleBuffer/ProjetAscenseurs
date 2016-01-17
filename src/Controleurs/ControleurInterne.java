@@ -46,7 +46,7 @@ public class ControleurInterne extends Controleur{
 	/**Ajout d'une {@link Requete} prioritaire sur les requetes en cours de traitement
 	 * @param requete la {@link Requete} prioritaire a ajouter.
 	 */
-	public void addRequetePrioritaire (Requete requete) {
+	public void ajouterRequetePrioritaire (Requete requete) {
 		this.getRequetes().add(0, requete);
 	}
 	
@@ -54,7 +54,7 @@ public class ControleurInterne extends Controleur{
 	 * @param etage l'etage de la {@link RequeteInterne}.
 	 * @see RequeteInterne
 	 */
-	public void addRequete (int etage) {
+	public void ajouterRequete (int etage) {
 		getRequetes().add(new RequeteInterne(etage));
 	}
 	

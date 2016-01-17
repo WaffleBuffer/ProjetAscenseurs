@@ -21,11 +21,8 @@ import Client.Constantes;
 
 public class FenetreBatiment extends JFrame implements Observer{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private JLabel labelNumAsc = new JLabel("1", JLabel.CENTER);
+	private JLabel labelNumAscenseur = new JLabel("1", JLabel.CENTER);
 	private JLabel labelEtageAscenseurSelectionne = new JLabel("0", JLabel.CENTER);
 	private ArrayList<JLabel> listeLabelNbAscenseursParEtage = new ArrayList<JLabel>();
 	private	JLabel labelCourant;
@@ -146,7 +143,7 @@ public class FenetreBatiment extends JFrame implements Observer{
 		JLabel labelTexteNumAsc = new JLabel("Elevator's number :", JLabel.CENTER);	
 		JLabel labelTexteEtageAsc = new JLabel("Elevator's floor :", JLabel.CENTER);
 		panelInfos.add(labelTexteNumAsc);
-		panelInfos.add(labelNumAsc);
+		panelInfos.add(labelNumAscenseur);
 		panelInfos.add(labelTexteEtageAsc);
 		panelInfos.add(labelEtageAscenseurSelectionne);
 		JButton boutonSimulation = new JButton("Simulate (step by step)");	//bouton qui va lancer une étape de la simulation 
@@ -174,7 +171,7 @@ public class FenetreBatiment extends JFrame implements Observer{
 	}
 
 	public void setLabelNumAsc(JLabel labelNumAsc) {
-		this.labelNumAsc = labelNumAsc;
+		this.labelNumAscenseur = labelNumAsc;
 	}
 
 	public void setLabelEtage(JLabel labelEtage) {
@@ -186,7 +183,7 @@ public class FenetreBatiment extends JFrame implements Observer{
 	}
 
 	public JLabel getLabelNumAsc() {
-		return labelNumAsc;
+		return labelNumAscenseur;
 	}
 
 	public JLabel getLabelEtageAscenseurSelectionne() {
