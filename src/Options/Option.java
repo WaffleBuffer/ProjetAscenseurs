@@ -1,9 +1,13 @@
 package Options;
 
-/**description des IOption
+import Controleurs.ControleurInterne;
+
+/**description des Option
  * @author p14005728
  */
 public abstract class Option {
+	
+	private ControleurInterne controleurInt;
 	
 	private boolean estActivee = false;
 
@@ -17,5 +21,13 @@ public abstract class Option {
 
 	public void setEstActivee(boolean estActivee) {
 		this.estActivee = estActivee;
+	}
+
+	public ControleurInterne getControleurInterne() {
+		return controleurInt;
+	}
+
+	public void setControleurInterne(ControleurInterne controleurInterne) {
+		this.controleurInt = controleurInterne;
 	}
 }

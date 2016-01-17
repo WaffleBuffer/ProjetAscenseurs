@@ -23,6 +23,7 @@ import Client.Ascenseur;
 import Client.Batiment;
 import Options.Option;
 import Options.OptionMusique;
+import Options.OptionsDisponnibles;
 
 public class FenetreOption extends JFrame implements Observer{
 	
@@ -30,7 +31,7 @@ public class FenetreOption extends JFrame implements Observer{
 	private JList<Ascenseur> listeAscenseur;
 	private JList<Option> listeOptionsAscenseur;
 	
-	public FenetreOption (Batiment batiment) {
+	public FenetreOption (final Batiment batiment) {
 		this.batiment = batiment;
 		
 		GridBagLayout gb = new GridBagLayout();
@@ -74,8 +75,10 @@ public class FenetreOption extends JFrame implements Observer{
 		ascenseursPanel.setBorder(BorderFactory.createTitledBorder(null, "Lift list", TitledBorder.CENTER, 
 				TitledBorder.DEFAULT_POSITION));
 		
-		Option[] optionsDispo = new Option[1];
-		optionsDispo[0] = new OptionMusique("");
+		Option[] optionsDispo = new Option[OptionsDisponnibles.getOptionsDisponnibles().size()];
+		for (int i = 0; i < OptionsDisponnibles.getOptionsDisponnibles().size(); ++i) {
+			optionsDispo[i] = OptionsDisponnibles.getOptionsDisponnibles().get(i);
+		}
 		
 		final JList<Option> listeOptions = new JList<Option>(optionsDispo);
 		listeOptions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -113,6 +116,7 @@ public class FenetreOption extends JFrame implements Observer{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				listeOptions.getSelectedValue().setControleurInterne(batiment.getControleursInternes().get(listeAscenseur.getSelectedIndex()));
 				listeAscenseur.getSelectedValue().ajouterOption(listeOptions.getSelectedValue());
 			}
 		});
@@ -162,12 +166,8 @@ public class FenetreOption extends JFrame implements Observer{
 		this.setTitle(batiment.getNom() + " (options)");		//Titre de la fenetre 
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setSize(new Dimension(900, 500));					//taille de la fenetre fixe
-		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		int height = (int)dimension.getHeight();
-		int width  = (int)dimension.getWidth();
-		// la fenetre apparait au milieu, a droite de l'ecran
-		this.setLocation(width - this.getWidth(), height - this.getHeight());
-		this.setVisible(true);									//la fenetre apparaît
+		setLocationRelativeTo(null);							// la fenetre se place au centre de l'ecran
+		this.setVisible(true);									//la fenetre apparait
 	}
 
 	@Override
@@ -177,6 +177,9 @@ public class FenetreOption extends JFrame implements Observer{
 			optionsDispo[i] = listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i);
 		}
 		listeOptionsAscenseur.setListData(optionsDispo);	
+		if (optionsDispo.length > 0 && listeOptionsAscenseur.getSelectedValue() == null) {
+			listeOptionsAscenseur.setSelectedIndex(0);
+		}
 	}
 
 }

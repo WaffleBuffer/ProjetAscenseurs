@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import Client.Ascenseur;
+import Controleurs.ControleurInterne;
+
 /**description de l'OptionMusique une implementation de {@link Option}
  * @author p14005728
  */
@@ -22,13 +25,16 @@ public class OptionMusique extends Option {
 	
 	/**nom de la musique 
 	 */
-	private String nomMusique;
+	private String nomMusique = "";
 	
 	/**constructeur de OptionMusique
 	 * @param nomMusique le nom de la musique de cette OptionMusique
 	 */
-	public OptionMusique (String nomMusique) {
-		this.nomMusique = nomMusique;
+	public OptionMusique (ControleurInterne controleurInt) {
+		setControleurInterne(controleurInt);
+	}
+	
+	public OptionMusique () {
 	}
 	
 	/**permet de lancer la musique  
@@ -36,12 +42,12 @@ public class OptionMusique extends Option {
 	 */
 	private void lancerMusique () {
 		setEstActivee(true);
-		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + " is playing");
+		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + " is playing in lift n°" + getControleurInterne().getAscenseur().getNumAsc());
 	}
 	
 	protected void arreterMusique() {
 		setEstActivee(false);
-		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + " stopped");
+		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + " stopped in lift n°" + getControleurInterne().getAscenseur().getNumAsc());
 	}
 
 	/** permet d'activer OptionMusique en utilisant {@link OptionMusique#lancerMusique}
@@ -105,7 +111,7 @@ public class OptionMusique extends Option {
 
 	@Override
 	public String toString() {
-		return "Option Music ";
+		return "Music ";
 	}
 
 	public boolean isEstOuverte() {

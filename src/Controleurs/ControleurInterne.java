@@ -77,6 +77,10 @@ public class ControleurInterne extends Controleur{
 		return getRequetes().size();
 	}
 
+	public void setStrategieTraitement(IAlgoTraitementInterne strategieTraitement) {
+		this.strategieTraitement = strategieTraitement;
+	}
+
 	/** Renvoie l'etat de ce ControleurInterne.
 	 * @see java.lang.Object#toString()
 	 */
