@@ -103,15 +103,9 @@ public class Ascenseur extends Observable{
 		listeBoutons.add(new BoutonStop()); // tout ascenseur a un bouton stop
 	}
 
-	/** Renvoie l'etat de cet Ascenseur.
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Ascenseur [etage=" + etage + ", estEnMouvement=" + estEnMouvement + ", portesOuvertes="
-				+ portesOuvertes + ", poidsMax=" + poidsMax + ", estVide="
-				+ estVide + ", estBloque=" + estBloque
-				+ ", numAsc=" + numAsc + "]";
+		return "Ascenseur " + numAsc;
 	}
 
 	/**Permet de faire bouger concretement l'Ascenseur en modifiant {@link Ascenseur#etage}.

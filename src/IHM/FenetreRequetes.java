@@ -54,7 +54,7 @@ public class FenetreRequetes extends JFrame implements Observer{
 		// on met une JScrollBar en cas de besoin
 		JScrollPane scrollHistorique = new JScrollPane(panelRequete);	
 		// On met un cadre avec le titre en haut, au milieu
-		panel.setBorder(BorderFactory.createTitledBorder(null, "Liste de requetes", TitledBorder.CENTER, 
+		panel.setBorder(BorderFactory.createTitledBorder(null, "Queries list", TitledBorder.CENTER, 
 				TitledBorder.DEFAULT_POSITION));
 		panel.add(scrollHistorique);	// on ajoute la JScrollBar au panel principale
 		this.add(panel);				// et on ajoute le panel principale a la fenetre
@@ -74,6 +74,7 @@ public class FenetreRequetes extends JFrame implements Observer{
 		int width  = (int)dimension.getWidth();
 		// la fenetre apparait au milieu, a droite de l'ecran
 		this.setLocation(width - this.getWidth(), height/2 - this.getHeight()/2);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setVisible(true);									//la fenetre apparaît
 	}
 

@@ -41,4 +41,9 @@ public class GestionnaireOption {
 		//traitement par defaut
 		options.get(index).activer();
 	}
+
+	@Override
+	public String toString() {
+		return "GestionnaireOption [options=" + options + "]";
+	}
 }

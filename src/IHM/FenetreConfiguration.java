@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
@@ -65,6 +66,10 @@ public class FenetreConfiguration extends JFrame {
 		gb.setConstraints(nbAscenseurs, gbc); // mise en forme des objets
 		add(nbAscenseurs);
 		
+		final JCheckBox checkBoxOption = new JCheckBox("Activer options");
+		gb.setConstraints(checkBoxOption, gbc); // mise en forme des objets
+		add(checkBoxOption);
+		
 		JButton submit = new JButton ("Add");
 		gb.setConstraints(submit, gbc); // mise en forme des objets
 		add(submit);
@@ -72,8 +77,11 @@ public class FenetreConfiguration extends JFrame {
 		submit.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {	
 				Batiment batiment = new Batiment(texteNomBatiment.getText(), (Integer) nbEtages.getValue(), (Integer) nbAscenseurs.getValue());
+				if (checkBoxOption.isSelected()) {
+					FenetreOption fenetreOption = new FenetreOption(batiment);
+				}
 				FenetreRequetes fenetreRequetes = new FenetreRequetes(batiment);
 				FenetreBatiment fenetreBatiment = new FenetreBatiment(batiment);
 				batiment.addObserver(fenetreRequetes);
@@ -83,7 +91,7 @@ public class FenetreConfiguration extends JFrame {
 					i.getAscenseur().addObserver(fenetreBatiment);
 				}
 				new FenetrePanneau(batiment);
-				texteNomBatiment.setText(null);
+				texteNomBatiment.setText("");
 				nbEtages.setValue(1);
 				nbAscenseurs.setValue(1);
 			}});

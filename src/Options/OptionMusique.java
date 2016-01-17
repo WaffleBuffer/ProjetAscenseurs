@@ -31,4 +31,9 @@ public class OptionMusique implements IOption {
 		// TODO Auto-generated method stub
 		this.lancerMusique();
 	}
+
+	@Override
+	public String toString() {
+		return "Option Music ";
+	}
 }
