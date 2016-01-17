@@ -40,17 +40,31 @@ public class OptionVitesseAugmentee extends Option {
 		if (!isEstActivee()) {
 			getControleurInterne().setStrategieTraitement(new AlgoTraitementInterneVitesseAugmentee());
 			setEstActivee(true);
-			JOptionPane.showMessageDialog(null, "the lift n°" + getControleurInterne().getAscenseur().getNumAsc() + " is speeding up.");
+			JOptionPane.showMessageDialog(null, "the lift n°" 
+			+ getControleurInterne().getAscenseur().getNumAsc() + " is speeding up.");
+			getControleurInterne().getAscenseur().notifyObservers();
 		}
 		else {
 			getControleurInterne().setStrategieTraitement(new AlgoTraitementInterneStandard());
 			setEstActivee(false);
-			JOptionPane.showMessageDialog(null, "the lift n°" + getControleurInterne().getAscenseur().getNumAsc() + " is slowing down.");		
+			JOptionPane.showMessageDialog(null, "the lift n°" 
+			+ getControleurInterne().getAscenseur().getNumAsc() + " is slowing down.");		
+			getControleurInterne().getAscenseur().notifyObservers();
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "speed upgrade ";
+		return "speed upgrade " + (isEstActivee() ? " activated" : "");
+	}
+	
+	@Override
+	public OptionVitesseAugmentee clone() {
+		OptionVitesseAugmentee optionARetournee = new OptionVitesseAugmentee();
+		optionARetournee.setEstActivee(isEstActivee());
+		if (getControleurInterne() != null) {
+			optionARetournee.setControleurInterne(getControleurInterne());
+		}
+		return optionARetournee;
 	}
 }

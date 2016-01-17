@@ -67,11 +67,10 @@ public class FenetreOption extends JFrame implements Observer{
 		listeAscenseur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listeAscenseur.setLayoutOrientation(JList.VERTICAL);
 		listeAscenseur.setVisibleRowCount(-1);
-		listeAscenseur.setPreferredSize(new Dimension (100, 50));
 		listeAscenseur.setSelectedIndex(0);
 		
 		JScrollPane ascenseursPanel = new JScrollPane(listeAscenseur); // panneau des ascenseurs a gauche
-		ascenseursPanel.setPreferredSize(new Dimension(250, 80));
+		ascenseursPanel.setPreferredSize(new Dimension(100, 80));
 		ascenseursPanel.setBorder(BorderFactory.createTitledBorder(null, "Lift list", TitledBorder.CENTER, 
 				TitledBorder.DEFAULT_POSITION));
 		
@@ -84,13 +83,12 @@ public class FenetreOption extends JFrame implements Observer{
 		listeOptions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listeOptions.setLayoutOrientation(JList.VERTICAL);
 		listeOptions.setVisibleRowCount(-1);
-		listeOptions.setPreferredSize(new Dimension (100, 50));
 		if (optionsDispo.length > 0) {
 			listeOptions.setSelectedIndex(0);
 		}
 		
 		JScrollPane optionsPanel = new JScrollPane(listeOptions); // panneau des options vers le centre
-		optionsPanel.setPreferredSize(new Dimension(250, 80));
+		optionsPanel.setPreferredSize(new Dimension(100, 80));
 		optionsPanel.setBorder(BorderFactory.createTitledBorder(null, "Options list", TitledBorder.CENTER, 
 				TitledBorder.DEFAULT_POSITION));
 		
@@ -98,8 +96,8 @@ public class FenetreOption extends JFrame implements Observer{
 		listeOptionsAscenseur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listeOptionsAscenseur.setLayoutOrientation(JList.VERTICAL);
 		listeOptionsAscenseur.setVisibleRowCount(-1);
-		listeOptionsAscenseur.setPreferredSize(new Dimension (100, 50));
 		JScrollPane optionsAscenseurPanel = new JScrollPane(listeOptionsAscenseur); // panneau des options vers le centre
+		optionsAscenseurPanel.setPreferredSize(new Dimension(200, 80));
 		optionsAscenseurPanel.setBorder(BorderFactory.createTitledBorder(null, "Lift's options list", TitledBorder.CENTER, 
 				TitledBorder.DEFAULT_POSITION));
 		
@@ -116,8 +114,9 @@ public class FenetreOption extends JFrame implements Observer{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listeOptions.getSelectedValue().setControleurInterne(batiment.getControleursInternes().get(listeAscenseur.getSelectedIndex()));
-				listeAscenseur.getSelectedValue().ajouterOption(listeOptions.getSelectedValue());
+				Option optionAAjouter = listeOptions.getSelectedValue().clone();
+				optionAAjouter.setControleurInterne(batiment.getControleursInternes().get(listeAscenseur.getSelectedIndex()));
+				listeAscenseur.getSelectedValue().ajouterOption(optionAAjouter);
 			}
 		});
 		
@@ -140,13 +139,14 @@ public class FenetreOption extends JFrame implements Observer{
 			}
 		});
 		
-		JButton activationButton = new JButton ("acitvate");
+		JButton activationButton = new JButton ("activate/desactivate");
 		activationButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (listeOptionsAscenseur.getSelectedValue() != null) {
-					listeAscenseur.getSelectedValue().getGestionnaireOption().activerOption(listeOptionsAscenseur.getSelectedIndex());
+					listeAscenseur.getSelectedValue().activerOption(listeOptionsAscenseur.getSelectedIndex());
+					listeAscenseur.setSelectedIndex(listeAscenseur.getSelectedIndex());
 				}
 			}
 		});
@@ -165,19 +165,19 @@ public class FenetreOption extends JFrame implements Observer{
 		this.add(optionsAscenseurPanel, listConstraint);
 		this.setTitle(batiment.getNom() + " (options)");		//Titre de la fenetre 
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.setSize(new Dimension(900, 500));					//taille de la fenetre fixe
+		this.setSize(new Dimension(600, 200));					//taille de la fenetre fixe
 		setLocationRelativeTo(null);							// la fenetre se place au centre de l'ecran
 		this.setVisible(true);									//la fenetre apparait
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		Option[] optionsDispo = new Option[listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().size()];
-		for (int i = 0; i < optionsDispo.length; ++i) {
-			optionsDispo[i] = listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i);
+		Option[] optionsAscenseur = new Option[listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().size()];
+		for (int i = 0; i < optionsAscenseur.length; ++i) {
+			optionsAscenseur[i] = listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i);
 		}
-		listeOptionsAscenseur.setListData(optionsDispo);	
-		if (optionsDispo.length > 0 && listeOptionsAscenseur.getSelectedValue() == null) {
+		listeOptionsAscenseur.setListData(optionsAscenseur);	
+		if (optionsAscenseur.length > 0 && listeOptionsAscenseur.getSelectedValue() == null) {
 			listeOptionsAscenseur.setSelectedIndex(0);
 		}
 	}

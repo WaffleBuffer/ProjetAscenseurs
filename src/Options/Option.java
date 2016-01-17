@@ -5,7 +5,7 @@ import Controleurs.ControleurInterne;
 /**description des Option
  * @author p14005728
  */
-public abstract class Option {
+public abstract class Option implements Cloneable{
 	
 	private ControleurInterne controleurInt;
 	
@@ -30,4 +30,7 @@ public abstract class Option {
 	public void setControleurInterne(ControleurInterne controleurInterne) {
 		this.controleurInt = controleurInterne;
 	}
+	
+	@Override
+	public abstract Option clone();
 }

@@ -19,7 +19,7 @@ import Controleurs.ControleurInterne;
 /**description de l'OptionMusique une implementation de {@link Option}
  * @author p14005728
  */
-public class OptionMusique extends Option {
+public class OptionMusique extends Option implements Cloneable {
 	
 	private boolean estOuverte;
 	
@@ -42,12 +42,14 @@ public class OptionMusique extends Option {
 	 */
 	private void lancerMusique () {
 		setEstActivee(true);
-		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + " is playing in lift n°" + getControleurInterne().getAscenseur().getNumAsc());
+		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + 
+				" is playing in lift n°" + getControleurInterne().getAscenseur().getNumAsc());
 	}
 	
 	protected void arreterMusique() {
 		setEstActivee(false);
-		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + " stopped in lift n°" + getControleurInterne().getAscenseur().getNumAsc());
+		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + 
+				" stopped in lift n°" + getControleurInterne().getAscenseur().getNumAsc());	
 	}
 
 	/** permet d'activer OptionMusique en utilisant {@link OptionMusique#lancerMusique}
@@ -76,7 +78,7 @@ public class OptionMusique extends Option {
 			
 			JLabel textLabel = new JLabel("music's name : ");
 			
-			final JTextField nomMusique = new JTextField("");
+			final JTextField nomMusique = new JTextField(this.nomMusique);
 			nomMusique.setPreferredSize(new Dimension(fenetreMusique.getWidth() / 2 - 10, nomMusique.getFont().getSize() + 8));
 			
 			JButton lancerArreter = new JButton("Play/Stop");
@@ -91,6 +93,7 @@ public class OptionMusique extends Option {
 					else {
 						arreterMusique();
 					}
+					getControleurInterne().getAscenseur().notifyObservers();
 				}
 			});
 			
@@ -103,6 +106,7 @@ public class OptionMusique extends Option {
 			constraint.gridy = 1;
 			fenetreMusique.add(lancerArreter, constraint);
 			
+			fenetreMusique.setLocationRelativeTo(null);
 			fenetreMusique.setVisible(true);				
 			
 			setEstOuverte(false);
@@ -111,7 +115,7 @@ public class OptionMusique extends Option {
 
 	@Override
 	public String toString() {
-		return "Music ";
+		return "Music " + (nomMusique != null ? nomMusique : "") + (isEstActivee() ? " activated" : "");
 	}
 
 	public boolean isEstOuverte() {
@@ -128,5 +132,19 @@ public class OptionMusique extends Option {
 
 	public void setNomMusique(String nomMusique) {
 		this.nomMusique = nomMusique;
+	}
+	
+	@Override
+	public OptionMusique clone() {
+		OptionMusique optionARetournee = new OptionMusique();
+		optionARetournee.setEstOuverte(isEstOuverte());
+		optionARetournee.setEstActivee(isEstActivee());
+		if (this.nomMusique != null) {
+			optionARetournee.setNomMusique(getNomMusique());
+		}
+		if (getControleurInterne() != null) {
+			optionARetournee.setControleurInterne(getControleurInterne());
+		}
+		return optionARetournee;
 	}
 }
