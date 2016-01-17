@@ -38,13 +38,13 @@ public class FenetreOption extends JFrame implements Observer{
 		setLayout(gb);
 		
 		GridBagConstraints listConstraint = new GridBagConstraints();
-		listConstraint.fill = GridBagConstraints.VERTICAL;
+		listConstraint.fill = GridBagConstraints.BOTH;
 		listConstraint.weightx = 0.5;
 		listConstraint.weighty = 2;
 		listConstraint.gridx = 0;
 		listConstraint.gridy = 0;
 		listConstraint.gridheight = 2;
-		listConstraint.ipadx = 2;
+		listConstraint.ipadx = 5;
 		listConstraint.ipady = 0;
 		
 		GridBagConstraints buttonConstraint = new GridBagConstraints();
