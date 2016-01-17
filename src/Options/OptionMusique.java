@@ -13,32 +13,35 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import Client.Ascenseur;
 import Controleurs.ControleurInterne;
 
-/**description de l'OptionMusique une implementation de {@link Option}
+/**description de l'OptionMusique, une implementation de {@link Option}
  * @author p14005728
  */
 public class OptionMusique extends Option implements Cloneable {
 	
-	private boolean estOuverte;
+	/**Permet de savoir si la fenetre de cette OptionMusique est ouverte.
+	 */
+	private boolean estFenetreOuverte;
 	
 	/**nom de la musique 
 	 */
 	private String nomMusique = "";
 	
-	/**constructeur de OptionMusique
-	 * @param nomMusique le nom de la musique de cette OptionMusique
+	/**Construit une OptionMusique et initialise {@link Option#controleurInt}.
+	 * @param controleurInt le {@link ControleurInterne} a affecter a cette OptionMusique.
 	 */
 	public OptionMusique (ControleurInterne controleurInt) {
 		setControleurInterne(controleurInt);
 	}
 	
+	/**Constructeur par defaut d'une OptionMusique.
+	 */
 	public OptionMusique () {
 	}
 	
-	/**permet de lancer la musique  
-	 * affichage du nom de la musique
+	/**permet de lancer la musique, pour l'instant ne fait qu'une notification
+	 * affichage du nom de la musique.
 	 */
 	private void lancerMusique () {
 		setEstActivee(true);
@@ -119,11 +122,11 @@ public class OptionMusique extends Option implements Cloneable {
 	}
 
 	public boolean isEstOuverte() {
-		return estOuverte;
+		return estFenetreOuverte;
 	}
 
 	public void setEstOuverte(boolean estOuverte) {
-		this.estOuverte = estOuverte;
+		this.estFenetreOuverte = estOuverte;
 	}
 
 	public String getNomMusique() {

@@ -8,12 +8,12 @@ import java.util.ArrayList;
  */
 public class GestionnaireOption {
 
-	/** creation d'une liste de {@link Option}
+	/** liste des {@link Option} de ce GestionnaireOption.
 	 */
 	private ArrayList<Option> options = new ArrayList<Option>();
 
-	/** permet l'acces à la liste de {@link Option}
-	 * @return options liste de {@link Option}
+	/** permet l'acces a la liste d'{@link Option} de ce GestionnaireOption
+	 * @return {@link #options} de ce GestionnaireOption
 	 */
 	public ArrayList<Option> getOptions() {
 		return options;
@@ -26,12 +26,12 @@ public class GestionnaireOption {
 		options.add(option);
 	}
 	
-	/** permet d'obtenir le numero de l'{@link Option} contenue dans {@link #options}
-	 * @param i numero de l'{@link Option}
-	 * @return {@link Option} de numero i
+	/** permet d'obtenir l'{@link Option} contenue dans {@link #options} a l'index index
+	 * @param index index de l'{@link Option}
+	 * @return {@link Option} d'index index
 	 */
-	public Option getOption (int i) {
-		return options.get(i);
+	public Option getOption (int index) {
+		return options.get(index);
 	}
 
 	/**permet d'activer une {@link Option} de {@link #options} grace a son index
@@ -41,11 +41,9 @@ public class GestionnaireOption {
 		options.get(index).activer();
 	}
 
-	@Override
-	public String toString() {
-		return "GestionnaireOption [options=" + options + "]";
-	}
-
+	/**Permet de supprimer une {@link Option} de {@link #options}
+	 * @param option l'{@link Option} a supprimer de {@link #options}
+	 */
 	public void supprimerOption(Option option) {
 		options.remove(option);
 	}
