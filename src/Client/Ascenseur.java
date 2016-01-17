@@ -8,7 +8,7 @@ import Boutons.BoutonInterne;
 import Boutons.BoutonStop;
 import Controleurs.ControleurInterne;
 import Options.GestionnaireOption;
-import Options.IOption;
+import Options.Option;
 import Requetes.RequeteInterne;
 
 /**Description de l'etat de l'Ascenseur. Le traitement des {@link Requetes.Requete} se fait dans le {@link ControleurInterne} correspondant.
@@ -229,8 +229,8 @@ public class Ascenseur extends Observable{
 		notifyObservers();
 	}
 	
-	/**Active l'{@link IOption} de numero numOption
-	 * @param numOption le numero de l'{@link IOption} a activer
+	/**Active l'{@link Option} de numero numOption
+	 * @param numOption le numero de l'{@link Option} a activer
 	 */
 	public void activerOption (int numOption) {
 		gestionnaireOption.activerOption(numOption);
@@ -238,10 +238,10 @@ public class Ascenseur extends Observable{
 		notifyObservers();
 	}
 	
-	/**Ajoute une {@link IOption} au {@link Ascenseur#gestionnaireOption} de ce Ascenseur
-	 * @param option {@link IOption} a ajouter
+	/**Ajoute une {@link Option} au {@link Ascenseur#gestionnaireOption} de ce Ascenseur
+	 * @param option {@link Option} a ajouter
 	 */
-	public void ajouterOption (IOption option) {
+	public void ajouterOption (Option option) {
 		gestionnaireOption.addOption(option);
 		setChanged();
 		notifyObservers();
