@@ -22,11 +22,18 @@ import Requetes.Requete;
  */
 public class FenetreRequetes extends JFrame implements Observer{
 
-	/**{@link JTextArea} dans laquelle s'ecrie la liste des {@link Requete}
+	/**{@link JTextArea} dans laquelle s'ecrie la liste des {@link RequeteInterne}
 	 */
 	private JTextArea AffichageRequetesInternes = new JTextArea();
 	
+	/**{@link JTextArea} dans laquelle s'ecrie la liste des {@link RequeteExterne}
+	 */
 	private JTextArea AffichageRequetesExternes = new JTextArea();
+	
+	/**{@link JTextArea} dans laquelle s'ecrie l'historique de la derniere iteration
+	 * @see Batiment#ResultatDerniereIteration
+	 */
+	private JTextArea AffichageHistorique = new JTextArea();
 	
 	/**{@link Batiment} correspondant a cette vue
 	 */
@@ -41,30 +48,41 @@ public class FenetreRequetes extends JFrame implements Observer{
 	 * @param batiment le {@link Batiment} correspondant a cette FenetreRequetes
 	 */
 	public FenetreRequetes (Batiment batiment) {
-		this.batiment = batiment;						// le Batiment associe a cette fenetre
-		AffichageRequetesInternes.setEditable(false);	// on empeche l'utilisateur d'ecrire dans la fenetre de texte
+		// le Batiment associe a cette fenetre
+		this.batiment = batiment;						
 		
-		this.setLayout(new GridLayout(2, 1, 0, 10));	// il est associe a la fenetre principale
+		// on empeche l'utilisateur d'ecrire dans les fenetres de texte
+		AffichageRequetesInternes.setEditable(false);	
+		AffichageRequetesExternes.setEditable(false);
+		AffichageHistorique.setEditable(false);
 		
-		JPanel panelRequeteInterne = new JPanel();		// le JPanel contenant le JTextArea
-		panelRequeteInterne.setBorder(BorderFactory.createTitledBorder("Internal queries"));
-		panelRequeteInterne.setLayout(new GridLayout());
-		panelRequeteInterne.add(AffichageRequetesInternes);		// on l'ajoute
+		this.setLayout(new GridLayout(3, 1, 0, 10));	// il est associe a la fenetre principale
+		
+		JPanel panelRequeteInterne = new JPanel();			// le JPanel contenant le JTextArea
+		panelRequeteInterne.add(AffichageRequetesInternes);	// on l'ajoute
 		JScrollPane scrollRequeteInterne = new JScrollPane(panelRequeteInterne);
-		this.add(scrollRequeteInterne);
+		JPanel panelRequeteInternePrincipale = new JPanel(new GridLayout());
+		panelRequeteInternePrincipale.add(scrollRequeteInterne);
+		panelRequeteInternePrincipale.setBorder(BorderFactory.createTitledBorder("Internal queries"));
+		this.add(panelRequeteInternePrincipale);
 		
 		JPanel panelRequeteExterne = new JPanel();
-		panelRequeteExterne.setBorder(BorderFactory.createTitledBorder("External queries"));
-		panelRequeteExterne.setLayout(new GridLayout());
 		panelRequeteExterne.add(AffichageRequetesExternes);
 		JScrollPane scrollRequeteExterne = new JScrollPane(panelRequeteExterne);
-		this.add(scrollRequeteExterne);
+		JPanel panelRequeteExternePrincipale = new JPanel(new GridLayout());
+		panelRequeteExternePrincipale.setBorder(BorderFactory.createTitledBorder("External queries"));
+		panelRequeteExternePrincipale.add(scrollRequeteExterne);
+		this.add(panelRequeteExternePrincipale);
 		
-		// on cree le JPanel principale auquel on affecte un layout
-		//JPanel panel = new JPanel(new GridLayout(0, 1));			
-		
-		// on met une JScrollBar en cas de besoin
-		//JScrollPane scrollHistorique = new JScrollPane(panelRequeteInterne);	
+		// on cree le JPanel de l'historique auquel on affecte un layout
+		JPanel panelHistorique = new JPanel();	
+		panelHistorique.add(AffichageHistorique);
+		// on met une JScrollPane en cas de besoin
+		JScrollPane scrollHistorique = new JScrollPane(panelHistorique);
+		JPanel panelHistoriquePrincipale = new JPanel(new GridLayout());
+		panelHistoriquePrincipale.setBorder(BorderFactory.createTitledBorder("Historic"));
+		panelHistoriquePrincipale.add(scrollHistorique);
+		this.add(panelHistoriquePrincipale);
 		
 		// Lors d'un changement de taille de la fenetre, on reactualise l'affichage
 		this.addComponentListener(new ComponentAdapter ()
@@ -94,6 +112,7 @@ public class FenetreRequetes extends JFrame implements Observer{
 		// Reinitialisation des JTextArea
 		AffichageRequetesInternes.setText("");
 		AffichageRequetesExternes.setText("");
+		AffichageHistorique.setText(batiment.getResultatDerniereIteration());
 		
 		// Affichage des RequeteExterne du Batiment
 		for (Requete i : batiment.getControleurExt().getRequetes()) {

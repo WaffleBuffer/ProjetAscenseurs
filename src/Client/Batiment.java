@@ -51,6 +51,10 @@ public class Batiment extends java.util.Observable {
 	 */
 	private ArrayList<BoutonBas> listeBoutonsBas = new ArrayList<BoutonBas>();
 	
+	/**La String representant la derniere iteration de ce Batiment
+	 */
+	private String ResultatDerniereIteration;
+
 	/**Construit un Batiment.
 	 * @param nom le nom de ce Batiment.
 	 * @param nbEtages le nombre d'etage de ce Batiment.
@@ -109,6 +113,7 @@ public class Batiment extends java.util.Observable {
 				}
 			}
 		}//boucle for
+		ResultatDerniereIteration = stringRenvoye;
 		return stringRenvoye;
 	}//traiterControleurs()
 	
@@ -207,5 +212,12 @@ public class Batiment extends java.util.Observable {
 	 */
 	public ArrayList<BoutonBas> getListeBoutonsBas() {
 		return listeBoutonsBas;
+	}
+	
+	/**Permet d'obtenir le {@link #ResultatDerniereIteration} de ce Batiment
+	 * @return le {@link #ResultatDerniereIteration} de ce Batiment
+	 */
+	public String getResultatDerniereIteration() {
+		return ResultatDerniereIteration;
 	}
 }
