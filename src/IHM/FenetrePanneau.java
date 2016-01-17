@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,19 +16,18 @@ import javax.swing.JToggleButton;
 
 import Client.Batiment;
 
-public class FenetrePanneau extends JFrame {
-
+public class FenetrePanneau extends Observable {
 
 	private JToggleButton boutonAscenseurSelectionne;
-	private static final long serialVersionUID = 1L;
 
 	public FenetrePanneau (final Batiment batiment){
+		JFrame fenetrePrincipale = new JFrame();
 		GridLayout layoutPrincipal = new GridLayout(2, 1);		//création layout principal de la fenetre
 		layoutPrincipal.setVgap(20);							//ajout margin vertical entre éléments du layout
-		this.setLayout(layoutPrincipal);						//associationd du layout à la fenetre
+		fenetrePrincipale.setLayout(layoutPrincipal);						//associationd du layout à la fenetre
 		JPanel panelPrincipalAscenseurs = new JPanel();
 		panelPrincipalAscenseurs.setLayout(new GridLayout());
-		this.add(panelPrincipalAscenseurs);
+		fenetrePrincipale.add(panelPrincipalAscenseurs);
 		panelPrincipalAscenseurs.setBorder(BorderFactory.createTitledBorder("Lifts"));
 		
 		JPanel panelAscenseurs = new JPanel();
@@ -53,13 +54,8 @@ public class FenetrePanneau extends JFrame {
 						boutonAscenseurSelectionne.setSelected(false);			//le dernier sélectionné ne l'est plus
 						boutonAscenseurSelectionne = ascenseur;					//le bouton sélectionné devient le nouveau cliqué
 						batiment.setAscenseurSelectionne(batiment.getAscenseur(j - 1));		//et l'ascenseur selectionne devient celui cliqué
-						
-						//fenetreBatiment.setAscenseur(ascenseurSelectionne);	//idem pour la fenetreBatiment
-						//fenetreBatiment.getLabelNumAsc().setText(String.valueOf(ascenseurSelectionne.getNumAsc()));	//actualisation du numéro du nouvel ascenseur
-						//fenetreBatiment.getListeLabelNbAscenseursParEtage().get(bat.getNbEtages() - 
-						//ascenseurSelectionne.getEtage()).setBackground(Color.orange);
-						//AscenseurAvecSonLabelActuel.get(ascenseurSelectionne).setBackground(Color.orange);
-						//fenetreBatiment.getLabelCourant().setBackground(null);
+						setChanged();
+						notifyObservers();
 					}
 					else
 						boutonAscenseurSelectionne.setSelected(true);
@@ -70,7 +66,7 @@ public class FenetrePanneau extends JFrame {
 		
 		JPanel panelPrincipalPanneau = new JPanel();
 		panelPrincipalPanneau.setLayout(new GridLayout());
-		this.add(panelPrincipalPanneau);
+		fenetrePrincipale.add(panelPrincipalPanneau);
 		panelPrincipalPanneau.setBorder(BorderFactory.createTitledBorder("Buttons"));
 		
 		JPanel panelPanneau = new JPanel();								//creation panel pour les boutons dans l'ascenseur
@@ -115,12 +111,12 @@ public class FenetrePanneau extends JFrame {
 		}
 		batiment.setAscenseurSelectionne(batiment.getAscenseur(0));
 		
-		this.setTitle(batiment.getNom() + " (lifts)");	//Titre de la fenêtre 
-		this.setMinimumSize(new Dimension(300, 500));
+		fenetrePrincipale.setTitle(batiment.getNom() + " (lifts)");	//Titre de la fenêtre 
+		fenetrePrincipale.setMinimumSize(new Dimension(300, 500));
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int)dimension.getHeight();
-		this.setLocation(0, height/2 - this.getHeight()/2);
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.setVisible(true);												//la fenetre apparait
-	}
+		fenetrePrincipale.setLocation(0, height/2 - fenetrePrincipale.getHeight()/2);
+		fenetrePrincipale.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		fenetrePrincipale.setVisible(true);												
+		}
 }

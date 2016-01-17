@@ -93,7 +93,8 @@ public class FenetreConfiguration extends JFrame {
 					i.getAscenseur().addObserver(fenetreRequetes);
 					i.getAscenseur().addObserver(fenetreBatiment);
 				}
-				new FenetrePanneau(batiment);
+				FenetrePanneau fenetrePanneau = new FenetrePanneau(batiment);
+				fenetrePanneau.addObserver(fenetreBatiment);
 				texteNomBatiment.setText("");
 				nbEtages.setValue(1);
 				nbAscenseurs.setValue(1);

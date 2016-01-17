@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import Client.Ascenseur;
 import Client.Batiment;
 import Client.Constantes;
 
@@ -209,13 +210,23 @@ public class FenetreBatiment extends JFrame implements Observer{
 
 	@Override
 	public void update(Observable observe, Object arg1) {
-		labelEtageAscenseurSelectionne.setText(Integer.toString(batiment.getAscenseurSelectionne().getEtage()));	//actualise l'étage actuel de l'ascenseur
-		labelCourant.setOpaque(false);
-		setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - batiment.getAscenseurSelectionne().getEtage()));
-		labelCourant.setOpaque(true);
-		FonctionsUtiles.afficherEtatAscenseur(batiment.getAscenseurSelectionne(), labelCourant);
-		for (int i = 0; i < listeLabelNbAscenseursParEtage.size(); ++i){
-			listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - i).setText(Integer.toString((FonctionsUtiles.NbAscenseursParEtage(batiment, i))));
+		if (observe.getClass() == Batiment.class || observe.getClass() == Ascenseur.class){
+			labelEtageAscenseurSelectionne.setText(Integer.toString(batiment.getAscenseurSelectionne().getEtage()));	//actualise l'étage actuel de l'ascenseur
+			labelCourant.setOpaque(false);
+			setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - batiment.getAscenseurSelectionne().getEtage()));
+			labelCourant.setOpaque(true);
+			FonctionsUtiles.afficherEtatAscenseur(batiment.getAscenseurSelectionne(), labelCourant);
+			for (int i = 0; i < listeLabelNbAscenseursParEtage.size(); ++i){
+				listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - i).setText(Integer.toString((FonctionsUtiles.NbAscenseursParEtage(batiment, i))));
+			}
+		}
+		else if (observe.getClass() == FenetrePanneau.class){
+			for (int i = 0; i < listeLabelNbAscenseursParEtage.size(); ++i){
+				listeLabelNbAscenseursParEtage.get(i).setBackground(null);
+			}
+			labelCourant.setBackground(null);
+			setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - batiment.getAscenseurSelectionne().getEtage()));
+			FonctionsUtiles.afficherEtatAscenseur(batiment.getAscenseurSelectionne(), labelCourant);
 		}
 	}
 }
