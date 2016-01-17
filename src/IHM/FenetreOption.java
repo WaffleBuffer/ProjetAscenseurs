@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -22,9 +24,11 @@ import Client.Batiment;
 import Options.Option;
 import Options.OptionMusique;
 
-public class FenetreOption extends JFrame{
+public class FenetreOption extends JFrame implements Observer{
 	
 	Batiment batiment;
+	private JList<Ascenseur> listeAscenseur;
+	private JList<Option> listeOptionsAscenseur;
 	
 	public FenetreOption (Batiment batiment) {
 		this.batiment = batiment;
@@ -58,7 +62,7 @@ public class FenetreOption extends JFrame{
 			ascenseurs[i] = batiment.getControleursInternes().get(i).getAscenseur();
 		}
 		
-		final JList<Ascenseur> listeAscenseur = new JList<Ascenseur>(ascenseurs);
+		this.listeAscenseur = new JList<Ascenseur>(ascenseurs);
 		listeAscenseur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listeAscenseur.setLayoutOrientation(JList.VERTICAL);
 		listeAscenseur.setVisibleRowCount(-1);
@@ -87,7 +91,7 @@ public class FenetreOption extends JFrame{
 		optionsPanel.setBorder(BorderFactory.createTitledBorder(null, "Options list", TitledBorder.CENTER, 
 				TitledBorder.DEFAULT_POSITION));
 		
-		final JList<Option> listeOptionsAscenseur = new JList<Option>();
+		this.listeOptionsAscenseur = new JList<Option>();
 		listeOptionsAscenseur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listeOptionsAscenseur.setLayoutOrientation(JList.VERTICAL);
 		listeOptionsAscenseur.setVisibleRowCount(-1);
@@ -100,11 +104,7 @@ public class FenetreOption extends JFrame{
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				Option[] optionsDispo = new Option[listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().size()];
-				for (int i = 0; i < optionsDispo.length; ++i) {
-					optionsDispo[i] = listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i);
-				}
-				listeOptionsAscenseur.setListData(optionsDispo);
+				update(null, null);
 			}
 		});
 		
@@ -114,11 +114,6 @@ public class FenetreOption extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				listeAscenseur.getSelectedValue().ajouterOption(listeOptions.getSelectedValue());
-				Option[] optionsDispo = new Option[listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().size()];
-				for (int i = 0; i < optionsDispo.length; ++i) {
-					optionsDispo[i] = listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i);
-				}
-				listeOptionsAscenseur.setListData(optionsDispo);
 			}
 		});
 		
@@ -129,12 +124,11 @@ public class FenetreOption extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if (listeOptionsAscenseur.getSelectedValue() != null) {
 					int selectedindex = listeOptionsAscenseur.getSelectedIndex();
-					listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().remove(listeOptionsAscenseur.getSelectedValue());
+					listeAscenseur.getSelectedValue().supprimerOption((listeOptionsAscenseur.getSelectedValue()));
 					Option[] optionsDispo = new Option[listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().size()];
 					for (int i = 0; i < optionsDispo.length; ++i) {
 						optionsDispo[i] = listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i);
 					}
-					listeOptionsAscenseur.setListData(optionsDispo);
 					if (selectedindex < optionsDispo.length && optionsDispo[selectedindex] != null) {
 						listeOptionsAscenseur.setSelectedIndex(selectedindex);
 					}		
@@ -174,6 +168,15 @@ public class FenetreOption extends JFrame{
 		// la fenetre apparait au milieu, a droite de l'ecran
 		this.setLocation(width - this.getWidth(), height - this.getHeight());
 		this.setVisible(true);									//la fenetre apparaît
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		Option[] optionsDispo = new Option[listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().size()];
+		for (int i = 0; i < optionsDispo.length; ++i) {
+			optionsDispo[i] = listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i);
+		}
+		listeOptionsAscenseur.setListData(optionsDispo);	
 	}
 
 }

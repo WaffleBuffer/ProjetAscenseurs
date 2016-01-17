@@ -38,12 +38,15 @@ public class GestionnaireOption {
 	 * @param index numero de l'{@link Option} a activer
 	 */
 	public void activerOption (int index) {
-		//traitement par defaut
 		options.get(index).activer();
 	}
 
 	@Override
 	public String toString() {
 		return "GestionnaireOption [options=" + options + "]";
+	}
+
+	public void supprimerOption(Option option) {
+		options.remove(option);
 	}
 }

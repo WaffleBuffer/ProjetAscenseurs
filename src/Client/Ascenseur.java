@@ -246,4 +246,13 @@ public class Ascenseur extends Observable{
 		setChanged();
 		notifyObservers();
 	}
+	
+	/**Supprime une {@link Option} au {@link Ascenseur#gestionnaireOption} de ce Ascenseur
+	 * @param option {@link Option} a supprimer
+	 */
+	public void supprimerOption (Option option) {
+		gestionnaireOption.supprimerOption(option);
+		setChanged();
+		notifyObservers();
+	}
 }

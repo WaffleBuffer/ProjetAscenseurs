@@ -81,6 +81,9 @@ public class FenetreConfiguration extends JFrame {
 				Batiment batiment = new Batiment(texteNomBatiment.getText(), (Integer) nbEtages.getValue(), (Integer) nbAscenseurs.getValue());
 				if (checkBoxOption.isSelected()) {
 					FenetreOption fenetreOption = new FenetreOption(batiment);
+					for (ControleurInterne i : batiment.getControleursInternes()) {
+						i.getAscenseur().addObserver(fenetreOption);
+					}
 				}
 				FenetreRequetes fenetreRequetes = new FenetreRequetes(batiment);
 				FenetreBatiment fenetreBatiment = new FenetreBatiment(batiment);
