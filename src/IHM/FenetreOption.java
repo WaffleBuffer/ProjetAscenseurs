@@ -126,12 +126,16 @@ public class FenetreOption extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (listeOptionsAscenseur.getSelectedValue() != null) {
+					int selectedindex = listeOptionsAscenseur.getSelectedIndex();
 					listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().remove(listeOptionsAscenseur.getSelectedValue());
 					IOption[] optionsDispo = new IOption[listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().size()];
 					for (int i = 0; i < optionsDispo.length; ++i) {
 						optionsDispo[i] = listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i);
 					}
 					listeOptionsAscenseur.setListData(optionsDispo);
+					if (selectedindex < optionsDispo.length && optionsDispo[selectedindex] != null) {
+						listeOptionsAscenseur.setSelectedIndex(selectedindex);
+					}		
 				}
 			}
 		});
