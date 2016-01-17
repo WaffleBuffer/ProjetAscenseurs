@@ -23,7 +23,7 @@ public class OptionMusique extends Option implements Cloneable {
 	/**Permet de savoir si la fenetre de cette OptionMusique est ouverte.
 	 */
 	private boolean estFenetreOuverte;
-	
+
 	/**nom de la musique 
 	 */
 	private String nomMusique = "";
@@ -40,8 +40,7 @@ public class OptionMusique extends Option implements Cloneable {
 	public OptionMusique () {
 	}
 	
-	/**permet de lancer la musique, pour l'instant ne fait qu'une notification
-	 * affichage du nom de la musique.
+	/**permet de lancer la musique, pour l'instant ne fait qu'une notification.
 	 */
 	private void lancerMusique () {
 		setEstActivee(true);
@@ -49,20 +48,24 @@ public class OptionMusique extends Option implements Cloneable {
 				" is playing in lift n°" + getControleurInterne().getAscenseur().getNumAsc());
 	}
 	
-	protected void arreterMusique() {
+	/**permet d'arreter la musique, pour l'instant ne fait qu'une notification.
+	 */
+	private void arreterMusique() {
 		setEstActivee(false);
 		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + 
 				" stopped in lift n°" + getControleurInterne().getAscenseur().getNumAsc());	
 	}
 
-	/** permet d'activer OptionMusique en utilisant {@link OptionMusique#lancerMusique}
+	/** permet d'activer OptionMusique en utilisant {@link OptionMusique#lancerMusique}.
+	 * Cela creer une fenetre qui permet d'interagire avec cette OptionMusique. 
 	 */
 	@Override
 	public void activer() {
-		if (!isEstOuverte()) {//On verifie qu'il n'y ait pas d'autres fenetres d'ouvertes pour cette Option.
+		if (!estFenetreOuverte) {//On verifie qu'il n'y ait pas d'autres fenetres d'ouvertes pour cette Option.
 
-			setEstOuverte(true); 
+			estFenetreOuverte = true; 
 			
+			//Creation de la fenetre
 			JFrame fenetreMusique = new JFrame("Music");
 			fenetreMusique.setSize(new Dimension(300, 100));
 			GridBagLayout gb = new GridBagLayout();
@@ -112,35 +115,47 @@ public class OptionMusique extends Option implements Cloneable {
 			fenetreMusique.setLocationRelativeTo(null);
 			fenetreMusique.setVisible(true);				
 			
-			setEstOuverte(false);
+			estFenetreOuverte = false;
 		}
 	}
 
+	/** Permet de connaitre l'etat de cette OptionMusique.
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Music " + (nomMusique != null ? nomMusique : "") + (isEstActivee() ? " activated" : "");
 	}
 
-	public boolean isEstOuverte() {
-		return estFenetreOuverte;
+	/**Permet de definire si la fenetre d'interaction est ouverte
+	 * @param estFenetreOuverte true si ouverte, false sinon.
+	 * @see #estFenetreOuverte
+	 */
+	public void setEstFenetreOuverte(boolean estFenetreOuverte) {
+		this.estFenetreOuverte = estFenetreOuverte;
 	}
-
-	public void setEstOuverte(boolean estOuverte) {
-		this.estFenetreOuverte = estOuverte;
-	}
-
+	
+	/**Permet d'obtenir le {@link #nomMusique} de cette OptionMusique
+	 * @return le {@link #nomMusique} de cette OptionMusique
+	 */
 	public String getNomMusique() {
 		return nomMusique;
 	}
 
+	/**Permet de definir le {@link #nomMusique} de cette OptionMusique
+	 * @param nomMusique {@link #nomMusique} a definir pour cette de cette OptionMusique
+	 */
 	public void setNomMusique(String nomMusique) {
 		this.nomMusique = nomMusique;
 	}
 	
+	/** Permet d'obtenir une copie de cette OptionMusique.
+	 * @see Options.Option#clone()
+	 */
 	@Override
 	public OptionMusique clone() {
 		OptionMusique optionARetournee = new OptionMusique();
-		optionARetournee.setEstOuverte(isEstOuverte());
+		optionARetournee.setEstFenetreOuverte(estFenetreOuverte);
 		optionARetournee.setEstActivee(isEstActivee());
 		if (this.nomMusique != null) {
 			optionARetournee.setNomMusique(getNomMusique());
