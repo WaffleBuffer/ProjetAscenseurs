@@ -106,6 +106,5 @@ public class FenetreConfiguration extends JFrame {
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int width  = (int)dimension.getWidth();
 		this.setLocation(width/2 - this.getWidth()/2, 0);
-		this.setVisible(true);									//la fenêtre apparaît
 	}
 }

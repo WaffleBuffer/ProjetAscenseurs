@@ -7,6 +7,7 @@ import Boutons.BoutonDestination;
 import Boutons.BoutonInterne;
 import Boutons.BoutonStop;
 import Controleurs.ControleurInterne;
+import IHM.FonctionsUtiles;
 import Options.GestionnaireOption;
 import Options.Option;
 import Requetes.RequeteInterne;
@@ -29,7 +30,7 @@ public class Ascenseur extends Observable{
 	/**Liste des {@link BoutonInterne} situes dans cet Ascenseur.
 	 * 
 	 */
-	private ArrayList<BoutonInterne> listeBoutons = new ArrayList<BoutonInterne>();
+	private ArrayList<BoutonInterne> listeBoutonsInternes = new ArrayList<BoutonInterne>();
 
 	/**Permet de savoir si cet Ascenseur est en mouvement (true) ou non (false).
 	 * 
@@ -44,11 +45,13 @@ public class Ascenseur extends Observable{
 	/**Permet de connaitre le poid maximum que peut supporter cet Ascenseur.
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private int poidsMax;
 
 	/**Permet de savoir si cet Ascenseur est vide (true) ou non (false).
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private boolean estVide;
 
 	/**Permet de savoir si cet Ascenseur est bloque (true) ou non (false).
@@ -60,52 +63,29 @@ public class Ascenseur extends Observable{
 	/**Permet d'indentifier les differents Ascenseur.
 	 * 
 	 */
-	private int numAsc;
+	private int numAscenseur;
 	
 	/**Construit un Ascenseur et initialise tous ses attributs.
 	 * @param nbEtage permet de connaitre le nombre de {@link BoutonDestination} que devrait posseder cet Ascenseur.
-	 * @param num le numero que l'on attribut a cet Ascenseur.
+	 * @param numAscenseur le numero que l'on attribut a cet Ascenseur.
 	 */
-	public Ascenseur (int nbEtage, int num){
-		gestionnaireOption = new GestionnaireOption ();
-		etage = 0;					//un nouvel ascenseur est assemble au rez-de-chaussee (niveau 0)
-		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore recu de requete
-		estVide = true;				//un nouvel ascenseur ne contient aucun usager
-		portesOuvertes = false;		//un nouvel acsenseur a les portes fermees
-		poidsMax = 300;				//parametre par defaut		
-		numAsc = num;
-		listeBoutons.add(new BoutonDestination("Rez-de-chausse", 0)); //tout ascenseur a un bouton rez-de chausse
-		listeBoutons.add(new BoutonDestination("1er etage", 1)); //tout ascenseur a un bouton 1er etage
-		for (int i = 2; i <= nbEtage; ++i){
-			listeBoutons.add(new BoutonDestination(i+"e etage", i)); //i est numero de l'etage correspondant au bouton
+	public Ascenseur (int nbEtage, int numAscenseur){
+		gestionnaireOption 	= new GestionnaireOption ();
+		etage 				= 0;			//un nouvel ascenseur est assemble au rez-de-chaussee (niveau 0)
+		estEnMouvement 		= false;		//un nouvel ascenseur est immobile car n'a pas encore recu de requete
+		estVide 			= true;			//un nouvel ascenseur ne contient aucun usager
+		portesOuvertes 		= false;		//un nouvel acsenseur a les portes fermees
+		poidsMax 			= 300;			//parametre par defaut		
+		this.numAscenseur 	= numAscenseur;
+		for (int i = 0; i <= nbEtage; ++i){
+			listeBoutonsInternes.add(new BoutonDestination(FonctionsUtiles.nommerEtage(i), i)); //i est numero de l'etage correspondant au bouton
 		} //initialisation des boutons : autant de boutons qu'il y a d'etages
-		listeBoutons.add(new BoutonStop()); // tout ascenseur a un bouton stop
-	}
-	
-	/**Construit un Ascenseur et initialise tous ses attributs avec en plus le {@link Ascenseur#poidsMax} en parametre.
-	 * @param nbEtage permet de connaitre le nombre de {@link BoutonDestination} que devrait posseder cet Ascenseur.
-	 * @param num le numero que l'on attribut a cet Ascenseur.
-	 * @param poidsMax le {@link #poidsMax} de cet Ascenseur.
-	 */
-	public Ascenseur (int nbEtage, int num, int poidsMax){
-		gestionnaireOption = new GestionnaireOption ();
-		etage = 0;					//un nouvel ascenseur est assemble au rez-de-chaussee (niveau 0)
-		estEnMouvement = false;		//un nouvel ascenseur est immobile car n'a pas encore recu de requete
-		estVide = true;				//un nouvel ascenseur ne contient aucun usager
-		portesOuvertes = false;		//un nouvel acsenseur a les portes fermees
-		this.poidsMax = poidsMax;	//poids max donne par l'utilisateur			
-		numAsc = num;
-		listeBoutons.add(new BoutonDestination("Rez-de-chausse", 0)); //tout ascenseur a un bouton rez-de chausse
-		listeBoutons.add(new BoutonDestination("1er etage", 1)); //tout ascenseur a un bouton 1er etage
-		for (int i = 2; i <= nbEtage; ++i){
-			listeBoutons.add(new BoutonDestination(i+"e etage", i)); //i est numero de l'etage correspondant au bouton
-		} //initialisation des boutons : autant de boutons qu'il y a d'etages
-		listeBoutons.add(new BoutonStop()); // tout ascenseur a un bouton stop
+		listeBoutonsInternes.add(new BoutonStop()); // tout ascenseur a un bouton stop
 	}
 
 	@Override
 	public String toString() {
-		return "Ascenseur " + numAsc;
+		return "Ascenseur " + numAscenseur;
 	}
 
 	/**Permet de faire bouger concretement l'Ascenseur en modifiant {@link Ascenseur#etage}.
@@ -117,11 +97,11 @@ public class Ascenseur extends Observable{
 		notifyObservers();
 	}
 
-	/**Permet d'obtenir {@link Ascenseur#listeBoutons}
-	 * @return {@link Ascenseur#listeBoutons}
+	/**Permet d'obtenir {@link Ascenseur#listeBoutonsInternes}
+	 * @return {@link Ascenseur#listeBoutonsInternes}
 	 */
 	public ArrayList<BoutonInterne> getListeBoutons() {
-		return listeBoutons;
+		return listeBoutonsInternes;
 	}
 
 	/**Retourne le {@link Ascenseur#gestionnaireOption} de cet Ascenseur
@@ -137,19 +117,12 @@ public class Ascenseur extends Observable{
 	public int getEtage() {
 		return etage;
 	}
-	
-	/**Retourne le {@link Ascenseur#poidsMax} de l'ascenseur
-	 * @return {@link Ascenseur#poidsMax}
-	 */
-	public int getPoidsMax() {
-		return poidsMax;
-	}
 
-	/**Permet d'obtenir {@link Ascenseur#numAsc}.
-	 * @return {@link Ascenseur#numAsc}
+	/**Permet d'obtenir {@link Ascenseur#numAscenseur}.
+	 * @return {@link Ascenseur#numAscenseur}
 	 */
 	public int getNumAsc() {
-		return numAsc;
+		return numAscenseur;
 	}
 
 	/**Ouvre les portes en modifiant {@link Ascenseur#portesOuvertes} en prenant du temps.
@@ -213,7 +186,7 @@ public class Ascenseur extends Observable{
 	/**Debloque l'Ascenseur en modifiant {@link Ascenseur#estBloque}.
 	 * 
 	 */
-	public void debloque () {
+	public void debloquer () {
 		estBloque = false;
 		setChanged();
 		notifyObservers();
@@ -221,10 +194,10 @@ public class Ascenseur extends Observable{
 	
 	/**Permet d'appuyer sur un {@link BoutonInterne} de cet Ascenseur
 	 * @param numBouton {@link BoutonInterne} de cet Ascenseur sur lequel on veut appuyer
-	 * @param controleur {@link ControleurInterne} de cet Ascenseur
+	 * @param controleurInterne {@link ControleurInterne} de cet Ascenseur
 	 */
-	public void appuyerBouton (int numBouton, ControleurInterne controleur) {
-		listeBoutons.get(numBouton).appuyer(controleur);
+	public void appuyerBouton (int numBouton, ControleurInterne controleurInterne) {
+		listeBoutonsInternes.get(numBouton).appuyer(controleurInterne);
 		setChanged();
 		notifyObservers();
 	}

@@ -37,11 +37,11 @@ public class Batiment extends java.util.Observable implements Observer {
 	/**La liste des {@link ControleurInterne} de ce Batiment.
 	 * @see ControleurInterne
 	 */
-	private ArrayList<ControleurInterne> controleursInt = new ArrayList<ControleurInterne>();
+	private ArrayList<ControleurInterne> listeControleursInternes = new ArrayList<ControleurInterne>();
 	
 	/**le {@link ControleurExterne} de ce Batiment.
 	 */
-	private ControleurExterne controleurExt;
+	private ControleurExterne controleurExterne;
 	
 	/**le batiment possede une liste de {@link Boutons.BoutonExterne} vers le haut
 	 */
@@ -53,10 +53,10 @@ public class Batiment extends java.util.Observable implements Observer {
 	
 	private Ascenseur ascenseurSelectionne;
 	
-	public Batiment(String nom, int nbEtages, int nbAscenseur) {
+	public Batiment(String nom, int nbEtages, int nbAscenseurs) {
 		this.nom = nom;
 		this.nbEtages = nbEtages;
-		this.nbAscenseurs = nbAscenseur;
+		this.nbAscenseurs = nbAscenseurs;
 		listeBoutonsHaut.add(new BoutonHaut(0)); //le rez de chaussé n'a qu'un bouton haut et pas de bouton bas
 		
 		//a chaque etage, le batiment possede deux boutons : haut et bas
@@ -66,49 +66,49 @@ public class Batiment extends java.util.Observable implements Observer {
 		} 
 		
 		//Creation de tous les ascenseurs
-		for (int i = 0; i < nbAscenseur; ++i) {
-			controleursInt.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1), new AlgoTraitementInterneStandard()));
+		for (int i = 0; i < nbAscenseurs; ++i) {
+			listeControleursInternes.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1), new AlgoTraitementInterneStandard()));
 			//controleursInt.get(i).getAscenseur().addObserver(this);
 		}
 		
 		//this.ascenseurSelectionne = getAscenseur(0);
 		
 		listeBoutonsBas.add(new BoutonBas(nbEtages)); // le dernier étage n'a qu'un bouton bas et pas de bouton haut
-		controleurExt = new ControleurExterne(controleursInt, this.getNbEtages(), new AlgoTraitementExterneStandard());
+		controleurExterne = new ControleurExterne(listeControleursInternes, this.getNbEtages(), new AlgoTraitementExterneStandard());
 	}
 	
-	/**permet de traiter les {@link Requete} des {@link ControleurInterne} contenus dans {@link #controleursInt}
+	/**permet de traiter les {@link Requete} des {@link ControleurInterne} contenus dans {@link #listeControleursInternes}
 	 * @return String representant le resultat de l'iteration. Inutilise a ce jour. Etait utilisee pour des tests dans un terminal.
 	 * @see Controleurs.ControleurInterne#traiterRequetes()
 	 */
 	public String traiterControleurs () {
-		controleurExt.traiterRequetes();
-		String strToReturn = "";
-		for (ControleurInterne i : controleursInt) {
-			String strResult = i.traiterRequetes();
-			String frame = "";
-			for (int j = 0; j < strResult.length() + 4; ++j) {
-				frame += "=";
+		controleurExterne.traiterRequetes();
+		String stringRenvoye = "";
+		for (ControleurInterne controleurInterne : listeControleursInternes) {
+			String resultat = controleurInterne.traiterRequetes();
+			String cadre = "";
+			for (int j = 0; j < resultat.length() + 4; ++j) {
+				cadre += "=";
 			}
-			strToReturn += frame + "\n";
-			strToReturn += "| " + strResult + " |\n";
-			strToReturn += frame + "\n";
+			stringRenvoye += cadre + "\n";
+			stringRenvoye += "| " + resultat + " |\n";
+			stringRenvoye += cadre + "\n";
 			//Si l'ascenseur s'est bloque, alors traitement exceptionnel : on reaffecte toutes les RequeteExterne de celui-ci au ControleurExterne.
 			//Cela evite que si un ascenseur se bloque de facon infini, alors la requete externe n'est jamais satisfaite.
-			if (strResult.equals("ascenseur " + i.getAscenseur().getNumAsc() + " est bloque.")) {
-				for (int j = 0; j < i.getRequetes().size(); ++j) {
-					if (i.getRequetes().get(j) instanceof RequeteExterne) {
-						controleurExt.addRequete(i.getRequetes().get(j));
-						i.getRequetes().remove(i.getRequetes().get(j));
+			if (resultat.equals("Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is blocked")) {
+				for (int j = 0; j < controleurInterne.getRequetes().size(); ++j) {
+					if (controleurInterne.getRequetes().get(j) instanceof RequeteExterne) {
+						controleurExterne.addRequete(controleurInterne.getRequetes().get(j));
+						controleurInterne.getRequetes().remove(controleurInterne.getRequetes().get(j));
 						--j;
 						setChanged();
 						notifyObservers();
 					}
 				}
 			}
-		}
-		return strToReturn;
-	}
+		}//boucle for
+		return stringRenvoye;
+	}//traiterControleurs()
 	
 	/**permet d'appuyer sur le {@link BoutonExterne}
 	 * @param numEtage numero du {@link BoutonExterne}
@@ -117,21 +117,21 @@ public class Batiment extends java.util.Observable implements Observer {
 	 */
 	public void appuyerBoutonEtage (int numEtage, int hautOuBas) {
 		if (hautOuBas == Constantes.HAUT) {
-			listeBoutonsHaut.get(numEtage).appuyer(controleurExt);
+			listeBoutonsHaut.get(numEtage).appuyer(controleurExterne);
 		}
 		else if (hautOuBas == Constantes.BAS) {
-			listeBoutonsBas.get(numEtage).appuyer(controleurExt);
+			listeBoutonsBas.get(numEtage).appuyer(controleurExterne);
 		}
 		setChanged();
 		notifyObservers();
-	}
+	}//appuerBoutonEtage()
 	
 	/**permet d'obtenir un {@link Ascenseur} de ce Batiment
 	 * @param index l'index de l'{@link Ascenseur}
 	 * @return l'{@link Ascenseur} a l'index index.
 	 */
 	public Ascenseur getAscenseur(int index) {
-		return controleursInt.get(index).getAscenseur();
+		return listeControleursInternes.get(index).getAscenseur();
 	}
 
 	/** Permet d'obtenir le {@link Batiment#nom} de ce Batiment
@@ -155,18 +155,18 @@ public class Batiment extends java.util.Observable implements Observer {
 		return nbAscenseurs;
 	}
 	
-	/**permet d'obtenir le {@link #controleurExt}
-	 * @return {@link #controleurExt}
+	/**permet d'obtenir le {@link #controleurExterne}
+	 * @return {@link #controleurExterne}
 	 */
 	public ControleurExterne getControleurExt () {
-		return controleurExt;
+		return controleurExterne;
 	}
 	
-	/**permet d'obtenir la liste des {@link #controleursInt} de ce Batiment
-	 * @return {@link #controleursInt}
+	/**permet d'obtenir la liste des {@link #listeControleursInternes} de ce Batiment
+	 * @return {@link #listeControleursInternes}
 	 */
 	public ArrayList<ControleurInterne> getControleursInternes () {
-		return controleursInt;
+		return listeControleursInternes;
 	}
 	
 	
@@ -185,7 +185,7 @@ public class Batiment extends java.util.Observable implements Observer {
 	public String toString() {
 		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages
 				+ ", nbAscenseur=" + nbAscenseurs + ", controleursInt="
-				+ controleursInt + ", controleurExt=" + controleurExt
+				+ listeControleursInternes + ", controleurExt=" + controleurExterne
 				+ ", listeBoutonsHaut=" + listeBoutonsHaut
 				+ ", listeBoutonsBas=" + listeBoutonsBas + "]";
 	}

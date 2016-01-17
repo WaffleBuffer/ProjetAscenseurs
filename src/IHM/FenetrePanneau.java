@@ -95,7 +95,7 @@ public class FenetrePanneau extends JFrame {
 						if (!batiment.getAscenseurSelectionne().estBloquer())
 							batiment.getAscenseurSelectionne().bloquer();
 						else
-							batiment.getAscenseurSelectionne().debloque();
+							batiment.getAscenseurSelectionne().debloquer();
 						
 					}});
 			}

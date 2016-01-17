@@ -25,7 +25,7 @@ public class AlgoTraitementInterneStandard implements IAlgoTraitementInterne{
 		//Si le bouton stop a ete appuyer, et que l'ascenseur est debloque, alors on le bloque. Sinon on le debloque
 		if (controleurInterne.getRequetes().get(0).getLibelle() == Constantes.STOP) {
 			if (controleurInterne.getAscenseur().estBloquer()) {
-				controleurInterne.getAscenseur().debloque();
+				controleurInterne.getAscenseur().debloquer();
 				return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is released";
 			}
 			else {

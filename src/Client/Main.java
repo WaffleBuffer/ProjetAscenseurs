@@ -5,6 +5,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		FenetreConfiguration fenetre = new FenetreConfiguration();
+		fenetre.setVisible(true);
 		
 		//Permet de tester une partie du programme sur terminal.
 		//Batiment batim = new Batiment("Hotel", 5, 2);
