@@ -20,7 +20,7 @@ import Requetes.RequeteExterne;
  * @author Thomas
  * @see ControleurInterne
  */
-public class Batiment extends java.util.Observable implements Observer {
+public class Batiment extends java.util.Observable {
 	
 	/**Le nom de ce Batiment.
 	 */
@@ -51,6 +51,11 @@ public class Batiment extends java.util.Observable implements Observer {
 	 */
 	private ArrayList<BoutonBas> listeBoutonsBas = new ArrayList<BoutonBas>();
 	
+	/**Construit un Batiment.
+	 * @param nom le nom de ce Batiment.
+	 * @param nbEtages le nombre d'etage de ce Batiment.
+	 * @param nbAscenseurs le nombre d'{@link Ascenseur} de ce Batiment.
+	 */
 	public Batiment(String nom, int nbEtages, int nbAscenseurs) {
 		this.nom = nom;
 		this.nbEtages = nbEtages;
@@ -66,7 +71,6 @@ public class Batiment extends java.util.Observable implements Observer {
 		//Creation de tous les ascenseurs
 		for (int i = 0; i < nbAscenseurs; ++i) {
 			listeControleursInternes.add(new ControleurInterne(new Ascenseur(nbEtages, i + 1), new AlgoTraitementInterneStandard()));
-			//controleursInt.get(i).getAscenseur().addObserver(this);
 		}
 		
 		//this.ascenseurSelectionne = getAscenseur(0);
@@ -179,6 +183,9 @@ public class Batiment extends java.util.Observable implements Observer {
 		//notifyObservers();
 	}
 	
+	/**Permet d'obtenir l'etat de ce Batiment.
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Batiment [nom=" + nom + ", nbEtages=" + nbEtages
@@ -188,18 +195,17 @@ public class Batiment extends java.util.Observable implements Observer {
 				+ ", listeBoutonsBas=" + listeBoutonsBas + "]";
 	}
 
+	/**Permet d'obtenir la {@link #listeBoutonsHaut} des {@link BoutonHaut} de ce Batiment
+	 * @return {@link #listeBoutonsHaut} de ce Batiment
+	 */
 	public ArrayList<BoutonHaut> getListeBoutonsHaut() {
 		return listeBoutonsHaut;
 	}
 
+	/**Permet d'obtenir la {@link #listeBoutonsBas} des {@link BoutonBas} de ce Batiment
+	 * @return {@link #listeBoutonsBas} de ce Batiment
+	 */
 	public ArrayList<BoutonBas> getListeBoutonsBas() {
 		return listeBoutonsBas;
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		setChanged();
-		notifyObservers();
-	} 
-
 }

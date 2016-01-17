@@ -20,9 +20,18 @@ import Client.Ascenseur;
 import Client.Batiment;
 import Client.Constantes;
 
+/**Decrit la fenetre de vue en coupe d'un {@link Batiment}.
+ * @author Thomas
+ */
 public class FenetreBatiment extends JFrame implements Observer{
 
+	/**Demande par {@link JFrame}
+	 * @see JFrame
+	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**Etiquette correspondant au {@link Ascenseur#numAsc} de l'{@link Ascenseur} selectionne
+	 */
 	private JLabel labelNumAscenseur = new JLabel("1", JLabel.CENTER);
 	private JLabel labelEtageAscenseurSelectionne = new JLabel("0", JLabel.CENTER);
 	private ArrayList<JLabel> listeLabelNbAscenseursParEtage = new ArrayList<JLabel>();

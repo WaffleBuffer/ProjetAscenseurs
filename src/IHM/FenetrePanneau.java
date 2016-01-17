@@ -14,21 +14,32 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 
+import Boutons.BoutonInterne;
 import Client.Ascenseur;
 import Client.Batiment;
 
+/**Decrit la fenetre qui contient les {@link BoutonInterne} de l'{@link Ascenseur} selectionne d'un {@link Batiment}.
+ * @author Thomas
+ */
 public class FenetrePanneau extends Observable {
 
+	/**{@link JButton} correspondant a l'{@link #ascenseurSelectionne} de cette Fenetrepanneau.
+	 */
 	private JToggleButton boutonAscenseurSelectionne;
 	
+	/**l'{@link Ascenseur} selectionne par le {@link #boutonAscenseurSelectionne} de cette Fenetrepanneau.
+	 */
 	private Ascenseur ascenseurSelectionne;
 
+	/**Construit une FenetrePanneau pour un {@link Batiment}.
+	 * @param batiment le {@link Batiment} correspondant a cette fenetrePanneau.
+	 */
 	public FenetrePanneau (final Batiment batiment){
 		ascenseurSelectionne = batiment.getAscenseur(0);
 		JFrame fenetrePrincipale = new JFrame();
 		GridLayout layoutPrincipal = new GridLayout(2, 1);		//creation layout principal de la fenetre
 		layoutPrincipal.setVgap(20);							//ajout margin vertical entre éléments du layout
-		fenetrePrincipale.setLayout(layoutPrincipal);						//associationd du layout à la fenetre
+		fenetrePrincipale.setLayout(layoutPrincipal);			//associationd du layout à la fenetre
 		JPanel panelPrincipalAscenseurs = new JPanel();
 		panelPrincipalAscenseurs.setLayout(new GridLayout());
 		fenetrePrincipale.add(panelPrincipalAscenseurs);
@@ -123,6 +134,9 @@ public class FenetrePanneau extends Observable {
 		fenetrePrincipale.setVisible(true);												
 	}
 
+	/**Permet d'obtenir l'{@link #ascenseurSelectionne} de cette FenetrePanneau.
+	 * @return l'{@link #ascenseurSelectionne} de cette FenetrePanneau.
+	 */
 	public Ascenseur getAscenseurSelectionne() {
 		return ascenseurSelectionne;
 	}
