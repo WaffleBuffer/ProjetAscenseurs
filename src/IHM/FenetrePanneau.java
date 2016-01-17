@@ -14,15 +14,19 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 
+import Client.Ascenseur;
 import Client.Batiment;
 
 public class FenetrePanneau extends Observable {
 
 	private JToggleButton boutonAscenseurSelectionne;
+	
+	private Ascenseur ascenseurSelectionne;
 
 	public FenetrePanneau (final Batiment batiment){
+		ascenseurSelectionne = batiment.getAscenseur(0);
 		JFrame fenetrePrincipale = new JFrame();
-		GridLayout layoutPrincipal = new GridLayout(2, 1);		//création layout principal de la fenetre
+		GridLayout layoutPrincipal = new GridLayout(2, 1);		//creation layout principal de la fenetre
 		layoutPrincipal.setVgap(20);							//ajout margin vertical entre éléments du layout
 		fenetrePrincipale.setLayout(layoutPrincipal);						//associationd du layout à la fenetre
 		JPanel panelPrincipalAscenseurs = new JPanel();
@@ -37,7 +41,7 @@ public class FenetrePanneau extends Observable {
 		panelPrincipalAscenseurs.add(scrollAscenseurs);
 		
 		//==========ASCENSEURS==========
-		//creation de la liste des ascenseur sous forme de boutons alignés verticalement
+		//creation de la liste des ascenseur sous forme de boutons alignes verticalement
 		for(int i = 1; i <= batiment.getNbAscenseurs(); ++i){		
 			final int j = i;
 			final JToggleButton ascenseur = new JToggleButton("Elevator n�" + i);
@@ -50,10 +54,10 @@ public class FenetrePanneau extends Observable {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					if (batiment.getAscenseurSelectionne() != batiment.getAscenseur(j - 1)) {
-						boutonAscenseurSelectionne.setSelected(false);			//le dernier sélectionné ne l'est plus
-						boutonAscenseurSelectionne = ascenseur;					//le bouton sélectionné devient le nouveau cliqué
-						batiment.setAscenseurSelectionne(batiment.getAscenseur(j - 1));		//et l'ascenseur selectionne devient celui cliqué
+					if (ascenseurSelectionne != batiment.getAscenseur(j - 1)) {
+						boutonAscenseurSelectionne.setSelected(false);			//le dernier selectionne ne l'est plus
+						boutonAscenseurSelectionne = ascenseur;					//le bouton selectionne devient le nouveau clique
+						ascenseurSelectionne = batiment.getAscenseur(j - 1);	//et l'ascenseur selectionne devient celui clique
 						setChanged();
 						notifyObservers();
 					}
@@ -88,10 +92,10 @@ public class FenetrePanneau extends Observable {
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						if (!batiment.getAscenseurSelectionne().estBloquer())
-							batiment.getAscenseurSelectionne().bloquer();
+						if (!ascenseurSelectionne.estBloquer())
+							ascenseurSelectionne.bloquer();
 						else
-							batiment.getAscenseurSelectionne().debloquer();
+							ascenseurSelectionne.debloquer();
 						
 					}});
 			}
@@ -105,11 +109,10 @@ public class FenetrePanneau extends Observable {
 	
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						batiment.appuyerBoutonAscenseur(batiment.getAscenseurSelectionne(), j);
+						batiment.appuyerBoutonAscenseur(ascenseurSelectionne, j);
 					}});
 			}
 		}
-		batiment.setAscenseurSelectionne(batiment.getAscenseur(0));
 		
 		fenetrePrincipale.setTitle(batiment.getNom() + " (lifts)");	//Titre de la fenêtre 
 		fenetrePrincipale.setMinimumSize(new Dimension(300, 500));
@@ -118,5 +121,9 @@ public class FenetrePanneau extends Observable {
 		fenetrePrincipale.setLocation(0, height/2 - fenetrePrincipale.getHeight()/2);
 		fenetrePrincipale.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		fenetrePrincipale.setVisible(true);												
-		}
+	}
+
+	public Ascenseur getAscenseurSelectionne() {
+		return ascenseurSelectionne;
+	}
 }
