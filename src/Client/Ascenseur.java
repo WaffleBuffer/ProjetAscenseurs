@@ -85,7 +85,10 @@ public class Ascenseur extends Observable{
 
 	@Override
 	public String toString() {
-		return "Ascenseur " + numAscenseur;
+		return "Ascenseur [gestionnaireOption=" + gestionnaireOption + ", etage=" + etage + ", listeBoutonsInternes="
+				+ listeBoutonsInternes + ", estEnMouvement=" + estEnMouvement + ", portesOuvertes=" + portesOuvertes
+				+ ", poidsMax=" + poidsMax + ", estVide=" + estVide + ", estBloque=" + estBloque + ", numAscenseur="
+				+ numAscenseur + "]";
 	}
 
 	/**Permet de faire bouger concretement l'Ascenseur en modifiant {@link Ascenseur#etage}.
