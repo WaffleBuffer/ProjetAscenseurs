@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import Client.Ascenseur;
 import Client.Batiment;
 
-public class FonctionsUtiles {
+public abstract class FonctionsUtiles {
 
 	public static String nommerEtage(int etage){
 		if (etage == 0)
