@@ -32,14 +32,14 @@ public class OptionVitesseAugmentee extends Option {
 		if (!isEstActivee()) {
 			getControleurInterne().setStrategieTraitement(new AlgoTraitementInterneVitesseAugmentee());
 			setEstActivee(true);
-			JOptionPane.showMessageDialog(null, "the lift n°" 
+			JOptionPane.showMessageDialog(null, "the lift " 
 			+ getControleurInterne().getAscenseur().getNumAsc() + " is speeding up.");
 			getControleurInterne().getAscenseur().notifyObservers();
 		}
 		else {
 			getControleurInterne().setStrategieTraitement(new AlgoTraitementInterneStandard());
 			setEstActivee(false);
-			JOptionPane.showMessageDialog(null, "the lift n°" 
+			JOptionPane.showMessageDialog(null, "the lift " 
 			+ getControleurInterne().getAscenseur().getNumAsc() + " is slowing down.");		
 			getControleurInterne().getAscenseur().notifyObservers();
 		}

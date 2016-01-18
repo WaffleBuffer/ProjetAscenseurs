@@ -45,7 +45,7 @@ public class OptionMusique extends Option implements Cloneable {
 	private void lancerMusique () {
 		setEstActivee(true);
 		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + 
-				" is playing in lift n°" + getControleurInterne().getAscenseur().getNumAsc());
+				" is playing in lift " + getControleurInterne().getAscenseur().getNumAsc());
 	}
 	
 	/**permet d'arreter la musique, pour l'instant ne fait qu'une notification.
@@ -53,7 +53,7 @@ public class OptionMusique extends Option implements Cloneable {
 	private void arreterMusique() {
 		setEstActivee(false);
 		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + 
-				" stopped in lift n°" + getControleurInterne().getAscenseur().getNumAsc());	
+				" stopped in lift " + getControleurInterne().getAscenseur().getNumAsc());	
 	}
 
 	/** permet d'activer OptionMusique en utilisant {@link OptionMusique#lancerMusique}.

@@ -55,7 +55,7 @@ public class FenetrePanneau extends Observable {
 		//creation de la liste des ascenseur sous forme de boutons alignes verticalement
 		for(int i = 1; i <= batiment.getNbAscenseurs(); ++i){		
 			final int j = i;
-			final JToggleButton ascenseur = new JToggleButton("Elevator n°" + i);
+			final JToggleButton ascenseur = new JToggleButton("Elevator " + i);
 			panelAscenseurs.add(ascenseur);
 			if (i == 1){
 				boutonAscenseurSelectionne = ascenseur;
