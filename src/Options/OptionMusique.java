@@ -10,8 +10,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Controleurs.ControleurInterne;
@@ -29,13 +27,10 @@ public class OptionMusique extends Option implements Cloneable {
 	 */
 	private String nomMusique = "";
 	
-	private String[] listeMusiques = {"Tomorrow - Kurt", "MegalovaniaVania - Kurt", "Elevator Nyan Cat - Lucie",
-			"Hey Pachuco - Julien", "Ievan Polka - Remi", "Ievan Polka Voacaloid - Lucie",
-			"La petite maison dans la prairie - Julien", "Mr Sandman - Remi", "Trololo - Thomas",
-			"Victory Day in Moscow - Thomas"};
+	@SuppressWarnings("javadoc")
+	private String[] listeMusiques;	
 	
-	
-	
+	@SuppressWarnings("javadoc")
 	private Thread musique;
 	
 	/**Construit une OptionMusique et initialise {@link Option#controleurInt}.
@@ -50,23 +45,21 @@ public class OptionMusique extends Option implements Cloneable {
 	public OptionMusique () {}
 	
 	/**permet de lancer la musique, pour l'instant ne fait qu'une notification.
+	 * @param cheminFichier 
 	 */
 	private void lancerMusique (String cheminFichier) {
 		setEstActivee(true);
 		musique = new JouerFichierWAV(cheminFichier);
         musique.start();
-		//JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' +
-		//		" is playing in lift " + getControleurInterne().getAscenseur().getNumAsc());
 	}
 	
 	/**permet d'arreter la musique, pour l'instant ne fait qu'une notification.
+	 * @param cheminFichier 
 	 */
 	@SuppressWarnings("deprecation")
 	private void arreterMusique(String cheminFichier) {
 		setEstActivee(false);
 		musique.stop();
-		//JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' + 
-		//		" stopped in lift " + getControleurInterne().getAscenseur().getNumAsc());	
 	}
 	
 	/**
@@ -82,7 +75,7 @@ public class OptionMusique extends Option implements Cloneable {
 			File[] sousFichiers = repertoire.listFiles();
 			listeMusiques = new String[sousFichiers.length];
 			for(int i = 0 ; i < sousFichiers.length; i++){
-				listeMusiques[i] = sousFichiers[i].getName();
+				listeMusiques[i] = sousFichiers[i].getName().substring(0, sousFichiers[i].getName().length() - 4);
 			}
 		}
 	}
@@ -108,7 +101,7 @@ public class OptionMusique extends Option implements Cloneable {
 		if (status == JFileChooser.APPROVE_OPTION){
 			File selectedFile = chargerMusique.getSelectedFile();
 			String chemin  = selectedFile.getName();
-			selectedFile.renameTo(new File("music/" + chemin));
+			selectedFile.renameTo(new File("./music/" + chemin));
 			activer();
 		}
 
@@ -143,10 +136,10 @@ public class OptionMusique extends Option implements Cloneable {
 				public void actionPerformed(ActionEvent e) {
 					setNomMusique(nomMusique.getSelectedItem().toString());
 					if (!isEstActivee()) {
-						lancerMusique("music/" + nomMusique.getSelectedItem().toString() + ".wav");
+						lancerMusique("./music/" + nomMusique.getSelectedItem().toString() + ".wav");
 					}
 					else {
-						arreterMusique("music/" + nomMusique.getSelectedItem().toString() + ".wav");
+						arreterMusique("./music/" + nomMusique.getSelectedItem().toString() + ".wav");
 					}
 					getControleurInterne().getAscenseur().notifyObservers();
 				}
