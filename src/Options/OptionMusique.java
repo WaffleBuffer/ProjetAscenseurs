@@ -3,11 +3,16 @@ package Options;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+
 import Controleurs.ControleurInterne;
 
 /**description de l'OptionMusique, une implementation de {@link Option}
@@ -58,6 +63,17 @@ public class OptionMusique extends Option implements Cloneable {
 		JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' + 
 				" stopped in lift " + getControleurInterne().getAscenseur().getNumAsc());	
 	}
+	
+	/**
+	 * 
+	 */
+	public void ajouterMusique(){
+		//FileFilter java = new FileFilter("Fichiers WAV",".wav"); 
+		JFileChooser chargerMusique = new JFileChooser();
+		chargerMusique.setCurrentDirectory(new File("/")); 
+		chargerMusique.changeToParentDirectory(); 
+		chargerMusique.showOpenDialog(null);
+	}
 
 	/** permet d'activer OptionMusique en utilisant {@link OptionMusique#lancerMusique}.
 	 * Cela creer une fenetre qui permet d'interagire avec cette OptionMusique. 
@@ -95,7 +111,17 @@ public class OptionMusique extends Option implements Cloneable {
 				}
 			});
 			
+			JButton ajouterMusique = new JButton("Add");
+			ajouterMusique.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ajouterMusique();
+				}
+			});
+			
 			fenetreMusique.add(lancerArreter);
+			fenetreMusique.add(ajouterMusique);
 			fenetreMusique.setLocationRelativeTo(null);
 			fenetreMusique.pack();
 			fenetreMusique.setVisible(true);				
