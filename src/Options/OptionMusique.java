@@ -1,21 +1,13 @@
 package Options;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import Controleurs.ControleurInterne;
 
 /**description de l'OptionMusique, une implementation de {@link Option}
@@ -31,7 +23,8 @@ public class OptionMusique extends Option implements Cloneable {
 	 */
 	private String nomMusique = "";
 	
-	private String[] listeMusiques = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };;
+	private String[] listeMusiques = { "Carol Malus Deinheim - Symphogear GX - Tomorrow", 
+			"Toby Fox & Kenichi Matsubara - MegalovaniaVania" };
 	
 	private Thread musique;
 	
@@ -44,8 +37,7 @@ public class OptionMusique extends Option implements Cloneable {
 	
 	/**Constructeur par defaut d'une OptionMusique.
 	 */
-	public OptionMusique () {
-	}
+	public OptionMusique () {}
 	
 	/**permet de lancer la musique, pour l'instant ne fait qu'une notification.
 	 */
@@ -59,6 +51,7 @@ public class OptionMusique extends Option implements Cloneable {
 	
 	/**permet d'arreter la musique, pour l'instant ne fait qu'une notification.
 	 */
+	@SuppressWarnings("deprecation")
 	private void arreterMusique(String cheminFichier) {
 		setEstActivee(false);
 		musique.stop();
@@ -82,7 +75,7 @@ public class OptionMusique extends Option implements Cloneable {
 			JLabel labelNomMusique = new JLabel("music's name : ");
 			fenetreMusique.add(labelNomMusique);
 			
-			final JComboBox nomMusique = new JComboBox(listeMusiques);
+			final JComboBox<String> nomMusique = new JComboBox<String>(listeMusiques);
 			fenetreMusique.add(nomMusique);
 			//nomMusique.setPreferredSize(new Dimension(fenetreMusique.getWidth() / 2 - 10, nomMusique.getFont().getSize() + 8));
 			
@@ -92,12 +85,11 @@ public class OptionMusique extends Option implements Cloneable {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					setNomMusique(nomMusique.getSelectedItem().toString());
-					System.out.println(nomMusique.getSelectedItem().toString());
 					if (!isEstActivee()) {
-						lancerMusique("Carol Malus Deinheim - Symphogear GX - Tomorrow.wav");
+						lancerMusique("music/" + nomMusique.getSelectedItem().toString() + ".wav");
 					}
 					else {
-						arreterMusique("Carol Malus Deinheim - Symphogear GX - Tomorrow.wav");
+						arreterMusique("music/" + nomMusique.getSelectedItem().toString() + ".wav");
 					}
 					getControleurInterne().getAscenseur().notifyObservers();
 				}
