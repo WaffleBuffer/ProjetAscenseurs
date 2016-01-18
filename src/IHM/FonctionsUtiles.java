@@ -12,9 +12,9 @@ import Client.Batiment;
  */
 public abstract class FonctionsUtiles {
 
-	/**Permet d'obtenir le label d'etage par son numero
-	 * @param etage l'etage 
-	 * @return
+	/**Permet d'obtenir le {@link String} d'etage par son numero
+	 * @param etage le numero de l'etage dont on veut la {@link String}.
+	 * @return le {@link String} de l'etage. 
 	 */
 	public static String nommerEtage(int etage){
 		if (etage == 0)
@@ -29,6 +29,10 @@ public abstract class FonctionsUtiles {
 			return etage + "th floor";
 	}
 	
+	/**Permet de changer la couleur de fond du {@link JLabel} label selon l'etat de l'{@link Ascenseur} asc
+	 * @param asc l'{@link Ascenseur} sur lequel on verifie l'etat.
+	 * @param label le {@link JLabel} sur lequel doit s'appliquer la couleur.
+	 */
 	public static void afficherEtatAscenseur(Ascenseur asc, JLabel label){
 		if (asc.estBloquer())
 			label.setBackground(Color.red);
@@ -40,6 +44,11 @@ public abstract class FonctionsUtiles {
 			label.setBackground(Color.green);
 	}
 	
+	/**Permet de connaitre le nombre d'{@link Ascenseur} pour l'etage etage du {@link Batiment} bat.
+	 * @param bat le {@link Batiment} dont on verifie la presence d'{@link Ascenseur}.
+	 * @param etage l'etage pour lequel on verifie la presence d'{@link Ascenseur}.
+	 * @return le nombre d'{@link Ascenseur} a l'etage etage du {@link Batiment} bat.
+	 */
 	public static int NbAscenseursParEtage(Batiment bat, int etage){
 		int CptAscenseurs = 0;
 		for (int i = 0; i < bat.getNbAscenseurs(); ++i){

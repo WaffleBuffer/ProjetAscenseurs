@@ -2,8 +2,6 @@ package Options;
 
 import javax.swing.JOptionPane;
 
-import AlgosTraitement.AlgoTraitementInterneStandard;
-import AlgosTraitement.AlgoTraitementInterneVitesseAugmentee;
 import AlgosTraitement.AlgoTraitementInterneVitesseDiminuee;
 import AlgosTraitement.IAlgoTraitementInterne;
 import Controleurs.ControleurInterne;
