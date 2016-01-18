@@ -45,13 +45,11 @@ public class Ascenseur extends Observable{
 	/**Permet de connaitre le poid maximum que peut supporter cet Ascenseur.
 	 * 
 	 */
-	@SuppressWarnings("unused")
 	private int poidsMax;
 
 	/**Permet de savoir si cet Ascenseur est vide (true) ou non (false).
 	 * 
 	 */
-	@SuppressWarnings("unused")
 	private boolean estVide;
 
 	/**Permet de savoir si cet Ascenseur est bloque (true) ou non (false).
