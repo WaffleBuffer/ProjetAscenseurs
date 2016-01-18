@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import Client.Ascenseur;
 import Client.Batiment;
 import Controleurs.ControleurInterne;
 import Requetes.Requete;
@@ -24,15 +23,15 @@ import Requetes.Requete;
  */
 public class FenetreRequetes extends JFrame implements Observer{
 
-	/**{@link JTextArea} dans laquelle s'ecrie la liste des {@link RequeteInterne}
+	/**{@link JTextArea} dans laquelle s'ecrit la liste des {@link Requetes.RequeteInterne}
 	 */
 	private JTextArea AffichageRequetesInternes = new JTextArea();
 	
-	/**{@link JTextArea} dans laquelle s'ecrie la liste des {@link RequeteExterne}
+	/**{@link JTextArea} dans laquelle s'ecrit la liste des {@link Requetes.RequeteExterne}
 	 */
 	private JTextArea AffichageRequetesExternes = new JTextArea();
 	
-	/**{@link JTextArea} dans laquelle s'ecrie l'historique de la derniere iteration
+	/**{@link JTextArea} dans laquelle s'ecrit l'historique de la derniere iteration
 	 * @see Batiment#ResultatDerniereIteration
 	 */
 	private JTextArea AffichageHistorique = new JTextArea();
@@ -104,7 +103,7 @@ public class FenetreRequetes extends JFrame implements Observer{
 		// la fenetre apparait au milieu, a droite de l'ecran
 		this.setLocation(width - this.getWidth(), height/2 - this.getHeight()/2);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.setVisible(true);									//la fenetre apparaît
+		this.setVisible(true);									//la fenetre apparait
 	}
 
 	/**Actualise le text dans le {@link #AffichageRequetesInternes} de cette FenetreRequetes
@@ -120,13 +119,10 @@ public class FenetreRequetes extends JFrame implements Observer{
 			AffichageRequetesExternes.append(i.toString() + "\n");
 		}
 	
-		@SuppressWarnings("unused")
-		String tiretsAffichage = "";	// variable d'affichage
 		String egalesAffichage = "";	// variable d'affichage
 		String etoilesAffichage = "";   // variable d'affichage
-		// configuration des variables d'affichage sela la taille de la JFrame
+		// configuration des variables d'affichage selon la taille de la JFrame
 		for (int i = 0; i < this.getSize().width / 11; ++i) {
-			tiretsAffichage += "-";
 			etoilesAffichage += "*";
 			if (0 == i % 2) {
 				egalesAffichage += "=";

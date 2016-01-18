@@ -6,14 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -27,13 +19,18 @@ import javax.swing.SwingConstants;
 import Client.Batiment;
 import Controleurs.ControleurInterne;
 
+/**Vue permettant de configurer le programme.
+ * @author Lucie
+ */
 public class FenetreConfiguration extends JFrame {
 
-	/**
-	 * 
+	/**Genere par {@link JFrame}
+	 * @see JFrame
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**Construit une FenetreConfiguration.
+	 */
 	public FenetreConfiguration(){
 		
 		GridBagLayout gb = new GridBagLayout();
