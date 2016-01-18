@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
@@ -120,9 +121,18 @@ public class FenetreOption extends JFrame implements Observer{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Option optionAAjouter = listeOptions.getSelectedValue().clone();
-				optionAAjouter.setControleurInterne(batiment.getControleursInternes().get(listeAscenseur.getSelectedIndex()));
-				listeAscenseur.getSelectedValue().ajouterOption(optionAAjouter);
+				if (listeOptions.getSelectedValue() != null) {
+					for (int i = 0; i < listeAscenseur.getSelectedValue().getGestionnaireOption().getOptions().size(); ++i) {
+						if (listeOptions.getSelectedValue().getClass() == listeAscenseur.getSelectedValue().getGestionnaireOption().getOption(i).getClass()) {
+							JOptionPane.showMessageDialog(null, "the lift " 
+									+ listeAscenseur.getSelectedValue().getNumAsc() + " has already this option.");
+							return;
+						}
+					}
+					Option optionAAjouter = listeOptions.getSelectedValue().clone();
+					optionAAjouter.setControleurInterne(batiment.getControleursInternes().get(listeAscenseur.getSelectedIndex()));
+					listeAscenseur.getSelectedValue().ajouterOption(optionAAjouter);
+				}
 			}
 		});
 		
