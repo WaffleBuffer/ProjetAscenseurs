@@ -8,13 +8,19 @@ import javax.swing.ListCellRenderer;
 
 import Client.Ascenseur;
 
+/**Classe permettant de personnaliser l'affichage des {@link Ascenseur} dans une {@link JList}.
+ * @author Thomas
+ *
+ */
 public class LabelAscenseurCellRenderer extends JLabel implements ListCellRenderer<Ascenseur> {
 	
-	/**
-	 * 
+	/**Creer par {@link JLabel}
+	 * @see JLabel
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**Construit un LabelAscenseurCellRenderer et le rend opaque.
+	 */
 	public LabelAscenseurCellRenderer () {
 		setOpaque(true);
 	}
