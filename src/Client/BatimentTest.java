@@ -12,7 +12,7 @@ import org.junit.Test;
 public class BatimentTest {
 
 	/**
-	 * {@link Batiment} utilise pour effectuer les différents tests
+	 * {@link Batiment} utilise pour effectuer les differents tests
 	 */
 	private Batiment batiment;
 		
