@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import Client.Ascenseur;
 import Client.Batiment;
 import Controleurs.ControleurInterne;
 import Requetes.Requete;
@@ -112,7 +114,6 @@ public class FenetreRequetes extends JFrame implements Observer{
 		// Reinitialisation des JTextArea
 		AffichageRequetesInternes.setText("");
 		AffichageRequetesExternes.setText("");
-		AffichageHistorique.setText(batiment.getResultatDerniereIteration());
 		
 		// Affichage des RequeteExterne du Batiment
 		for (Requete i : batiment.getControleurExt().getRequetes()) {
@@ -122,12 +123,19 @@ public class FenetreRequetes extends JFrame implements Observer{
 		@SuppressWarnings("unused")
 		String tiretsAffichage = "";	// variable d'affichage
 		String egalesAffichage = "";	// variable d'affichage
+		String etoilesAffichage = "";   // variable d'affichage
 		// configuration des variables d'affichage sela la taille de la JFrame
 		for (int i = 0; i < this.getSize().width / 11; ++i) {
 			tiretsAffichage += "-";
+			etoilesAffichage += "*";
 			if (0 == i % 2) {
 				egalesAffichage += "=";
 			}
+		}
+		
+		if ("" != batiment.getResultatDerniereIteration()) {
+			AffichageHistorique.append(etoilesAffichage + "\n");
+			AffichageHistorique.append(batiment.getResultatDerniereIteration());
 		}
 		
 		// Affichage des RequeteInterne du Batiment
