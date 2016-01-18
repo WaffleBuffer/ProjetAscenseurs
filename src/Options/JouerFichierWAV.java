@@ -88,4 +88,11 @@ public class JouerFichierWAV extends Thread {
             auline.close();
         }
     }//run()
+
+	/**
+	 * @return
+	 */
+	public String getCheminDuFichier() {
+		return cheminDuFichier;
+	}
 } 

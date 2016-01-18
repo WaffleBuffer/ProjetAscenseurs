@@ -1,13 +1,16 @@
 package Options;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +31,8 @@ public class OptionMusique extends Option implements Cloneable {
 	 */
 	private String nomMusique = "";
 	
+	private String[] listeMusiques = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };;
+	
 	private Thread musique;
 	
 	/**Construit une OptionMusique et initialise {@link Option#controleurInt}.
@@ -44,20 +49,20 @@ public class OptionMusique extends Option implements Cloneable {
 	
 	/**permet de lancer la musique, pour l'instant ne fait qu'une notification.
 	 */
-	private void lancerMusique () {
+	private void lancerMusique (String cheminFichier) {
 		setEstActivee(true);
-		musique = new JouerFichierWAV("coin.wav");
+		musique = new JouerFichierWAV(cheminFichier);
         musique.start();
-		JOptionPane.showMessageDialog(null, "the music : " + musique.getName() + 
+		JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' +
 				" is playing in lift " + getControleurInterne().getAscenseur().getNumAsc());
 	}
 	
 	/**permet d'arreter la musique, pour l'instant ne fait qu'une notification.
 	 */
-	private void arreterMusique() {
+	private void arreterMusique(String cheminFichier) {
 		setEstActivee(false);
 		musique.stop();
-		JOptionPane.showMessageDialog(null, "the music : " + musique.getName() + 
+		JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' + 
 				" stopped in lift " + getControleurInterne().getAscenseur().getNumAsc());	
 	}
 
@@ -72,52 +77,35 @@ public class OptionMusique extends Option implements Cloneable {
 			
 			//Creation de la fenetre
 			JFrame fenetreMusique = new JFrame("Music");
-			fenetreMusique.setSize(new Dimension(300, 100));
-			GridBagLayout gb = new GridBagLayout();
-			fenetreMusique.setLayout(gb);
+			fenetreMusique.setLayout(new FlowLayout());
 			
-			GridBagConstraints constraint = new GridBagConstraints();
-			constraint.fill = GridBagConstraints.HORIZONTAL;
-			constraint.weightx = 0;
-			constraint.weighty = 0;
-			constraint.gridx = 0;
-			constraint.gridy = 0;
-			constraint.ipadx = 0;
-			constraint.ipady = 0;
-			constraint.insets = new Insets(0, 0, 0, 0);
-			constraint.anchor = GridBagConstraints.CENTER;
+			JLabel labelNomMusique = new JLabel("music's name : ");
+			fenetreMusique.add(labelNomMusique);
 			
-			JLabel textLabel = new JLabel("music's name : ");
-			
-			final JTextField nomMusique = new JTextField(this.nomMusique);
-			nomMusique.setPreferredSize(new Dimension(fenetreMusique.getWidth() / 2 - 10, nomMusique.getFont().getSize() + 8));
+			final JComboBox nomMusique = new JComboBox(listeMusiques);
+			fenetreMusique.add(nomMusique);
+			//nomMusique.setPreferredSize(new Dimension(fenetreMusique.getWidth() / 2 - 10, nomMusique.getFont().getSize() + 8));
 			
 			JButton lancerArreter = new JButton("Play/Stop");
 			lancerArreter.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					setNomMusique(nomMusique.getText());
+					setNomMusique(nomMusique.getSelectedItem().toString());
+					System.out.println(nomMusique.getSelectedItem().toString());
 					if (!isEstActivee()) {
-						lancerMusique();
+						lancerMusique("Carol Malus Deinheim - Symphogear GX - Tomorrow.wav");
 					}
 					else {
-						arreterMusique();
+						arreterMusique("Carol Malus Deinheim - Symphogear GX - Tomorrow.wav");
 					}
 					getControleurInterne().getAscenseur().notifyObservers();
 				}
 			});
 			
-			fenetreMusique.add(textLabel, constraint);
-			
-			constraint.gridx = 1;
-			fenetreMusique.add(nomMusique, constraint);
-			
-			constraint.gridx = 0;
-			constraint.gridy = 1;
-			fenetreMusique.add(lancerArreter, constraint);
-			
+			fenetreMusique.add(lancerArreter);
 			fenetreMusique.setLocationRelativeTo(null);
+			fenetreMusique.pack();
 			fenetreMusique.setVisible(true);				
 			
 			estFenetreOuverte = false;

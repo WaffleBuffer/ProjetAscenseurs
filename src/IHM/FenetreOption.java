@@ -25,6 +25,7 @@ import Client.Batiment;
 import Options.Option;
 import Options.OptionsDisponibles;
 
+@SuppressWarnings("javadoc")
 public class FenetreOption extends JFrame implements Observer{
 	
 	/**
