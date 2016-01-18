@@ -87,21 +87,21 @@ public class Batiment extends Observable {
 	 */
 	public String traiterControleurs () {
 		controleurExterne.traiterRequetes();
-		String stringRenvoye = "";
+		ResultatDerniereIteration = "";
 		for (ControleurInterne controleurInterne : listeControleursInternes) {
 			String resultat = controleurInterne.traiterRequetes();
 			String cadre = "";
 			for (int j = 0; j < resultat.length() + 4; ++j) {
 				cadre += "=";
 			}
-			stringRenvoye += cadre + "\n";
-			stringRenvoye += "| " + resultat + " |\n";
-			stringRenvoye += cadre + "\n";
+			ResultatDerniereIteration += cadre + "\n";
+			ResultatDerniereIteration += "| " + resultat + " |\n";
+			ResultatDerniereIteration += cadre + "\n";
 			//Si l'ascenseur s'est bloque, alors traitement exceptionnel : on reaffecte toutes les RequeteExterne de celui-ci au ControleurExterne.
 			//Cela evite que si un ascenseur se bloque de facon infini, alors la requete externe n'est jamais satisfaite.
 			if (resultat.equals("Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is blocked")) {
 				for (int j = 0; j < controleurInterne.getRequetes().size(); ++j) {
-					if (controleurInterne.getRequetes().get(j) instanceof RequeteExterne) {
+					if (controleurInterne.getRequetes().get(j).getClass() == RequeteExterne.class) {
 						controleurExterne.ajouterRequete(controleurInterne.getRequetes().get(j));
 						controleurInterne.getRequetes().remove(controleurInterne.getRequetes().get(j));
 						--j;
@@ -111,8 +111,7 @@ public class Batiment extends Observable {
 				}
 			}
 		}//boucle for
-		ResultatDerniereIteration = stringRenvoye;
-		return stringRenvoye;
+		return ResultatDerniereIteration;
 	}//traiterControleurs()
 	
 	/**permet d'appuyer sur le {@link BoutonExterne}
