@@ -27,6 +27,11 @@ public abstract class Constantes {
 	 */
 	public static final int DEPLACEMENT = 3;
 	
+	/**Permet d'obtenir la {@link String} correspondant a une constante.
+	 * @param i la constante dont on veut la {@link String}.
+	 * @return la {@link String} correspondant a la constante i.
+	 * @see Constantes
+	 */
 	public static String toString (int i) {
 		switch (i) {
 		case 0 :

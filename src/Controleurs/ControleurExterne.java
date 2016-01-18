@@ -39,7 +39,7 @@ public class ControleurExterne extends Controleur{
 		this.nbEtages = nbEtages;
 	}
 	
-	/**Permet d'ajouter une {@link RequeteExterne} a {@link Controleur#requetes}.
+	/**Permet d'ajouter une {@link RequeteExterne} a {@link Controleur#listeRequetes}.
 	 * @param etage l'etage a partir duquel vient la {@link RequeteExterne}
 	 * @param direction {@link Requete#libelle} que prend la {@link RequeteExterne} : {@link Client.Constantes#HAUT} ou {@link Client.Constantes#BAS}.
 	 * @see RequeteExterne
@@ -48,7 +48,7 @@ public class ControleurExterne extends Controleur{
 		getRequetes().add(new RequeteExterne(etage, direction));
 	}
 	
-	/**Permet de traiter toutes les requetes de {@link Controleur#requetes} 
+	/**Permet de traiter toutes les requetes de {@link Controleur#listeRequetes} 
 	 * en appliquant la {@link #strategieTraitement} de ce ControleurExterne.
 	 * 
 	 */

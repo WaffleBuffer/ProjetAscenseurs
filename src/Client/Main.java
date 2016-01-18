@@ -1,8 +1,16 @@
 package Client;
 import IHM.FenetreConfiguration;
 
+/** La classe main qui s'execute lors de l'execution du programme
+ * @author Thomas
+ *
+ */
 public class Main {
 
+	/** La fonction qui s'execute lors de l'execution du programme.<br>
+	 * Permet de creer une {@link FenetreConfiguration} et de la mettre visible.
+	 * @param args les arguments fournis lors de l'execution. Inutilises mais obligatoires.
+	 */
 	public static void main(String[] args) {
 		FenetreConfiguration fenetre = new FenetreConfiguration();
 		fenetre.setVisible(true);
