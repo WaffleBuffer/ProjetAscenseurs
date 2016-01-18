@@ -11,6 +11,10 @@ import Controleurs.ControleurInterne;
  */
 public class OptionVitesseAugmentee extends Option {
 	
+	/**Permet de stocker l'ancien {@link IAlgoTraitementInterne} du {@link Option#controleurInt}.
+	 */
+	private IAlgoTraitementInterne ancienAlgoTraitementInterne;
+	
 	/**Construit une OptionVitesseAugmentee et initialise {@link Option#controleurInt}.
 	 * @param controleurInt le {@link ControleurInterne} a affecter a cette OptionVitesseAugmentee.
 	 */
@@ -30,18 +34,23 @@ public class OptionVitesseAugmentee extends Option {
 	@Override
 	public void activer() {
 		if (!isEstActivee()) {
+			ancienAlgoTraitementInterne = getControleurInterne().getStrategieTraitement();
 			getControleurInterne().setStrategieTraitement(new AlgoTraitementInterneVitesseAugmentee());
 			setEstActivee(true);
 			JOptionPane.showMessageDialog(null, "the lift " 
 			+ getControleurInterne().getAscenseur().getNumAsc() + " is speeding up.");
-			getControleurInterne().getAscenseur().notifyObservers();
 		}
 		else {
-			getControleurInterne().setStrategieTraitement(new AlgoTraitementInterneStandard());
-			setEstActivee(false);
-			JOptionPane.showMessageDialog(null, "the lift " 
-			+ getControleurInterne().getAscenseur().getNumAsc() + " is slowing down.");		
-			getControleurInterne().getAscenseur().notifyObservers();
+			if (getControleurInterne().getStrategieTraitement().getClass() == AlgoTraitementInterneVitesseAugmentee.class) {
+				getControleurInterne().setStrategieTraitement(ancienAlgoTraitementInterne);
+				setEstActivee(false);
+				JOptionPane.showMessageDialog(null, "the lift " 
+				+ getControleurInterne().getAscenseur().getNumAsc() + " is slowing down.");		
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "the lift " 
+						+ getControleurInterne().getAscenseur().getNumAsc() + " already has a different handling methode.");
+			}
 		}
 	}
 

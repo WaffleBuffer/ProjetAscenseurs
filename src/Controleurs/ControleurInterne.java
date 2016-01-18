@@ -77,8 +77,18 @@ public class ControleurInterne extends Controleur{
 		return getRequetes().size();
 	}
 
+	/**Permet de definir l'{@link IAlgoTraitementInterne} de ce ControleurInterne.
+	 * @param strategieTraitement l'{@link IAlgoTraitementInterne} de ce ControleurInterne.
+	 */
 	public void setStrategieTraitement(IAlgoTraitementInterne strategieTraitement) {
 		this.strategieTraitement = strategieTraitement;
+	}
+
+	/**Permet d'optenir l'{@link IAlgoTraitementInterne} de ce ControleurInterne.
+	 * @return l'{@link IAlgoTraitementInterne} de ce ControleurInterne.
+	 */
+	public IAlgoTraitementInterne getStrategieTraitement() {
+		return strategieTraitement;
 	}
 
 	/** Renvoie l'etat de ce ControleurInterne.
