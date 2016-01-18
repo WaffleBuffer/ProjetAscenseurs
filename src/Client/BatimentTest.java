@@ -39,14 +39,14 @@ public class BatimentTest {
 		System.out.println("==============================================");
 		System.out.println("");
 		
-		/*this.batiment.appuyerBoutonAscenseur(1, 3);
-		this.batiment.appuyerBoutonAscenseur(2, 5);*/
+		this.batiment.appuyerBoutonAscenseur(this.batiment.getAscenseur(0), 3);
+		this.batiment.appuyerBoutonAscenseur(this.batiment.getAscenseur(1), 5);
 		for (int i = 1; i <= 9; ++i) {
 			System.out.println("Iteration " + i);
 			System.out.println(this.batiment.traiterControleurs());
 		}
-		assertTrue(this.batiment.getAscenseur(1).getEtage() == 3);
-		assertTrue(this.batiment.getAscenseur(2).getEtage() == 5);
+		assertTrue(this.batiment.getAscenseur(0).getEtage() == 3);
+		assertTrue(this.batiment.getAscenseur(1).getEtage() == 5);
 		
 		System.out.println("");
 	}
@@ -58,7 +58,8 @@ public class BatimentTest {
 		System.out.println("");
 		
 		this.batiment.appuyerBoutonEtage(0, Constantes.HAUT); //etage 0 haut
-		this.batiment.appuyerBoutonEtage(1, Constantes.BAS); //etage 1 bas
+		this.batiment.appuyerBoutonEtage(0, Constantes.BAS); /*etage 1 bas : on mes 0 car c'est le premier 
+		bouton bas de la liste des boutons bas*/
 		this.batiment.appuyerBoutonEtage(4, Constantes.HAUT); //etage 4 haut
 		this.batiment.appuyerBoutonEtage(0, Constantes.HAUT); //etage 0 haut
 		
@@ -70,8 +71,8 @@ public class BatimentTest {
 			System.out.println(this.batiment.traiterControleurs());
 		}
 		
-		assertTrue(this.batiment.getAscenseur(1).getEtage() == 4);
-		assertTrue(this.batiment.getAscenseur(2).getEtage() == 1);
+		assertTrue(this.batiment.getAscenseur(0).getEtage() == 4);
+		assertTrue(this.batiment.getAscenseur(1).getEtage() == 1);
 	}
 
 }
