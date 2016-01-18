@@ -28,6 +28,8 @@ public class OptionMusique extends Option implements Cloneable {
 	 */
 	private String nomMusique = "";
 	
+	private Thread musique;
+	
 	/**Construit une OptionMusique et initialise {@link Option#controleurInt}.
 	 * @param controleurInt le {@link ControleurInterne} a affecter a cette OptionMusique.
 	 */
@@ -44,7 +46,9 @@ public class OptionMusique extends Option implements Cloneable {
 	 */
 	private void lancerMusique () {
 		setEstActivee(true);
-		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + 
+		musique = new JouerFichierWAV("coin.wav");
+        musique.start();
+		JOptionPane.showMessageDialog(null, "the music : " + musique.getName() + 
 				" is playing in lift " + getControleurInterne().getAscenseur().getNumAsc());
 	}
 	
@@ -52,7 +56,8 @@ public class OptionMusique extends Option implements Cloneable {
 	 */
 	private void arreterMusique() {
 		setEstActivee(false);
-		JOptionPane.showMessageDialog(null, "the music : " + nomMusique + 
+		musique.stop();
+		JOptionPane.showMessageDialog(null, "the music : " + musique.getName() + 
 				" stopped in lift " + getControleurInterne().getAscenseur().getNumAsc());	
 	}
 

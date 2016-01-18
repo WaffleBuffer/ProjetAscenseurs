@@ -13,31 +13,30 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  
 /**
  * Jouer un son au format wav
- * @author ???
- * Source sur le web
+ * @author Julien
  */
 public class JouerFichierWAV extends Thread {
  
-    private String filename;
-    private Position curPosition;
-    private final int EXTERNAL_BUFFER_SIZE = 524288; // 128Kb
-    enum Position {LEFT, RIGHT, NORMAL};
+    private String cheminDuFichier;
+    private Position positionActuelle;
+    private final int TAILLE_BUFFER_EXTERNE = 524288; // 128Kb
+    enum Position {GAUCHE, DROITE, NORMAL};
  
-    public JouerFichierWAV(String wavfile) {
-        filename = wavfile;
-        curPosition = Position.NORMAL;
+    public JouerFichierWAV(String fichierWAV) {
+        cheminDuFichier = fichierWAV;
+        positionActuelle = Position.NORMAL;
     }
  
     public void run() {
-        File soundFile = new File(filename);
-        if (!soundFile.exists()) {
-            System.err.println("Wave file not found: " + filename);
+        File fichier = new File(cheminDuFichier);
+        if (!fichier.exists()) {
+            System.err.println("Wave file not found: " + cheminDuFichier);
             return;
         }
  
         AudioInputStream audioInputStream = null;
         try {
-            audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            audioInputStream = AudioSystem.getAudioInputStream(fichier);
         } catch (UnsupportedAudioFileException e1) {
             e1.printStackTrace();
             return;
@@ -63,16 +62,16 @@ public class JouerFichierWAV extends Thread {
  
         if (auline.isControlSupported(FloatControl.Type.PAN)) {
             FloatControl pan = (FloatControl) auline.getControl(FloatControl.Type.PAN);
-            if (curPosition == Position.RIGHT) {
+            if (positionActuelle == Position.DROITE) {
                 pan.setValue(1.0f);
-            } else if (curPosition == Position.LEFT) {
+            } else if (positionActuelle == Position.GAUCHE) {
                 pan.setValue(-1.0f);
             }
         }
  
         auline.start();
         int nBytesRead = 0;
-        byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
+        byte[] abData = new byte[TAILLE_BUFFER_EXTERNE];
  
         try {
             while (nBytesRead != -1) {
@@ -88,13 +87,5 @@ public class JouerFichierWAV extends Thread {
             auline.drain();
             auline.close();
         }
-    }
- 
-    /**
-     * Exemple pour jouer le son du tambour
-     */
-    public static void main(String[] args) {
-        Thread playWave=new JouerFichierWAV("coin.wav");
-        playWave.start();
-    }
+    }//run()
 } 
