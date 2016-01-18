@@ -35,7 +35,7 @@ public class ControleurInterne extends Controleur{
 		return this.ascenseur;
 	}
 	
-	/**Fonction permettant de traiter les {@link Controleur#requetes} pour l'{@link Ascenseur} gere par ce ControleurInterne pour une iteration
+	/**Fonction permettant de traiter les {@link Controleur#listeRequetes} pour l'{@link Ascenseur} gere par ce ControleurInterne pour une iteration
 	 * grace a la {@link #strategieTraitement} de ce ControleurInterne.
 	 * @return String representant le resultat de l'iteration. Inutilise a ce jour. Etait utilisee pour des tests dans un terminal.
 	 */
@@ -50,7 +50,7 @@ public class ControleurInterne extends Controleur{
 		this.getRequetes().add(0, requete);
 	}
 	
-	/**Ajout d'une {@link RequeteInterne} specifique a {@link Controleur#requetes}
+	/**Ajout d'une {@link RequeteInterne} specifique a {@link Controleur#listeRequetes}
 	 * @param etage l'etage de la {@link RequeteInterne}.
 	 * @see RequeteInterne
 	 */
@@ -58,8 +58,8 @@ public class ControleurInterne extends Controleur{
 		getRequetes().add(new RequeteInterne(etage));
 	}
 	
-	/**Renvoi le numero d'etage de la prochaine {@link Requete} a traiter. Si {@link #requetes} est vide alors renvoie -1.
-	 * @return le numero d'etage de la prochaine {@link Requete} a traiter. Si {@link ControleurInterne#requetes} est vide alors renvoie -1.
+	/**Renvoi le numero d'etage de la prochaine {@link Requete} a traiter. Si {@link #listeRequetes} est vide alors renvoie -1.
+	 * @return le numero d'etage de la prochaine {@link Requete} a traiter. Si {@link ControleurInterne#listeRequetes} est vide alors renvoie -1.
 	 */
 	public int prochaineDest () {
 		if (getRequetes().size() > 0) {
@@ -70,8 +70,8 @@ public class ControleurInterne extends Controleur{
 			return -1;
 	}
 	
-	/**Renvoi le nombre de {@link Requete} dans {@link Controleur#requetes}.
-	 * @return le nombre de {@link Requete} dans {@link Controleur#requetes}.
+	/**Renvoi le nombre de {@link Requete} dans {@link Controleur#listeRequetes}.
+	 * @return le nombre de {@link Requete} dans {@link Controleur#listeRequetes}.
 	 */
 	public int getNumberOfRequete () {
 		return getRequetes().size();
