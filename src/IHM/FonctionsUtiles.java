@@ -7,8 +7,15 @@ import javax.swing.JLabel;
 import Client.Ascenseur;
 import Client.Batiment;
 
+/**Classe statique possedant des fonctions utiles pour l'IHM
+ * @author Thomas
+ */
 public abstract class FonctionsUtiles {
 
+	/**Permet d'obtenir le label d'etage par son numero
+	 * @param etage l'etage 
+	 * @return
+	 */
 	public static String nommerEtage(int etage){
 		if (etage == 0)
 			return "Ground floor";
