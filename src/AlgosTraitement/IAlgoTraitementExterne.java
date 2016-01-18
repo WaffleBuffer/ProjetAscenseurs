@@ -7,7 +7,7 @@ import Controleurs.ControleurExterne;
  */
 public interface IAlgoTraitementExterne {
 	
-	/**Fonction permettant de traiter les {@link Controleurs.Controleur#requetes} d'un {@link ControleurExterne}
+	/**Fonction permettant de traiter les {@link Controleurs.Controleur#listeRequetes} d'un {@link ControleurExterne}
 	 * @param controleurExterne le {@link ControleurExterne} sur lequel appliquer l'algorithme.
 	 */
 	public void traiterRequetes(ControleurExterne controleurExterne);
