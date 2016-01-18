@@ -11,18 +11,44 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
  
-/**
- * Jouer un son au format wav
+/**Decrit le lecteur de son au format WAV. Utilise dans {@link OptionMusique}.
  * @author Julien
+ * @see OptionMusique
  */
-public class JouerFichierWAV extends Thread {
+public class LecteurFichierWAV extends Thread {
  
+    /**Le nom du chemin du fichier.
+     */
     private String cheminDuFichier;
+    
+    /**Position de lecture?
+     */
     private Position positionActuelle;
+    
+    /**Constante pour la taille max du buffer externe de lecture = 128Kb
+     */
     private final int TAILLE_BUFFER_EXTERNE = 524288; // 128Kb
-    enum Position {GAUCHE, DROITE, NORMAL};
+    
+    /**Les valeurs possibles de {@link #positionActuelle}.
+     * @author Lucie
+     */
+    enum Position {
+    /**position gauche
+     */
+    GAUCHE, 
+    
+    /**position droite
+     */
+    DROITE, 
+    
+    /**Position normale.
+     */
+    NORMAL};
  
-    public JouerFichierWAV(String fichierWAV) {
+    /**Construit un JouerFichierWAV
+     * @param fichierWAV le chemin du fichier a lire.
+     */
+    public LecteurFichierWAV(String fichierWAV) {
         cheminDuFichier = fichierWAV;
         positionActuelle = Position.NORMAL;
     }
@@ -89,8 +115,8 @@ public class JouerFichierWAV extends Thread {
         }
     }//run()
 
-	/**
-	 * @return
+	/**Permet d'obtenir le {@link #cheminDuFichier} de ce LecteurFichierWAV.
+	 * @return le {@link #cheminDuFichier} de ce LecteurFichierWAV.
 	 */
 	public String getCheminDuFichier() {
 		return cheminDuFichier;

@@ -49,7 +49,7 @@ public class OptionMusique extends Option implements Cloneable {
 	 */
 	private void lancerMusique (String cheminFichier) {
 		setEstActivee(true);
-		musique = new JouerFichierWAV(cheminFichier);
+		musique = new LecteurFichierWAV(cheminFichier);
         musique.start();
 	}
 	
