@@ -6,7 +6,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -98,6 +105,34 @@ public class FenetreConfiguration extends JFrame {
 				texteNomBatiment.setText("");
 				nbEtages.setValue(1);
 				nbAscenseurs.setValue(1);
+				AudioInputStream audioIn = null;
+				try {
+					audioIn = AudioSystem.getAudioInputStream(new File("coin.wav"));
+				} catch (UnsupportedAudioFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                // Get a sound clip resource.
+                Clip clip = null;
+				try {
+					clip = AudioSystem.getClip();
+				} catch (LineUnavailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                // Open audio clip and load samples from the audio input stream.
+                try {
+					clip.open(audioIn);
+				} catch (LineUnavailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}});
 		
 		this.setTitle("Add a building");					//Titre de la fenêtre 
