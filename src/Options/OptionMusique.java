@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Controleurs.ControleurInterne;
 
@@ -33,6 +34,8 @@ public class OptionMusique extends Option implements Cloneable {
 			"La petite maison dans la prairie - Julien", "Mr Sandman - Remi", "Trololo - Thomas",
 			"Victory Day in Moscow - Thomas"};
 	
+	
+	
 	private Thread musique;
 	
 	/**Construit une OptionMusique et initialise {@link Option#controleurInt}.
@@ -52,8 +55,8 @@ public class OptionMusique extends Option implements Cloneable {
 		setEstActivee(true);
 		musique = new JouerFichierWAV(cheminFichier);
         musique.start();
-		JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' +
-				" is playing in lift " + getControleurInterne().getAscenseur().getNumAsc());
+		//JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' +
+		//		" is playing in lift " + getControleurInterne().getAscenseur().getNumAsc());
 	}
 	
 	/**permet d'arreter la musique, pour l'instant ne fait qu'une notification.
@@ -62,20 +65,56 @@ public class OptionMusique extends Option implements Cloneable {
 	private void arreterMusique(String cheminFichier) {
 		setEstActivee(false);
 		musique.stop();
-		JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' + 
-				" stopped in lift " + getControleurInterne().getAscenseur().getNumAsc());	
+		//JOptionPane.showMessageDialog(null, "the music : " + '"' + cheminFichier.substring(0, cheminFichier.length() - 4) + '"' + 
+		//		" stopped in lift " + getControleurInterne().getAscenseur().getNumAsc());	
+	}
+	
+	/**
+	 * @param cheminRepertoire
+	 */
+	public void trouverFichiers(final String cheminRepertoire) {
+		File repertoire = new File(cheminRepertoire);
+		if(!repertoire.exists()){
+			System.out.println("Le fichier/répertoire '"+cheminRepertoire+"' n'existe pas");
+		}else if(!repertoire.isDirectory()){
+			System.out.println("Le chemin '"+cheminRepertoire+"' correspond à un fichier et non à un répertoire");
+		}else{
+			File[] sousFichiers = repertoire.listFiles();
+			listeMusiques = new String[sousFichiers.length];
+			for(int i = 0 ; i < sousFichiers.length; i++){
+				listeMusiques[i] = sousFichiers[i].getName();
+			}
+		}
 	}
 	
 	/**
 	 * 
 	 */
-	public void ajouterMusique(){
-		//FileFilter java = new FileFilter("Fichiers WAV",".wav"); 
-		JFileChooser chargerMusique = new JFileChooser();
+	public void ajouterMusique(){ 
+		final JFileChooser chargerMusique = new JFileChooser();
+		chargerMusique.setFileFilter(new FileNameExtensionFilter("Fichier WAV", "wav"));
 		chargerMusique.setCurrentDirectory(new File("/")); 
 		chargerMusique.changeToParentDirectory(); 
-		chargerMusique.showOpenDialog(null);
+		int status = chargerMusique.showOpenDialog(null);
+		
+		chargerMusique.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("action");
+				}
+			});
+		
+		if (status == JFileChooser.APPROVE_OPTION){
+			File selectedFile = chargerMusique.getSelectedFile();
+			String chemin  = selectedFile.getName();
+			selectedFile.renameTo(new File("music/" + chemin));
+			activer();
+		}
+
 	}
+	
+	
 
 	/** permet d'activer OptionMusique en utilisant {@link OptionMusique#lancerMusique}.
 	 * Cela creer une fenetre qui permet d'interagire avec cette OptionMusique. 
@@ -85,7 +124,7 @@ public class OptionMusique extends Option implements Cloneable {
 		if (!estFenetreOuverte) {//On verifie qu'il n'y ait pas d'autres fenetres d'ouvertes pour cette Option.
 
 			estFenetreOuverte = true; 
-			
+			trouverFichiers("music");
 			//Creation de la fenetre
 			JFrame fenetreMusique = new JFrame("Music");
 			fenetreMusique.setLayout(new FlowLayout());
