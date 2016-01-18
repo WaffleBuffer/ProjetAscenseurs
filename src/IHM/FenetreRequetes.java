@@ -130,7 +130,7 @@ public class FenetreRequetes extends JFrame implements Observer{
 			}
 		}
 		
-		if (o.getClass() == Batiment.class && 
+		if (o != null && o.getClass() == Batiment.class && 
 				null != batiment.getResultatDerniereIteration() && "" != batiment.getResultatDerniereIteration()) {
 			AffichageHistorique.append(etoilesAffichage + Calendar.getInstance().getTime() + etoilesAffichage + "\n");
 			AffichageHistorique.append(batiment.getResultatDerniereIteration() + "\n");
