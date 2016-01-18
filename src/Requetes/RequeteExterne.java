@@ -1,6 +1,5 @@
 package Requetes;
 
-import Boutons.Bouton;
 import Boutons.BoutonExterne;
 import Client.Constantes;
 
