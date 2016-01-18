@@ -28,8 +28,10 @@ public class OptionMusique extends Option implements Cloneable {
 	 */
 	private String nomMusique = "";
 	
-	private String[] listeMusiques = { "Carol Malus Deinheim - Symphogear GX - Tomorrow", 
-			"Toby Fox & Kenichi Matsubara - MegalovaniaVania" };
+	private String[] listeMusiques = {"Tomorrow - Kurt", "MegalovaniaVania - Kurt", "Elevator Nyan Cat - Lucie",
+			"Hey Pachuco - Julien", "Ievan Polka - Remi", "Ievan Polka Voacaloid - Lucie",
+			"La petite maison dans la prairie - Julien", "Mr Sandman - Remi", "Trololo - Thomas",
+			"Victory Day in Moscow - Thomas"};
 	
 	private Thread musique;
 	
