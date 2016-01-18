@@ -2,8 +2,6 @@ package Client;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
-
 import Boutons.Bouton;
 import Boutons.BoutonBas;
 import Boutons.BoutonExterne;
@@ -20,7 +18,7 @@ import Requetes.RequeteExterne;
  * @author Thomas
  * @see ControleurInterne
  */
-public class Batiment extends java.util.Observable {
+public class Batiment extends Observable {
 	
 	/**Le nom de ce Batiment.
 	 */

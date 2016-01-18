@@ -119,6 +119,7 @@ public class FenetreRequetes extends JFrame implements Observer{
 			AffichageRequetesExternes.append(i.toString() + "\n");
 		}
 	
+		@SuppressWarnings("unused")
 		String tiretsAffichage = "";	// variable d'affichage
 		String egalesAffichage = "";	// variable d'affichage
 		// configuration des variables d'affichage sela la taille de la JFrame

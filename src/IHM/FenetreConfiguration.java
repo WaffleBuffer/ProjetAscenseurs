@@ -66,7 +66,7 @@ public class FenetreConfiguration extends JFrame {
 		gb.setConstraints(nbAscenseurs, gbc); // mise en forme des objets
 		add(nbAscenseurs);
 		
-		final JCheckBox checkBoxOption = new JCheckBox("Activer options");
+		final JCheckBox checkBoxOption = new JCheckBox("Enable options");
 		gb.setConstraints(checkBoxOption, gbc); // mise en forme des objets
 		add(checkBoxOption);
 		

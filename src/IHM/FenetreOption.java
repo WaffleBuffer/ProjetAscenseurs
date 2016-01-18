@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
 import Client.Ascenseur;
 import Client.Batiment;
 import Options.Option;
-import Options.OptionsDisponnibles;
+import Options.OptionsDisponibles;
 
 public class FenetreOption extends JFrame implements Observer{
 	
@@ -80,9 +80,9 @@ public class FenetreOption extends JFrame implements Observer{
 		ascenseursPanel.setBorder(BorderFactory.createTitledBorder(null, "Lift list", TitledBorder.CENTER, 
 				TitledBorder.DEFAULT_POSITION));
 		
-		Option[] optionsDispo = new Option[OptionsDisponnibles.getOptionsDisponnibles().size()];
-		for (int i = 0; i < OptionsDisponnibles.getOptionsDisponnibles().size(); ++i) {
-			optionsDispo[i] = OptionsDisponnibles.getOptionsDisponnibles().get(i);
+		Option[] optionsDispo = new Option[OptionsDisponibles.getOptionsDisponnibles().size()];
+		for (int i = 0; i < OptionsDisponibles.getOptionsDisponnibles().size(); ++i) {
+			optionsDispo[i] = OptionsDisponibles.getOptionsDisponnibles().get(i);
 		}
 		
 		final JList<Option> listeOptions = new JList<Option>(optionsDispo);
@@ -104,7 +104,7 @@ public class FenetreOption extends JFrame implements Observer{
 		listeOptionsAscenseur.setVisibleRowCount(-1);
 		JScrollPane optionsAscenseurPanel = new JScrollPane(listeOptionsAscenseur); // panneau des options vers le centre
 		optionsAscenseurPanel.setPreferredSize(new Dimension(200, 80));
-		optionsAscenseurPanel.setBorder(BorderFactory.createTitledBorder(null, "Lift's options list", TitledBorder.CENTER, 
+		optionsAscenseurPanel.setBorder(BorderFactory.createTitledBorder(null, "Lift's options", TitledBorder.CENTER, 
 				TitledBorder.DEFAULT_POSITION));
 		
 		listeAscenseur.addListSelectionListener(new ListSelectionListener() {

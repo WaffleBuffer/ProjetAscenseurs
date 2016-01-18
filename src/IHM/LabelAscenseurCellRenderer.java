@@ -10,6 +10,11 @@ import Client.Ascenseur;
 
 public class LabelAscenseurCellRenderer extends JLabel implements ListCellRenderer<Ascenseur> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public LabelAscenseurCellRenderer () {
 		setOpaque(true);
 	}

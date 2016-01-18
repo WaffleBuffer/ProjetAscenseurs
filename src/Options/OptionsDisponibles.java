@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**Classe statique permettant de lister toutes les {@link Option} disponnibles.
  * @author Thomas
  */
-public abstract class OptionsDisponnibles {
+public abstract class OptionsDisponibles {
 	/**La liste des {@link Option} disponnibles.
 	 */
 	private final static ArrayList<Option> OPTIONSDISPONNIBLES;
