@@ -20,7 +20,8 @@ public class AlgoTraitementInterneVitesseAugmentee implements IAlgoTraitementInt
 		if (0 == controleurInterne.getRequetes().size()) {
 			if (controleurInterne.getAscenseur().isPortesOuvertes())
 				controleurInterne.getAscenseur().fermerPortes();
-			return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " has no queries processed";
+			return "";
+			/*"Elevator " + controleurInterne.getAscenseur().getNumAsc() + " has no queries processed";*/
 		}
 		//Si le bouton stop a ete appuyer, et que l'ascenseur est debloque, alors on le bloque. Sinon on le debloque et on continue
 		if (controleurInterne.getRequetes().get(0).getLibelle() == Constantes.STOP) {

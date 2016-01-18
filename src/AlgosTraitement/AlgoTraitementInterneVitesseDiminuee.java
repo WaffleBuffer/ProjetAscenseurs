@@ -10,7 +10,9 @@ import Requetes.Requete;
  */
 public class AlgoTraitementInterneVitesseDiminuee implements IAlgoTraitementInterne {
 	
-	private boolean hasAlreadyWaitOneTurn = false;
+	/**Defini si oui ou non, l'{@link Ascenseur} a attendu une iteration a ne rien faire, car il est lent.
+	 */
+	private boolean aDejaAttenduUneIteration = false;
 
 	/**Fonction permettant de traiter les {@link Controleurs.Controleur#listeRequetes} de l'{@link Ascenseur}
 	 *  gere par controleurInt pour une iteration de maniere standard.
@@ -18,8 +20,8 @@ public class AlgoTraitementInterneVitesseDiminuee implements IAlgoTraitementInte
 	 * @return String representant le resultat de l'iteration. Inutilise a ce jour. Etait utilisee pour des tests dans un terminal.
 	 */
 	public String traiterRequetes(ControleurInterne controleurInterne){
-		if (!(hasAlreadyWaitOneTurn)) {
-			hasAlreadyWaitOneTurn = true;
+		if (!(aDejaAttenduUneIteration)) {
+			aDejaAttenduUneIteration = true;
 			return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is being SLOOOOOOOOOOOW";
 		}
 			
@@ -27,25 +29,26 @@ public class AlgoTraitementInterneVitesseDiminuee implements IAlgoTraitementInte
 		if (0 == controleurInterne.getRequetes().size()) {
 			if (controleurInterne.getAscenseur().isPortesOuvertes())
 				controleurInterne.getAscenseur().fermerPortes();
-			hasAlreadyWaitOneTurn = false;
-			return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " has no queries processed";
+			aDejaAttenduUneIteration = true;
+			return "";
+			/*"Elevator " + controleurInterne.getAscenseur().getNumAsc() + " has no queries processed";*/
 		}
 		//Si le bouton stop a ete appuyer, et que l'ascenseur est debloque, alors on le bloque. Sinon on le debloque
 		if (controleurInterne.getRequetes().get(0).getLibelle() == Constantes.STOP) {
 			if (controleurInterne.getAscenseur().estBloquer()) {
 				controleurInterne.getAscenseur().debloquer();
-				hasAlreadyWaitOneTurn = false;
+				aDejaAttenduUneIteration = false;
 				return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is released";
 			}
 			else {
 				controleurInterne.getAscenseur().bloquer();
-				hasAlreadyWaitOneTurn = false;
+				aDejaAttenduUneIteration = false;
 				return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is spirit to hang";
 			}
 		}
 		//Si l'ascenseur est bloque alors on ignore le traitement.
 		if (controleurInterne.getAscenseur().estBloquer()) {
-			hasAlreadyWaitOneTurn = false;
+			aDejaAttenduUneIteration = false;
 			return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is blocked";
 		}
 		//Si c'est une requete de mouvement
@@ -56,13 +59,13 @@ public class AlgoTraitementInterneVitesseDiminuee implements IAlgoTraitementInte
 			//Si les portes sont ouvertes alors on les fermes
 			if (controleurInterne.getAscenseur().isPortesOuvertes()) {
 				controleurInterne.getAscenseur().fermerPortes();
-				hasAlreadyWaitOneTurn = false;
+				aDejaAttenduUneIteration = false;
 				return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " closes its doors";
 			}
 			//Si l'ascenseur n'est pas arrive, on le met l'ascenseur en mouvement.
 			else if (!controleurInterne.getAscenseur().isEstEnMouvement() && !isEtageDemande(controleurInterne)) {
 				controleurInterne.getAscenseur().setEstEnMouvement(true);
-				hasAlreadyWaitOneTurn = false;
+				aDejaAttenduUneIteration = false;
 				return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " move from : "
 						+ controleurInterne.getAscenseur().getEtage() + " to : " 
 				+ controleurInterne.getRequetes().get(0).getEtageDemande();
@@ -76,13 +79,13 @@ public class AlgoTraitementInterneVitesseDiminuee implements IAlgoTraitementInte
 						--i;
 					}
 				}
-				hasAlreadyWaitOneTurn = false;
+				aDejaAttenduUneIteration = false;
 				return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " opens its doors";
 			}
 			//Si l'ascenseur est a un etage demande, on l'arrete.
 			else if (isEtageDemande(controleurInterne)) {
 				controleurInterne.getAscenseur().setEstEnMouvement(false);
-				hasAlreadyWaitOneTurn = false;
+				aDejaAttenduUneIteration = false;
 				return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " stops on the floor " + controleurInterne.getAscenseur().getEtage();
 			}
 			//A ce stade, l'ascenseur se deplace et n'est pas arrive, donc on le fait changer d'etage
@@ -93,12 +96,12 @@ public class AlgoTraitementInterneVitesseDiminuee implements IAlgoTraitementInte
 				else {
 					controleurInterne.getAscenseur().setEtage(controleurInterne.getAscenseur().getEtage() - 1);
 				}
-				hasAlreadyWaitOneTurn = false;
+				aDejaAttenduUneIteration = false;
 				return "Elevator " + controleurInterne.getAscenseur().getNumAsc() + " goes through the " + controleurInterne.getAscenseur().getEtage() + " floor";
 			}
 		}
 		//Si on arrive ici, alors c'est une requete non prise en charge.
-		hasAlreadyWaitOneTurn = false;
+		aDejaAttenduUneIteration = false;
 		return "Unknown request";
 	}//traiterRequetes()
 	

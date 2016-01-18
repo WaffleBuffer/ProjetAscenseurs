@@ -90,15 +90,17 @@ public class Batiment extends Observable {
 		ResultatDerniereIteration = "";
 		for (ControleurInterne controleurInterne : listeControleursInternes) {
 			String resultat = controleurInterne.traiterRequetes();
-			String cadre = "";
-			for (int j = 0; j < resultat.length() + 4; ++j) {
-				cadre += "=";
+			if ("" != resultat) {
+				String cadre = "";
+				for (int j = 0; j < resultat.length() + 4; ++j) {
+					cadre += "=";
+				}
+				ResultatDerniereIteration += cadre + "\n";
+				ResultatDerniereIteration += "| " + resultat + " |\n";
+				ResultatDerniereIteration += cadre + "\n";
 			}
-			ResultatDerniereIteration += cadre + "\n";
-			ResultatDerniereIteration += "| " + resultat + " |\n";
-			ResultatDerniereIteration += cadre + "\n";
 			//Si l'ascenseur s'est bloque, alors traitement exceptionnel : on reaffecte toutes les RequeteExterne de celui-ci au ControleurExterne.
-			//Cela evite que si un ascenseur se bloque de facon infini, alors la requete externe n'est jamais satisfaite.
+			//Cela evite que si un ascenseur se bloque de facon infinie, alors la requete externe n'est jamais satisfaite.
 			if (resultat.equals("Elevator " + controleurInterne.getAscenseur().getNumAsc() + " is blocked")) {
 				for (int j = 0; j < controleurInterne.getRequetes().size(); ++j) {
 					if (controleurInterne.getRequetes().get(j).getClass() == RequeteExterne.class) {
@@ -111,6 +113,8 @@ public class Batiment extends Observable {
 				}
 			}
 		}//boucle for
+		setChanged();
+		notifyObservers();
 		return ResultatDerniereIteration;
 	}//traiterControleurs()
 	

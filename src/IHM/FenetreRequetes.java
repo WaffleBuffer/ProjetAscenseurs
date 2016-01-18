@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,7 +20,6 @@ import Requetes.Requete;
 
 /**Vue de la liste des {@link Requete} a traiter par le systeme concernant le {{@link #batiment} de cette FenetreRequetes
  * @author dark1wador
- *
  */
 public class FenetreRequetes extends JFrame implements Observer{
 
@@ -123,15 +123,17 @@ public class FenetreRequetes extends JFrame implements Observer{
 		String etoilesAffichage = "";   // variable d'affichage
 		// configuration des variables d'affichage selon la taille de la JFrame
 		for (int i = 0; i < this.getSize().width / 11; ++i) {
-			etoilesAffichage += "*";
+			
 			if (0 == i % 2) {
 				egalesAffichage += "=";
+				etoilesAffichage += "*";
 			}
 		}
 		
-		if ("" != batiment.getResultatDerniereIteration()) {
-			AffichageHistorique.append(etoilesAffichage + "\n");
-			AffichageHistorique.append(batiment.getResultatDerniereIteration());
+		if (o.getClass() == Batiment.class && 
+				null != batiment.getResultatDerniereIteration() && "" != batiment.getResultatDerniereIteration()) {
+			AffichageHistorique.append(etoilesAffichage + Calendar.getInstance().getTime() + etoilesAffichage + "\n");
+			AffichageHistorique.append(batiment.getResultatDerniereIteration() + "\n");
 		}
 		
 		// Affichage des RequeteInterne du Batiment
