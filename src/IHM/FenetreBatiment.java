@@ -40,6 +40,9 @@ public class FenetreBatiment extends JFrame implements Observer{
 	
 	private Ascenseur ascenseurSelectionne;
 	
+	/**
+	 * @param batiment
+	 */
 	public FenetreBatiment (final Batiment batiment) {
 		
 		this.batiment = batiment;
@@ -182,35 +185,6 @@ public class FenetreBatiment extends JFrame implements Observer{
 		scrollBatiment.getVerticalScrollBar().setValue(scrollBatiment.getVerticalScrollBar().getMaximum());
 	}
 
-	public void setLabelEtage(JLabel labelEtage) {
-		this.labelEtageAscenseurSelectionne = labelEtage;
-	}
-
-	public ArrayList<JLabel> getListeNbAscenseursParEtage() {
-		return listeLabelNbAscenseursParEtage;
-	}
-
-	public JLabel getLabelEtageAscenseurSelectionne() {
-		return labelEtageAscenseurSelectionne;
-	}
-
-	public ArrayList<JLabel> getListeLabelNbAscenseursParEtage() {
-		return listeLabelNbAscenseursParEtage;
-	}
-
-	public void setListeLabelNbAscenseursParEtage(
-			ArrayList<JLabel> listeLabelNbAscenseursParEtage) {
-		this.listeLabelNbAscenseursParEtage = listeLabelNbAscenseursParEtage;
-	}
-
-	public JLabel getLabelCourant() {
-		return labelCourant;
-	}
-
-	public void setLabelCourant(JLabel labelCourant) {
-		this.labelCourant = labelCourant;
-	}
-
 	@Override
 	public void update(Observable observe, Object arg1) {
 		if (observe.getClass() == Ascenseur.class){
@@ -218,7 +192,7 @@ public class FenetreBatiment extends JFrame implements Observer{
 				labelEtageAscenseurSelectionne.setText(Integer.toString(((Ascenseur) observe).getEtage()));	//actualise l'etage actuel de l'ascenseur
 				labelCourant.setBackground(null);
 				labelCourant.setOpaque(false);
-				setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - ((Ascenseur) observe).getEtage()));
+				labelCourant = listeLabelNbAscenseursParEtage.get(batiment.getNbEtages() - ((Ascenseur) observe).getEtage());
 				labelCourant.setOpaque(true);
 				FonctionsUtiles.afficherEtatAscenseur(((Ascenseur) observe), labelCourant);
 			}
@@ -231,8 +205,8 @@ public class FenetreBatiment extends JFrame implements Observer{
 			labelNumAscenseur.setText(Integer.toString(ascenseurSelectionne.getNumAsc()));
 			labelCourant.setOpaque(false);
 			labelCourant.setBackground(null);
-			setLabelCourant(listeLabelNbAscenseursParEtage.get(batiment.getNbEtages()
-					- ascenseurSelectionne.getEtage()));
+			labelCourant = listeLabelNbAscenseursParEtage.get(batiment.getNbEtages()
+					- ascenseurSelectionne.getEtage());
 			labelCourant.setOpaque(true);
 			FonctionsUtiles.afficherEtatAscenseur(ascenseurSelectionne, labelCourant);
 		}

@@ -15,6 +15,7 @@ public abstract class OptionsDisponibles {
 		
 		tmp.add(new OptionMusique());
 		tmp.add(new OptionVitesseAugmentee());
+		tmp.add(new OptionVistesseDiminuee());
 		//Pour ajouter des options a liste des OptionsDisponnible, c'est ici.
 		
 		OPTIONSDISPONNIBLES = tmp;
