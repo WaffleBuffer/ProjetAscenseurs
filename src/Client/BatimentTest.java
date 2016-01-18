@@ -2,26 +2,24 @@ package Client;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * @author Moi !
+ *
+ */
 public class BatimentTest {
 
+	/**
+	 * {@link Batiment} utilise pour effectuer les différents tests
+	 */
 	private Batiment batiment;
-	
-	@BeforeClass
-	public static void setUpClasse() throws Exception {
 		
-	}
-	
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-		
-	}
-	
+	/**
+	 * Initialisation du {@link Batiment} a utilise pour chaque Test
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		this.batiment = new Batiment("Hotel", 5, 2);
@@ -29,10 +27,10 @@ public class BatimentTest {
 		System.out.print("| Debut du test : ");
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
 	
+	/**
+	 * fonction de Test des requetes interne
+	 */
 	@Test
 	public void testRequetesInterne() {
 		System.out.println("Test des Requetes Interne |");
@@ -51,6 +49,10 @@ public class BatimentTest {
 		System.out.println("");
 	}
 	
+	/**
+	 * fonction de test des requetes externes. Test la bonne repartition des requetes
+	 * entre les ascenseurs par l'algorithme de tri
+	 */
 	@Test
 	public void testRequeteExterne() {
 		System.out.println("Test des Requetes Externes |");
