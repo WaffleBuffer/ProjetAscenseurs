@@ -12,12 +12,12 @@ import org.junit.Test;
 public class BatimentTest {
 
 	/**
-	 * {@link Batiment} utilise pour effectuer les différents tests
+	 * {@link Client.Batiment} utilise pour effectuer les differents tests
 	 */
 	private Batiment batiment;
 		
 	/**
-	 * Initialisation du {@link Batiment} a utilise pour chaque Test
+	 * Initialisation du {@link Client.Batiment} a utilise pour chaque Test
 	 * @throws Exception
 	 */
 	@Before
@@ -60,7 +60,7 @@ public class BatimentTest {
 		System.out.println("");
 		
 		this.batiment.appuyerBoutonEtage(0, Constantes.HAUT); //etage 0 haut
-		this.batiment.appuyerBoutonEtage(0, Constantes.BAS); /*etage 1 bas : on mes 0 car c'est le premier 
+		this.batiment.appuyerBoutonEtage(0, Constantes.BAS); /*etage 1 bas : on met 0 car c'est le premier 
 		bouton bas de la liste des boutons bas*/
 		this.batiment.appuyerBoutonEtage(4, Constantes.HAUT); //etage 4 haut
 		this.batiment.appuyerBoutonEtage(0, Constantes.HAUT); //etage 0 haut
